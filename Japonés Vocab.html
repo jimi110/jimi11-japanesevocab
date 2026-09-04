@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>日本語 — Vocabulario Japonés</title>
+    <style>
+        /* --- VARIABLES GLOBALES (TEMA CLARO POR DEFECTO) --- */
+        :root {
+            --bg-color: #ffffff;
+            --bg-secondary: #f7f9fa;
+            --text-main: #3c3c3c;
+            --text-muted: #777777;
+            --primary: #1cb0f6;
+            --primary-hover: #1899d6;
+            --correct: #58cc02;
+            --correct-bg: #d7ffb8;
+            --wrong: #ff4b4b;
+            --wrong-bg: #ffdfe0;
+            --border: #e5e5e5;
+            --shadow: 0 4px 0 rgba(229, 229, 229, 1);
+            --shadow-active: 0 0 0 rgba(229, 229, 229, 1);
+            --card-bg: #ffffff;
+            --ruby-color: #1cb0f6;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition: all 0.2s ease;
+        }
+
+        /* --- TEMA OSCURO --- */
+        body.dark-theme {
+            --bg-color: #131f24;
+            --bg-secondary: #202f36;
+            --text-main: #ffffff;
+            --text-muted: #afafaf;
+            --primary: #1cb0f6;
+            --correct: #58cc02;
+            --correct-bg: #1a3300;
+            --wrong: #ff4b4b;
+            --wrong-bg: #3a1111;
+            --border: #37464f;
+            --shadow: 0 4px 0 #182b33;
+            --shadow-active: 0 0 0 #182b33;
+            --card-bg: #18252b;
+            --ruby-color: #1cb0f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-y: scroll;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL Y LAYOUTS --- */
+        #app {
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-color);
+            position: relative;
+            transition: max-width 0.3s ease;
+        }
+
+        /* Modos de diseño */
+        #app.layout-mobile { max-width: 480px; }
+        #app.layout-pc { max-width: 900px; }
+        #app.layout-auto { max-width: 900px; } /* Auto usa max-width grande y se ajusta con media queries */
+
+        .screen {
+            display: none;
+            padding: 24px;
+            flex-direction: column;
+            flex-grow: 1;
+            animation: fadeIn 0.3s ease;
+        }
+        .screen.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- TIPOGRAFÍA --- */
+        h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+        h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+        p.subtitle { color: var(--text-muted); font-size: 15px; text-align: center; margin-bottom: 24px; }
+        
+        /* --- FURIGANA (Hiragana sobre Kanji) --- */
+        ruby { ruby-align: center; }
+        rt { font-size: 0.55em; color: var(--ruby-color); font-weight: 600; user-select: none; line-height: 1; transform: translateY(-2px); }
+
+        /* --- CONTROLES SUPERIORES (Settings) --- */
+        .settings-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .segmented-control {
+            display: flex;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .seg-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .seg-btn:hover { color: var(--text-main); }
+        .seg-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- BOTONES PRINCIPALES --- */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 16px 24px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #1899d6;
+            transition: transform 0.1s, box-shadow 0.1s;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 #1899d6; }
+        .btn.outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .btn.outline:active { box-shadow: var(--shadow-active); }
+
+        /* --- GRID DE TEMARIOS --- */
+        .topics-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: 1fr;
+        }
+        
+        /* Comportamiento Grid según Layout */
+        #app.layout-pc .topics-grid { grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 768px) {
+            #app.layout-auto .topics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .topic-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .topic-card:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
+
+        .topic-icon {
+            font-size: 32px; width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-secondary); border-radius: var(--radius-md);
+        }
+        .topic-info { flex-grow: 1; }
+        .topic-title { font-weight: 700; font-size: 16px; color: var(--text-main); margin-bottom: 4px; }
+        .topic-stats { font-size: 13px; color: var(--text-muted); }
+        .progress-indicator { 
+            font-size: 13px; font-weight: 600; background: var(--bg-secondary);
+            padding: 4px 8px; border-radius: var(--radius-sm); color: var(--primary);
+        }
+
+        /* --- TEORÍA --- */
+        .theory-list { display: grid; gap: 12px; grid-template-columns: 1fr; padding-bottom: 24px; }
+        #app.layout-pc .theory-list { grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 768px) { #app.layout-auto .theory-list { grid-template-columns: repeat(2, 1fr); } }
+        
+        .word-card {
+            border: 2px solid var(--border); border-radius: var(--radius-lg);
+            padding: 16px; background: var(--card-bg); cursor: pointer;
+            transition: var(--transition); overflow: hidden;
+        }
+        .word-card:active { background: var(--bg-secondary); }
+
+        .word-header { display: flex; align-items: center; gap: 16px; }
+        .word-emoji { font-size: 28px; }
+        .word-main { flex-grow: 1; }
+        .word-spanish { font-weight: 700; font-size: 15px; }
+        .word-kanji-preview { font-size: 20px; font-weight: bold; color: var(--primary); margin-bottom: 2px; }
+        
+        .word-details {
+            display: none; margin-top: 16px; padding-top: 16px;
+            border-top: 2px dashed var(--border); animation: fadeIn 0.2s ease;
+        }
+        .word-card.expanded .word-details { display: block; }
+        
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .detail-label { color: var(--text-muted); }
+        .detail-value { font-weight: 600; font-size: 16px; }
+        
+        .btn-audio {
+            background: var(--bg-secondary); border: none; border-radius: 50%;
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; cursor: pointer; margin: 12px auto 0; color: var(--primary);
+        }
+
+        /* --- PRÁCTICA --- */
+        .practice-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+        .progress-bar-container { flex-grow: 1; height: 16px; background: var(--border); border-radius: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s ease; border-radius: 8px; }
+
+        .question-container { text-align: center; margin-bottom: 40px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .question-label { color: var(--text-muted); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .question-word { font-size: 40px; font-weight: 700; color: var(--text-main); }
+
+        .options-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; width: 100%; }
+        
+        .option-btn {
+            background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg);
+            padding: 18px; font-size: 22px; font-weight: 600; text-align: center; cursor: pointer;
+            box-shadow: var(--shadow); transition: var(--transition); color: var(--text-main);
+        }
+        .option-btn.es-text { font-size: 18px; } /* Más pequeño para respuestas largas en español */
+        .option-btn:active { transform: translateY(4px); box-shadow: var(--shadow-active); }
+        .option-btn.disabled { pointer-events: none; }
+
+        /* --- FEEDBACK --- */
+        .feedback-panel {
+            position: fixed; bottom: 0; left: 0; width: 100%; padding: 24px; display: none;
+            flex-direction: column; gap: 16px; animation: slideUp 0.3s ease; z-index: 10;
+        }
+        #app.layout-pc .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); }
+        @media (min-width: 768px) { #app.layout-auto .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); } }
+        
+        .feedback-panel.correct { background-color: var(--correct-bg); border-top: 2px solid var(--correct); display: flex; }
+        .feedback-panel.correct .feedback-title { color: var(--correct); }
+        .feedback-panel.correct .btn-next { background-color: var(--correct); box-shadow: 0 4px 0 #46a302; }
+        
+        .feedback-panel.wrong { background-color: var(--wrong-bg); border-top: 2px solid var(--wrong); display: flex; }
+        .feedback-panel.wrong .feedback-title { color: var(--wrong); }
+        .feedback-panel.wrong .btn-next { background-color: var(--wrong); box-shadow: 0 4px 0 #cc3a3a; }
+
+        .feedback-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .feedback-answer { font-size: 18px; color: var(--text-main); font-weight: 600; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        .pad-bottom { padding-bottom: 160px; }
+
+        /* --- RESULTADOS --- */
+        .result-header { text-align: center; margin-bottom: 32px; }
+        .result-score { font-size: 48px; font-weight: 700; color: var(--primary); margin: 16px 0; }
+        .result-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .result-item { display: flex; align-items: center; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-secondary); font-size: 15px; }
+        .result-item.correct .res-icon { color: var(--correct); }
+        .result-item.wrong { background: var(--wrong-bg); }
+        .result-item.wrong .res-icon { color: var(--wrong); }
+        .res-icon { font-weight: bold; width: 24px; font-size: 18px; }
+        .res-word { flex-grow: 1; font-weight: 600; font-size: 16px;}
+        .res-meaning { color: var(--text-muted); font-size: 14px;}
+        .center-btn-wrap { max-width: 400px; margin: 0 auto; width: 100%; }
+
+    </style>
+</head>
+<body>
+
+<div id="app" class="layout-auto">
+    
+    <!-- PANTALLA INICIAL -->
+    <div id="screen-home" class="screen active">
+        <h1>日本語</h1>
+        <p class="subtitle">Vocabulario japonés</p>
+
+        <!-- Controles de preferencias -->
+        <div class="settings-bar">
+            <div class="segmented-control" id="layout-controls">
+                <button class="seg-btn active" onclick="setPref('layout', 'auto')">Auto</button>
+                <button class="seg-btn" onclick="setPref('layout', 'mobile')">📱</button>
+                <button class="seg-btn" onclick="setPref('layout', 'pc')">💻</button>
+            </div>
+            <div class="segmented-control" id="theme-controls">
+                <button class="seg-btn active" onclick="setPref('theme', 'light')">☀️ Claro</button>
+                <button class="seg-btn" onclick="setPref('theme', 'dark')">🌙 Oscuro</button>
+            </div>
+            <div class="segmented-control" id="hiragana-controls">
+                <button class="seg-btn active" onclick="setPref('hiragana', true)">あ ON</button>
+                <button class="seg-btn" onclick="setPref('hiragana', false)">あ OFF</button>
+            </div>
+            <div class="segmented-control" id="sound-controls">
+                <button class="seg-btn active" onclick="setPref('sound', true)">🔊</button>
+                <button class="seg-btn" onclick="setPref('sound', false)">🔇</button>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 8px;">Tus temarios</h2>
+        <div class="topics-grid" id="topics-container">
+            <!-- Los temarios se generan aquí por JS -->
+        </div>
+    </div>
+
+    <!-- PANTALLA DE TEMARIO -->
+    <div id="screen-topic" class="screen">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('home')">← Salir</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 40px; margin-top: 20px;">
+            <div id="topic-detail-icon" style="font-size: 56px; margin-bottom: 16px;"></div>
+            <h2 id="topic-detail-title" style="font-size: 24px;">Título</h2>
+            <p class="subtitle" id="topic-detail-count" style="margin-bottom: 0;">X palabras</p>
+        </div>
+        
+        <div class="center-btn-wrap">
+            <button class="btn" onclick="startTheory()">📖 Teoría</button>
+            <button class="btn outline" onclick="startPractice()">✏️ Práctica (10 pregs)</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE TEORIA -->
+    <div id="screen-theory" class="screen">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('topic')">← Volver</button>
+            <span style="font-weight:bold; color:var(--text-muted)">Teoría</span>
+        </div>
+        <div id="theory-list" class="theory-list">
+            <!-- Fichas se generan aquí -->
+        </div>
+    </div>
+
+    <!-- PANTALLA DE PRACTICA -->
+    <div id="screen-practice" class="screen pad-bottom">
+        <div class="practice-header">
+            <button class="btn-back" onclick="abortPractice()" style="font-size:24px; padding:0;">×</button>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="practice-progress"></div>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question-label" id="question-label">¿Qué significa?</div>
+            <div class="question-word" id="question-word">駅</div>
+        </div>
+
+        <div class="options-container" id="options-container">
+            <!-- Botones de opciones se generan aquí -->
+        </div>
+
+        <div id="feedback-panel" class="feedback-panel">
+            <div style="max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 16px;">
+                <div class="feedback-title" id="feedback-title">✓ ¡Correcto!</div>
+                <div class="feedback-answer" id="feedback-answer" style="display:none;"></div>
+                <button class="btn btn-next" onclick="nextQuestion()" style="margin-bottom: 0;">Siguiente →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <div id="screen-result" class="screen">
+        <div class="result-header">
+            <h2>Práctica completada</h2>
+            <div class="result-score" id="result-score">8 / 10</div>
+        </div>
+        <div class="result-list" id="result-list">
+            <!-- Resumen generado por JS -->
+        </div>
+        <div class="center-btn-wrap">
+            <button class="btn" onclick="showScreen('topic')">Volver al temario</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true };
+    let userProgress = {};
+
+    function loadData() {
+        try {
+            const savedPrefs = localStorage.getItem('nihongoAppPrefs');
+            if (savedPrefs) prefs = { ...prefs, ...JSON.parse(savedPrefs) };
+            
+            const savedProg = localStorage.getItem('nihongoAppProgress');
+            if (savedProg) userProgress = JSON.parse(savedProg);
+        } catch(e) {}
+        applyPrefs();
+    }
+
+    function saveData() {
+        try {
+            localStorage.setItem('nihongoAppPrefs', JSON.stringify(prefs));
+            localStorage.setItem('nihongoAppProgress', JSON.stringify(userProgress));
+        } catch(e) {}
+    }
+
+    function setPref(key, value) {
+        prefs[key] = value;
+        saveData();
+        applyPrefs();
+        if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) {
+            renderTheory(); // Refrescar furigana instantáneamente en teoría
+        }
+    }
+
+    function applyPrefs() {
+        // Layout
+        const app = document.getElementById('app');
+        app.className = `layout-${prefs.layout}`;
+        
+        // Theme
+        if (prefs.theme === 'dark') document.body.classList.add('dark-theme');
+        else document.body.classList.remove('dark-theme');
+
+        // Actualizar UI Botones
+        updateSegControl('layout-controls', prefs.layout);
+        updateSegControl('theme-controls', prefs.theme);
+        updateSegControl('hiragana-controls', prefs.hiragana);
+        updateSegControl('sound-controls', prefs.sound);
+    }
+
+    function updateSegControl(containerId, activeValue) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        const btns = container.querySelectorAll('.seg-btn');
+        btns.forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.innerText.toLowerCase().includes(activeValue.toString().toLowerCase()) || 
+               (activeValue === true && btn.innerText.includes('ON')) ||
+               (activeValue === false && btn.innerText.includes('OFF')) ||
+               (activeValue === true && btn.innerText === '🔊') ||
+               (activeValue === false && btn.innerText === '🔇')) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    // --- 2. DATOS Y VOCABULARIO --- //
+    const topics = [
+        { id: 'transport', title: 'Estación y transporte', icon: '🚉' },
+        { id: 'city', title: 'La calle y moverse por Japón', icon: '🚶' },
+        { id: 'food', title: 'Comida y restaurantes', icon: '🍜' },
+        { id: 'hotel', title: 'Alojamiento', icon: '🏨' },
+        { id: 'shopping', title: 'Compras y tiendas', icon: '🛒' },
+        { id: 'survival', title: 'Frases de supervivencia', icon: '🗣️' },
+        { id: 'money', title: 'Dinero y pagos', icon: '💴' },
+        { id: 'basics', title: 'Necesidades básicas', icon: '🚻' },
+        { id: 'places', title: 'Lugares y ciudad', icon: '🗺️' },
+        { id: 'time', title: 'Tiempo y números', icon: '⏰' },
+        { id: 'airport', title: 'Aeropuerto y viaje', icon: '✈️' },
+        { id: 'polite', title: 'Cortesía japonesa', icon: '🙏' },
+        { id: 'trouble', title: 'Problemas y urgencias', icon: '🏥' }
+    ];
+
+    // Datos compactos: categoria|español|romaji|kana|kanji|emoji
+    const rawVocab = [
+        // Topic 1: Transport
+        "transport|Estación|eki|えき|駅|🚉",
+        "transport|Empleado de estación|ekiin|えきいん|駅員|👨‍✈️",
+        "transport|Tren|densha|でんしゃ|電車|🚆",
+        "transport|Tren bala|shinkansen|しんかんせん|新幹線|🚅",
+        "transport|Metro|chikatetsu|ちかてつ|地下鉄|🚇",
+        "transport|Tren (general)|ressha|れっしゃ|列車|🚂",
+        "transport|Vagón|sharyō|しゃりょう|車両|🚃",
+        "transport|Autobús|basu|バス||🚌",
+        "transport|Parada de autobús|basutei|バスてい|バス停|🚏",
+        "transport|Taxi|takushī|タクシー||🚕",
+        "transport|Aeropuerto|kūkō|くうこう|空港|✈️",
+        "transport|Frente a la estación|ekimae|えきまえ|駅前|📍",
+        "transport|Control de acceso|kaisatsu|かいさつ|改札|🎫",
+        "transport|Puerta de acceso|kaisatsuguchi|かいさつぐち|改札口|🚪",
+        "transport|Salida|deguchi|でぐち|出口|⬅️",
+        "transport|Entrada|iriguchi|いりぐち|入口|➡️",
+        "transport|Salida norte|kitaguchi|きたぐち|北口|⬆️",
+        "transport|Salida sur|minamiguchi|みなみぐち|南口|⬇️",
+        "transport|Salida este|higashiguchi|ひがしぐち|東口|➡️",
+        "transport|Salida oeste|nishiguchi|にしぐち|西口|⬅️",
+        "transport|Billete|kippu|きっぷ|切符|🎟️",
+        "transport|Lugar de venta de billetes|kippu uriba|きっぷうりば|切符売り場|🎫",
+        "transport|Máquina de billetes|kenbaiki|けんばいき|券売機|🏧",
+        "transport|Billete de transporte|jōshaken|じょうしゃけん|乗車券|🎫",
+        "transport|Abono|teikiken|ていきけん|定期券|💳",
+        "transport|Tarjeta IC|IC kādo|ICカード||💳",
+        "transport|Tarjeta de transporte IC|kōtsūkei IC kādo|こうつうけいICカード|交通系ICカード|💳",
+        "transport|Saldo|zandaka|ざんだか|残高|💰",
+        "transport|Recarga|chāji|チャージ||🔋",
+        "transport|Andén|hōmu|ホーム||🛤️",
+        "transport|Puertas del andén|hōmu doa|ホームドア||🚪",
+        "transport|Lugar de embarque|noriba|のりば|乗り場|🚏",
+        "transport|Transbordo|norikae|のりかえ|乗り換え|🔄",
+        "transport|Línea (tren/bus)|rosen|ろせん|路線|〽️",
+        "transport|Línea|sen|せん|線|➖",
+        "transport|Nombre de estación|ekimei|えきめい|駅名|🪧",
+        "transport|Horario|jikokuhyō|じこくひょう|時刻表|🕒",
+        "transport|Salida (tren)|hassha|はっしゃ|発車|🛫",
+        "transport|Llegada|tōchaku|とうちゃく|到着|🛬",
+        "transport|Primer tren|shihatsu|しはつ|始発|🌅",
+        "transport|Último tren|shūden|しゅうでん|終電|🌃",
+        "transport|Retraso|chien|ちえん|遅延|⏳",
+        "transport|Servicio suspendido|unkyū|うんきゅう|運休|🚫",
+        "transport|Funcionamiento/servicio|unkō|うんこう|運行|✅",
+        "transport|Tren rápido/express|kyūkō|きゅうこう|急行|🚄",
+        "transport|Tren rápido|kaisoku|かいそく|快速|🚅",
+        "transport|Tren express limitado|tokkyū|とっきゅう|特急|🚀",
+        "transport|Tren normal|futsū|ふつう|普通|🚆",
+        "transport|Parada en todas las estaciones|kakueki teisha|かくえきていしゃ|各駅停車|🐌",
+        "transport|Todas las estaciones|kakueki|かくえき|各駅|🚉",
+        "transport|Dirección hacia|hōmen|ほうめん|方面|🧭",
+        "transport|Con destino a|yuki|ゆき|行き|➡️",
+        "transport|Destino final|shūten|しゅうてん|終点|🏁",
+        "transport|Estación de origen|shihatsu-eki|しはつえき|始発駅|🏁",
+        "transport|Siguiente estación|tsugi no eki|つぎのえき|次の駅|⏭️",
+        "transport|Estación anterior|mae no eki|まえのえき|前の駅|⏮️",
+        "transport|Dentro del tren|densha-nai|でんしゃない|電車内|🚇",
+        "transport|Asiento prioritario|yūsen-seki|ゆうせんせき|優先席|💺",
+        "transport|Torniquete automático|jidō kaisatsuki|じどうかいさつき|自動改札機|🎫",
+        "transport|Escaleras|kaidan|かいだん|階段|📶",
+        "transport|Escalera mecánica|esukarētā|エスカレーター||🛗",
+        "transport|Ascensor|erebētā|エレベーター||🛗",
+        "transport|Terminal de autobuses|basu tāminaru|バスターミナル||🚏",
+        "transport|Subir/embarcar|jōsha|じょうしゃ|乗車|🚶",
+        "transport|Bajar/desembarcar|gesha|げしゃ|下車|🚶",
+        "transport|Tarifa|unchin|うんちん|運賃|💴",
+        "transport|Tarifa/precio|ryōkin|りょうきん|料金|💴",
+        "transport|Solo ida|katamichi|かたみち|片道|➡️",
+        "transport|Ida y vuelta|ōfuku|おうふく|往復|🔁",
+        "transport|Asiento reservado|shitei-seki|していせき|指定席|💺",
+        "transport|Asiento no reservado|jiyū-seki|じゆうせき|自由席|💺",
+        "transport|Reserva|yoyaku|よやく|予約|📝",
+        "transport|Número de vagón|gōsha|ごうしゃ|号車|🚃",
+        "transport|Equipaje|nimotsu|にもつ|荷物|🧳",
+        "transport|Objeto olvidado|wasuremono|わすれもの|忘れ物|☂️",
+        "transport|Aparcamiento|chūshajō|ちゅうしゃじょう|駐車場|🅿️",
+        "transport|Puesto de policía|kōban|こうばん|交番|🚓",
+
+        // Topic 2: City
+        "city|Camino/calle|michi|みち|道|🛣️",
+        "city|Carretera/vía|dōro|どうろ|道路|🛣️",
+        "city|Calle/avenida|tōri|とおり|通り|🛣️",
+        "city|Avenida principal|ōdōri|おおどおり|大通り|🛣️",
+        "city|Callejón|roji|ろじ|路地|🛤️",
+        "city|Cruce|kōsaten|こうさてん|交差点|➕",
+        "city|Semáforo|shingō|しんごう|信号|🚦",
+        "city|Paso de peatones|ōdan hodō|おうだんほどう|横断歩道|🚶",
+        "city|Acera|hodō|ほどう|歩道|🚶",
+        "city|Calzada|shadō|しゃどう|車道|🚗",
+        "city|Puente|hashi|はし|橋|🌉",
+        "city|Esquina|kado|かど|角|📐",
+        "city|Final de una calle|tsukiatari|つきあたり|突き当たり|🛑",
+        "city|Derecha|migi|みぎ|右|➡️",
+        "city|Izquierda|hidari|ひだり|左|⬅️",
+        "city|Delante|mae|まえ|前|⬆️",
+        "city|Detrás|ushiro|うしろ|後ろ|⬇️",
+        "city|Arriba|ue|うえ|上|⬆️",
+        "city|Abajo|shita|した|下|⬇️",
+        "city|Dentro|naka|なか|中|📥",
+        "city|Fuera|soto|そと|外|📤",
+        "city|Cerca|chikaku|ちかく|近く|🎯",
+        "city|Lejos|tōku|とおく|遠く|🔭",
+        "city|Recto|massugu|まっすぐ||⬆️",
+        "city|Girar|magaru|まがる|曲がる|↩️",
+        "city|Cruzar|wataru|わたる|渡る|🚶",
+        "city|Entrar|hairu|はいる|入る|🚪",
+        "city|Salir|deru|でる|出る|🚪",
+        "city|Camino recto|ipponmichi|いっぽんみち|一本道|🛣️",
+        "city|Mapa|chizu|ちず|地図|🗺️",
+        "city|Dirección|jūsho|じゅうしょ|住所|📍",
+        "city|Lugar|basho|ばしょ|場所|📍",
+        "city|Punto de referencia|mejirushi|めじるし|目印|🚩",
+        "city|Edificio|tatemono|たてもの|建物|🏢",
+        "city|Edificio (biru)|biru|ビル||🏢",
+        "city|Piso|kai|かい|階|🏢",
+        "city|Sótano/subterráneo|chika|ちか|地下|🚇",
+        "city|Superficie|chijō|ちじょう|地上|🏙️",
+        "city|Azotea|okujō|おくじょう|屋上|🌇",
+        "city|Entrada|iriguchi|いりぐち|入口|➡️",
+        "city|Salida|deguchi|でぐち|出口|⬅️",
+        "city|Ascensor|erebētā|エレベーター||🛗",
+        "city|Escalera mecánica|esukarētā|エスカレーター||🛗",
+        "city|Escaleras|kaidan|かいだん|階段|📶",
+        "city|Baño|toire|トイレ||🚻",
+        "city|Baño público|kōshū toire|こうしゅうトイレ|公衆トイレ|🚾",
+        "city|Punto de información|annaijo|あんないじょ|案内所|ℹ️",
+        "city|Oficina de turismo|kankō annaijo|かんこうあんないじょ|観光案内所|ℹ️",
+        "city|Puesto de policía|kōban|こうばん|交番|🚓",
+        "city|Policía|keisatsu|けいさつ|警察|👮",
+        "city|Hospital|byōin|びょういん|病院|🏥",
+        "city|Farmacia|yakkyoku|やっきょく|薬局|💊",
+        "city|Banco|ginkō|ぎんこう|銀行|🏦",
+        "city|Oficina de correos|yūbinkyoku|ゆうびんきょく|郵便局|📮",
+        "city|Hotel|hoteru|ホテル||🏨",
+        "city|Restaurante|resutoran|レストラン||🍽️",
+        "city|Tienda|mise|みせ|店|🏪",
+        "city|Tienda de conveniencia|konbini|コンビニ||🏪",
+        "city|Supermercado|sūpā|スーパー||🛒",
+        "city|Grandes almacenes|depāto|デパート||🏬",
+        "city|Parque|kōen|こうえん|公園|🌳",
+        "city|Estación|eki|えき|駅|🚉",
+        "city|Aeropuerto|kūkō|くうこう|空港|✈️",
+        "city|Museo de arte|bijutsukan|びじゅつかん|美術館|🖼️",
+        "city|Museo|hakubutsukan|はくぶつかん|博物館|🏛️",
+        "city|Santuario sintoísta|jinja|じんじゃ|神社|⛩️",
+        "city|Templo budista|tera|てら|寺|🛕",
+        "city|Castillo|shiro|しろ|城|🏯",
+        "city|Aparcamiento|chūshajō|ちゅうしゃじょう|駐車場|🅿️",
+        "city|Parada de taxis|takushī noriba|タクシーのりば|タクシー乗り場|🚕",
+        "city|Parada de autobús|basutei|バスてい|バス停|🚏",
+        "city|Vecindario|kinjo|きんじょ|近所|🏘️",
+        "city|Zona urbana|shigaichi|しがいち|市街地|🏙️",
+        "city|Centro|chūshin|ちゅうしん|中心|🎯",
+        "city|Alrededores de la estación|eki shūhen|えきしゅうへん|駅周辺|📍",
+
+        // Topic 3: Food
+        "food|Comida|tabemono|たべもの|食べ物|🍱",
+        "food|Bebida|nomimono|のみもの|飲み物|🥤",
+        "food|Comida/plato|ryōri|りょうり|料理|🍽️",
+        "food|Arroz/comida|gohan|ごはん|ご飯|🍚",
+        "food|Arroz|kome|こめ|米|🌾",
+        "food|Agua|mizu|みず|水|💧",
+        "food|Agua caliente|oyu|おゆ|お湯|♨️",
+        "food|Té|ocha|おちゃ|お茶|🍵",
+        "food|Té verde|ryokucha|りょくちゃ|緑茶|🍵",
+        "food|Matcha|matcha|まっちゃ|抹茶|🍵",
+        "food|Café|kōhī|コーヒー||☕",
+        "food|Zumo/refresco|jūsu|ジュース||🧃",
+        "food|Cerveza|bīru|ビール||🍺",
+        "food|Sake|nihonshu|にほんしゅ|日本酒|🍶",
+        "food|Carne|niku|にく|肉|🥩",
+        "food|Carne de vacuno|gyūniku|ぎゅうにく|牛肉|🥩",
+        "food|Carne de cerdo|butaniku|ぶたにく|豚肉|🥓",
+        "food|Pollo|toriniku|とりにく|鶏肉|🍗",
+        "food|Pescado|sakana|さかな|魚|🐟",
+        "food|Verdura|yasai|やさい|野菜|🥦",
+        "food|Fruta|kudamono|くだもの|果物|🍎",
+        "food|Huevo|tamago|たまご|卵|🥚",
+        "food|Lácteos|nyūseihin|にゅうせいひん|乳製品|🥛",
+        "food|Trigo|komugi|こむぎ|小麦|🌾",
+        "food|Pan|pan|パン||🍞",
+        "food|Fideos|men|めん|麺|🍜",
+        "food|Sushi|sushi|すし|寿司|🍣",
+        "food|Sashimi|sashimi|さしみ|刺身|🍣",
+        "food|Tempura|tenpura|てんぷら|天ぷら|🍤",
+        "food|Ramen|rāmen|ラーメン||🍜",
+        "food|Udon|udon|うどん||🍜",
+        "food|Soba|soba|そば||🍜",
+        "food|Curry|karē|カレー||🍛",
+        "food|Yakitori|yakitori|やきとり|焼き鳥|🍢",
+        "food|Onigiri|onigiri|おにぎり||🍙",
+        "food|Bento|bentō|べんとう|弁当|🍱",
+        "food|Sopa de miso|misoshiru|みそしる|味噌汁|🍲",
+        "food|Tofu|tōfu|とうふ|豆腐|🧊",
+        "food|Natto|nattō|なっとう|納豆|🫘",
+        "food|Gyoza|gyōza|ぎょうざ|餃子|🥟",
+        "food|Bol de arroz|donburi|どんぶり|丼|🍲",
+        "food|Bol de ternera|gyūdon|ぎゅうどん|牛丼|🍲",
+        "food|Bol de pollo y huevo|oyakodon|おやこどん|親子丼|🍲",
+        "food|Bol de cerdo empanado|katsudon|カツどん|カツ丼|🍲",
+        "food|Okonomiyaki|okonomiyaki|おこのみやき|お好み焼き|🥞",
+        "food|Takoyaki|takoyaki|たこやき|たこ焼き|🐙",
+        "food|Carne a la parrilla|yakiniku|やきにく|焼肉|🥩",
+        "food|Sabor|aji|あじ|味|👅",
+        "food|Picante|karai|からい|辛い|🌶️",
+        "food|Dulce|amai|あまい|甘い|🍬",
+        "food|Amargo|nigai|にがい|苦い|😖",
+        "food|Salado|shoppai|しょっぱい||🧂",
+        "food|Ácido|suppai|すっぱい|酸っぱい|🍋",
+        "food|Caliente|atsui|あつい|熱い|🔥",
+        "food|Frío|tsumetai|つめたい|冷たい|❄️",
+        "food|Delicioso|oishī|おいしい|美味しい|😋",
+        "food|Menú|menyū|メニュー||📖",
+        "food|Pedido|chūmon|ちゅうもん|注文|📝",
+        "food|Empleado|ten'in|てんいん|店員|🧑‍🍳",
+        "food|Cliente|okyaku-san|おきゃくさん|お客さん|🧑‍💼",
+        "food|Asiento/mesa|seki|せき|席|🪑",
+        "food|Reserva|yoyaku|よやく|予約|📅",
+        "food|Precio|nedan|ねだん|値段|💴",
+        "food|Cuenta/pago|kaikei|かいけい|会計|🧾",
+        "food|Efectivo|genkin|げんきん|現金|💵",
+        "food|Tarjeta|kādo|カード||💳",
+        "food|Recibo|reshīto|レシート||🧾",
+        "food|Palillos|hashi|はし|箸|🥢",
+        "food|Cuchara|supūn|スプーン||🥄",
+        "food|Tenedor|fōku|フォーク||🍴",
+        "food|Cuchillo|naifu|ナイフ||🔪",
+        "food|Plato|sara|さら|皿|🍽️",
+        "food|Cuenco|chawan|ちゃわん|茶碗|🥣",
+        "food|Vaso|koppu|コップ||🥛",
+        "food|Plato pequeño|tori-zara|とりざら|取り皿|🍽️",
+        "food|Toallita húmeda|oshibori|おしぼり||🧻",
+        "food|Para llevar|mochikaeri|もちかえり|持ち帰り|🛍️",
+        "food|En el local|tennai|てんない|店内|🍽️",
+        "food|Buffet/Sin límite|tabehōdai|たべほうだい|食べ放題|♾️",
+        "food|Bebidas sin límite|nomihōdai|のみほうだい|飲み放題|♾️",
+        "food|No fumar|kin'en|きんえん|禁煙|🚭",
+        "food|Fumar|kitsuen|きつえん|喫煙|🚬",
+        "food|Alergia|arerugī|アレルギー||⚠️",
+        "food|Cerdo|buta|ぶた|豚|🐖",
+        "food|Vaca/ternera|ushi|うし|牛|🐄",
+        "food|Pollo|tori|とり|鶏|🐓",
+        "food|Marisco/pescado|kaisen|かいせん|海鮮|🦞",
+        "food|Sin carne|niku nashi|にくなし|肉なし|🥗",
+        "food|Verduras|yasai|やさい|野菜|🥦",
+
+        // Topic 4: Hotel
+        "hotel|Hotel|hoteru|ホテル||🏨",
+        "hotel|Alojamiento (acción)|yado|やど|宿|🏡",
+        "hotel|Posada tradicional|ryokan|りょかん|旅館|👘",
+        "hotel|Pensión/alojamiento|minshuku|みんしゅく|民宿|🏡",
+        "hotel|Habitación|heya|へや|部屋|🚪",
+        "hotel|Habitación de huéspedes|kyakushitsu|きゃくしつ|客室|🛌",
+        "hotel|Recepción|uketsuke|うけつけ|受付|🛎️",
+        "hotel|Recepción (front)|furonto|フロント||🛎️",
+        "hotel|Reserva|yoyaku|よやく|予約|📅",
+        "hotel|Número de reserva|yoyaku bangō|よやくばんごう|予約番号|🔢",
+        "hotel|Check-in|chekku-in|チェックイン||✍️",
+        "hotel|Check-out|chekku-auto|チェックアウト||👋",
+        "hotel|Llave|kagi|かぎ|鍵|🔑",
+        "hotel|Tarjeta electrónica|kādo kī|カードキー||💳",
+        "hotel|Número de habitación|heya bangō|へやばんごう|部屋番号|🔢",
+        "hotel|Piso|kai|かい|階|🏢",
+        "hotel|Ascensor|erebētā|エレベーター||🛗",
+        "hotel|Escaleras|kaidan|かいだん|階段|📶",
+        "hotel|Cama|beddo|ベッド||🛏️",
+        "hotel|Futón|futon|ふとん|布団|🛌",
+        "hotel|Almohada|makura|まくら|枕|🛏️",
+        "hotel|Manta|mōfu|もうふ|毛布|🛌",
+        "hotel|Toalla|taoru|タオル||🧖",
+        "hotel|Toalla de baño|basu taoru|バスタオル||🧖",
+        "hotel|Cuarto de baño|yokushitsu|よくしつ|浴室|🛁",
+        "hotel|Bañera/Baño|ofuro|おふろ|お風呂|🛁",
+        "hotel|Ducha|shawā|シャワー||🚿",
+        "hotel|Baño|toire|トイレ||🚻",
+        "hotel|Lavabo|senmenjo|せんめんじょ|洗面所|🚰",
+        "hotel|Cepillo de dientes|haburashi|歯ブラシ|歯ブラシ|🪥",
+        "hotel|Champú|shanpū|シャンプー||🧴",
+        "hotel|Jabón|sekken|せっけん|石鹸|🧼",
+        "hotel|Secador|doraiyā|ドライヤー||💨",
+        "hotel|Aire acondicionado|eakon|エアコン||❄️",
+        "hotel|Calefacción|danbō|だんぼう|暖房|🔥",
+        "hotel|Refrigeración|reibō|れいぼう|冷房|❄️",
+        "hotel|Wi-Fi|waifai|Wi-Fi||📶",
+        "hotel|Contraseña|pasuwādo|パスワード||🔒",
+        "hotel|Desayuno|chōshoku|ちょうしょく|朝食|🥐",
+        "hotel|Cena|yūshoku|ゆうしょく|夕食|🍽️",
+        "hotel|Servicio de habitaciones|rūmu sābisu|ルームサービス||🛎️",
+        "hotel|Limpieza (servicio)|seisō|せいそう|清掃|🧹",
+        "hotel|Limpieza|sōji|そうじ|掃除|🧹",
+        "hotel|Lavandería|sentaku|せんたく|洗濯|🧺",
+        "hotel|Lavandería automática|koin randorī|コインランドリー||🧺",
+        "hotel|Máquina expendedora|jidō hanbaiki|じどうはんばいき|自動販売機|🧃",
+        "hotel|Equipaje|nimotsu|にもつ|荷物|🧳",
+        "hotel|Consigna de equipaje|nimotsu azukari|にもつあずかり|荷物預かり|🛅",
+        "hotel|No fumar|kin'en|きんえん|禁煙|🚭",
+        "hotel|Fumar|kitsuen|きつえん|喫煙|🚬",
+        "hotel|Individual|shinguru|シングル||🛏️",
+        "hotel|Doble|daburu|ダブル||🛌",
+        "hotel|Twin/dos camas|tsuin|ツイン||🛌",
+        "hotel|Hab. no fumadores|kin'en-shitsu|きんえんしつ|禁煙室|🚭",
+        "hotel|Hab. fumadores|kitsuen-shitsu|きつえんしつ|喫煙室|🚬",
+        "hotel|Salida de emergencia|hijōguchi|ひじょうぐち|非常口|🚪",
+        "hotel|Incendio|kasai|かさい|火災|🔥",
+        "hotel|Evacuación|hinan|ひなん|避難|🏃",
+        "hotel|Recibo/factura|ryōshūsho|りょうしゅうしょ|領収書|🧾",
+        "hotel|Prolongación estancia|enpaku|えんぱく|延泊|📅",
+
+        // Topic 5: Shopping
+        "shopping|Tienda|mise|みせ|店|🏪",
+        "shopping|Compras|kaimono|かいもの|買い物|🛍️",
+        "shopping|Producto|shōhin|しょうひん|商品|📦",
+        "shopping|Mercancía|shinamono|しなもの|品物|📦",
+        "shopping|Precio|nedan|ねだん|値段|💴",
+        "shopping|Precio (formal)|kakaku|かかく|価格|💴",
+        "shopping|Barato|yasui|やすい|安い|📉",
+        "shopping|Caro|takai|たかい|高い|📈",
+        "shopping|Descuento|waribiki|わりびき|割引|✂️",
+        "shopping|Oferta/rebajas|sēru|セール||🏷️",
+        "shopping|Mitad de precio|hangaku|はんがく|半額|✂️",
+        "shopping|Gratis|muryō|むりょう|無料|🆓",
+        "shopping|Talla/tamaño|saizu|サイズ||📏",
+        "shopping|Grande|ōkī|おおきい|大きい|🐘",
+        "shopping|Pequeño|chīsai|ちいさい|小さい|🐭",
+        "shopping|Color|iro|いろ|色|🎨",
+        "shopping|Rojo|aka|あか|赤|🔴",
+        "shopping|Azul|ao|あお|青|🔵",
+        "shopping|Blanco|shiro|しろ|白|⚪",
+        "shopping|Negro|kuro|くろ|黒|⚫",
+        "shopping|Amarillo|kiiro|きいろ|黄色|🟡",
+        "shopping|Verde|midori|みどり|緑|🟢",
+        "shopping|Marrón|chairo|ちゃいろ|茶色|🟤",
+        "shopping|Gris|haiiro|はいいろ|灰色|🔘",
+        "shopping|Rosa|pinku|ピンク||🌸",
+        "shopping|Naranja|orenji|オレンジ||🟠",
+        "shopping|Morado|murasaki|むらさき|紫|🟣",
+        "shopping|Ropa|fuku|ふく|服|👕",
+        "shopping|Camisa|shatsu|シャツ||👔",
+        "shopping|Pantalones|zubon|ズボン||👖",
+        "shopping|Zapatos|kutsu|くつ|靴|👞",
+        "shopping|Calcetines|kutsushita|くつした|靴下|🧦",
+        "shopping|Probador|shichakushitsu|しちゃくしつ|試着室|👗",
+        "shopping|Bolsa|fukuro|ふくろ|袋|🛍️",
+        "shopping|Comprar|kau|かう|買う|🛒",
+        "shopping|Vender|uru|うる|売る|💰",
+        "shopping|Pago|shiharai|しはらい|支払い|💳",
+        "shopping|Efectivo|genkin|げんきん|現金|💵",
+        "shopping|Tarjeta|kādo|カード||💳",
+        "shopping|Dinero electrónico|denshi manē|でんしマネー|電子マネー|📱",
+        "shopping|Tarjeta de crédito|kurejitto kādo|クレジットカード||💳",
+        "shopping|Tarjeta de transporte IC|kōtsūkei IC kādo|こうつうけいICカード|交通系ICカード|💳",
+        "shopping|Caja|reji|レジ||🛒",
+        "shopping|Empleado|ten'in|てんいん|店員|🧑‍💼",
+        "shopping|Cliente|kyaku|きゃく|客|🧑‍💼",
+        "shopping|Recibo|reshīto|レシート||🧾",
+        "shopping|Cambio|otsuri|おつり|おつり|🪙",
+        "shopping|Monedas|kozeni|こぜに|小銭|🪙",
+        "shopping|Billete (dinero)|osatsu|おさつ|お札|💵",
+        "shopping|Existencias|zaiko|ざいこ|在庫|📦",
+        "shopping|Agotado|urikire|うりきれ|売り切れ|🚫",
+        "shopping|Apertura|kaiten|かいてん|開店|🔓",
+        "shopping|Cierre|heiten|へいてん|閉店|🔒",
+        "shopping|Abierto/en servicio|eigyō-chū|えいぎょうちゅう|営業中|🟢",
+        "shopping|Preparando/cerrado|junbi-chū|じゅんびちゅう|準備中|🔴",
+        "shopping|Libre de impuestos|menzei|めんぜい|免税|🛂",
+        "shopping|Recuerdo|miyage|みやげ|土産|🎁",
+        "shopping|Souvenir|omiyage|おみやげ|お土産|🎁",
+        "shopping|Tienda de conveniencia|konbini|コンビニ||🏪",
+        "shopping|Supermercado|sūpā|スーパー||🛒",
+        "shopping|Grandes almacenes|depāto|デパート||🏬",
+        "shopping|Droguería/farmacia|doraggu sutoa|ドラッグストア||💊",
+        "shopping|Tienda de 100 yenes|hyaku-en shoppu|ひゃくえんショップ|百円ショップ|💯",
+        "shopping|Máquina expendedora|jidō hanbaiki|じどうはんばいき|自動販売機|🧃",
+        "shopping|Bolsa de compra|kaimono-bukuro|かいものぶくろ|買い物袋|🛍️",
+
+        // Topic 6: Survival
+        "survival|Esto|kore|これ||👇",
+        "survival|Eso|sore|それ||👉",
+        "survival|Aquello|are|あれ||👆",
+        "survival|Aquí|koko|ここ||📍",
+        "survival|Ahí|soko|そこ||📍",
+        "survival|Allí|asoko|あそこ||📍",
+        "survival|Dónde|doko|どこ||❓",
+        "survival|Qué|nani / nan|なに|何|🤷",
+        "survival|Quién|dare|だれ|誰|👤",
+        "survival|Cuándo|itsu|いつ||⏰",
+        "survival|Cuál|dore|どれ||❓",
+        "survival|Qué/cuál|dono|どの||❓",
+        "survival|Cuánto|ikura|いくら||💰",
+        "survival|Cuántos/cuántas|ikutsu|いくつ||🔢",
+        "survival|¿Hay? / ¿Tienen?|arimasu ka|ありますか||🔍",
+        "survival|¿Está? / ¿Hay alguien?|imasu ka|いますか||👤",
+        "survival|Entiendo|wakarimasu|わかります|分かります|💡",
+        "survival|No entiendo|wakarimasen|わかりません|分かりません|🤔",
+        "survival|No lo sé|shirimasen|しりません|知りません|🤷",
+        "survival|Está bien / no hace falta|daijōbu desu|だいじょうぶです|大丈夫です|🙆",
+        "survival|Otra vez, por favor|mō ichido onegaishimasu|もういちどおねがいします|もう一度お願いします|🔁",
+        "survival|Más despacio, por favor|yukkuri onegaishimasu|ゆっくりおねがいします|ゆっくりお願いします|🐢",
+        "survival|Entiendo un poco de japonés|nihongo ga sukoshi wakarimasu|にほんごがすこしわかります|日本語が少し分かります|🤏",
+        "survival|¿Habla inglés?|eigo wa hanasemasu ka|えいごははなせますか|英語は話せますか|🗣️",
+        "survival|Solo hablo japonés|nihongo shika hanasemasen|にほんごしかはなせません|日本語しか話せません|🗣️",
+        "survival|¿Qué es esto?|kore wa nan desu ka|これはなんですか|これは何ですか|❓",
+        "survival|¿Cuánto cuesta esto?|kore wa ikura desu ka|これはいくらですか||💰",
+        "survival|¿Dónde está el baño?|toire wa doko desu ka|トイレはどこですか||🚻",
+        "survival|¿Dónde está la estación?|eki wa doko desu ka|えきはどこですか|駅はどこですか|🚉",
+        "survival|¿Es aquí?|koko desu ka|ここですか||📍",
+        "survival|Quiero esto / deme esto|kore o kudasai|これをください||🤲",
+        "survival|Por favor|onegaishimasu|おねがいします|お願いします|🙏",
+        "survival|Ayúdeme, por favor|tasukete kudasai|たすけてください|助けてください|🆘",
+        "survival|Espere un momento|chotto matte kudasai|ちょっとまってください|ちょっと待ってください|✋",
+        "survival|¿Puedo hacer una foto?|shashin o totte mo ii desu ka|しゃしんをとってもいいですか|写真を撮ってもいいですか|📷",
+        "survival|Otra vez|mō ichido|もういちど|もう一度|🔁",
+        "survival|Despacio|yukkuri|ゆっくり||🐢",
+        "survival|Sí|hai|はい||⭕",
+        "survival|No|iie|いいえ||❌",
+        "survival|Por supuesto|mochiron|もちろん||👍",
+        "survival|Probablemente|tabun|たぶん||🤔",
+        "survival|¿De verdad?|hontō desu ka|ほんとうですか|本当ですか|😲",
+        "survival|Entendido|wakarimashita|わかりました|分かりました|✅",
+        "survival|Es un poco... (rechazo suave)|chotto...|ちょっと…||😬",
+        "survival|Está bien / no hace falta|ii desu|いいです||🙅",
+
+        // Topic 7: Money
+        "money|Dinero|okane|おかね|お金|💴",
+        "money|Yen|en|えん|円|¥",
+        "money|Yen japonés|nihon-en|にほんえん|日本円|¥",
+        "money|Billete|osatsu|おさつ|お札|💵",
+        "money|Billete (shihei)|shihei|しへい|紙幣|💵",
+        "money|Moneda|kōka|こうか|硬貨|🪙",
+        "money|Monedas/suelto|kozeni|こぜに|小銭|🪙",
+        "money|Tarifa|ryōkin|りょうきん|料金|💴",
+        "money|Precio|nedan|ねだん|値段|💴",
+        "money|Precio (formal)|kakaku|かかく|価格|💴",
+        "money|Total|gōkei|ごうけい|合計|🧾",
+        "money|Cantidad de dinero|kingaku|きんがく|金額|💰",
+        "money|Cambio|otsuri|おつり|お釣り|🪙",
+        "money|Pago|shiharai|しはらい|支払い|💳",
+        "money|Pagar|shiharau|しはらう|支払う|💸",
+        "money|Efectivo|genkin|げんきん|現金|💵",
+        "money|Tarjeta|kādo|カード||💳",
+        "money|Tarjeta de crédito|kurejitto kādo|クレジットカード||💳",
+        "money|Tarjeta de débito|debitto kādo|デビットカード||💳",
+        "money|Dinero electrónico|denshi manē|でんしマネー|電子マネー|📱",
+        "money|Código QR|kyūāru kōdo|QRコード||📱",
+        "money|Caja|reji|レジ||🛒",
+        "money|Recibo|reshīto|レシート||🧾",
+        "money|Recibo/factura|ryōshūsho|りょうしゅうしょ|領収書|🧾",
+        "money|Banco|ginkō|ぎんこう|銀行|🏦",
+        "money|Cajero automático|ē tī emu|ATM||🏧",
+        "money|Cajero automático (completo)|genkin jidō azukebarai-ki|げんきんじどうあずけばらいき|現金自動預け払い機|🏧",
+        "money|Retirar dinero|hikidasu|ひきだす|引き出す|🏧",
+        "money|Depositar/dejar|azukeru|あずける|預ける|📥",
+        "money|Saldo|zandaka|ざんだか|残高|💰",
+        "money|Comisión|tesūryō|てすうりょう|手数料|💸",
+        "money|Cambio/intercambio|kōkan|こうかん|交換|🔄",
+        "money|Cambio de divisas|ryōgae|りょうがえ|両替|💱",
+        "money|Libre de impuestos|menzei|めんぜい|免税|🛂",
+        "money|Impuestos|zeikin|ぜいきん|税金|🏛️",
+        "money|Barato|yasui|やすい|安い|📉",
+        "money|Caro|takai|たかい|高い|📈",
+        "money|Gratis|muryō|むりょう|無料|🆓",
+        "money|Mitad de precio|hangaku|はんがく|半額|✂️",
+        "money|Moneda de 1 yen|ichien-dama|いちえんだま|一円玉|🪙",
+        "money|Moneda de 5 yenes|goen-dama|ごえんだま|五円玉|🪙",
+        "money|Moneda de 10 yenes|jūen-dama|じゅうえんだま|十円玉|🪙",
+        "money|Moneda de 50 yenes|gojūen-dama|ごじゅうえんだま|五十円玉|🪙",
+        "money|Moneda de 100 yenes|hyakuen-dama|ひゃくえんだま|百円玉|🪙",
+        "money|Moneda de 500 yenes|gohyakuen-dama|ごひゃくえんだま|五百円玉|🪙",
+        "money|Billete de 1000 yenes|sen-en satsu|せんえんさつ|千円札|💴",
+        "money|Billete de 2000 yenes|nisen-en satsu|にせんえんさつ|二千円札|💴",
+        "money|Billete de 5000 yenes|gosen-en satsu|ごせんえんさつ|五千円札|💴",
+        "money|Billete de 10000 yenes|ichiman-en satsu|いちまんえんさつ|一万円札|💴",
+
+        // Topic 8: Basics
+        "basics|Baño|toire|トイレ||🚻",
+        "basics|Aseo|otearai|おてあらい|お手洗い|🚻",
+        "basics|Agua|mizu|みず|水|💧",
+        "basics|Comida|tabemono|たべもの|食べ物|🍱",
+        "basics|Bebida|nomimono|のみもの|飲み物|🥤",
+        "basics|Comida (plato)|shokuji|しょくじ|食事|🍽️",
+        "basics|Ayuda|tasuke|たすけ|助け|🆘",
+        "basics|Ayudar|tasukeru|たすける|助ける|🆘",
+        "basics|Ayúdeme, por favor|tasukete kudasai|たすけてください|助けてください|🆘",
+        "basics|Emergencia|kinkyū|きんきゅう|緊急|🚨",
+        "basics|Situación de emergencia|kinkyū jitai|きんきゅうじたい|緊急事態|🚨",
+        "basics|Ambulancia|kyūkyūsha|きゅうきゅうしゃ|救急車|🚑",
+        "basics|Policía|keisatsu|けいさつ|警察|🚓",
+        "basics|Puesto de policía|kōban|こうばん|交番|🚓",
+        "basics|Hospital|byōin|びょういん|病院|🏥",
+        "basics|Farmacia|yakkyoku|やっきょく|薬局|💊",
+        "basics|Medicamento|kusuri|くすり|薬|💊",
+        "basics|Médico|isha|いしゃ|医者|👨‍⚕️",
+        "basics|Duele|itai|いたい|痛い|🤕",
+        "basics|Enfermedad|byōki|びょうき|病気|🤒",
+        "basics|Fiebre|netsu|ねつ|熱|🤒",
+        "basics|Estar abierto|aite iru|あいている|開いている|🟢",
+        "basics|Abierto/en servicio|eigyō-chū|えいぎょうちゅう|営業中|🟢",
+        "basics|Estar cerrado|shimatte iru|しまっている|閉まっている|🔴",
+        "basics|Cierre|heiten|へいてん|閉店|🔒",
+        "basics|Camino|michi|みち|道|🛣️",
+        "basics|Perdido|maigo|まいご|迷子|❓",
+        "basics|Perderse|michi ni mayou|みちにまよう|道に迷う|🧭",
+        "basics|Cartera|saifu|さいふ|財布|👛",
+        "basics|Teléfono móvil|keitai denwa|けいたいでんわ|携帯電話|📱",
+        "basics|Smartphone|sumātofon|スマートフォン||📱",
+        "basics|Carga|jūden|じゅうでん|充電|🔋",
+        "basics|Cargador|jūdenki|じゅうでんき|充電器|🔌",
+        "basics|Papel higiénico|toiretto pēpā|トイレットペーパー||🧻",
+        "basics|Entrada|iriguchi|いりぐち|入り口|➡️",
+        "basics|Salida|deguchi|でぐち|出口|⬅️",
+        "basics|Orientación/Información|annai|あんない|案内|ℹ️",
+        "basics|Información|jōhō|じょうほう|情報|ℹ️",
+        "basics|Teléfono|denwa|でんわ|電話|📞",
+
+        // Topic 9: Places
+        "places|Ciudad/pueblo|machi|まち|町|🏙️",
+        "places|Ciudad|shi|し|市|🏙️",
+        "places|Zona urbana (machi)|machi|まち|街|🏙️",
+        "places|Zona urbana|shigaichi|しがいち|市街地|🏙️",
+        "places|Centro urbano|chūshingai|ちゅうしんがい|中心街|🎯",
+        "places|Camino|michi|みち|道|🛣️",
+        "places|Calle/avenida|tōri|とおり|通り|🛣️",
+        "places|Esquina|kado|かど|角|📐",
+        "places|Edificio|tatemono|たてもの|建物|🏢",
+        "places|Edificio (biru)|biru|ビル||🏢",
+        "places|Hotel|hoteru|ホテル||🏨",
+        "places|Restaurante|resutoran|レストラン||🍽️",
+        "places|Tienda de conveniencia|konbini|コンビニ||🏪",
+        "places|Supermercado|sūpā|スーパー||🛒",
+        "places|Grandes almacenes|depāto|デパート||🏬",
+        "places|Tienda|mise|みせ|店|🏪",
+        "places|Estación|eki|えき|駅|🚉",
+        "places|Aeropuerto|kūkō|くうこう|空港|✈️",
+        "places|Parada de autobús|basutei|バスてい|バス停|🚏",
+        "places|Banco|ginkō|ぎんこう|銀行|🏦",
+        "places|Oficina de correos|yūbinkyoku|ゆうびんきょく|郵便局|📮",
+        "places|Hospital|byōin|びょういん|病院|🏥",
+        "places|Farmacia|yakkyoku|やっきょく|薬局|💊",
+        "places|Puesto de policía|kōban|こうばん|交番|🚓",
+        "places|Comisaría|keisatsu-sho|けいさつしょ|警察署|🚓",
+        "places|Parque|kōen|こうえん|公園|🌳",
+        "places|Plaza|hiroba|ひろば|広場|⛲",
+        "places|Santuario sintoísta|jinja|じんじゃ|神社|⛩️",
+        "places|Templo budista|tera|てら|寺|🛕",
+        "places|Iglesia|kyōkai|きょうかい|教会|⛪",
+        "places|Castillo|shiro|しろ|城|🏯",
+        "places|Museo de arte|bijutsukan|びじゅつかん|美術館|🖼️",
+        "places|Museo|hakubutsukan|はくぶつかん|博物館|🏛️",
+        "places|Acuario|suizokukan|すいぞくかん|水族館|🐬",
+        "places|Zoológico|dōbutsuen|どうぶつえん|動物園|🐘",
+        "places|Lugar turístico|kankōchi|かんこうち|観光地|📸",
+        "places|Oficina de turismo|kankō annaijo|かんこうあんないじょ|観光案内所|ℹ️",
+        "places|Ayuntamiento|shiyakusho|しやくしょ|市役所|🏛️",
+        "places|Baño público|kōshū toire|こうしゅうトイレ|公衆トイレ|🚾",
+        "places|Aparcamiento|chūshajō|ちゅうしゃじょう|駐車場|🅿️",
+        "places|Gasolinera|gasorin sutando|ガソリンスタンド||⛽",
+        "places|Carretera|dōro|どうろ|道路|🛣️",
+        "places|Cruce|kōsaten|こうさてん|交差点|➕",
+        "places|Semáforo|shingō|しんごう|信号|🚦",
+        "places|Puente|hashi|はし|橋|🌉",
+        "places|Río|kawa|かわ|川|🏞️",
+        "places|Mar|umi|うみ|海|🌊",
+        "places|Montaña|yama|やま|山|⛰️",
+        "places|Frente de la estación|ekimae|えきまえ|駅前|📍",
+        "places|Subterráneo|chika|ちか|地下|🚇",
+        "places|Zona comercial subterránea|chikagai|ちかがい|地下街|🛍️",
+        "places|Entrada|iriguchi|いりぐち|入口|➡️",
+        "places|Salida|deguchi|でぐち|出口|⬅️",
+        "places|Dirección|jūsho|じゅうしょ|住所|📍",
+        "places|Mapa|chizu|ちず|地図|🗺️",
+        "places|Lugar|basho|ばしょ|場所|📍",
+        "places|Cerca|chikaku|ちかく|近く|🎯",
+        "places|Lejos|tōku|とおく|遠く|🔭",
+
+        // Topic 10: Time and numbers
+        "time|Tiempo/hora|jikan|じかん|時間|⏱️",
+        "time|Hora (suffix)|ji|じ|時|🕒",
+        "time|Minuto|fun/pun|ふん/ぷん|分|⏲️",
+        "time|Segundo|byō|びょう|秒|⏱️",
+        "time|AM/mañana|gozen|ごぜん|午前|🌅",
+        "time|PM/tarde|gogo|ごご|午後|🌇",
+        "time|Mañana|asa|あさ|朝|🌅",
+        "time|Mediodía|hiru|ひる|昼|☀️",
+        "time|Tarde|yūgata|ゆうがた|夕方|🌇",
+        "time|Noche|yoru|よる|夜|🌃",
+        "time|Ahora|ima|いま|今|🔽",
+        "time|Hoy|kyō|きょう|今日|📅",
+        "time|Mañana (día)|ashita|あした|明日|⏭️",
+        "time|Ayer|kinō|きのう|昨日|⏮️",
+        "time|Pasado mañana|asatte|あさって|明後日|⏭️",
+        "time|Anteayer|ototoi|おととい|一昨日|⏮️",
+        "time|Cada día|mainichi|まいにち|毎日|🔁",
+        "time|Semana|shūkan|しゅうかん|週間|📅",
+        "time|Mes/luna|tsuki|つき|月|🌙",
+        "time|Año|toshi|とし|年|📅",
+        "time|Día|hi|ひ|日|☀️",
+        "time|Esta semana|konshū|こんしゅう|今週|📅",
+        "time|Próxima semana|raishū|らいしゅう|来週|⏭️",
+        "time|Semana pasada|senshū|せんしゅう|先週|⏮️",
+        "time|Este mes|kongetsu|こんげつ|今月|📅",
+        "time|Próximo mes|raigetsu|らいげつ|来月|⏭️",
+        "time|Mes pasado|sengetsu|せんげつ|先月|⏮️",
+        "time|Este año|kotoshi|ことし|今年|📅",
+        "time|Próximo año|rainen|らいねん|来年|⏭️",
+        "time|Año pasado|kyonen|きょねん|去年|⏮️",
+
+        // Topic 11: Airport
+        "airport|Aeropuerto|kūkō|くうこう|空港|✈️",
+        "airport|Vuelo|furaito|フライト||🛫",
+        "airport|Avión|hikōki|ひこうき|飛行機|🛩️",
+        "airport|Tarjeta de embarque|tōjōken|とうじょうけん|搭乗券|🎫",
+        "airport|Maleta|sūtsukēsu|スーツケース||🧳",
+        "airport|Equipaje de mano|tenimotsu|てにもつ|手荷物|👜",
+        "airport|Pasaporte|pasupōto|パスポート||🛂",
+        "airport|Puerta de embarque|tōjōguchi|とうじょうぐち|搭乗口|🚪",
+        "airport|Llegada|tōchaku|とうちゃく|到着|🛬",
+        "airport|Salida|shuppatsu|しゅっぱつ|出発|🛫",
+        "airport|Inmigración|nyūkoku shinsa|にゅうこくしんさ|入国審査|🛂",
+        "airport|Aduanas|zeikan|ぜいかん|税関|🛃",
+        
+        // Topic 12: Polite
+        "polite|Hola|konnichiwa|こんにちは||👋",
+        "polite|Gracias|arigatō gozaimasu|ありがとうございます||🙏",
+        "polite|Disculpe / Perdón|sumimasen|すみません||🙇",
+        "polite|Por favor|onegaishimasu|おねがいします|お願いします|🤲",
+        "polite|Está bien / No hace falta|daijōbu desu|だいじょうぶです|大丈夫です|🙆",
+        "polite|Disculpe (al entrar)|shitsurei shimasu|しつれいします|失礼します|🚪",
+        "polite|Buen provecho|itadakimasu|いただきます||🥢",
+        "polite|Estuvo delicioso|gochisōsama deshita|ごちそうさまでした||😋",
+        "polite|Buenos días|ohayō gozaimasu|おはようございます||🌅",
+        
+        // Topic 13: Trouble
+        "trouble|Me he perdido|michi ni mayoi mashita|みちにまよいました|道に迷いました|🧭",
+        "trouble|Perdido (objeto)|nakushimashita|なくしました|無くしました|❓",
+        "trouble|No me encuentro bien|kibun ga warui desu|きぶんがわるいです|気分が悪いです|🤢",
+        "trouble|Dolor|itai|いたい|痛い|🤕",
+        "trouble|Médico|isha|いしゃ|医者|👨‍⚕️",
+        "trouble|Medicamento|kusuri|くすり|薬|💊",
+        "trouble|Alergia|arerugī|アレルギー||⚠️",
+        "trouble|Fiebre|netsu|ねつ|熱|🤒",
+        "trouble|Herida|kega|けが|怪我|🩹",
+        "trouble|Ambulancia|kyūkyūsha|きゅうきゅうしゃ|救急車|🚑",
+        "trouble|Llamar (por teléfono)|yobu|よぶ|呼ぶ|📞",
+        "trouble|Problema|mondai|もんだい|問題|❗"
+    ];
+
+    let vocabulary = [];
+    rawVocab.forEach((item, index) => {
+        const [category, spanish, romaji, kana, kanji, emoji] = item.split('|');
+        vocabulary.push({
+            id: category + index,
+            category, spanish, romaji, kana, kanji,
+            type: category === 'survival' || category === 'polite' ? 'phrase' : 'word',
+            emoji: emoji || "🔹"
+        });
+    });
+
+    // --- Generador de Números 1 al 100 automático --- //
+    const numKanji = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+    const numKana = ["", "いち", "に", "さん", "よん", "ご", "ろく", "なな", "はち", "きゅう", "じゅう"];
+    const numRomaji = ["", "ichi", "ni", "san", "yon", "go", "roku", "nana", "hachi", "kyū", "jū"];
+    
+    for(let i = 1; i <= 100; i++) {
+        let k = '', ka = '', ro = '';
+        if(i <= 10) { 
+            k = numKanji[i]; ka = numKana[i]; ro = numRomaji[i]; 
+        } else if (i === 100) { 
+            k = "百"; ka = "ひゃく"; ro = "hyaku"; 
+        } else {
+            let tens = Math.floor(i/10);
+            let units = i%10;
+            if (tens === 1) {
+                k = "十" + numKanji[units];
+                ka = "じゅう" + numKana[units];
+                ro = "jū" + numRomaji[units];
+            } else {
+                k = numKanji[tens] + "十" + numKanji[units];
+                ka = numKana[tens] + "じゅう" + numKana[units];
+                ro = numRomaji[tens] + "jū" + numRomaji[units];
+            }
+        }
+        vocabulary.push({
+            id: 'time_num_' + i, category: 'time', spanish: String(i),
+            romaji: ro, kana: ka, kanji: k, type: 'word', emoji: "🔢"
+        });
+    }
+
+    // --- 3. ESTADO DE LA APLICACIÓN --- //
+    let currentTopicId = null;
+    let practiceState = { questions: [], currentIndex: 0, score: 0, results: [], answered: false };
+    
+    // Función para renderizar Furigana (si aplica y está activo)
+    function renderJapanese(wordObj) {
+        if (!wordObj.kanji) return wordObj.kana;
+        if (prefs.hiragana) {
+            return `<ruby>${wordObj.kanji}<rt>${wordObj.kana}</rt></ruby>`;
+        }
+        return wordObj.kanji;
+    }
+
+    // --- 4. AUDIO --- //
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    function initAudio() { if (!audioCtx) audioCtx = new AudioContext(); }
+
+    function playTone(freq1, freq2, type = 'sine', duration = 0.15) {
+        if (!prefs.sound) return;
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(freq1, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq2, audioCtx.currentTime + duration);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+    function playCorrectSound() { playTone(600, 900, 'sine', 0.2); }
+    function playWrongSound() { playTone(300, 200, 'triangle', 0.2); }
+    function playCompletionSound() {
+        if (!prefs.sound) return;
+        setTimeout(() => playTone(400, 600, 'sine', 0.15), 0);
+        setTimeout(() => playTone(600, 800, 'sine', 0.2), 150);
+    }
+
+    function speakJapanese(text) {
+        if (!window.speechSynthesis || !prefs.sound) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // --- 5. NAVEGACIÓN --- //
+    function showScreen(screenId) {
+        if(prefs.sound) initAudio();
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(`screen-${screenId}`).classList.add('active');
+        window.scrollTo(0, 0);
+        if (screenId === 'home') renderHome();
+    }
+
+    function getTopicProgress(topicId) {
+        if (!userProgress[topicId]) { userProgress[topicId] = { completed: 0 }; saveData(); }
+        return userProgress[topicId].completed;
+    }
+    function addPracticeCompletion(topicId) {
+        if (!userProgress[topicId]) getTopicProgress(topicId);
+        userProgress[topicId].completed++;
+        saveData();
+    }
+
+    function renderHome() {
+        const container = document.getElementById('topics-container');
+        container.innerHTML = '';
+        topics.forEach((t, idx) => {
+            const vocabCount = vocabulary.filter(v => v.category === t.id).length;
+            const completed = getTopicProgress(t.id);
+            const card = document.createElement('div');
+            card.className = 'topic-card';
+            card.onclick = () => openTopic(t.id);
+            const numStr = (idx + 1).toString().padStart(2, '0');
+            card.innerHTML = `
+                <div class="topic-icon">${t.icon}</div>
+                <div class="topic-info">
+                    <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${t.title}</div>
+                    <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
+                </div>
+                ${completed > 0 ? `<div class="progress-indicator">⭐ ${completed}</div>` : ''}
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function openTopic(topicId) {
+        currentTopicId = topicId;
+        const topic = topics.find(t => t.id === topicId);
+        const vocabCount = vocabulary.filter(v => v.category === topicId).length;
+        document.getElementById('topic-detail-icon').innerText = topic.icon;
+        document.getElementById('topic-detail-title').innerText = topic.title;
+        document.getElementById('topic-detail-count').innerText = `${vocabCount} elementos`;
+        showScreen('topic');
+    }
+
+    // --- 6. TEORÍA --- //
+    function startTheory() { renderTheory(); showScreen('theory'); }
+
+    function renderTheory() {
+        const container = document.getElementById('theory-list');
+        container.innerHTML = '';
+        const words = vocabulary.filter(v => v.category === currentTopicId);
+        
+        words.forEach(word => {
+            const card = document.createElement('div');
+            card.className = 'word-card';
+            const speakText = word.kanji || word.kana;
+            
+            card.innerHTML = `
+                <div class="word-header" onclick="toggleTheoryCard(this, '${speakText}')">
+                    <div class="word-emoji">${word.emoji}</div>
+                    <div class="word-main">
+                        <div class="word-kanji-preview">${renderJapanese(word)}</div>
+                        <div class="word-spanish">${word.spanish}</div>
+                    </div>
+                </div>
+                <div class="word-details">
+                    <div class="detail-row"><span class="detail-label">Significado:</span> <span class="detail-value">${word.spanish}</span></div>
+                    <div class="detail-row"><span class="detail-label">Romaji:</span> <span class="detail-value" style="color:var(--text-muted)">${word.romaji}</span></div>
+                    <div class="detail-row"><span class="detail-label">Kana:</span> <span class="detail-value">${word.kana}</span></div>
+                    ${word.kanji ? `<div class="detail-row"><span class="detail-label">Kanji:</span> <span class="detail-value" style="color:var(--primary)">${word.kanji}</span></div>` : ''}
+                    <button class="btn-audio" onclick="event.stopPropagation(); speakJapanese('${speakText}')">🔊</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function toggleTheoryCard(headerElement, textToSpeak) {
+        const card = headerElement.parentElement;
+        const wasExpanded = card.classList.contains('expanded');
+        document.querySelectorAll('.word-card').forEach(c => c.classList.remove('expanded'));
+        if (!wasExpanded) {
+            card.classList.add('expanded');
+            speakJapanese(textToSpeak);
+        }
+    }
+
+    // --- 7. PRÁCTICA --- //
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function startPractice() {
+        const topicWords = vocabulary.filter(v => v.category === currentTopicId);
+        practiceState = {
+            questions: shuffleArray(topicWords).slice(0, 10),
+            currentIndex: 0, score: 0, results: [], answered: false
+        };
+        generateQuestion();
+        showScreen('practice');
+    }
+
+    function abortPractice() {
+        if(confirm("¿Seguro que quieres salir de la práctica?")) showScreen('topic');
+    }
+
+    function generateQuestion() {
+        if (practiceState.currentIndex >= practiceState.questions.length || practiceState.currentIndex >= 10) {
+            showPracticeResult();
+            return;
+        }
+
+        practiceState.answered = false;
+        const word = practiceState.questions[practiceState.currentIndex];
+        const allTopicWords = vocabulary.filter(v => v.category === currentTopicId);
+        
+        const feedbackPanel = document.getElementById('feedback-panel');
+        feedbackPanel.className = 'feedback-panel';
+        feedbackPanel.style.display = 'none';
+        
+        const progress = (practiceState.currentIndex / 10) * 100;
+        document.getElementById('practice-progress').style.width = `${progress}%`;
+
+        // format: 0 = es->ja, 1 = ja->es, 2 = romaji->ja
+        const formats = [0, 1, 2];
+        const format = formats[Math.floor(Math.random() * formats.length)];
+        
+        let questionLabel, questionTextHTML, isOptionsSpanish;
+        const mainJaSpeak = word.kanji || word.kana;
+
+        if (format === 0) {
+            questionLabel = "¿Cómo se dice?";
+            questionTextHTML = word.spanish;
+            isOptionsSpanish = false;
+        } else if (format === 1) {
+            questionLabel = "¿Qué significa?";
+            questionTextHTML = renderJapanese(word);
+            isOptionsSpanish = true;
+        } else {
+            questionLabel = "¿Cuál es su escritura?";
+            questionTextHTML = word.romaji;
+            isOptionsSpanish = false;
+        }
+
+        document.getElementById('question-label').innerText = questionLabel;
+        document.getElementById('question-word').innerHTML = questionTextHTML;
+
+        if (format === 1) speakJapanese(mainJaSpeak);
+
+        const wrongPool = allTopicWords.filter(v => v.id !== word.id);
+        const wrongWords = shuffleArray(wrongPool).slice(0, 2);
+        
+        const optionsObjects = [
+            { isCorrect: true, wordObj: word },
+            { isCorrect: false, wordObj: wrongWords[0] },
+            { isCorrect: false, wordObj: wrongWords[1] }
+        ];
+        
+        const shuffledOptions = shuffleArray(optionsObjects);
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        shuffledOptions.forEach((opt) => {
+            const btn = document.createElement('div');
+            btn.className = `option-btn ${isOptionsSpanish ? 'es-text' : ''}`;
+            
+            // Render text depending on mode
+            if (isOptionsSpanish) {
+                btn.innerText = opt.wordObj.spanish;
+            } else {
+                btn.innerHTML = renderJapanese(opt.wordObj);
+            }
+
+            btn.onclick = () => handleAnswer(opt.isCorrect, btn, word, isOptionsSpanish);
+            container.appendChild(btn);
+        });
+    }
+
+    function handleAnswer(isCorrect, buttonElement, wordObj, isOptionsSpanish) {
+        if (practiceState.answered) return;
+        practiceState.answered = true;
+
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
+        const feedbackPanel = document.getElementById('feedback-panel');
+        const titleEl = document.getElementById('feedback-title');
+        const answerEl = document.getElementById('feedback-answer');
+        
+        practiceState.results.push({ word: wordObj, isCorrect: isCorrect });
+
+        if (isCorrect) {
+            practiceState.score++;
+            buttonElement.style.borderColor = "var(--correct)";
+            buttonElement.style.color = "var(--correct)";
+            playCorrectSound();
+            feedbackPanel.className = 'feedback-panel correct';
+            titleEl.innerHTML = "✓ ¡Correcto!";
+            answerEl.style.display = 'none';
+        } else {
+            buttonElement.style.borderColor = "var(--wrong)";
+            buttonElement.style.color = "var(--wrong)";
+            
+            // Buscar correcta para resaltarla (comprobando el objeto asociado)
+            document.querySelectorAll('.option-btn').forEach(b => {
+                // Almacenamos el obj en html o lo buscamos visualmente
+                // Para ser precisos, buscamos el texto que coincide
+                let targetHTML = isOptionsSpanish ? wordObj.spanish : renderJapanese(wordObj);
+                if (b.innerHTML === targetHTML) {
+                    b.style.borderColor = "var(--correct)";
+                    b.style.backgroundColor = "var(--correct-bg)";
+                    b.style.color = "var(--text-main)";
+                }
+            });
+
+            playWrongSound();
+            feedbackPanel.className = 'feedback-panel wrong';
+            titleEl.innerHTML = "✕ Incorrecto";
+            let fullAnswer = `${wordObj.kanji ? wordObj.kanji + ' — ' : ''}${wordObj.kana} — ${wordObj.romaji} — ${wordObj.spanish}`;
+            answerEl.innerText = fullAnswer;
+            answerEl.style.display = 'block';
+        }
+        
+        feedbackPanel.style.display = 'flex';
+        setTimeout(() => speakJapanese(wordObj.kanji || wordObj.kana), 100);
+    }
+
+    function nextQuestion() {
+        practiceState.currentIndex++;
+        generateQuestion();
+    }
+
+    // --- 8. RESULTADOS --- //
+    function showPracticeResult() {
+        playCompletionSound();
+        addPracticeCompletion(currentTopicId);
+        document.getElementById('result-score').innerText = `${practiceState.score} / ${practiceState.questions.length}`;
+        
+        const list = document.getElementById('result-list');
+        list.innerHTML = '';
+        practiceState.results.forEach(res => {
+            const w = res.word;
+            const item = document.createElement('div');
+            item.className = `result-item ${res.isCorrect ? 'correct' : 'wrong'}`;
+            item.innerHTML = `
+                <div class="res-icon">${res.isCorrect ? '✓' : '✕'}</div>
+                <div class="res-word">${renderJapanese(w)} <span style="font-size:12px; font-weight:normal; color:var(--text-muted)">(${w.romaji})</span></div>
+                <div class="res-meaning">${w.spanish}</div>
+            `;
+            list.appendChild(item);
+        });
+        showScreen('result');
+    }
+
+    // Init
+    window.onload = () => { loadData(); renderHome(); };
+</script>
+
+</body>
+</html>
