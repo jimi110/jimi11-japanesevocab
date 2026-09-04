@@ -287,8 +287,17 @@
             position: fixed; bottom: 0; left: 0; width: 100%; padding: 24px; display: none;
             flex-direction: column; gap: 16px; animation: slideUp 0.3s ease; z-index: 10;
         }
-        #app.layout-pc .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); }
-        @media (min-width: 768px) { #app.layout-auto .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); } }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        /* FIX de animación: Usamos una animación que mantiene el centrado en el eje X para evitar el salto */
+        @keyframes slideUpCenter {
+            from { transform: translate(-50%, 100%); }
+            to { transform: translate(-50%, 0); }
+        }
+
+        #app.layout-pc .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); animation: slideUpCenter 0.3s ease; }
+        @media (min-width: 768px) { #app.layout-auto .feedback-panel { border-radius: 16px 16px 0 0; width: 100%; max-width: inherit; left: 50%; transform: translateX(-50%); animation: slideUpCenter 0.3s ease; } }
         
         .feedback-panel.correct { background-color: var(--correct-bg); border-top: 2px solid var(--correct); display: flex; }
         .feedback-panel.correct .feedback-title { color: var(--correct); }
@@ -300,7 +309,6 @@
 
         .feedback-title { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
         .feedback-answer { font-size: 18px; color: var(--text-main); font-weight: 600; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         
         .pad-bottom { padding-bottom: 160px; }
 
@@ -395,6 +403,8 @@
         <div class="question-container">
             <div class="question-label" id="question-label">¿Qué significa?</div>
             <div class="question-word" id="question-word">駅</div>
+            <!-- Nuevo botón para repetir el audio visible por defecto -->
+            <button class="btn-audio" id="btn-repeat-audio" style="display:flex; margin: 16px auto 0;" onclick="repeatPracticeAudio()">🔊</button>
         </div>
 
         <div class="options-container" id="options-container">
@@ -1002,7 +1012,7 @@
         "basics|Farmacia|yakkyoku|やっきょく|薬局|💊",
         "basics|Medicamento|kusuri|くすり|薬|💊",
         "basics|Médico|isha|いしゃ|医者|👨‍⚕️",
-        "basics|Duele|itai|いたい|痛い|🤕",
+        "basics|Duele|itai|いたい|いたい|🤕",
         "basics|Enfermedad|byōki|びょうき|病気|🤒",
         "basics|Fiebre|netsu|ねつ|熱|🤒",
         "basics|Estar abierto|aite iru|あいている|開いている|🟢",
@@ -1201,6 +1211,9 @@
     let currentTopicId = null;
     let practiceState = { questions: [], currentIndex: 0, score: 0, results: [], answered: false };
     
+    // Variable global para almacenar el audio japonés actual de la práctica
+    let currentPracticeWordSpeak = "";
+    
     // Función para renderizar Furigana (si aplica y está activo)
     function renderJapanese(wordObj) {
         if (!wordObj.kanji) return wordObj.kana;
@@ -1245,6 +1258,13 @@
         utterance.lang = 'ja-JP';
         utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
+    }
+
+    // Función para repetir el audio de la pregunta actual
+    function repeatPracticeAudio() {
+        if (currentPracticeWordSpeak) {
+            speakJapanese(currentPracticeWordSpeak);
+        }
     }
 
     // --- 5. NAVEGACIÓN --- //
@@ -1388,6 +1408,9 @@
         
         let questionLabel, questionTextHTML, isOptionsSpanish;
         const mainJaSpeak = word.kanji || word.kana;
+        
+        // Asignamos la palabra a la variable global para el botón de repetición de audio
+        currentPracticeWordSpeak = mainJaSpeak;
 
         if (format === 0) {
             questionLabel = "¿Cómo se dice?";
@@ -1405,8 +1428,12 @@
 
         document.getElementById('question-label').innerText = questionLabel;
         document.getElementById('question-word').innerHTML = questionTextHTML;
-
-        if (format === 1) speakJapanese(mainJaSpeak);
+        
+        // Autoreproducir el audio por defecto solo en preguntas tipo "ja->es", pero el botón 
+        // de repetición permanece siempre activo y visible para que el usuario pueda interactuar cuando quiera.
+        if (format === 1) {
+            speakJapanese(mainJaSpeak);
+        }
 
         const wrongPool = allTopicWords.filter(v => v.id !== word.id);
         const wrongWords = shuffleArray(wrongPool).slice(0, 2);
@@ -1463,7 +1490,6 @@
             // Buscar correcta para resaltarla (comprobando el objeto asociado)
             document.querySelectorAll('.option-btn').forEach(b => {
                 // Almacenamos el obj en html o lo buscamos visualmente
-                // Para ser precisos, buscamos el texto que coincide
                 let targetHTML = isOptionsSpanish ? wordObj.spanish : renderJapanese(wordObj);
                 if (b.innerHTML === targetHTML) {
                     b.style.borderColor = "var(--correct)";
@@ -1481,6 +1507,8 @@
         }
         
         feedbackPanel.style.display = 'flex';
+        
+        // Reproducir la pronunciación original al responder
         setTimeout(() => speakJapanese(wordObj.kanji || wordObj.kana), 100);
     }
 
