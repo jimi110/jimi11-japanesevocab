@@ -223,6 +223,21 @@
         .topic-info { flex-grow: 1; }
         .topic-title { font-weight: 700; font-size: 16px; color: var(--text-main); margin-bottom: 4px; }
         .topic-stats { font-size: 13px; color: var(--text-muted); }
+        .global-search { margin: 0 auto 28px; width: 100%; max-width: 620px; }
+        .global-search label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .global-search-input { width: 100%; border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--card-bg); color: var(--text-main); padding: 14px 16px; font-size: 16px; outline: none; }
+        .global-search-input:focus { border-color: var(--primary); }
+        .search-results { display: none; margin-top: 12px; }
+        .search-results.visible { display: block; }
+        .search-summary { color: var(--text-muted); font-size: 13px; margin: 0 0 10px 2px; }
+        .search-result-list { display: grid; gap: 8px; }
+        .search-word-card { display: flex; align-items: center; gap: 12px; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 12px; background: var(--card-bg); }
+        .search-word-main { flex: 1; min-width: 0; }
+        .search-word-ja { font-size: 19px; font-weight: 700; color: var(--primary); }
+        .search-word-es { font-size: 14px; font-weight: 600; }
+        .search-word-topic { font-size: 12px; color: var(--text-muted); }
+        .dict-button { flex: 0 0 auto; width: 40px; height: 40px; border: 2px solid var(--border); border-radius: 50%; background: var(--bg-secondary); color: var(--primary); font-size: 18px; cursor: pointer; }
+        .dict-button:hover { border-color: var(--primary); }
         .progress-indicator { 
             font-size: 13px; font-weight: 600; background: var(--bg-secondary);
             padding: 4px 8px; border-radius: var(--radius-sm); color: var(--primary);
@@ -261,6 +276,19 @@
             width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
             font-size: 20px; cursor: pointer; margin: 12px auto 0; color: var(--primary);
         }
+
+        /* --- DICCIONARIO --- */
+        .dictionary-modal { position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); }
+        .dictionary-modal.visible { display: flex; }
+        .dictionary-dialog { position: relative; width: min(560px, 100%); max-height: 80vh; overflow-y: auto; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .dictionary-close { position: absolute; right: 14px; top: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 28px; cursor: pointer; }
+        .dictionary-title { padding-right: 36px; font-size: 24px; color: var(--primary); margin-bottom: 6px; }
+        .dictionary-reading { color: var(--text-muted); margin-bottom: 16px; }
+        .dictionary-status { color: var(--text-muted); }
+        .dictionary-sense { padding: 12px 0; border-top: 1px solid var(--border); }
+        .dictionary-pos { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+        .dictionary-definition { font-weight: 600; }
+        .dictionary-link { display: inline-block; margin-top: 18px; color: var(--primary); font-weight: 700; }
 
         /* --- PRÁCTICA --- */
         .practice-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
@@ -357,6 +385,12 @@
             </div>
         </div>
 
+        <div class="global-search">
+            <label for="global-search-input">🔎 Buscar en todo el vocabulario</label>
+            <input id="global-search-input" class="global-search-input" type="search" placeholder="Escribe japonés, romaji o español…" autocomplete="off" oninput="searchVocabulary(this.value)">
+            <div id="search-results" class="search-results" aria-live="polite"></div>
+        </div>
+
         <h2 style="margin-top: 8px;">Tus temarios</h2>
         <div class="topics-grid" id="topics-container">
             <!-- Los temarios se generan aquí por JS -->
@@ -434,6 +468,14 @@
         </div>
     </div>
 
+</div>
+
+<div id="dictionary-modal" class="dictionary-modal" role="dialog" aria-modal="true" aria-labelledby="dictionary-title" onclick="closeDictionaryOnOverlay(event)">
+    <div class="dictionary-dialog">
+        <button class="dictionary-close" aria-label="Cerrar diccionario" onclick="closeDictionary()">×</button>
+        <h2 id="dictionary-title" class="dictionary-title">Diccionario</h2>
+        <div id="dictionary-content" class="dictionary-status">Cargando…</div>
+    </div>
 </div>
 
 <script>
@@ -1163,8 +1205,51 @@
         "trouble|Herida|kega|けが|怪我|🩹",
         "trouble|Ambulancia|kyūkyūsha|きゅうきゅうしゃ|救急車|🚑",
         "trouble|Llamar (por teléfono)|yobu|よぶ|呼ぶ|📞",
-        "trouble|Problema|mondai|もんだい|問題|❗"
+        "trouble|Problema|mondai|もんだい|問題|❗",
+
+        // Nuevos temarios 14–38
+        "body|Persona|hito|ひと|人|👤", "body|Gente|hito|ひと|人|👥", "body|Hombre|otoko|おとこ|男|👨", "body|Mujer|onna|おんな|女|👩", "body|Niño|kodomo|こども|子供|🧒", "body|Niña|onnanoko|おんなのこ|女の子|👧", "body|Chico|otokonoko|おとこのこ|男の子|👦", "body|Adulto|otona|おとな|大人|🧑", "body|Bebé|akachan|あかちゃん|赤ちゃん|👶", "body|Cuerpo|karada|からだ|体|👤", "body|Cabeza|atama|あたま|頭|🧠", "body|Cara|kao|かお|顔|🙂", "body|Pelo/cabello|kami|かみ|髪|💇", "body|Frente|hitai|ひたい|額|👤", "body|Ojo|me|め|目|👁️", "body|Oreja|mimi|みみ|耳|👂", "body|Nariz|hana|はな|鼻|👃", "body|Boca|kuchi|くち|口|👄", "body|Diente|ha|は|歯|🦷", "body|Lengua|shita|した|舌|👅", "body|Cuello|kubi|くび|首|🧣", "body|Hombro|kata|かた|肩|💪", "body|Brazo|ude|うで|腕|💪", "body|Mano|te|て|手|✋", "body|Dedo|yubi|ゆび|指|☝️", "body|Pecho|mune|むね|胸|🫁", "body|Espalda|senaka|せなか|背中|🔙", "body|Estómago|onaka|おなか|お腹|🤰", "body|Pierna|ashi|あし|足|🦵", "body|Pie|ashi|あし|足|🦶", "body|Rodilla|hiza|ひざ|膝|🦵", "body|Corazón|kokoro|こころ|心|❤️", "body|Sangre|chi|ち|血|🩸", "body|Piel|hada|はだ|肌|🖐️", "body|Ropa|fuku|ふく|服|👕", "body|Zapatos|kutsu|くつ|靴|👞",
+
+        "home|Casa/hogar|ie|いえ|家|🏠", "home|Habitación|heya|へや|部屋|🚪", "home|Sala de estar|ima|いま|居間|🛋️", "home|Dormitorio|shitsu|しつ|室|🛏️", "home|Cocina|daidokoro|だいどころ|台所|🍳", "home|Baño|ofuro|おふろ|お風呂|🛁", "home|Aseo/inodoro|toire|トイレ||🚻", "home|Puerta|doa|ドア||🚪", "home|Puerta corredera|tobira|とびら|扉|🚪", "home|Ventana|mado|まど|窓|🪟", "home|Pared|kabe|かべ|壁|🧱", "home|Techo|tenjo|てんじょう|天井|🏠", "home|Suelo|yuka|ゆか|床|🪵", "home|Mesa|tsukue|つくえ|机|🪑", "home|Silla|isu|いす|椅子|🪑", "home|Cama|beddo|ベッド||🛏️", "home|Sofá|sofa|ソファ||🛋️", "home|Nevera/congelador|reizouko|れいぞうこ|冷蔵庫|🧊", "home|Microondas|denshi renji|でんしレンジ|電子レンジ|📻", "home|Lavadora|sentakuki|せんたくき|洗濯機|🧺", "home|Ducha|shawa|シャワー||🚿", "home|Espejo|kagami|かがみ|鏡|🪞", "home|Toalla|taoru|タオル||🧴", "home|Luz|denki|でんき|電気|💡", "home|Bombilla|denkyu|でんきゅう|電球|💡", "home|Interruptor|suicchi|スイッチ||🔘", "home|Aire acondicionado|eakon|エアコン||❄️", "home|Calefacción|danbo|だんぼう|暖房|🔥", "home|Ventilador|senpuki|せんぷうき|扇風機|🌀", "home|Enchufe|konsento|コンセント||🔌", "home|Cargador|judenki|じゅうでんき|充電器|🔋", "home|Encender|tsukeru|つける|付ける|🔛", "home|Apagar|kesu|けす|消す|🔕", "home|Abrir|akeru|あける|開ける|🔓", "home|Cerrar|shimeru|しめる|閉める|🔒", "home|Cargar|juden suru|じゅうでんする|充電する|🔋",
+
+        "clothes|Ropa|fuku|ふく|服|👕", "clothes|Camisa|shatsu|シャツ||👔", "clothes|Camiseta|T-shatsu|Tシャツ||👕", "clothes|Pantalón|zubon|ズボン||👖", "clothes|Vaqueros|jinzu|ジーンズ||👖", "clothes|Falda|sukaato|スカート||👗", "clothes|Vestido|wanpisu|ワンピース||👗", "clothes|Chaqueta|jaketto|ジャケット||🧥", "clothes|Abrigo|koto|コート||🧥", "clothes|Jersey|seta|セーター||🧶", "clothes|Sudadera|paka|パーカー||👕", "clothes|Calcetines|kutsushita|くつした|靴下|🧦", "clothes|Zapatos|kutsu|くつ|靴|👞", "clothes|Zapatillas deportivas|sunika|スニーカー||👟", "clothes|Sandalias|sandaru|サンダル||🩴", "clothes|Sombrero/gorra|boshi|ぼうし|帽子|🧢", "clothes|Paraguas|kasa|かさ|傘|☂️", "clothes|Guantes|tebukuro|てぶくろ|手袋|🧤", "clothes|Bufanda|mafura|マフラー||🧣", "clothes|Cinturón|beruto|ベルト||➖", "clothes|Limpio|kirei|きれい|綺麗|✨", "clothes|Sucio|kitanai|きたない|汚い|🧼", "clothes|Mojado|nurete iru|ぬれている|濡れている|💧", "clothes|Seco|kawaita|かわいた|乾いた|☀️", "clothes|Ponerse ropa|kiru|きる|着る|👕", "clothes|Ponerse zapatos|haku|はく|履く|👟", "clothes|Quitarse|nugu|ぬぐ|脱ぐ|👕", "clothes|Vestir/llevar puesto|kite iru|きている|着ている|👕", "clothes|Llevar zapatos|haite iru|はいている|履いている|👟", "clothes|Llevar|motsu|もつ|持つ|👜",
+
+        "daily|Despertarse/levantarse|okiru|おきる|起きる|⏰", "daily|Dormir/acostarse|neru|ねる|寝る|😴", "daily|Ducharse|shawa o abiru|シャワーをあびる|シャワーを浴びる|🚿", "daily|Bañarse/entrar|hairu|はいる|入る|🛁", "daily|Lavarse|arau|あらう|洗う|🧼", "daily|Lavarse la cara|kao o arau|かおをあらう|顔を洗う|🙂", "daily|Cepillarse los dientes|ha o migaku|はをみがく|歯を磨く|🦷", "daily|Vestirse|kiru|きる|着る|👕", "daily|Sentarse|suwaru|すわる|座る|🪑", "daily|Levantarse de una silla|tatsu|たつ|立つ|🧍", "daily|Caminar|aruku|あるく|歩く|🚶", "daily|Correr|hashiru|はしる|走る|🏃", "daily|Descansar|yasumu|やすむ|休む|😌", "daily|Comer|taberu|たべる|食べる|🍽️", "daily|Beber|nomu|のむ|飲む|🥤", "daily|Cocinar|ryori suru|りょうりする|料理する|🍳", "daily|Limpiar|soji suru|そうじする|掃除する|🧹", "daily|Estudiar|benkyo suru|べんきょうする|勉強する|📚", "daily|Trabajar|hataraku|はたらく|働く|💼", "daily|Jugar|asobu|あそぶ|遊ぶ|🎮", "daily|Ir|iku|いく|行く|➡️", "daily|Venir|kuru|くる|来る|⬅️", "daily|Volver|kaeru|かえる|帰る|🏠", "daily|Salir|deru|でる|出る|🚪",
+
+        "routine|Siempre|itsumo|いつも|いつも|🔁", "routine|Nunca|zenzen|ぜんぜん|全然|🚫", "routine|Normalmente|futsu|ふつう|普通|🔁", "routine|Normalmente|taitei|たいてい|大抵|🔁", "routine|A menudo|yoku|よく||🔁", "routine|A veces|tokidoki|ときどき|時々|🔁", "routine|Raramente|amari|あまり||🔁", "routine|Todavía|mada|まだ|未だ|⌛", "routine|Ya|mo|もう||✅", "routine|Antes|mae|まえ|前|⏮️", "routine|Después|ato|あと|後|⏭️", "routine|Temprano|hayai|はやい|早い|🌅", "routine|Tarde|osoi|おそい|遅い|🌙", "routine|Cada día|mainichi|まいにち|毎日|📅", "routine|Cada semana|maishu|まいしゅう|毎週|📅", "routine|Cada mes|maitsuki|まいつき|毎月|📅", "routine|Cada año|maitoshi|まいとし|毎年|📅", "routine|Por la mañana|asa|あさ|朝|🌅", "routine|Mediodía|hiru|ひる|昼|☀️", "routine|Noche/por la noche|yoru|よる|夜|🌙", "routine|Hoy|kyo|きょう|今日|📅", "routine|Mañana|ashita|あした|明日|➡️", "routine|Ayer|kino|きのう|昨日|⬅️",
+
+        "position|Encima|ue|うえ|上|⬆️", "position|Debajo|shita|した|下|⬇️", "position|Dentro|naka|なか|中|📦", "position|Fuera|soto|そと|外|🌳", "position|Delante|mae|まえ|前|⬅️", "position|Detrás|ushiro|うしろ|後ろ|➡️", "position|Al lado|tonari|となり|隣|↔️", "position|Junto a|yoko|よこ|横|↔️", "position|Entre|aida|あいだ|間|↔️", "position|Cerca|chikaku|ちかく|近く|📍", "position|Lejos|toi|とおい|遠い|🔭", "position|Aquí|koko|ここ||📍", "position|Ahí|soko|そこ||📍", "position|Allí|asoko|あそこ||📍", "position|Derecha|migi|みぎ|右|➡️", "position|Izquierda|hidari|ひだり|左|⬅️", "position|Centro|mannaka|まんなか|真ん中|🎯", "position|Interior|uchi|うち|内|🏠", "position|Exterior|soto|そと|外|🌳", "position|Esquina|kado|かど|角|📐", "position|Enfrente|mukai|むかい|向かい|↔️",
     ];
+
+    // Temarios adicionales: el formato mantiene la misma estructura del vocabulario original.
+    const addTopicWords = (category, emoji, rows) => rows.split(';').forEach(row => {
+        const [spanish, romaji, kana, kanji = ''] = row.split('~');
+        rawVocab.push(`${category}|${spanish}|${romaji}|${kana}|${kanji}|${emoji}`);
+    });
+
+    addTopicWords('quantity', '📏', 'Cantidad/número~kazu~かず~数;Cantidad~ryō~りょう~量;Mucho/muchos~ōi~おおい~多い;Poco/pocos~sukunai~すくない~少ない;Mucho/muchos~takusan~たくさん~;Un poco~sukoshi~すこし~少し;Un poco~chotto~ちょっと~;Todo~zenbu~ぜんぶ~全部;Mitad~hanbun~はんぶん~半分;Casi todo/casi nada~hotondo~ほとんど~;Cuántos/cuántas~ikutsu~いくつ~;Cuánto dinero~ikura~いくら~;Cuántas unidades~nanko~なんこ~何個;Cuántas personas~nannin~なんにん~何人;Cuántas unidades planas~nanmai~なんまい~何枚;Cuántas unidades largas~nanbon~なんぼん~何本;Cuántas veces~nankai~なんかい~何回;Uno~hitotsu~ひとつ~一つ;Dos~futatsu~ふたつ~二つ;Tres~mittsu~みっつ~三つ;Muchos~takusan~たくさん~;Varios/algunos~ikutsuka~いくつか~;Algunas personas~nanninka~なんにんか~何人か;El más/el número uno~ichiban~いちばん~一番;Aproximadamente~yaku~やく~約;Aproximadamente~kurai / gurai~くらい / ぐらい~;O más~ijō~いじょう~以上;O menos~ika~いか~以下;Solamente~dake~だけ~;Solamente/no más que~shika~しか~;Más~motto~もっと~;Un poco más~mō sukoshi~もうすこし~もう少し;Uno más~mō hitotsu~もうひとつ~もう一つ;Comparar~kuraberu~くらべる~比べる;Igual/mismo~onaji~おなじ~同じ;Diferente~chigau~ちがう~違う;Que/en comparación con~yori~より~;Tanto como~hodo~ほど~;El/la más…~ichiban~いちばん〜~一番〜;Más que~yori ōi~よりおおい~より多い;Menos que~yori sukunai~よりすくない~より少ない;Grande~ōkii~おおきい~大きい;Pequeño~chiisai~ちいさい~小さい;Alto/caro~takai~たかい~高い;Barato~yasui~やすい~安い;Largo~nagai~ながい~長い;Corto~mijikai~みじかい~短い;Pesado~omoi~おもい~重い;Ligero~karui~かるい~軽い;Rápido~hayai~はやい~速い;Lento/tarde~osoi~おそい~遅い;A es más grande que B~A wa B yori ōkii~AはBよりおおきい。~AはBより大きい。;B es más grande que A~A yori B no hō ga ōkii~AよりBのほうがおおきい。~AよりBのほうが大きい。;Es mi favorito/el que más me gusta~ichiban suki~いちばんすき。~一番好き。;¿Cuál prefieres?~dochira ga suki?~どちらがすき？~どちらが好き？;Cualquiera está bien~dochira demo ii~どちらでもいい。~どちらでもいい。;Más o menos igual~onaji kurai~おなじくらい。~同じくらい。;Más grande que esto~kore yori ōkii~これよりおおきい。~これより大きい。;Más pequeño que esto~kore yori chiisai~これよりちいさい。~これより小さい。;Un poco más, por favor~mō sukoshi kudasai~もうすこしください。~もう少しください。;Solo esto~kore dake desu~これだけです。~これだけです。');
+    addTopicWords('colors', '🎨', 'Color~iro~いろ~色;Rojo~aka~あか~赤;Azul~ao~あお~青;Blanco~shiro~しろ~白;Negro~kuro~くろ~黒;Amarillo~kiiro~きいろ~黄色;Verde~midori~みどり~緑;Marrón~chairo~ちゃいろ~茶色;Naranja~orenji~オレンジ~;Rosa~pinku~ピンク~;Morado~murasaki~むらさき~紫;Gris~haiiro~はいいろ~灰色;Dorado~kiniro~きんいろ~金色;Plateado~giniro~ぎんいろ~銀色;Claro/brillante~akarui~あかるい~明るい;Oscuro~kurai~くらい~暗い;Pálido/suave~awai~あわい~淡い;Intenso/oscuro~koi~こい~濃い;Forma~katachi~かたち~形;Redondo~marui~まるい~丸い;Cuadrado~shikakui~しかくい~四角い;Triángulo~sankakukei~さんかくけい~三角形;Rectángulo~chōhōkei~ちょうほうけい~長方形;Círculo~maru~まる~丸;Línea~sen~せん~線;Punto~ten~てん~点;Esquina~kado~かど~角;Plano~taira~たいら~平ら;Curvado/doblado~magatta~まがった~曲がった;Recto~massugu~まっすぐ~真っ直ぐ;Grande~ōkii~おおきい~大きい;Pequeño~chiisai~ちいさい~小さい;Largo~nagai~ながい~長い;Corto~mijikai~みじかい~短い;Alto~takai~たかい~高い;Bajo~hikui~ひくい~低い;Grueso~futoi~ふとい~太い;Fino/delgado~hosoi~ほそい~細い;Grueso~atsui~あつい~厚い;Fino/delgado~usui~うすい~薄い;Amplio~hiroi~ひろい~広い;Estrecho~semai~せまい~狭い;Pesado~omoi~おもい~重い;Ligero~karui~かるい~軽い;Nuevo~atarashii~あたらしい~新しい;Viejo~furui~ふるい~古い;Joven~wakai~わかい~若い;Bonito/limpio~kirei~きれい~;Sucio~kitanai~きたない~汚い;Mono/adorable~kawaii~かわいい~可愛い;Guay/atractivo~kakkoii~かっこいい~;Hermoso~utsukushii~うつくしい~美しい;Feo~minikui~みにくい~醜い;Sencillo~shinpuru~シンプル~;Complejo~fukuzatsu~ふくざつ~複雑;Blando/suave~yawarakai~やわらかい~柔らかい;Duro~katai~かたい~硬い;Suave/liso~nameraka~なめらか~滑らか;Áspero~zarazara~ザラザラ~;Liso/resbaladizo~tsurutsuru~ツルツル~;Caliente~atsui~あつい~熱い;Frío al tacto~tsumetai~つめたい~冷たい;Cálido~atatakai~あたたかい~温かい;Fresco~suzushii~すずしい~涼しい;Seco~kawaite iru~かわいている~乾いている;Mojado~nurete iru~ぬれている~濡れている;Dulce~amai~あまい~甘い;Picante~karai~からい~辛い;Amargo~nigai~にがい~苦い;Ácido~suppai~すっぱい~酸っぱい;Salado~shoppai~しょっぱい~;Delicioso~oishii~おいしい~美味しい;Malo de sabor~mazui~まずい~不味い');
+    addTopicWords('feelings', '😊', 'Contento/feliz~ureshii~うれしい~嬉しい;Divertido/pasarlo bien~tanoshii~たのしい~楽しい;Feliz/felicidad~shiawase~しあわせ~幸せ;Gustar~suki~すき~好き;Encantar~daisuki~だいすき~大好き;Amar~aishite iru~あいしている~愛している;Tranquilidad~anshin~あんしん~安心;Satisfacción~manzoku~まんぞく~満足;Emoción/excitación~kōfun~こうふん~興奮;Ilusión/emoción~wakuwaku~ワクワク~;Nervios/corazón acelerado~dokidoki~ドキドキ~;Orgulloso~hokorashii~ほこらしい~誇らしい;Triste~kanashii~かなしい~悲しい;Sentirse solo~sabishii~さびしい~寂しい;Tener miedo/aterrador~kowai~こわい~怖い;Ansiedad/preocupación~fuan~ふあん~不安;Preocupación~shinpai~しんぱい~心配;Enfadarse~okoru~おこる~怒る;Estar enfadado~hara ga tatsu~はらがたつ~腹が立つ;Frustrarse/irritarse~iraira suru~イライラする~;Ponerse nervioso~kinchō suru~きんちょうする~緊張する;Tener vergüenza~hazukashii~はずかしい~恥ずかしい;Decepcionarse~gakkari suru~がっかりする~;Cansarse~tsukareru~つかれる~疲れる;Aburrimiento~taikutsu~たいくつ~退屈;No gustar~kirai~きらい~嫌い;Odiar/detestar~daikirai~だいきらい~大嫌い;Estar bien/con energía~genki~げんき~元気;Cansado~tsukareta~つかれた~疲れた;Tener sueño~nemui~ねむい~眠い;Tener hambre~onaka ga suita~おなかがすいた~お腹が空いた;Tener sed~nodo ga kawaita~のどがかわいた~喉が渇いた;Doler~itai~いたい~痛い;Sentirse bien/agradable~kimochi ii~きもちいい~気持ちいい;Sentirse mal/desagradable~kimochi warui~きもちわるい~気持ち悪い;Estar bien~daijōbu~だいじょうぶ~大丈夫;Estar libre/sin nada que hacer~hima~ひま~暇;Estar ocupado~isogashii~いそがしい~忙しい;No estar ocupado~isogashikunai~いそがしくない~忙しくない;¡Qué alegría!~ureshii!~うれしい！~嬉しい！;¡Qué divertido!~tanoshii!~たのしい！~楽しい！;¡Estoy cansado!~tsukareta!~つかれた！~疲れた！;¡Tengo sueño!~nemui!~ねむい！~眠い！;¡Estoy lleno!~onaka ippai!~おなかいっぱい！~お腹いっぱい！;¡Qué miedo!~kowai!~こわい！~怖い！;¡Sí!/¡Lo conseguimos!~yatta!~やった！~;Qué pena/lástima~zannen~ざんねん~残念;¡Qué bien!/¡Menos mal!~yokatta!~よかった！~;Lo peor/qué desastre~saiaku~さいあく~最悪;Duro/complicado~taihen~たいへん~大変');
+    addTopicWords('opinions', '🧠', 'Pensar~omou~おもう~思う;Pensar/considerar~kangaeru~かんがえる~考える;Saber/conocer~shiru~しる~知る;Entender~wakaru~わかる~分かる;Sentir~kanjiru~かんじる~感じる;Preferir~konomu~このむ~好む;Elegir~erabu~えらぶ~選ぶ;Decidir~kimeru~きめる~決める;Estar de acuerdo~sansei suru~さんせいする~賛成する;Estar en contra~hantai suru~はんたいする~反対する;Opinión~iken~いけん~意見;Pensamiento/idea~kangae~かんがえ~考え;Verdad/verdadero~hontō~ほんとう~本当;Mentira~uso~うそ~嘘;Correcto~tadashii~ただしい~正しい;Estar equivocado~machigatte iru~まちがっている~間違っている;Bueno~ii~いい~;Malo~warui~わるい~悪い;Interesante/divertido~omoshiroi~おもしろい~面白い;Aburrido~tsumaranai~つまらない~;Importante~jūyō~じゅうよう~重要;Necesario~hitsuyō~ひつよう~必要;Práctico~benri~べんり~便利;Incómodo/poco práctico~fuben~ふべん~不便;Fácil~kantan~かんたん~簡単;Difícil~muzukashii~むずかしい~難しい;Genial/lo mejor~saikō~さいこう~最高;Horrible/lo peor~saiaku~さいあく~最悪;Gustar~suki~すき~好き;Encantar~daisuki~だいすき~大好き;No gustar~kirai~きらい~嫌い;Odiar~daikirai~だいきらい~大嫌い;Favorito~okiniiri~おきにいり~お気に入り;Gustar más~ichiban suki~いちばんすき~一番好き;Preferir…~no hō ga suki~〜のほうがすき~〜のほうが好き;¿Cuál prefieres?~dochira ga suki?~どちらがすき？~どちらが好き？;¿Cuál prefieres? (informal)~docchi ga suki?~どっちがすき？~どっちが好き？;Cualquiera está bien~dochira demo ii~どちらでもいい~どちらでもいい;Me da igual~docchi demo ii~どっちでもいい~どっちでもいい;Cosas que te gustan~suki na mono~すきなもの~好きなもの;Comida favorita~suki na tabemono~すきなたべもの~好きな食べ物;Afición/hobby~shumi~しゅみ~趣味;Creo que…~watashi wa to omou~わたしは〜とおもう。~私は〜と思う。;Creo que… (más educado)~to omoimasu~〜とおもいます。~〜と思います。;Me gusta…~watashi wa ga suki~わたしは〜がすき。~私は〜が好き。;Prefiero…~watashi wa no hō ga suki~わたしは〜のほうがすき。~私は〜のほうが好き。;Creo que está bien~ii to omou~いいとおもう。~いいと思う。;Eso pienso/estoy de acuerdo~sō omou~そうおもう。~そう思う。;No pienso eso~sō omowanai~そうおもわない。~そう思わない。;¿De verdad?~hontō ni?~ほんとうに？~本当に？;Sí, eso es verdad~sō da ne~そうだね。~;Ya veo/entiendo~naruhodo~なるほど。~;Ciertamente/es verdad~tashika ni~たしかに~確かに;Probablemente~tabun~たぶん~;Por supuesto~mochiron~もちろん~;Absolutamente~zettai~ぜったい~絶対;No especialmente/me da igual~betsu ni~べつに~別に');
+    addTopicWords('casual', '💬', 'Yo~watashi~わたし~私;Yo (masculino, informal/moderado)~boku~ぼく~僕;Yo (masculino, muy informal)~ore~おれ~俺;Tú~anata~あなた~;Tú~kimi~きみ~君;Él~kare~かれ~彼;Ella~kanojo~かのじょ~彼女;Todos~minna~みんな~;Uno mismo/yo~jibun~じぶん~自分;¿Verdad?/¿no?~ne~ね~;Énfasis/información~yo~よ~;¿Verdad?~yone~よね~;Énfasis informal~sa~さ~;Me pregunto si…~kana~かな~;Pero/aunque~kedo~けど~;Pero~demo~でも~;Por eso~dakara~だから~;Entonces/bueno, pues~jā~じゃあ~;Bueno…~mā~まあ~;Como/algo así~nanka~なんか~;Un poco~chotto~ちょっと~;Como pensaba/al final~yappari~やっぱり~;Probablemente~tabun~たぶん~;Realmente~hontō ni~ほんとうに~本当に;Muchísimo~sugoku~すごく~;Súper/muy (muy informal)~meccha~めっちゃ~;Nada/en absoluto~zenzen~ぜんぜん~全然;Bastante~kanari~かなり~;Bastante/suficiente~kekkō~けっこう~結構;Prácticamente~hobo~ほぼ~;De momento/por ahora~toriaezu~とりあえず~;¿Eh?~e?~え？~;¿Qué?~e?~えっ？~;Ah~ā~ああ~;Vaya/¿en serio?~hē~へえ~;¿Sí?~sō?~そう？~;Ah, ya veo~sō nan da~そうなんだ~;Sí, verdad~sō da ne~そうだね~;¿De verdad?~honto?~ほんと？~;¿En serio? (muy informal)~maji?~マジ？~;¿En serio?~maji de?~マジで？~;Sí~un~うん~;No~uun~ううん~;Ya veo~naruhodo~なるほど~;Entendido~wakatta~わかった~分かった;No lo sé/no entiendo~wakaranai~わからない~分からない;No lo sé~shiranai~しらない~知らない;Qué bien/mola~ii ne~いいね~;Increíble~sugoi~すごい~;¡Qué fuerte! (muy informal)~sugo~すごっ~;Brutal/increíble/mal asunto~yabai~やばい~;Qué mono~kawaii~かわいい~;Qué guay~kakkoii~かっこいい~;Lo mejor/genial~saikō~さいこう~最高;Fatal~saiaku~さいあく~最悪;¿Qué?~nani?~なに？~何？;¿Quién?~dare?~だれ？~誰？;¿Dónde?~doko?~どこ？~;¿Cuándo?~itsu?~いつ？~;¿Por qué?~nande?~なんで？~;¿Por qué?~dōshite?~どうして？~;¿Qué tal?/¿cómo?~dō?~どう？~;¿Qué significa?~dō iu imi?~どういういみ？~どういう意味？;¿Qué hacemos?~dō suru?~どうする？~;¿Qué pasa?/¿qué te pasa?~dō shita?~どうした？~;¿Estás bien?~daijōbu?~だいじょうぶ？~大丈夫？;¿De verdad?~hontō?~ほんとう？~本当？;¿Está bien?~ii?~いい？~;¿Vamos?~iku?~いく？~行く？;¿Comes?~taberu?~たべる？~食べる？;¿Entiendes?~wakaru?~わかる？~分かる？;¿Lo sabes/conoces?~shitteru?~しってる？~知ってる？;Comer (forma informal)~taberu~たべる~食べる;Ir (forma informal)~iku~いく~行く;Ver (forma informal)~miru~みる~見る;Beber (forma informal)~nomu~のむ~飲む;Hacer (forma informal)~suru~する~;Venir (forma informal)~kuru~くる~来る;Entender (forma informal)~wakaru~わかる~分かる;Saber (forma informal)~shitteru~しってる~知ってる;Tener/llevar (forma informal)~motteru~もってる~持ってる;Estar esperando (forma informal)~matteru~まってる~待ってる;Pensar/estar pensando (forma informal)~omotteru~おもってる~思ってる;Estar haciendo (forma informal)~teru~てる~;No ser (forma informal)~janai~じゃない~;Decir (forma informal)~tte iu~っていう~;¿Cómo se llama?~nante iu namae?~なんていうなまえ？~なんていう名前？;O mejor dicho…~tte iu ka~っていうか~;Tener que…~nakya~〜なきゃ~;Acabar haciendo/hacerlo sin querer~chau / jau~〜ちゃう / 〜じゃう~;Espera un momento~chotto matte~ちょっとまって。~ちょっと待って。;Espera un momento, ¿vale?~chotto matte ne~ちょっとまってね。~ちょっと待ってね。;Vale/entendido~wakatta~わかった。~分かった。;No lo sé/no entiendo~wakannai~わかんない。~;No sé~shiranai~しらない。~知らない。;No lo sabía~shiranakatta~しらなかった。~知らなかった。;¿Qué hago?~dō shiyō~どうしよう。~;Me da igual~dō demo ii~どうでもいい。~;Vale/está bien~ii yo~いいよ。~;¡Está bien!/¡Mola!~ii jan~いいじゃん。~;Estoy bien/no pasa nada~daijōbu da yo~だいじょうぶだよ。~大丈夫だよ。;Ten cuidado~ki o tsukete~きをつけて。~気をつけて。;Hasta luego~mata ne~またね。~;Nos vemos~jā ne~じゃあね。~;La próxima vez~mata kondo~またこんど。~また今度。;Buen trabajo/nos vemos~otsukare~おつかれ。~お疲れ。;¡Ánimo!~ganbatte~がんばって。~頑張って。;Vamos a hacerlo/ánimo~ganbarō~がんばろう。~頑張ろう。;No se puede evitar~shōganai~しょうがない。~;No hay nada que hacer~shikata nai~しかたない。~仕方ない。;Ni idea (muy coloquial)~shiran~しらん。~;Qué pereza/qué rollo~mendokusai~めんどくさい。~;Qué ruidoso/cállate~urusai~うるさい。~;Tengo sueño~nemui~ねむい。~眠い。;Estoy cansado~tsukareta~つかれた。~疲れた。;Tengo hambre~onaka suita~おなかすいた。~お腹すいた。;Tengo sed~nodo kawaita~のどかわいた。~喉乾いた。;Vamos~ikō~いこう。~行こう。;Vámonos/volvamos~kaerō~かえろう。~帰ろう。;Dejémoslo~yameyō~やめよう。~;Tiene buena pinta/buen rollo~ii kanji~いいかんじ。~いい感じ。;Algo así~sonna kanji~そんなかんじ。~そんな感じ。;Lo que sea~nan demo ii~なんでもいい。~;No especialmente/da igual~betsu ni~べつに。~別に。');
+    addTopicWords('fillers', '🗯️', 'Eh...~etto~えっと~;Esto...~ano~あの~;Pues...~nanka~なんか~何か;Ya veo~so desu ne~そうですね~;Entiendo~naruhodo~なるほど~;Quizás~tabun~たぶん~多分;Un poco~chotto~ちょっと~;Como que...~nanka~なんか~何か;Pero~demo~でも~;Por eso/entonces~dakara~だから~;Bueno...~maa~まあ~;Bueno, pues~jaa~じゃあ~;Así que~sorede~それで~;Realmente~honto ni~ほんとうに~本当に;Exactamente~sono tori~そのとおり~その通り;Aparentemente~rashii~らしい~');
+    addTopicWords('phone', '📞', 'Teléfono~denwa~でんわ~電話;Móvil~sumaho~スマホ~;Llamar~denwa suru~でんわする~電話する;Contestar~denwa ni deru~でんわにでる~電話に出る;Mensaje~meru~メール~;Mensaje de texto~messeji~メッセージ~;Número~bango~ばんごう~番号;Número de teléfono~denwa bango~でんわばんごう~電話番号;Señal~denpa~でんぱ~電波;Batería~denchi~でんち~電池;Llamada perdida~chakushin~ちゃくしん~着信;Llamar de nuevo~kakenaosu~かけなおす~かけ直す;Repetir~kurikaesu~くりかえす~繰り返す;Hablar~hanasu~はなす~話す;Escuchar~kiku~きく~聞く;¿Puedes repetir?~mo ichido onegaishimasu~もういちどおねがいします~もう一度お願いします;Más despacio~motto yukkuri~もっとゆっくり~');
+    addTopicWords('work', '💼', 'Trabajo~shigoto~しごと~仕事;Empresa~kaisha~かいしゃ~会社;Oficina~jimusho~じむしょ~事務所;Empleado~shakaijin~しゃかいじん~社会人;Jefe~joshi~じょうし~上司;Compañero~doryo~どうりょう~同僚;Estudiante~gakusei~がくせい~学生;Profesor~sensei~せんせい~先生;Maestro/docente~kyoshi~きょうし~教師;Universidad~daigaku~だいがく~大学;Escuela~gakko~がっこう~学校;Instituto~koko~こうこう~高校;Clase~jugyo~じゅぎょう~授業;Examen~shiken~しけん~試験;Estudiar~benkyo suru~べんきょうする~勉強する;Trabajar~hataraku~はたらく~働く;Reunión~kaigi~かいぎ~会議;Horario~yotei~よてい~予定;Vacaciones~yasumi~やすみ~休み;Día libre~kyujitsu~きゅうじつ~休日');
+    addTopicWords('family', '👨‍👩‍👧', 'Familia~kazoku~かぞく~家族;Padre~chichi~ちち~父;Padre de otra persona~otosan~おとうさん~お父さん;Madre~haha~はは~母;Madre de otra persona~okasan~おかあさん~お母さん;Hermano mayor~ani~あに~兄;Hermana mayor~ane~あね~姉;Hermano menor~ototo~おとうと~弟;Hermana menor~imoto~いもうと~妹;Marido~otto~おっと~夫;Mujer/esposa~tsuma~つま~妻;Amigo~tomodachi~ともだち~友達;Pareja~koibito~こいびと~恋人;Novio~kareshi~かれし~彼氏;Novia~kanojo~かのじょ~彼女;Conocido~shiriai~しりあい~知り合い;Compañero~nakama~なかま~仲間;Vecino~kinjo no hito~きんじょのひと~近所の人;Hijo~musuko~むすこ~息子;Hija~musume~むすめ~娘');
+    addTopicWords('countries', '🌍', 'Japón~Nihon / Nippon~にほん / にっぽん~日本;España~Supein~スペイン~;Español (persona)~Supeinjin~スペインじん~スペイン人;Español (idioma)~Supein-go~スペインご~スペイン語;Japonés (persona)~Nihonjin~にほんじん~日本人;Japonés (idioma)~Nihongo~にほんご~日本語;Inglés~Eigo~えいご~英語;Inglés (persona)~Igirisu-jin~イギリスじん~イギリス人;Francés~Furansugo~フランスご~フランス語;Alemán~Doitsu-go~ドイツご~ドイツ語;Chino~Chugokugo~ちゅうごくご~中国語;Coreano~Kankokugo~かんこくご~韓国語;Extranjero~gaikokujin~がいこくじん~外国人;País~kuni~くに~国;Idioma~gengo~げんご~言語;Hablar~hanasu~はなす~話す;Entender~wakaru~わかる~分かる;Aprender~narau~ならう~習う;Enseñar~oshieru~おしえる~教える');
+    addTopicWords('nature', '🌳', 'Naturaleza~shizen~しぜん~自然;Árbol~ki~き~木;Flor~hana~はな~花;Hierba~kusa~くさ~草;Bosque~mori~もり~森;Montaña~yama~やま~山;Colina~oka~おか~丘;Río~kawa~かわ~川;Lago~mizuumi~みずうみ~湖;Mar~umi~うみ~海;Playa~bichi~ビーチ~;Isla~shima~しま~島;Campo~inaka~いなか~田舎;Cielo~sora~そら~空;Nube~kumo~くも~雲;Sol~taiyo~たいよう~太陽;Luna~tsuki~つき~月;Estrella~hoshi~ほし~星;Amanecer~hinode~ひので~日の出;Atardecer~yuyake~ゆうやけ~夕焼け;Paisaje~keshiki~けしき~景色;Piedra~ishi~いし~石');
+    addTopicWords('animals', '🐕', 'Animal~dobutsu~どうぶつ~動物;Perro~inu~いぬ~犬;Gato~neko~ねこ~猫;Pájaro~tori~とり~鳥;Pez~sakana~さかな~魚;Caballo~uma~うま~馬;Vaca~ushi~うし~牛;Cerdo~buta~ぶた~豚;Pollo/gallina~tori~とり~鳥;Mono~saru~さる~猿;Zorro~kitsune~きつね~狐;Ciervo~shika~しか~鹿;Oso~kuma~くま~熊;Conejo~usagi~うさぎ~兎;Insecto~mushi~むし~虫;Mariposa~cho~ちょう~蝶;Mosquito~ka~か~蚊;Abeja~hachi~はち~蜂;Serpiente~hebi~へび~蛇;Animal salvaje~yasei dobutsu~やせいどうぶつ~野生動物;Mascota~petto~ペット~');
+    addTopicWords('japan', '🎌', 'Tienda de conveniencia~konbini~コンビニ~;Souvenir/recuerdo~omiyage~おみやげ~お土産;Festival~matsuri~まつり~祭り;Fuegos artificiales~hanabi~はなび~花火;Flor de cerezo~sakura~さくら~桜;Hojas otoñales~koyo~こうよう~紅葉;Bento~bento~べんとう~弁当;Bola de arroz~onigiri~おにぎり~お握り;Templo budista~otera~おてら~お寺;Santuario sintoísta~jinja~じんじゃ~神社;Torii~torii~とりい~鳥居;Amuleto~omamori~おまもり~お守り;Fortuna/papel de la suerte~omikuji~おみくじ~;Baño termal~onsen~おんせん~温泉;Yukata~yukata~ゆかた~浴衣;Kimono~kimono~きもの~着物;Tatami~tatami~たたみ~畳;Habitación japonesa~washitsu~わしつ~和室;Cultura japonesa~nihon bunka~にほんぶんか~日本文化;Artes marciales~budo~ぶどう~武道;Anime~anime~アニメ~;Manga~manga~マンガ~漫画;Karaoke~karaoke~カラオケ~;Izakaya~izakaya~いざかや~居酒屋');
+    addTopicWords('connectors', '🧩', 'Y~to / soshite~と / そして~;Pero~demo~でも~;Porque~kara~から~;Por eso~dakara~だから~;Entonces~jaa / sorede~じゃあ / それで~;También~mo~も~;Todavía~mada~まだ~未だ;Ya~mo~もう~;Quizás~tabun~たぶん~多分;Realmente~honto ni~ほんとうに~本当に;Solamente~dake~だけ~;Aproximadamente~gurai / kurai~ぐらい / くらい~;Incluso~sae / demo~さえ / でも~;También/además~mata~また~又;Sin embargo~shikashi~しかし~然し;Además~sono ue~そのうえ~その上;Primero~mazu~まず~;Finalmente~saigo ni~さいごに~最後に;Juntos~issho ni~いっしょに~一緒に');
+    addTopicWords('quantifiers', '🔢', 'Aproximadamente 10~ju-gurai~じゅうぐらい~十ぐらい;Unos pocos~sukoshi~すこし~少し;Varios~ikutsu ka~いくつか~幾つか;Muchas veces~nando mo~なんども~何度も;Varias veces~nankai ka~なんかいか~何回か;Una vez~ikkai~いっかい~一回;Dos veces~nikai~にかい~二回;Primera vez~hajimete~はじめて~初めて;Segunda vez~nido-me~にどめ~二度目;Durante tres días~mikka kan~みっかかん~三日間;Durante una semana~isshukan~いっしゅうかん~一週間;Desde~kara~から~;Hasta~made~まで~;Desde... hasta...~kara... made~から…まで~;Aproximadamente~yaku~やく~約;Alrededor de~gurai~ぐらい~;Más o menos~daitai~だいたい~大体;Mitad~hanbun~はんぶん~半分;Doble~nibai~にばい~二倍;Tres veces~sanbai~さんばい~三倍');
+    addTopicWords('nuances', '⚠️', 'Un poco / difícil de decir directamente~chotto~ちょっと~;Ya / más~mo~もう~;Todavía~mada~まだ~未だ;Correctamente~chanto~ちゃんと~;De verdad~honto ni~ほんとうに~本当に;Bastante / bien / sorprendentemente~kekko~けっこう~結構;Está bien~daijobu~だいじょうぶ~大丈夫;Bueno / bien~ii~いい~良い;Disculpe~sumimasen~すみません~済みません;Mucho~zutto~ずっと~;Bastante~kanari~かなり~可成り;Probablemente~tabun~たぶん~多分;Más o menos~daitai~だいたい~大体');
+    addTopicWords('formal', '🗣️', 'Gracias (formal)~arigato gozaimasu~ありがとうございます~;Gracias (informal)~arigato~ありがとう~;Buenos días (formal)~ohayo gozaimasu~おはようございます~;Buenos días (informal)~ohayo~おはよう~;¿Verdad? (formal)~so desu ne~そうですね~;¿Verdad? (informal)~so da ne~そうだね~;Está bien (formal)~daijobu desu~だいじょうぶです~;Entiendo (formal)~wakarimasu~わかります~;Entiendo (informal)~wakaru~わかる~;No entiendo (formal)~wakarimasen~わかりません~;No entiendo (informal)~wakaranai~わからない~;Quiero (formal)~hoshii desu~ほしいです~;Quiero (informal)~hoshii~ほしい~;Puedo (formal)~dekimasu~できます~;Puedo (informal)~dekiru~できる~;No puedo (formal)~dekimasen~できません~;No puedo (informal)~dekinai~できない~;Voy~ikimasu~いきます~;Voy (informal)~iku~いく~;Vengo~kimasu~きます~;Vengo (informal)~kuru~くる~;Hago~shimasu~します~;Hago (informal)~suru~する~;Como~tabemasu~たべます~;Como (informal)~taberu~たべる~;Bebo~nomimasu~のみます~;Bebo (informal)~nomu~のむ~;¿Qué? formal~nan desu ka~なんですか~;¿Qué? informal~nani?~なに？~;¿Por qué? formal~doshite desu ka~どうしてですか~;¿Por qué? informal~nande?~なんで？~;Espera (formal)~matte kudasai~まってください~;Espera (informal)~matte~まって~;Vamos (formal)~ikimasho~いきましょう~;Vamos (informal)~iko~いこう~;Entonces~jaa~じゃあ~;Decir~tte iu~っていう~;Estar haciendo~teru~てる~;Terminar algo~chau~ちゃう~;Tener que~nakya~なきゃ~;Eso de...~tte koto~ってこと~;No entender~wakannai~わかんない~;Increíble (hablado)~sugee~すげえ~;De verdad (hablado)~maji de / honto ni~マジで / ほんとに~');
+    addTopicWords('listening', '👂', 'Gracias (reducido)~arigato gozaimasu~ありがとーございます~;Disculpe (reducido)~suimasen~すいません~;No entiendo (reducido)~wakannai~わかんない~;Estar haciendo~teru~てる~;Estaba haciendo~teta~てた~;No es~janai~じゃない~;No es (formal reducido)~ja arimasen~じゃありません~;Decir~tte iu~っていう~;Eso de...~tte koto~ってこと~;Tener que~nakya~なきゃ~;Tener que (alternativa)~nakya ikenai~なきゃいけない~;Terminar algo~chau~ちゃう~;Terminar algo (variante)~jau~じゃう~;Debe ser~nakya naranai~なきゃならない~');
+    addTopicWords('polysemy', '🈶', 'Bueno/bien/adecuado/no gracias~ii~いい~;Un poco/espera/rechazo indirecto~chotto~ちょっと~;Coger/tomar/conseguir/quitar~toru~とる~取る;Entrar/caber/estar dentro~hairu~はいる~入る;Salir/aparecer/producirse~deru~でる~出る;Poner/colgar/llamar/gastar/echar~kakeru~かける~;Hacer/llevar a cabo/decidir~suru~する~;Convertirse/llegar a ser/resultar~naru~なる~;Poner/dejar~oku~おく~置く;Abrir/inaugurarse~hiraku~ひらく~開く;Cerrar~tojiru~とじる~閉じる;Cortar/apagar/terminar~kiru~きる~切る;Encenderse/pegarse/llegar~tsuku~つく~付く;Encender/poner/adjuntar~tsukeru~つける~付ける;Caer/suspender/disminuir~ochiru~おちる~落ちる;Subir/elevarse/terminar~agaru~あがる~上がる;Bajar/disminuir~sagaru~さがる~下がる;Costar/tardar/estar colgado~kakaru~かかる~;Entender/saber~wakaru~わかる~分かる;Escuchar/preguntar~kiku~きく~聞く;Ver/mirar/comprobar~miru~みる~見る;Decir/llamar/denominar~iu~いう~言う;Pensar/creer/sentir~omou~おもう~思う;Saber/conocer~shiru~しる~知る;Usar/emplear~tsukau~つかう~使う');
+
+    topics.push(
+        { id: 'body', title: 'Partes del cuerpo y persona', icon: '👤' }, { id: 'home', title: 'Casa y objetos cotidianos', icon: '🏠' }, { id: 'clothes', title: 'Ropa y apariencia', icon: '👕' }, { id: 'daily', title: 'Acciones cotidianas', icon: '🍳' }, { id: 'routine', title: 'Rutinas y frecuencia', icon: '📅' }, { id: 'position', title: 'Posición y ubicación', icon: '📍' }, { id: 'quantity', title: 'Cantidad y comparación', icon: '📏' }, { id: 'colors', title: 'Colores, formas y características', icon: '🎨' }, { id: 'feelings', title: 'Emociones y estados', icon: '😊' }, { id: 'opinions', title: 'Opiniones y preferencias', icon: '🧠' }, { id: 'casual', title: 'Conversación informal', icon: '💬' }, { id: 'fillers', title: 'Muletillas y japonés hablado', icon: '🗯️' }, { id: 'phone', title: 'Teléfono y conversación a distancia', icon: '📞' }, { id: 'work', title: 'Trabajo y estudios', icon: '🧑‍💼' }, { id: 'family', title: 'Familia y relaciones', icon: '👨‍👩‍👧' }, { id: 'countries', title: 'Países, nacionalidades e idiomas', icon: '🌍' }, { id: 'nature', title: 'Naturaleza y paisaje', icon: '🌳' }, { id: 'animals', title: 'Animales', icon: '🐕' }, { id: 'japan', title: 'Japón específico', icon: '🎌' }, { id: 'connectors', title: 'Conectores y palabras funcionales', icon: '🧩' }, { id: 'quantifiers', title: 'Números y expresiones cuantitativas avanzadas', icon: '🔢' }, { id: 'nuances', title: 'Palabras que cambian mucho de significado', icon: '⚠️' }, { id: 'formal', title: 'Formal vs. informal', icon: '🗣️' }, { id: 'listening', title: 'Comprensión auditiva y japonés reducido', icon: '👂' }, { id: 'polysemy', title: 'Palabras con varios significados', icon: '🈶' }
+    );
 
     let vocabulary = [];
     rawVocab.forEach((item, index) => {
@@ -1537,6 +1622,158 @@
             list.appendChild(item);
         });
         showScreen('result');
+    }
+
+    // --- 9. BÚSQUEDA GLOBAL --- //
+
+    // Busca en español, romaji, kana y kanji de todo el vocabulario (todos los temarios)
+    function searchVocabulary(rawQuery) {
+        const resultsContainer = document.getElementById('search-results');
+        const query = (rawQuery || '').trim().toLowerCase();
+
+        if (!query) {
+            resultsContainer.classList.remove('visible');
+            resultsContainer.innerHTML = '';
+            return;
+        }
+
+        const matches = vocabulary.filter(w =>
+            (w.spanish && w.spanish.toLowerCase().includes(query)) ||
+            (w.romaji && w.romaji.toLowerCase().includes(query)) ||
+            (w.kana && w.kana.toLowerCase().includes(query)) ||
+            (w.kanji && w.kanji.toLowerCase().includes(query))
+        );
+
+        resultsContainer.classList.add('visible');
+
+        if (matches.length === 0) {
+            resultsContainer.innerHTML = `<p class="search-summary">Sin resultados para "${escapeHtml(rawQuery)}"</p>`;
+            return;
+        }
+
+        const MAX_RESULTS = 30;
+        const limited = matches.slice(0, MAX_RESULTS);
+        const countLabel = `${matches.length} resultado${matches.length !== 1 ? 's' : ''}` +
+            (matches.length > limited.length ? ` (mostrando ${limited.length})` : '');
+
+        const listHtml = limited.map(w => {
+            const topic = topics.find(t => t.id === w.category);
+            const topicTitle = topic ? topic.title : w.category;
+            const idx = vocabulary.indexOf(w);
+            return `
+                <div class="search-word-card">
+                    <div class="search-word-main" onclick="goToSearchResult(${idx})">
+                        <div class="search-word-ja">${renderJapanese(w)}</div>
+                        <div class="search-word-es">${escapeHtml(w.spanish)}</div>
+                        <div class="search-word-topic">${escapeHtml(topicTitle)}</div>
+                    </div>
+                    <button class="dict-button" title="Ver significado en el diccionario" onclick="event.stopPropagation(); openDictionary(${idx})">📖</button>
+                </div>
+            `;
+        }).join('');
+
+        resultsContainer.innerHTML = `<p class="search-summary">${countLabel}</p><div class="search-result-list">${listHtml}</div>`;
+    }
+
+    // Al pulsar una palabra de los resultados, la lleva a su temario correspondiente
+    function goToSearchResult(index) {
+        const word = vocabulary[index];
+        if (!word) return;
+        openTopic(word.category);
+    }
+
+    function escapeHtml(str) {
+        if (str === undefined || str === null) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // --- 10. DICCIONARIO (API externa) --- //
+    // Usa la API pública de Jisho.org (diccionario japonés-inglés basado en JMdict).
+    // Como jisho.org no envía cabeceras CORS, se intenta primero una petición directa
+    // y, si falla, se recurre a un proxy CORS público como alternativa.
+    async function fetchJsonSafe(url) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async function openDictionary(index) {
+        const word = vocabulary[index];
+        if (!word) return;
+
+        const modal = document.getElementById('dictionary-modal');
+        const titleEl = document.getElementById('dictionary-title');
+        const contentEl = document.getElementById('dictionary-content');
+        const query = word.kanji || word.kana || word.romaji;
+
+        titleEl.textContent = query;
+        contentEl.className = 'dictionary-status';
+        contentEl.innerHTML = 'Cargando definición…';
+        modal.classList.add('visible');
+
+        const jishoUrl = `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(query)}`;
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(jishoUrl)}`;
+
+        let data = await fetchJsonSafe(jishoUrl);
+        if (!data || !data.data) data = await fetchJsonSafe(proxyUrl);
+
+        renderDictionaryResult(data, query, word);
+    }
+
+    function renderDictionaryResult(data, query, word) {
+        const contentEl = document.getElementById('dictionary-content');
+
+        if (!data || !data.data || data.data.length === 0) {
+            contentEl.className = 'dictionary-status';
+            contentEl.innerHTML = `
+                <p>No se pudo obtener la definición automáticamente.</p>
+                <a class="dictionary-link" href="https://jisho.org/search/${encodeURIComponent(query)}" target="_blank" rel="noopener">Buscar "${escapeHtml(query)}" en Jisho.org →</a>
+            `;
+            return;
+        }
+
+        const entries = data.data.slice(0, 3);
+        const first = entries[0];
+        const jp = (first.japanese && first.japanese[0]) || {};
+        const reading = jp.reading || word.kana || '';
+
+        let html = `<div class="dictionary-reading">${escapeHtml(reading)}${word.romaji ? ' · ' + escapeHtml(word.romaji) : ''}</div>`;
+
+        entries.forEach(entry => {
+            (entry.senses || []).slice(0, 3).forEach(sense => {
+                const pos = (sense.parts_of_speech || []).join(', ');
+                const defs = (sense.english_definitions || []).join('; ');
+                if (!defs) return;
+                html += `
+                    <div class="dictionary-sense">
+                        ${pos ? `<div class="dictionary-pos">${escapeHtml(pos)}</div>` : ''}
+                        <div class="dictionary-definition">${escapeHtml(defs)}</div>
+                    </div>
+                `;
+            });
+        });
+
+        html += `<a class="dictionary-link" href="https://jisho.org/search/${encodeURIComponent(query)}" target="_blank" rel="noopener">Ver más en Jisho.org →</a>`;
+
+        contentEl.className = '';
+        contentEl.innerHTML = html;
+    }
+
+    function closeDictionary() {
+        document.getElementById('dictionary-modal').classList.remove('visible');
+    }
+
+    function closeDictionaryOnOverlay(event) {
+        if (event.target.id === 'dictionary-modal') closeDictionary();
     }
 
     // Init
