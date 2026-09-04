@@ -146,6 +146,19 @@
             align-items: center;
             margin-bottom: 24px;
         }
+
+        /* Cabecera fija: usada en pantallas con listas largas (p.ej. Teoría)
+           para que el botón de volver siga siempre visible al hacer scroll */
+        .header-controls.sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg-color);
+            margin: -24px -24px 20px -24px;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
         
         .btn-back {
             background: none;
@@ -238,6 +251,7 @@
         .search-word-topic { font-size: 12px; color: var(--text-muted); }
         .dict-button { flex: 0 0 auto; width: 40px; height: 40px; border: 2px solid var(--border); border-radius: 50%; background: var(--bg-secondary); color: var(--primary); font-size: 18px; cursor: pointer; }
         .dict-button:hover { border-color: var(--primary); }
+        .audio-button { color: var(--correct); }
         .progress-indicator { 
             font-size: 13px; font-weight: 600; background: var(--bg-secondary);
             padding: 4px 8px; border-radius: var(--radius-sm); color: var(--primary);
@@ -266,6 +280,13 @@
             border-top: 2px dashed var(--border); animation: fadeIn 0.2s ease;
         }
         .word-card.expanded .word-details { display: block; }
+
+        @keyframes wordHighlightGlow {
+            0% { box-shadow: 0 0 0 0 rgba(28, 176, 246, 0.85); border-color: var(--primary); }
+            50% { box-shadow: 0 0 22px 10px rgba(28, 176, 246, 0.55); border-color: var(--primary); }
+            100% { box-shadow: 0 0 0 0 rgba(28, 176, 246, 0); border-color: var(--border); }
+        }
+        .word-card.highlight-flash { animation: wordHighlightGlow 1.6s ease-out; }
         
         .detail-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
         .detail-label { color: var(--text-muted); }
@@ -416,7 +437,7 @@
 
     <!-- PANTALLA DE TEORIA -->
     <div id="screen-theory" class="screen">
-        <div class="header-controls">
+        <div class="header-controls sticky-header">
             <button class="btn-back" onclick="showScreen('topic')">← Volver</button>
             <span style="font-weight:bold; color:var(--text-muted)">Teoría</span>
         </div>
@@ -1414,6 +1435,7 @@
         words.forEach(word => {
             const card = document.createElement('div');
             card.className = 'word-card';
+            card.dataset.wordId = word.id;
             const speakText = word.kanji || word.kana;
             
             card.innerHTML = `
@@ -1667,6 +1689,7 @@
                         <div class="search-word-es">${escapeHtml(w.spanish)}</div>
                         <div class="search-word-topic">${escapeHtml(topicTitle)}</div>
                     </div>
+                    <button class="dict-button audio-button" title="Escuchar pronunciación" onclick="event.stopPropagation(); speakJapanese('${(w.kanji || w.kana || '').replace(/'/g, "\\'")}')">🔊</button>
                     <button class="dict-button" title="Ver significado en el diccionario" onclick="event.stopPropagation(); openDictionary(${idx})">📖</button>
                 </div>
             `;
@@ -1675,11 +1698,31 @@
         resultsContainer.innerHTML = `<p class="search-summary">${countLabel}</p><div class="search-result-list">${listHtml}</div>`;
     }
 
-    // Al pulsar una palabra de los resultados, la lleva a su temario correspondiente
+    // Al pulsar una palabra de los resultados, la lleva directamente a la teoría
+    // de su temario correspondiente y resalta esa palabra concreta.
     function goToSearchResult(index) {
         const word = vocabulary[index];
         if (!word) return;
-        openTopic(word.category);
+        currentTopicId = word.category;
+        renderTheory();
+        showScreen('theory');
+        highlightWordInTheory(word.id);
+    }
+
+    // Localiza la tarjeta de la palabra dentro de la teoría, la centra en pantalla
+    // y la hace brillar una vez para que sea fácil de identificar.
+    function highlightWordInTheory(wordId) {
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                const card = document.querySelector(`.word-card[data-word-id="${CSS.escape(String(wordId))}"]`);
+                if (!card) return;
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.remove('highlight-flash');
+                void card.offsetWidth; // reflow para poder re-disparar la animación
+                card.classList.add('highlight-flash');
+                card.addEventListener('animationend', () => card.classList.remove('highlight-flash'), { once: true });
+            }, 150);
+        });
     }
 
     function escapeHtml(str) {
@@ -1696,15 +1739,23 @@
     // Usa la API pública de Jisho.org (diccionario japonés-inglés basado en JMdict).
     // Como jisho.org no envía cabeceras CORS, se intenta primero una petición directa
     // y, si falla, se recurre a un proxy CORS público como alternativa.
-    async function fetchJsonSafe(url) {
+    async function fetchJsonSafe(url, timeoutMs = 5000) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
         try {
-            const res = await fetch(url);
+            const res = await fetch(url, { signal: controller.signal });
             if (!res.ok) return null;
             return await res.json();
         } catch (e) {
             return null;
+        } finally {
+            clearTimeout(timer);
         }
     }
+
+    // Token que identifica la búsqueda en curso, para evitar que una petición
+    // lenta pinte resultados sobre una palabra distinta que se abrió después.
+    let dictionaryRequestToken = 0;
 
     async function openDictionary(index) {
         const word = vocabulary[index];
@@ -1714,10 +1765,18 @@
         const titleEl = document.getElementById('dictionary-title');
         const contentEl = document.getElementById('dictionary-content');
         const query = word.kanji || word.kana || word.romaji;
+        const directUrl = `https://jisho.org/search/${encodeURIComponent(query)}`;
+
+        const myToken = ++dictionaryRequestToken;
 
         titleEl.textContent = query;
         contentEl.className = 'dictionary-status';
-        contentEl.innerHTML = 'Cargando definición…';
+        // El botón para ir directamente a Jisho.org se muestra desde el primer
+        // instante, sin esperar a que termine (o falle) la búsqueda automática.
+        contentEl.innerHTML = `
+            <p>Cargando definición…</p>
+            <a class="dictionary-link" href="${directUrl}" target="_blank" rel="noopener">Ver "${escapeHtml(query)}" en Jisho.org →</a>
+        `;
         modal.classList.add('visible');
 
         const jishoUrl = `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(query)}`;
@@ -1726,17 +1785,21 @@
         let data = await fetchJsonSafe(jishoUrl);
         if (!data || !data.data) data = await fetchJsonSafe(proxyUrl);
 
+        // Si mientras tanto se abrió otra palabra o se cerró el modal, no pisamos ese contenido.
+        if (myToken !== dictionaryRequestToken || !modal.classList.contains('visible')) return;
+
         renderDictionaryResult(data, query, word);
     }
 
     function renderDictionaryResult(data, query, word) {
         const contentEl = document.getElementById('dictionary-content');
+        const directUrl = `https://jisho.org/search/${encodeURIComponent(query)}`;
 
         if (!data || !data.data || data.data.length === 0) {
             contentEl.className = 'dictionary-status';
             contentEl.innerHTML = `
                 <p>No se pudo obtener la definición automáticamente.</p>
-                <a class="dictionary-link" href="https://jisho.org/search/${encodeURIComponent(query)}" target="_blank" rel="noopener">Buscar "${escapeHtml(query)}" en Jisho.org →</a>
+                <a class="dictionary-link" href="${directUrl}" target="_blank" rel="noopener">Buscar "${escapeHtml(query)}" en Jisho.org →</a>
             `;
             return;
         }
