@@ -309,7 +309,21 @@
         .dictionary-sense { padding: 12px 0; border-top: 1px solid var(--border); }
         .dictionary-pos { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
         .dictionary-definition { font-weight: 600; }
+        .dictionary-info-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
         .dictionary-link { display: inline-block; margin-top: 18px; color: var(--primary); font-weight: 700; }
+
+        /* Insignias (palabra común, niveles JLPT...) */
+        .dictionary-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+        .dictionary-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+        .dictionary-badge.common { background: var(--correct-bg); color: var(--correct); }
+        .dictionary-badge.jlpt { background: var(--bg-secondary); color: var(--text-muted); border: 1px solid var(--border); }
+
+        /* Otras formas de escritura (p.ej. こんにちは / こんにちわ) */
+        .dictionary-otherforms { margin: 4px 0 16px; padding: 10px 12px; background: var(--bg-secondary); border-radius: var(--radius-sm); font-size: 15px; }
+        .dictionary-otherforms-title { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
+
+        .dictionary-status a.dictionary-link { margin-top: 12px; }
+        .dictionary-status p { margin-bottom: 4px; }
 
         /* --- PRÁCTICA --- */
         .practice-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
@@ -319,6 +333,20 @@
         .question-container { text-align: center; margin-bottom: 40px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .question-label { color: var(--text-muted); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
         .question-word { font-size: 40px; font-weight: 700; color: var(--text-main); }
+
+        /* Modo "Completa el hueco": la frase es más larga que una palabra suelta,
+           así que usa un tamaño de letra menor y permite varias líneas. */
+        .question-word.sentence-mode { font-size: 26px; line-height: 1.7; font-weight: 600; padding: 0 6px; }
+        .question-blank { display: inline-block; min-width: 60px; color: var(--primary); font-weight: 800; border-bottom: 3px solid var(--primary); }
+        .question-translation { color: var(--text-muted); font-size: 15px; margin-top: 14px; text-align: center; padding: 0 12px; }
+
+        /* Botón para mostrar/ocultar la traducción de apoyo en "Completa el hueco" */
+        .btn-translation-toggle {
+            background: var(--bg-secondary); border: 2px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-muted); font-size: 13px; font-weight: 700; padding: 8px 14px;
+            cursor: pointer; margin: 16px auto 0; transition: var(--transition);
+        }
+        .btn-translation-toggle:hover { border-color: var(--primary); color: var(--primary); }
 
         .options-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; width: 100%; }
         
@@ -458,7 +486,11 @@
         <div class="question-container">
             <div class="question-label" id="question-label">¿Qué significa?</div>
             <div class="question-word" id="question-word">駅</div>
-            <!-- Nuevo botón para repetir el audio visible por defecto -->
+            <!-- Traducción de apoyo, solo en el modo "Completa el hueco". Empieza
+                 escondida y el usuario decide si quiere revelarla con el botón. -->
+            <button class="btn-translation-toggle" id="btn-toggle-translation" style="display:none;" onclick="toggleTranslation()">👁️ Ver traducción</button>
+            <div class="question-translation" id="question-translation" style="display:none;"></div>
+            <!-- Botón para reproducir el audio, visible en todos los formatos -->
             <button class="btn-audio" id="btn-repeat-audio" style="display:flex; margin: 16px auto 0;" onclick="repeatPracticeAudio()">🔊</button>
         </div>
 
@@ -1313,6 +1345,369 @@
         });
     }
 
+    // --- 2.5 BANCO DE FRASES ("Completa el hueco") --- //
+    // Frases de ejemplo escritas a mano, SIN depender de ninguna API externa ni de
+    // conexión a internet: así el ejercicio funciona siempre, haya red o no.
+    //
+    // Clave de cada entrada: "categoria|kanjiOKana" (el kanji de la palabra si lo
+    // tiene, o si no su kana). Cada palabra puede tener varias frases; en cada
+    // partida se elige una al azar. El hueco dentro de la frase se marca con
+    // el símbolo ＿＿＿＿ y se sustituye visualmente por una casilla resaltada.
+    //
+    // Para añadir más frases a un temario ya existente, o crear las de un
+    // temario nuevo, basta con añadir más entradas a este objeto siguiendo el
+    // mismo formato: no hay que tocar nada más del código.
+    const sentenceBank = {
+        "transport|駅": [
+            { jp: "この＿＿＿＿から電車に乗ります。", es: "Voy a subir al tren desde esta estación." }
+        ],
+        "transport|駅員": [
+            { jp: "＿＿＿＿に切符の買い方を聞きました。", es: "Le pregunté al empleado de la estación cómo comprar el billete." }
+        ],
+        "transport|電車": [
+            { jp: "＿＿＿＿は七時に出発します。", es: "El tren sale a las siete." }
+        ],
+        "transport|新幹線": [
+            { jp: "＿＿＿＿で大阪まで行きます。", es: "Voy a Osaka en tren bala." }
+        ],
+        "transport|地下鉄": [
+            { jp: "＿＿＿＿は雨の日でも便利です。", es: "El metro es práctico incluso los días de lluvia." }
+        ],
+        "transport|列車": [
+            { jp: "次の＿＿＿＿は何時に来ますか。", es: "¿A qué hora llega el próximo tren?" }
+        ],
+        "transport|車両": [
+            { jp: "この＿＿＿＿は人がとても多いです。", es: "Este vagón tiene muchísima gente." }
+        ],
+        "transport|バス": [
+            { jp: "＿＿＿＿は駅の前に止まります。", es: "El autobús para delante de la estación." }
+        ],
+        "transport|バス停": [
+            { jp: "＿＿＿＿はコンビニの前です。", es: "La parada de autobús está delante de la tienda de conveniencia." }
+        ],
+        "transport|タクシー": [
+            { jp: "雨だったので＿＿＿＿に乗りました。", es: "Como llovía, cogí un taxi." }
+        ],
+        "transport|空港": [
+            { jp: "＿＿＿＿まで一時間かかります。", es: "Se tarda una hora hasta el aeropuerto." }
+        ],
+        "transport|駅前": [
+            { jp: "＿＿＿＿に大きいスーパーがあります。", es: "Delante de la estación hay un supermercado grande." }
+        ],
+        "transport|改札": [
+            { jp: "＿＿＿＿で切符を入れてください。", es: "Introduzca el billete en la barrera de acceso, por favor." }
+        ],
+        "transport|改札口": [
+            { jp: "＿＿＿＿の前で待っています。", es: "Te espero delante de la puerta de acceso." }
+        ],
+        "transport|出口": [
+            { jp: "＿＿＿＿はあちらです。", es: "La salida está por allí." }
+        ],
+        "transport|入口": [
+            { jp: "＿＿＿＿はどこですか。", es: "¿Dónde está la entrada?" }
+        ],
+        "transport|北口": [
+            { jp: "＿＿＿＿で会いましょう。", es: "Quedamos en la salida norte." }
+        ],
+        "transport|南口": [
+            { jp: "＿＿＿＿にタクシー乗り場があります。", es: "En la salida sur hay una parada de taxis." }
+        ],
+        "transport|東口": [
+            { jp: "＿＿＿＿からバスに乗ります。", es: "Cojo el autobús desde la salida este." }
+        ],
+        "transport|西口": [
+            { jp: "＿＿＿＿はあまり人がいません。", es: "En la salida oeste no hay mucha gente." }
+        ],
+        "transport|切符": [
+            { jp: "＿＿＿＿を二枚買いました。", es: "Compré dos billetes." }
+        ],
+        "transport|切符売り場": [
+            { jp: "＿＿＿＿はあそこにあります。", es: "La taquilla de billetes está allí." }
+        ],
+        "transport|券売機": [
+            { jp: "＿＿＿＿でチケットを買います。", es: "Compro el billete en la máquina expendedora." }
+        ],
+        "transport|乗車券": [
+            { jp: "＿＿＿＿をなくしてしまいました。", es: "He perdido el billete de transporte." }
+        ],
+        "transport|定期券": [
+            { jp: "毎月＿＿＿＿を買っています。", es: "Compro un abono cada mes." }
+        ],
+        "transport|ICカード": [
+            { jp: "＿＿＿＿でも電車に乗れます。", es: "También se puede coger el tren con la tarjeta IC." }
+        ],
+        "transport|交通系ICカード": [
+            { jp: "＿＿＿＿はコンビニでも使えます。", es: "La tarjeta IC de transporte también se puede usar en la tienda de conveniencia." }
+        ],
+        "transport|残高": [
+            { jp: "カードの＿＿＿＿が足りません。", es: "El saldo de la tarjeta no es suficiente." }
+        ],
+        "transport|チャージ": [
+            { jp: "駅で＿＿＿＿をしました。", es: "Recargué la tarjeta en la estación." }
+        ],
+        "transport|ホーム": [
+            { jp: "＿＿＿＿で電車を待っています。", es: "Espero el tren en el andén." }
+        ],
+        "transport|ホームドア": [
+            { jp: "＿＿＿＿が閉まっています。", es: "Las puertas del andén están cerradas." }
+        ],
+        "transport|乗り場": [
+            { jp: "バスの＿＿＿＿はどこですか。", es: "¿Dónde está la parada del autobús?" }
+        ],
+        "transport|乗り換え": [
+            { jp: "次の駅で＿＿＿＿します。", es: "Hago transbordo en la próxima estación." }
+        ],
+        "transport|路線": [
+            { jp: "この＿＿＿＿は新宿を通ります。", es: "Esta línea pasa por Shinjuku." }
+        ],
+        "transport|線": [
+            { jp: "山手＿＿＿＿に乗ります。", es: "Cojo la línea Yamanote." }
+        ],
+        "transport|駅名": [
+            { jp: "＿＿＿＿を忘れてしまいました。", es: "Se me ha olvidado el nombre de la estación." }
+        ],
+        "transport|時刻表": [
+            { jp: "＿＿＿＿を見てください。", es: "Mira el horario, por favor." }
+        ],
+        "transport|発車": [
+            { jp: "電車はもうすぐ＿＿＿＿します。", es: "El tren va a salir pronto." }
+        ],
+        "transport|到着": [
+            { jp: "＿＿＿＿は九時の予定です。", es: "La llegada está prevista para las nueve." }
+        ],
+        "transport|始発": [
+            { jp: "＿＿＿＿は五時です。", es: "El primer tren es a las cinco." }
+        ],
+        "transport|終電": [
+            { jp: "＿＿＿＿に間に合いませんでした。", es: "No llegué a tiempo para el último tren." }
+        ],
+        "transport|遅延": [
+            { jp: "電車に＿＿＿＿があります。", es: "El tren lleva retraso." }
+        ],
+        "transport|運休": [
+            { jp: "台風で＿＿＿＿です。", es: "Está suspendido por el tifón." }
+        ],
+        "transport|運行": [
+            { jp: "今日はふつうに＿＿＿＿しています。", es: "Hoy circula con normalidad." }
+        ],
+        "transport|急行": [
+            { jp: "＿＿＿＿はこの駅に止まりません。", es: "El tren rápido no para en esta estación." }
+        ],
+        "transport|快速": [
+            { jp: "＿＿＿＿のほうが早いです。", es: "El tren rápido (kaisoku) es más rápido." }
+        ],
+        "transport|特急": [
+            { jp: "＿＿＿＿は追加料金が必要です。", es: "El tren limitado express necesita suplemento." }
+        ],
+        "transport|普通": [
+            { jp: "＿＿＿＿はすべての駅に止まります。", es: "El tren normal para en todas las estaciones." }
+        ],
+        "transport|各駅停車": [
+            { jp: "＿＿＿＿はゆっくりです。", es: "El tren de paradas en todas las estaciones es lento." }
+        ],
+        "transport|各駅": [
+            { jp: "＿＿＿＿に止まります。", es: "Para en todas las estaciones." }
+        ],
+        "transport|方面": [
+            { jp: "渋谷＿＿＿＿の電車に乗ってください。", es: "Coge el tren en dirección a Shibuya." }
+        ],
+        "transport|行き": [
+            { jp: "東京＿＿＿＿の電車です。", es: "Es el tren con destino a Tokio." }
+        ],
+        "transport|終点": [
+            { jp: "＿＿＿＿で降りてください。", es: "Bájese en la última parada." }
+        ],
+        "transport|始発駅": [
+            { jp: "この駅は＿＿＿＿です。", es: "Esta estación es la estación de origen." }
+        ],
+        "transport|次の駅": [
+            { jp: "＿＿＿＿で降ります。", es: "Me bajo en la siguiente estación." }
+        ],
+        "transport|前の駅": [
+            { jp: "＿＿＿＿で乗り換えました。", es: "Hice transbordo en la estación anterior." }
+        ],
+        "transport|電車内": [
+            { jp: "＿＿＿＿では静かにしてください。", es: "Guarde silencio dentro del tren, por favor." }
+        ],
+        "transport|優先席": [
+            { jp: "＿＿＿＿にお年寄りが座っています。", es: "Un anciano está sentado en el asiento prioritario." }
+        ],
+        "transport|自動改札機": [
+            { jp: "＿＿＿＿にカードをタッチします。", es: "Toco la tarjeta en el torniquete automático." }
+        ],
+        "transport|階段": [
+            { jp: "＿＿＿＿を上ってください。", es: "Sube las escaleras, por favor." }
+        ],
+        "transport|エスカレーター": [
+            { jp: "＿＿＿＿で二階に行きます。", es: "Subo al segundo piso en la escalera mecánica." }
+        ],
+        "transport|エレベーター": [
+            { jp: "荷物が多いので＿＿＿＿を使います。", es: "Como llevo mucho equipaje, uso el ascensor." }
+        ],
+        "transport|バスターミナル": [
+            { jp: "＿＿＿＿は駅の東口にあります。", es: "La terminal de autobuses está en la salida este de la estación." }
+        ],
+        "transport|乗車": [
+            { jp: "三番線から＿＿＿＿してください。", es: "Suba al tren desde la vía tres, por favor." }
+        ],
+        "transport|下車": [
+            { jp: "次の駅で＿＿＿＿します。", es: "Me bajo en la próxima estación." }
+        ],
+        "transport|運賃": [
+            { jp: "バスの＿＿＿＿はいくらですか。", es: "¿Cuánto cuesta el billete de autobús?" }
+        ],
+        "transport|料金": [
+            { jp: "この電車は＿＿＿＿が高いです。", es: "Este tren tiene una tarifa alta." }
+        ],
+        "transport|片道": [
+            { jp: "＿＿＿＿の切符をください。", es: "Un billete de ida, por favor." }
+        ],
+        "transport|往復": [
+            { jp: "＿＿＿＿のチケットのほうが安いです。", es: "El billete de ida y vuelta es más barato." }
+        ],
+        "transport|指定席": [
+            { jp: "＿＿＿＿を予約しました。", es: "Reservé un asiento reservado." }
+        ],
+        "transport|自由席": [
+            { jp: "＿＿＿＿はいつも混んでいます。", es: "El vagón de asientos libres siempre va lleno." }
+        ],
+        "transport|予約": [
+            { jp: "電話で＿＿＿＿をしました。", es: "Hice la reserva por teléfono." }
+        ],
+        "transport|号車": [
+            { jp: "私の席は三＿＿＿＿です。", es: "Mi asiento está en el vagón número tres." }
+        ],
+        "transport|荷物": [
+            { jp: "＿＿＿＿は棚の上に置いてください。", es: "Ponga el equipaje en el estante de arriba, por favor." }
+        ],
+        "transport|忘れ物": [
+            { jp: "電車の中に＿＿＿＿をしました。", es: "Me dejé algo olvidado en el tren." }
+        ],
+        "transport|駐車場": [
+            { jp: "駅の近くに＿＿＿＿があります。", es: "Cerca de la estación hay un aparcamiento." }
+        ],
+        "transport|交番": [
+            { jp: "＿＿＿＿で道を聞きました。", es: "Pregunté el camino en el puesto de policía." }
+        ],
+
+        // --- Temario: Aeropuerto y viaje (airport) --- //
+        "airport|空港": [
+            { jp: "この＿＿＿＿はとても大きいです。", es: "Este aeropuerto es muy grande." }
+        ],
+        "airport|フライト": [
+            { jp: "＿＿＿＿は何時に出発しますか。", es: "¿A qué hora sale el vuelo?" }
+        ],
+        "airport|飛行機": [
+            { jp: "＿＿＿＿に乗るのは初めてです。", es: "Es la primera vez que subo a un avión." }
+        ],
+        "airport|搭乗券": [
+            { jp: "＿＿＿＿を見せてください。", es: "Muéstreme la tarjeta de embarque, por favor." }
+        ],
+        "airport|スーツケース": [
+            { jp: "＿＿＿＿が重すぎます。", es: "La maleta pesa demasiado." }
+        ],
+        "airport|手荷物": [
+            { jp: "＿＿＿＿は一つだけ持てます。", es: "Solo se puede llevar un equipaje de mano." }
+        ],
+        "airport|パスポート": [
+            { jp: "＿＿＿＿を忘れてしまいました。", es: "Se me olvidó el pasaporte." }
+        ],
+        "airport|搭乗口": [
+            { jp: "＿＿＿＿は十番です。", es: "La puerta de embarque es la número diez." }
+        ],
+        "airport|到着": [
+            { jp: "飛行機の＿＿＿＿は何時ですか。", es: "¿A qué hora es la llegada del avión?" }
+        ],
+        "airport|出発": [
+            { jp: "＿＿＿＿の三十分前に来てください。", es: "Venga treinta minutos antes de la salida, por favor." }
+        ],
+        "airport|入国審査": [
+            { jp: "＿＿＿＿の列に並んでいます。", es: "Estoy haciendo cola para el control de inmigración." }
+        ],
+        "airport|税関": [
+            { jp: "＿＿＿＿で荷物を見せました。", es: "Enseñé el equipaje en la aduana." }
+        ],
+
+        // --- Temario: Cortesía japonesa (polite) --- //
+        "polite|こんにちは": [
+            { jp: "昼に会ったら、＿＿＿＿と言います。", es: "Si te encuentras con alguien de día, dices \"hola\"." }
+        ],
+        "polite|ありがとうございます": [
+            { jp: "助けてもらったら、＿＿＿＿と言います。", es: "Si alguien te ayuda, dices \"muchas gracias\"." }
+        ],
+        "polite|すみません": [
+            { jp: "人にぶつかったら、＿＿＿＿と言います。", es: "Si chocas con alguien, dices \"disculpe\"." }
+        ],
+        "polite|お願いします": [
+            { jp: "何かを頼むときは、＿＿＿＿と言います。", es: "Cuando pides algo, dices \"por favor\"." }
+        ],
+        "polite|大丈夫です": [
+            { jp: "断りたいときは、＿＿＿＿と言います。", es: "Cuando quieres rechazar algo, dices \"está bien, no hace falta\"." }
+        ],
+        "polite|失礼します": [
+            { jp: "部屋に入るときは、＿＿＿＿と言います。", es: "Al entrar en una habitación, dices \"disculpe\"." }
+        ],
+        "polite|いただきます": [
+            { jp: "食べる前に、＿＿＿＿と言います。", es: "Antes de comer, dices \"itadakimasu\"." }
+        ],
+        "polite|ごちそうさまでした": [
+            { jp: "食べ終わったら、＿＿＿＿と言います。", es: "Al terminar de comer, dices \"gochisousama deshita\"." }
+        ],
+        "polite|おはようございます": [
+            { jp: "朝会ったら、＿＿＿＿と言います。", es: "Si te encuentras con alguien por la mañana, dices \"buenos días\"." }
+        ],
+
+        // --- Temario: Problemas y urgencias (trouble) --- //
+        "trouble|道に迷いました": [
+            { jp: "駅がわからなくて、＿＿＿＿。", es: "No encontraba la estación y me perdí." }
+        ],
+        "trouble|無くしました": [
+            { jp: "財布を＿＿＿＿。", es: "He perdido la cartera." }
+        ],
+        "trouble|気分が悪いです": [
+            { jp: "今日は＿＿＿＿。", es: "Hoy no me encuentro bien." }
+        ],
+        "trouble|痛い": [
+            { jp: "お腹が＿＿＿＿です。", es: "Me duele el estómago." }
+        ],
+        "trouble|医者": [
+            { jp: "＿＿＿＿に見てもらいました。", es: "Me examinó el médico." }
+        ],
+        "trouble|薬": [
+            { jp: "この＿＿＿＿を飲んでください。", es: "Tómese este medicamento, por favor." }
+        ],
+        "trouble|アレルギー": [
+            { jp: "卵に＿＿＿＿があります。", es: "Tengo alergia al huevo." }
+        ],
+        "trouble|熱": [
+            { jp: "＿＿＿＿があります。", es: "Tengo fiebre." }
+        ],
+        "trouble|怪我": [
+            { jp: "足に＿＿＿＿をしました。", es: "Me hice una herida en la pierna." }
+        ],
+        "trouble|救急車": [
+            { jp: "＿＿＿＿を呼んでください。", es: "Llame a una ambulancia, por favor." }
+        ],
+        "trouble|呼ぶ": [
+            { jp: "困ったときは医者を＿＿＿＿。", es: "Cuando tienes un problema, llamas al médico." }
+        ],
+        "trouble|問題": [
+            { jp: "何か＿＿＿＿がありますか。", es: "¿Hay algún problema?" }
+        ],
+    };
+
+    // Devuelve la clave de búsqueda de una palabra dentro del sentenceBank.
+    function getSentenceKey(word) {
+        return `${word.category}|${word.kanji || word.kana}`;
+    }
+
+    // Devuelve la lista de frases disponibles para una palabra, o null si
+    // todavía no se ha escrito ninguna para ella (así el resto de la app
+    // sigue funcionando con normalidad para las palabras que aún no tienen).
+    function getWordSentences(word) {
+        return sentenceBank[getSentenceKey(word)] || null;
+    }
+
     // --- 3. ESTADO DE LA APLICACIÓN --- //
     let currentTopicId = null;
     let practiceState = { questions: [], currentIndex: 0, score: 0, results: [], answered: false };
@@ -1327,6 +1722,53 @@
             return `<ruby>${wordObj.kanji}<rt>${wordObj.kana}</rt></ruby>`;
         }
         return wordObj.kanji;
+    }
+
+    // --- FURIGANA EN FRASES ("Completa el hueco") --- //
+    // Las frases del banco (sentenceBank) están escritas solo con el texto en
+    // japonés, sin lectura palabra por palabra. Para poder mostrar furigana
+    // igual que en el resto de la app, construimos un diccionario kanji->kana
+    // a partir de TODO el vocabulario ya cargado (de todos los temarios, no
+    // solo el actual, porque una frase puede usar palabras de otro temario).
+    // Con ese diccionario buscamos, de mayor a menor longitud, qué trozos de
+    // la frase coinciden exactamente con una palabra conocida y les añadimos
+    // su <ruby>. El kanji que no coincida con ninguna palabra del vocabulario
+    // se deja tal cual (no hay forma de adivinar su lectura sin esa lista).
+    let furiganaDictionary = null;
+    function getFuriganaDictionary() {
+        if (!furiganaDictionary) {
+            furiganaDictionary = vocabulary
+                .filter(w => w.kanji && w.kana && w.kanji !== w.kana)
+                .map(w => ({ kanji: w.kanji, kana: w.kana }));
+            // Coincidencia más larga primero, para no "partir" una palabra de
+            // varios kanji con la lectura de una palabra más corta contenida en ella.
+            furiganaDictionary.sort((a, b) => b.kanji.length - a.kanji.length);
+        }
+        return furiganaDictionary;
+    }
+
+    // Convierte una frase en japonés a HTML seguro, añadiendo <ruby> sobre las
+    // palabras reconocidas cuando la lectura en hiragana está activada.
+    function renderSentenceHTML(jpText) {
+        const dict = prefs.hiragana ? getFuriganaDictionary() : [];
+        let html = '';
+        let i = 0;
+        outer:
+        while (i < jpText.length) {
+            if (dict.length) {
+                for (const entry of dict) {
+                    const len = entry.kanji.length;
+                    if (jpText.substr(i, len) === entry.kanji) {
+                        html += `<ruby>${entry.kanji}<rt>${entry.kana}</rt></ruby>`;
+                        i += len;
+                        continue outer;
+                    }
+                }
+            }
+            html += escapeHtml(jpText[i]);
+            i += 1;
+        }
+        return html;
     }
 
     // --- 4. AUDIO --- //
@@ -1364,6 +1806,21 @@
         utterance.lang = 'ja-JP';
         utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
+    }
+
+    // Muestra u oculta la traducción de apoyo en "Completa el hueco" (pista opcional)
+    function toggleTranslation() {
+        const translationEl = document.getElementById('question-translation');
+        const toggleBtn = document.getElementById('btn-toggle-translation');
+        const isVisible = translationEl.style.display === 'block';
+        if (isVisible) {
+            translationEl.style.display = 'none';
+            toggleBtn.innerHTML = '👁️ Ver traducción';
+        } else {
+            translationEl.innerText = translationEl.dataset.text || '';
+            translationEl.style.display = 'block';
+            toggleBtn.innerHTML = '🙈 Ocultar traducción';
+        }
     }
 
     // Función para repetir el audio de la pregunta actual
@@ -1509,8 +1966,13 @@
         const progress = (practiceState.currentIndex / 10) * 100;
         document.getElementById('practice-progress').style.width = `${progress}%`;
 
-        // format: 0 = es->ja, 1 = ja->es, 2 = romaji->ja
+        // format: 0 = es->ja, 1 = ja->es, 2 = romaji->ja, 3 = completa el hueco
+        // El formato 3 solo entra en juego cuando la palabra tiene alguna frase
+        // escrita en el sentenceBank; si no la tiene, el resto de formatos
+        // siguen funcionando exactamente igual que antes.
         const formats = [0, 1, 2];
+        const wordSentences = getWordSentences(word);
+        if (wordSentences && wordSentences.length) formats.push(3);
         const format = formats[Math.floor(Math.random() * formats.length)];
         
         let questionLabel, questionTextHTML, isOptionsSpanish;
@@ -1518,6 +1980,17 @@
         
         // Asignamos la palabra a la variable global para el botón de repetición de audio
         currentPracticeWordSpeak = mainJaSpeak;
+
+        const wordEl = document.getElementById('question-word');
+        const translationEl = document.getElementById('question-translation');
+        const toggleBtn = document.getElementById('btn-toggle-translation');
+        const repeatBtn = document.getElementById('btn-repeat-audio');
+        wordEl.classList.remove('sentence-mode');
+        translationEl.style.display = 'none';
+        translationEl.innerText = '';
+        toggleBtn.style.display = 'none';
+        toggleBtn.innerHTML = '👁️ Ver traducción';
+        repeatBtn.style.display = 'flex';
 
         if (format === 0) {
             questionLabel = "¿Cómo se dice?";
@@ -1527,17 +2000,38 @@
             questionLabel = "¿Qué significa?";
             questionTextHTML = renderJapanese(word);
             isOptionsSpanish = true;
-        } else {
+        } else if (format === 2) {
             questionLabel = "¿Cuál es su escritura?";
             questionTextHTML = word.romaji;
             isOptionsSpanish = false;
+        } else {
+            // Completa el hueco: se elige una frase al azar entre las disponibles
+            // para esta palabra y se sustituye el marcador ＿＿＿＿ por una casilla
+            // resaltada. Se muestra también la traducción para dar contexto,
+            // ya que el resto de la frase puede contener palabras aún no vistas.
+            const chosenSentence = wordSentences[Math.floor(Math.random() * wordSentences.length)];
+            questionLabel = "Completa el hueco";
+            // El hueco se muestra como un espacio en blanco con línea azul debajo
+            // (sin los guiones ＿＿＿＿ visibles, que quedaban como rayas discontinuas
+            // superpuestas a la línea).
+            questionTextHTML = renderSentenceHTML(chosenSentence.jp).replace('＿＿＿＿', '<span class="question-blank">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+            isOptionsSpanish = false;
+            wordEl.classList.add('sentence-mode');
+            // La traducción queda guardada pero escondida: el usuario decide si
+            // quiere revelarla como pista pulsando el botón (ver toggleTranslation).
+            translationEl.dataset.text = chosenSentence.es;
+            toggleBtn.style.display = 'inline-block';
+            // El botón de audio se deja visible igual que en el resto de formatos:
+            // es una pista más que el usuario activa cuando quiere, igual que la
+            // traducción, en vez de ocultarse por completo.
         }
 
         document.getElementById('question-label').innerText = questionLabel;
-        document.getElementById('question-word').innerHTML = questionTextHTML;
+        wordEl.innerHTML = questionTextHTML;
         
         // Autoreproducir el audio por defecto solo en preguntas tipo "ja->es", pero el botón 
         // de repetición permanece siempre activo y visible para que el usuario pueda interactuar cuando quiera.
+        // En el formato "Completa el hueco" nunca se reproduce antes de responder, por el mismo motivo de arriba.
         if (format === 1) {
             speakJapanese(mainJaSpeak);
         }
@@ -1579,8 +2073,18 @@
         const feedbackPanel = document.getElementById('feedback-panel');
         const titleEl = document.getElementById('feedback-title');
         const answerEl = document.getElementById('feedback-answer');
-        
+
+        // En "Completa el hueco" el botón de audio estaba oculto para no desvelar
+        // la respuesta; una vez contestado ya no hay nada que ocultar.
+        document.getElementById('btn-repeat-audio').style.display = 'flex';
+
         practiceState.results.push({ word: wordObj, isCorrect: isCorrect });
+
+        // Info completa de la palabra (kanji, kana, romaji y significado). Se muestra
+        // SIEMPRE, tanto si aciertas como si fallas: acertar la escritura o lectura no
+        // implica conocer el significado (o viceversa), así que conviene reforzarlo
+        // en los dos casos en vez de solo cuando la respuesta es incorrecta.
+        let fullAnswer = `${wordObj.kanji ? wordObj.kanji + ' — ' : ''}${wordObj.kana} — ${wordObj.romaji} — ${wordObj.spanish}`;
 
         if (isCorrect) {
             practiceState.score++;
@@ -1589,7 +2093,8 @@
             playCorrectSound();
             feedbackPanel.className = 'feedback-panel correct';
             titleEl.innerHTML = "✓ ¡Correcto!";
-            answerEl.style.display = 'none';
+            answerEl.innerText = fullAnswer;
+            answerEl.style.display = 'block';
         } else {
             buttonElement.style.borderColor = "var(--wrong)";
             buttonElement.style.color = "var(--wrong)";
@@ -1608,7 +2113,6 @@
             playWrongSound();
             feedbackPanel.className = 'feedback-panel wrong';
             titleEl.innerHTML = "✕ Incorrecto";
-            let fullAnswer = `${wordObj.kanji ? wordObj.kanji + ' — ' : ''}${wordObj.kana} — ${wordObj.romaji} — ${wordObj.spanish}`;
             answerEl.innerText = fullAnswer;
             answerEl.style.display = 'block';
         }
@@ -1700,10 +2204,17 @@
 
     // Al pulsar una palabra de los resultados, la lleva directamente a la teoría
     // de su temario correspondiente y resalta esa palabra concreta.
+    //
+    // IMPORTANTE: usamos openTopic() (en vez de fijar currentTopicId a mano) porque
+    // es la función que también rellena la cabecera de la pantalla "screen-topic"
+    // (icono, título y nº de palabras). Si no la llamamos, esa pantalla se queda
+    // con los datos del último temario abierto normalmente (o vacía si no se ha
+    // abierto ninguno todavía), y al pulsar "← Volver" desde la teoría se ve un
+    // temario equivocado o en blanco.
     function goToSearchResult(index) {
         const word = vocabulary[index];
         if (!word) return;
-        currentTopicId = word.category;
+        openTopic(word.category);
         renderTheory();
         showScreen('theory');
         highlightWordInTheory(word.id);
@@ -1737,9 +2248,24 @@
 
     // --- 10. DICCIONARIO (API externa) --- //
     // Usa la API pública de Jisho.org (diccionario japonés-inglés basado en JMdict).
-    // Como jisho.org no envía cabeceras CORS, se intenta primero una petición directa
-    // y, si falla, se recurre a un proxy CORS público como alternativa.
-    async function fetchJsonSafe(url, timeoutMs = 5000) {
+    //
+    // jisho.org NO envía cabeceras CORS (Access-Control-Allow-Origin), así que una
+    // petición directa desde el navegador siempre es rechazada por la política del
+    // mismo origen. Por eso se prueba una cadena de varios proxys CORS públicos, uno
+    // detrás de otro: si el primero falla o está caído, se prueba el siguiente, etc.
+    // Con varias alternativas la probabilidad de que TODAS fallen a la vez es mucho
+    // menor, así que en la práctica casi siempre se consigue mostrar la definición.
+    function buildDictionaryUrls(jishoUrl) {
+        const enc = encodeURIComponent(jishoUrl);
+        return [
+            jishoUrl, // Petición directa (funcionará si algún día jisho.org añade CORS)
+            `https://api.allorigins.win/raw?url=${enc}`,
+            `https://corsproxy.io/?url=${enc}`,
+            `https://api.codetabs.com/v1/proxy?quest=${enc}`,
+        ];
+    }
+
+    async function fetchJsonSafe(url, timeoutMs = 6000) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeoutMs);
         try {
@@ -1751,6 +2277,28 @@
         } finally {
             clearTimeout(timer);
         }
+    }
+
+    // Intenta cada URL de la cadena en orden y se queda con la primera que
+    // devuelva un JSON válido con datos.
+    async function fetchJishoData(query) {
+        const jishoUrl = `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(query)}`;
+        const candidates = buildDictionaryUrls(jishoUrl);
+        for (const url of candidates) {
+            const data = await fetchJsonSafe(url);
+            if (data && Array.isArray(data.data)) return data;
+        }
+        return null;
+    }
+
+    // De todas las entradas devueltas por Jisho, elige la que coincide exactamente
+    // con el kanji/kana de la palabra seleccionada (en vez de asumir que la primera
+    // del listado es siempre la correcta).
+    function pickBestEntry(entries, word) {
+        const targets = [word.kanji, word.kana].filter(Boolean);
+        if (!targets.length) return entries[0];
+        const exact = entries.find(e => (e.japanese || []).some(j => targets.includes(j.word) || targets.includes(j.reading)));
+        return exact || entries[0];
     }
 
     // Token que identifica la búsqueda en curso, para evitar que una petición
@@ -1779,11 +2327,7 @@
         `;
         modal.classList.add('visible');
 
-        const jishoUrl = `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(query)}`;
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(jishoUrl)}`;
-
-        let data = await fetchJsonSafe(jishoUrl);
-        if (!data || !data.data) data = await fetchJsonSafe(proxyUrl);
+        const data = await fetchJishoData(query);
 
         // Si mientras tanto se abrió otra palabra o se cerró el modal, no pisamos ese contenido.
         if (myToken !== dictionaryRequestToken || !modal.classList.contains('visible')) return;
@@ -1798,34 +2342,65 @@
         if (!data || !data.data || data.data.length === 0) {
             contentEl.className = 'dictionary-status';
             contentEl.innerHTML = `
-                <p>No se pudo obtener la definición automáticamente.</p>
+                <p>Esta palabra todavía no tiene ficha detallada disponible aquí.</p>
                 <a class="dictionary-link" href="${directUrl}" target="_blank" rel="noopener">Buscar "${escapeHtml(query)}" en Jisho.org →</a>
             `;
             return;
         }
 
-        const entries = data.data.slice(0, 3);
-        const first = entries[0];
-        const jp = (first.japanese && first.japanese[0]) || {};
+        // Entrada principal: la que coincide con la palabra seleccionada. El resto
+        // de entradas devueltas se usan solo para añadir alguna acepción extra.
+        const bestEntry = pickBestEntry(data.data, word);
+        const extraEntries = data.data.filter(e => e !== bestEntry).slice(0, 2);
+        const entries = [bestEntry, ...extraEntries];
+
+        const jp = (bestEntry.japanese && bestEntry.japanese[0]) || {};
         const reading = jp.reading || word.kana || '';
 
         let html = `<div class="dictionary-reading">${escapeHtml(reading)}${word.romaji ? ' · ' + escapeHtml(word.romaji) : ''}</div>`;
 
+        // Insignias: palabra común / niveles JLPT (lo resaltado en verde/morado de Jisho)
+        const badges = [];
+        if (bestEntry.is_common) badges.push('<span class="dictionary-badge common">Palabra común</span>');
+        (bestEntry.jlpt || []).forEach(lvl => {
+            const label = lvl.replace('jlpt-', '').toUpperCase();
+            badges.push(`<span class="dictionary-badge jlpt">${escapeHtml(label)}</span>`);
+        });
+        if (badges.length) html += `<div class="dictionary-badges">${badges.join('')}</div>`;
+
+        // Otras formas de escritura, p.ej. 今日は【こんにちわ】 en el caso de こんにちは
+        const otherForms = (bestEntry.japanese || [])
+            .slice(1)
+            .filter(f => f.word || f.reading)
+            .map(f => f.word ? `${f.word}${f.reading ? `【${f.reading}】` : ''}` : f.reading);
+        if (otherForms.length) {
+            html += `
+                <div class="dictionary-otherforms">
+                    <div class="dictionary-otherforms-title">Otras formas</div>
+                    ${escapeHtml(otherForms.join('、 '))}
+                </div>
+            `;
+        }
+
+        // Significados, agrupados por categoría gramatical, con sus notas (p.ej.
+        // "Usually written using kana alone", equivalente a las notas de Jisho).
         entries.forEach(entry => {
-            (entry.senses || []).slice(0, 3).forEach(sense => {
+            (entry.senses || []).slice(0, 4).forEach(sense => {
                 const pos = (sense.parts_of_speech || []).join(', ');
                 const defs = (sense.english_definitions || []).join('; ');
                 if (!defs) return;
+                const info = (sense.info || []).join('; ');
                 html += `
                     <div class="dictionary-sense">
                         ${pos ? `<div class="dictionary-pos">${escapeHtml(pos)}</div>` : ''}
                         <div class="dictionary-definition">${escapeHtml(defs)}</div>
+                        ${info ? `<div class="dictionary-info-note">${escapeHtml(info)}</div>` : ''}
                     </div>
                 `;
             });
         });
 
-        html += `<a class="dictionary-link" href="https://jisho.org/search/${encodeURIComponent(query)}" target="_blank" rel="noopener">Ver más en Jisho.org →</a>`;
+        html += `<a class="dictionary-link" href="https://jisho.org/search/${encodeURIComponent(query)}" target="_blank" rel="noopener">Ver ficha completa en Jisho.org →</a>`;
 
         contentEl.className = '';
         contentEl.innerHTML = html;
