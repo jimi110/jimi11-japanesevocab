@@ -82,6 +82,7 @@
         .screen {
             display: none;
             padding: 24px;
+            padding-bottom: 90px; /* espacio para el menú inferior fijo */
             flex-direction: column;
             flex-grow: 1;
             animation: fadeIn 0.3s ease;
@@ -248,7 +249,7 @@
         .scroll-top-btn {
             position: fixed;
             left: 50%;
-            bottom: 20px;
+            bottom: 76px;
             transform: translateX(-50%) translateY(16px);
             width: 44px;
             height: 44px;
@@ -273,6 +274,61 @@
             transform: translateX(-50%) translateY(0);
         }
         .scroll-top-btn:active { transform: translateX(-50%) scale(0.92); }
+        /* --- MENÚ INFERIOR GLOBAL --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 15;
+            display: flex;
+            justify-content: center;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .bottom-nav-inner { display: flex; width: 100%; max-width: 900px; }
+        .bottom-nav-item {
+            flex: 1;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 8px 4px 10px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .bottom-nav-item .bottom-nav-icon { font-size: 20px; }
+        .bottom-nav-item.active { color: var(--primary); }
+
+        /* --- FILAS DE PALABRAS EN "REPASAR ERRORES" --- */
+        .review-word-row {
+            display: flex; align-items: center; gap: 12px;
+            border: 2px solid var(--border); border-radius: var(--radius-md);
+            padding: 12px; background: var(--card-bg);
+        }
+        .review-word-emoji { font-size: 22px; }
+        .review-word-main { flex-grow: 1; }
+        .review-word-jp { font-weight: 700; font-size: 16px; }
+        .review-word-es { font-size: 13px; color: var(--text-muted); }
+        .review-word-badge { font-size: 12px; font-weight: 700; color: var(--wrong); background: var(--wrong-bg); padding: 4px 8px; border-radius: var(--radius-sm); white-space: nowrap; cursor: pointer; }
+        .review-word-badge:hover { background: var(--correct-bg); color: var(--correct); }
+
+        /* --- TARJETAS DE ESTADÍSTICAS --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+        .stat-card {
+            border: 2px solid var(--border); border-radius: var(--radius-md);
+            background: var(--card-bg); padding: 14px; text-align: center;
+        }
+        .stat-card .stat-value { font-size: 22px; font-weight: 700; color: var(--primary); }
+        .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
         .search-summary { color: var(--text-muted); font-size: 13px; margin: 0 0 10px 2px; }
         .search-result-list { display: grid; gap: 8px; }
         .search-word-card { display: flex; align-items: center; gap: 12px; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 12px; background: var(--card-bg); }
@@ -282,11 +338,22 @@
         .search-word-topic { font-size: 12px; color: var(--text-muted); }
         .dict-button { flex: 0 0 auto; width: 40px; height: 40px; border: 2px solid var(--border); border-radius: 50%; background: var(--bg-secondary); color: var(--primary); font-size: 18px; cursor: pointer; }
         .dict-button:hover { border-color: var(--primary); }
+
+        /* --- BOTÓN "AÑADIR A REPASO" EN CADA PALABRA DE TEORÍA --- */
+        .word-review-btn {
+            flex: 0 0 auto; width: 36px; height: 36px; border: 2px solid var(--border); border-radius: 50%;
+            background: var(--bg-secondary); color: var(--text-muted); font-size: 15px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .word-review-btn:hover { border-color: var(--primary); }
+        .word-review-btn.active { border-color: var(--primary); color: var(--primary); }
         .audio-button { color: var(--correct); }
-        .progress-indicator { 
+        .progress-indicator {
             font-size: 13px; font-weight: 600; background: var(--bg-secondary);
             padding: 4px 8px; border-radius: var(--radius-sm); color: var(--primary);
+            cursor: pointer;
         }
+        .progress-indicator:hover { background: var(--wrong-bg); color: var(--wrong); }
 
         /* --- TEORÍA --- */
         .theory-list { display: grid; gap: 12px; grid-template-columns: 1fr; padding-bottom: 24px; }
@@ -548,11 +615,79 @@
             <!-- Resumen generado por JS -->
         </div>
         <div class="center-btn-wrap">
-            <button class="btn" onclick="showScreen('topic')">Volver al temario</button>
+            <button class="btn" id="result-back-btn" onclick="showScreen('topic')">Volver al temario</button>
         </div>
     </div>
 
+    <!-- PANTALLA DE REPASO GLOBAL (ERRORES DE TODA LA APP) -->
+    <div id="screen-review" class="screen">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('home')">← Salir</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
+            <h2 style="margin-bottom:4px;">🔁 Repasar errores</h2>
+            <p class="subtitle" id="review-pending-count" style="margin-bottom:0;">0 palabras pendientes</p>
+        </div>
+        <div class="center-btn-wrap">
+            <button class="btn" id="review-all-btn" onclick="startReviewAll()">▶️ Repasar todo</button>
+        </div>
+        <div class="topics-grid" id="review-categories-container" style="margin-top:8px;"></div>
+    </div>
+
+    <!-- PANTALLA DE REPASO DE UNA CATEGORÍA -->
+    <div id="screen-review-category" class="screen">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('review')">← Volver</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
+            <div id="review-category-icon" style="font-size: 44px; margin-bottom: 8px;"></div>
+            <h2 id="review-category-title" style="font-size: 22px; margin-bottom:4px;">Categoría</h2>
+            <p class="subtitle" id="review-category-count" style="margin-bottom:0;">X palabras pendientes</p>
+        </div>
+        <div class="center-btn-wrap">
+            <button class="btn" id="review-category-start-btn">▶️ Repasar esta categoría</button>
+        </div>
+        <div id="review-category-words" style="display:flex; flex-direction:column; gap:10px; margin-top:8px;"></div>
+    </div>
+
+    <!-- PANTALLA DE ESTADÍSTICAS -->
+    <div id="screen-stats" class="screen">
+        <div class="header-controls">
+            <button class="btn-back" onclick="showScreen('home')">← Salir</button>
+        </div>
+        <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
+            <h2 style="font-size: 24px; margin-bottom:4px;">📊 Mis estadísticas</h2>
+            <p class="subtitle" style="margin-bottom:0;">Tu progreso en la app</p>
+        </div>
+
+        <h2 style="font-size:16px;">Progreso general</h2>
+        <div class="stats-grid" id="stats-general"></div>
+
+        <h2 style="font-size:16px; margin-top:28px;">Palabras</h2>
+        <div class="stats-grid" id="stats-words"></div>
+
+        <h2 style="font-size:16px; margin-top:28px;">🔴 Más difíciles</h2>
+        <div id="stats-hardest" style="display:flex; flex-direction:column; gap:10px;"></div>
+
+        <h2 style="font-size:16px; margin-top:28px;">Temarios</h2>
+        <div id="stats-topics" style="display:flex; flex-direction:column; gap:10px;"></div>
+    </div>
+
     <button id="scroll-top-btn" class="scroll-top-btn" onclick="scrollActiveScreenToTop()" aria-label="Subir arriba del todo" title="Subir arriba">↑</button>
+
+    <nav id="bottom-nav" class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <button class="bottom-nav-item" data-nav="home" onclick="showScreen('home')">
+                <span class="bottom-nav-icon">📚</span><span>Temarios</span>
+            </button>
+            <button class="bottom-nav-item" data-nav="review" onclick="openReviewHome()">
+                <span class="bottom-nav-icon">🔁</span><span>Repasar</span>
+            </button>
+            <button class="bottom-nav-item" data-nav="stats" onclick="showScreen('stats')">
+                <span class="bottom-nav-icon">📊</span><span>Estadísticas</span>
+            </button>
+        </div>
+    </nav>
 
 </div>
 
@@ -568,6 +703,19 @@
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
     let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true };
     let userProgress = {};
+    // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
+    let mistakes = {};
+    // Estadísticas globales (nihongoStats)
+    let stats = {
+        totalPractice: 0,
+        totalCorrect: 0,
+        totalWrong: 0,
+        practicedWords: {},   // { wordId: true } - palabras que han salido en alguna pregunta
+        correctWords: {},     // { wordId: true } - palabras acertadas al menos una vez
+        streak: 0,
+        lastStudyDate: null,  // 'YYYY-MM-DD'
+        topicStats: {}        // { topicId: { correct, wrong } }
+    };
 
     function loadData() {
         try {
@@ -576,6 +724,12 @@
             
             const savedProg = localStorage.getItem('nihongoAppProgress');
             if (savedProg) userProgress = JSON.parse(savedProg);
+
+            const savedMistakes = localStorage.getItem('nihongoMistakes');
+            if (savedMistakes) mistakes = JSON.parse(savedMistakes);
+
+            const savedStats = localStorage.getItem('nihongoStats');
+            if (savedStats) stats = { ...stats, ...JSON.parse(savedStats) };
         } catch(e) {}
         applyPrefs();
     }
@@ -584,13 +738,19 @@
         try {
             localStorage.setItem('nihongoAppPrefs', JSON.stringify(prefs));
             localStorage.setItem('nihongoAppProgress', JSON.stringify(userProgress));
+            localStorage.setItem('nihongoMistakes', JSON.stringify(mistakes));
+            localStorage.setItem('nihongoStats', JSON.stringify(stats));
         } catch(e) {}
     }
 
     function setPref(key, value) {
+        const soundWasOn = prefs.sound;
         prefs[key] = value;
         saveData();
         applyPrefs();
+        // Si se acaba de desactivar el sonido, no reproducir nada (ni el propio
+        // toggle). Si se acaba de activar, sí se oye para confirmar el cambio.
+        if (key === 'sound' ? value : soundWasOn) playSound('toggle');
         if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) {
             renderTheory(); // Refrescar furigana instantáneamente en teoría
         }
@@ -1805,31 +1965,103 @@
     }
 
     // --- 4. AUDIO --- //
+    // Sistema de sonido centralizado. Un único AudioContext reutilizado para
+    // toda la app; cada interacción llama a playSound('tipo'). Todo son
+    // osciladores nativos (sin librerías ni archivos externos), pensados para
+    // ser cortos, suaves y no repetitivos durante sesiones largas de estudio.
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
-    function initAudio() { if (!audioCtx) audioCtx = new AudioContext(); }
-
-    function playTone(freq1, freq2, type = 'sine', duration = 0.15) {
-        if (!prefs.sound) return;
-        initAudio();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.frequency.setValueAtTime(freq1, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(freq2, audioCtx.currentTime + duration);
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
+    function initAudio() {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
     }
-    function playCorrectSound() { playTone(600, 900, 'sine', 0.2); }
-    function playWrongSound() { playTone(300, 200, 'triangle', 0.2); }
-    function playCompletionSound() {
+
+    // Nodo de un tono: frecuencia con leve deslizamiento opcional, envolvente
+    // suave (ataque rápido, caída exponencial) y filtro paso-bajo para quitar
+    // aristas ásperas al oscilador. `at` retrasa el inicio en segundos desde ahora.
+    function tone({ freq, to, type = 'sine', duration = 0.14, gain = 0.22, at = 0, filter = 2200 }) {
+        const t0 = audioCtx.currentTime + at;
+        const osc = audioCtx.createOscillator();
+        const amp = audioCtx.createGain();
+        const lp = audioCtx.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.value = filter;
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, t0);
+        if (to) osc.frequency.exponentialRampToValueAtTime(to, t0 + duration);
+        amp.gain.setValueAtTime(0.0001, t0);
+        amp.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
+        amp.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+        osc.connect(lp);
+        lp.connect(amp);
+        amp.connect(audioCtx.destination);
+        osc.start(t0);
+        osc.stop(t0 + duration + 0.02);
+    }
+
+    // Definición de cada "identidad sonora". Mantenido en un solo objeto para
+    // no duplicar lógica: playSound(name) simplemente reproduce su receta.
+    const SOUND_RECIPES = {
+        // Navegación y botones: muy sutiles, un tap corto y limpio.
+        click:      () => tone({ freq: 720, type: 'sine', duration: 0.045, gain: 0.10, filter: 3000 }),
+        primary:    () => tone({ freq: 520, to: 660, type: 'sine', duration: 0.09, gain: 0.16, filter: 2600 }),
+        secondary:  () => tone({ freq: 480, type: 'sine', duration: 0.06, gain: 0.11, filter: 2400 }),
+        toggle:     () => tone({ freq: 600, to: 500, type: 'sine', duration: 0.07, gain: 0.13, filter: 2500 }),
+        open:       () => tone({ freq: 500, to: 760, type: 'sine', duration: 0.1, gain: 0.14, filter: 2800 }),
+        close:      () => tone({ freq: 500, to: 380, type: 'sine', duration: 0.08, gain: 0.12, filter: 2200 }),
+
+        // Búsqueda en el diccionario/vocabulario.
+        search:     () => tone({ freq: 500, type: 'sine', duration: 0.05, gain: 0.08, filter: 2400 }),
+        searchFound: () => { tone({ freq: 700, type: 'sine', duration: 0.06, gain: 0.13, filter: 3000 });
+                              tone({ freq: 950, type: 'sine', duration: 0.08, gain: 0.11, filter: 3200, at: 0.05 }); },
+        searchEmpty: () => tone({ freq: 380, to: 320, type: 'sine', duration: 0.12, gain: 0.1, filter: 1800 }),
+
+        // Respuestas de práctica: acierto = pequeño brillo ascendente de dos
+        // notas; fallo = tono corto y descendente, sin agresividad.
+        correct:    () => { tone({ freq: 660, type: 'sine', duration: 0.09, gain: 0.2, filter: 3200 });
+                             tone({ freq: 990, type: 'sine', duration: 0.14, gain: 0.16, filter: 3500, at: 0.07 }); },
+        wrong:      () => tone({ freq: 340, to: 240, type: 'sine', duration: 0.18, gain: 0.14, filter: 1500 }),
+
+        // Fin de práctica: frase melódica corta de 3 notas, memorable sin ser infantil.
+        complete: () => {
+            [440, 550, 660].forEach((f, i) => tone({ freq: f, type: 'sine', duration: 0.16, gain: 0.17, filter: 3000, at: i * 0.1 }));
+        },
+        // Variante para puntuación muy alta: añade una nota final más brillante.
+        completeGreat: () => {
+            [440, 550, 660, 880].forEach((f, i) => tone({ freq: f, type: 'sine', duration: 0.16, gain: 0.18, filter: 3400, at: i * 0.09 }));
+        },
+        // Recompensa al corregir todos los errores de un repaso: sutil pero distinta a todo lo demás.
+        reward: () => {
+            [523, 659, 784, 1047].forEach((f, i) => tone({ freq: f, type: 'triangle', duration: 0.22, gain: 0.15, filter: 3800, at: i * 0.08 }));
+        },
+    };
+
+    let lastSoundAt = 0;
+    let lastSoundName = '';
+    function playSound(name) {
         if (!prefs.sound) return;
-        setTimeout(() => playTone(400, 600, 'sine', 0.15), 0);
-        setTimeout(() => playTone(600, 800, 'sine', 0.2), 150);
+        const recipe = SOUND_RECIPES[name];
+        if (!recipe) return;
+        initAudio();
+        // Evita duplicados/solapes cuando dos eventos casi simultáneos disparan
+        // sonidos (p.ej. una acción principal que además cambia de pantalla).
+        const now = performance.now();
+        const gap = now - lastSoundAt;
+        if (name === 'click' && gap < 60) return;
+        if (name === 'secondary' && lastSoundName === 'primary' && gap < 120) return;
+        lastSoundAt = now;
+        lastSoundName = name;
+        try { recipe(); } catch (e) {}
+    }
+
+    // Compatibilidad con el código existente (mismos puntos de llamada, ahora
+    // delegando en el sistema centralizado).
+    function playCorrectSound() { playSound('correct'); }
+    function playWrongSound() { playSound('wrong'); }
+    function playCompletionSound() {
+        const great = practiceState.questions.length > 0 &&
+            (practiceState.score / practiceState.questions.length) >= 0.9;
+        playSound(great ? 'completeGreat' : 'complete');
     }
 
     function speakJapanese(text) {
@@ -1872,6 +2104,7 @@
 
     function showScreen(screenId) {
         if(prefs.sound) initAudio();
+        playSound('secondary');
         if (currentScreenId) {
             scrollPositions[currentScreenId] = window.scrollY;
         }
@@ -1879,6 +2112,9 @@
         document.getElementById(`screen-${screenId}`).classList.add('active');
         currentScreenId = screenId;
         if (screenId === 'home') renderHome();
+        if (screenId === 'review') renderReview();
+        if (screenId === 'stats') renderStats();
+        updateBottomNav(screenId);
         requestAnimationFrame(() => {
             window.scrollTo(0, scrollPositions[screenId] || 0);
         });
@@ -1892,6 +2128,32 @@
         if (!userProgress[topicId]) getTopicProgress(topicId);
         userProgress[topicId].completed++;
         saveData();
+    }
+
+    let pendingStarResetTopic = null;
+    let pendingStarResetTimeout = null;
+
+    function resetTopicStars(topicId) {
+        const badge = document.querySelector(`.progress-indicator[data-topic-id="${topicId}"]`);
+        // Primer toque: solo pedimos confirmación cambiando el texto de la insignia,
+        // sin usar confirm()/alert() porque algunos navegadores/WebViews los bloquean.
+        if (pendingStarResetTopic !== topicId) {
+            pendingStarResetTopic = topicId;
+            clearTimeout(pendingStarResetTimeout);
+            if (badge) badge.innerText = '¿Seguro? Toca de nuevo';
+            pendingStarResetTimeout = setTimeout(() => {
+                pendingStarResetTopic = null;
+                renderHome();
+            }, 3000);
+            return;
+        }
+        // Segundo toque dentro de los 3 segundos: confirmamos el reinicio
+        clearTimeout(pendingStarResetTimeout);
+        pendingStarResetTopic = null;
+        if (!userProgress[topicId]) getTopicProgress(topicId);
+        userProgress[topicId].completed = 0;
+        saveData();
+        renderHome();
     }
 
     function renderHome() {
@@ -1910,7 +2172,7 @@
                     <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${t.title}</div>
                     <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
                 </div>
-                ${completed > 0 ? `<div class="progress-indicator">⭐ ${completed}</div>` : ''}
+                ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
             `;
             container.appendChild(card);
         });
@@ -1927,7 +2189,7 @@
     }
 
     // --- 6. TEORÍA --- //
-    function startTheory() { renderTheory(); showScreen('theory'); }
+    function startTheory() { playSound('primary'); renderTheory(); showScreen('theory'); }
 
     function renderTheory() {
         const container = document.getElementById('theory-list');
@@ -1939,6 +2201,7 @@
             card.className = 'word-card';
             card.dataset.wordId = word.id;
             const speakText = word.kanji || word.kana;
+            const inReview = !!mistakes[word.id];
             
             card.innerHTML = `
                 <div class="word-header" onclick="toggleTheoryCard(this, '${speakText}')">
@@ -1947,6 +2210,7 @@
                         <div class="word-kanji-preview">${renderJapanese(word)}</div>
                         <div class="word-spanish">${word.spanish}</div>
                     </div>
+                    <button class="word-review-btn ${inReview ? 'active' : ''}" onclick="event.stopPropagation(); toggleWordInReview('${word.id}', '${word.category}', this)" title="${inReview ? 'Quitar de repaso' : 'Añadir a repaso'}">${inReview ? '✓' : '🔁'}</button>
                 </div>
                 <div class="word-details">
                     <div class="detail-row"><span class="detail-label">Significado:</span> <span class="detail-value">${word.spanish}</span></div>
@@ -1966,7 +2230,28 @@
         document.querySelectorAll('.word-card').forEach(c => c.classList.remove('expanded'));
         if (!wasExpanded) {
             card.classList.add('expanded');
+            playSound('open');
             speakJapanese(textToSpeak);
+        } else {
+            playSound('close');
+        }
+    }
+
+    // Añade o quita manualmente una palabra de "Repasar errores" desde la teoría,
+    // reutilizando el mismo almacén (mistakes / nihongoMistakes) que usan los fallos de práctica.
+    function toggleWordInReview(wordId, category, btnElement) {
+        if (mistakes[wordId]) {
+            delete mistakes[wordId];
+        } else {
+            mistakes[wordId] = { id: wordId, category: category, count: 1, lastMissed: Date.now() };
+        }
+        playSound('toggle');
+        saveData();
+        if (btnElement) {
+            const nowInReview = !!mistakes[wordId];
+            btnElement.classList.toggle('active', nowInReview);
+            btnElement.innerText = nowInReview ? '✓' : '🔁';
+            btnElement.title = nowInReview ? 'Quitar de repaso' : 'Añadir a repaso';
         }
     }
 
@@ -1980,18 +2265,22 @@
         return arr;
     }
 
-    function startPractice() {
-        const topicWords = vocabulary.filter(v => v.category === currentTopicId);
+    function startPractice(customWords, isReview) {
+        playSound('primary');
+        const topicWords = customWords || vocabulary.filter(v => v.category === currentTopicId);
         practiceState = {
             questions: shuffleArray(topicWords).slice(0, 10),
-            currentIndex: 0, score: 0, results: [], answered: false
+            currentIndex: 0, score: 0, results: [], answered: false,
+            isReview: !!isReview
         };
         generateQuestion();
         showScreen('practice');
     }
 
     function abortPractice() {
-        if(confirm("¿Seguro que quieres salir de la práctica?")) showScreen('topic');
+        if(confirm("¿Seguro que quieres salir de la práctica?")) {
+            showScreen(practiceState.isReview ? 'review' : 'topic');
+        }
     }
 
     function generateQuestion() {
@@ -2002,13 +2291,13 @@
 
         practiceState.answered = false;
         const word = practiceState.questions[practiceState.currentIndex];
-        const allTopicWords = vocabulary.filter(v => v.category === currentTopicId);
+        const allTopicWords = vocabulary.filter(v => v.category === word.category);
         
         const feedbackPanel = document.getElementById('feedback-panel');
         feedbackPanel.className = 'feedback-panel';
         feedbackPanel.style.display = 'none';
         
-        const progress = (practiceState.currentIndex / 10) * 100;
+        const progress = (practiceState.currentIndex / practiceState.questions.length) * 100;
         document.getElementById('practice-progress').style.width = `${progress}%`;
 
         // format: 0 = es->ja, 1 = ja->es, 2 = romaji->ja, 3 = completa el hueco
@@ -2124,6 +2413,7 @@
         document.getElementById('btn-repeat-audio').style.display = 'flex';
 
         practiceState.results.push({ word: wordObj, isCorrect: isCorrect });
+        recordStatsAnswer(wordObj, isCorrect);
 
         // Info completa de la palabra (kanji, kana, romaji y significado). Se muestra
         // SIEMPRE, tanto si aciertas como si fallas: acertar la escritura o lectura no
@@ -2140,9 +2430,13 @@
             titleEl.innerHTML = "✓ ¡Correcto!";
             answerEl.innerText = fullAnswer;
             answerEl.style.display = 'block';
+            // Si acertamos una palabra estando en una sesión de repaso, reducimos su contador de errores
+            if (practiceState.isReview) resolveMistake(wordObj.id);
         } else {
             buttonElement.style.borderColor = "var(--wrong)";
             buttonElement.style.color = "var(--wrong)";
+            // Cualquier fallo, en práctica normal o en repaso, se guarda como error pendiente
+            recordMistake(wordObj);
             
             // Buscar correcta para resaltarla (comprobando el objeto asociado)
             document.querySelectorAll('.option-btn').forEach(b => {
@@ -2169,14 +2463,25 @@
     }
 
     function nextQuestion() {
+        playSound('click');
         practiceState.currentIndex++;
         generateQuestion();
     }
 
     // --- 8. RESULTADOS --- //
     function showPracticeResult() {
-        playCompletionSound();
-        addPracticeCompletion(currentTopicId);
+        // Recompensa especial: se trataba de una sesión de repaso y ya no queda
+        // ningún error pendiente (el usuario los ha corregido todos).
+        const allMistakesCleared = practiceState.isReview && Object.keys(mistakes).length === 0;
+        if (allMistakesCleared) {
+            playSound('reward');
+        } else {
+            playCompletionSound();
+        }
+        // Las sesiones de repaso no cuentan como una práctica completada de un temario concreto
+        if (!practiceState.isReview) addPracticeCompletion(currentTopicId);
+        // Pero SÍ cuentan para las estadísticas globales (normal y repaso)
+        recordPracticeSessionStats();
         document.getElementById('result-score').innerText = `${practiceState.score} / ${practiceState.questions.length}`;
         
         const list = document.getElementById('result-list');
@@ -2192,7 +2497,284 @@
             `;
             list.appendChild(item);
         });
+
+        const backBtn = document.getElementById('result-back-btn');
+        if (practiceState.isReview) {
+            backBtn.innerText = '🔁 Volver a repasar';
+            backBtn.onclick = () => showScreen('review');
+        } else {
+            backBtn.innerText = 'Volver al temario';
+            backBtn.onclick = () => showScreen('topic');
+        }
+
         showScreen('result');
+    }
+
+    // --- 8b. MENÚ INFERIOR Y REPASO DE ERRORES --- //
+
+    function updateBottomNav(screenId) {
+        const nav = document.getElementById('bottom-nav');
+        if (!nav) return;
+        // Durante la práctica se oculta para no chocar con el panel de feedback
+        if (screenId === 'practice') { nav.style.display = 'none'; return; }
+        nav.style.display = 'flex';
+
+        let activeTab = 'home';
+        if (screenId === 'review' || screenId === 'review-category') activeTab = 'review';
+        else if (screenId === 'stats') activeTab = 'stats';
+        else if (screenId === 'result' && practiceState.isReview) activeTab = 'review';
+
+        document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.nav === activeTab);
+        });
+    }
+
+    function recordMistake(wordObj) {
+        const existing = mistakes[wordObj.id];
+        if (existing) {
+            existing.count++;
+            existing.lastMissed = Date.now();
+        } else {
+            mistakes[wordObj.id] = { id: wordObj.id, category: wordObj.category, count: 1, lastMissed: Date.now() };
+        }
+        saveData();
+    }
+
+    function resolveMistake(wordId) {
+        const existing = mistakes[wordId];
+        if (!existing) return;
+        existing.count--;
+        if (existing.count <= 0) delete mistakes[wordId];
+        saveData();
+    }
+
+    function getPendingWords() {
+        return Object.values(mistakes)
+            .map(m => vocabulary.find(v => v.id === m.id))
+            .filter(Boolean);
+    }
+
+    function getPendingCountByCategory() {
+        const counts = {};
+        Object.values(mistakes).forEach(m => {
+            counts[m.category] = (counts[m.category] || 0) + 1;
+        });
+        return counts;
+    }
+
+    function openReviewHome() { showScreen('review'); }
+
+    function renderReview() {
+        const totalPending = Object.keys(mistakes).length;
+        document.getElementById('review-pending-count').innerText =
+            totalPending === 0 ? 'No tienes palabras pendientes' : `${totalPending} palabra${totalPending === 1 ? '' : 's'} pendiente${totalPending === 1 ? '' : 's'}`;
+
+        const allBtn = document.getElementById('review-all-btn');
+        allBtn.style.display = totalPending === 0 ? 'none' : 'flex';
+
+        const counts = getPendingCountByCategory();
+        const container = document.getElementById('review-categories-container');
+        container.innerHTML = '';
+        Object.keys(counts).forEach(categoryId => {
+            const topic = topics.find(t => t.id === categoryId);
+            if (!topic) return;
+            const card = document.createElement('div');
+            card.className = 'topic-card';
+            card.onclick = () => openReviewCategory(categoryId);
+            card.innerHTML = `
+                <div class="topic-icon">${topic.icon}</div>
+                <div class="topic-info">
+                    <div class="topic-title">${topic.title}</div>
+                    <div class="topic-stats">${counts[categoryId]} pendiente${counts[categoryId] === 1 ? '' : 's'}</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function openReviewCategory(categoryId) {
+        const topic = topics.find(t => t.id === categoryId);
+        const pendingWords = getPendingWords().filter(w => w.category === categoryId);
+
+        document.getElementById('review-category-icon').innerText = topic.icon;
+        document.getElementById('review-category-title').innerText = topic.title;
+        document.getElementById('review-category-count').innerText =
+            `${pendingWords.length} palabra${pendingWords.length === 1 ? '' : 's'} pendiente${pendingWords.length === 1 ? '' : 's'}`;
+
+        document.getElementById('review-category-start-btn').onclick = () => startReviewCategory(categoryId);
+
+        const list = document.getElementById('review-category-words');
+        list.innerHTML = '';
+        pendingWords.forEach(w => {
+            const m = mistakes[w.id];
+            const row = document.createElement('div');
+            row.className = 'review-word-row';
+            row.innerHTML = `
+                <div class="review-word-emoji">${w.emoji}</div>
+                <div class="review-word-main">
+                    <div class="review-word-jp">${renderJapanese(w)}</div>
+                    <div class="review-word-es">${w.spanish}</div>
+                </div>
+                <div class="review-word-badge" data-word-id="${w.id}" onclick="clearMistakeWord('${w.id}', '${categoryId}')" title="Toca dos veces para quitarla de pendientes">✕ ${m ? m.count : 1}</div>
+            `;
+            list.appendChild(row);
+        });
+
+        const startBtn = document.getElementById('review-category-start-btn');
+        startBtn.style.display = pendingWords.length === 0 ? 'none' : 'flex';
+
+        showScreen('review-category');
+    }
+
+    let pendingWordRemoveId = null;
+    let pendingWordRemoveTimeout = null;
+
+    function clearMistakeWord(wordId, categoryId) {
+        const badge = document.querySelector(`.review-word-badge[data-word-id="${wordId}"]`);
+        // Igual que con las estrellas: primer toque pide confirmación cambiando el
+        // texto de la insignia, segundo toque en menos de 3s confirma el borrado.
+        if (pendingWordRemoveId !== wordId) {
+            pendingWordRemoveId = wordId;
+            clearTimeout(pendingWordRemoveTimeout);
+            if (badge) badge.innerText = '¿Seguro?';
+            pendingWordRemoveTimeout = setTimeout(() => {
+                pendingWordRemoveId = null;
+                openReviewCategory(categoryId);
+            }, 3000);
+            return;
+        }
+        clearTimeout(pendingWordRemoveTimeout);
+        pendingWordRemoveId = null;
+        delete mistakes[wordId];
+        saveData();
+        // Si ya no quedan palabras pendientes en esta categoría, volvemos al listado de repaso
+        const stillPending = getPendingWords().filter(w => w.category === categoryId);
+        if (stillPending.length === 0) {
+            showScreen('review');
+        } else {
+            openReviewCategory(categoryId);
+        }
+    }
+
+    function startReviewAll() {
+        const pendingWords = getPendingWords();
+        if (!pendingWords.length) return;
+        startPractice(pendingWords, true);
+    }
+
+    function startReviewCategory(categoryId) {
+        const pendingWords = getPendingWords().filter(w => w.category === categoryId);
+        if (!pendingWords.length) return;
+        startPractice(pendingWords, true);
+    }
+
+    // --- 8c. ESTADÍSTICAS --- //
+
+    // Se llama desde handleAnswer, que es el único punto donde se procesa
+    // cualquier respuesta (práctica normal o repaso).
+    function recordStatsAnswer(wordObj, isCorrect) {
+        stats.practicedWords[wordObj.id] = true;
+        if (isCorrect) {
+            stats.totalCorrect++;
+            stats.correctWords[wordObj.id] = true;
+        } else {
+            stats.totalWrong++;
+        }
+        if (!stats.topicStats[wordObj.category]) stats.topicStats[wordObj.category] = { correct: 0, wrong: 0 };
+        if (isCorrect) stats.topicStats[wordObj.category].correct++;
+        else stats.topicStats[wordObj.category].wrong++;
+        saveData();
+    }
+
+    // Se llama desde showPracticeResult, único punto donde termina cualquier
+    // sesión de práctica (normal o repaso).
+    function recordPracticeSessionStats() {
+        stats.totalPractice++;
+        updateStreak();
+        saveData();
+    }
+
+    // Racha simple basada solo en la fecha (sin horas ni calendarios)
+    function updateStreak() {
+        const today = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+        if (stats.lastStudyDate === today) return; // ya contaba hoy, no duplicar
+        if (stats.lastStudyDate) {
+            const prevDate = new Date(stats.lastStudyDate + 'T00:00:00');
+            const todayDate = new Date(today + 'T00:00:00');
+            const diffDays = Math.round((todayDate - prevDate) / 86400000);
+            stats.streak = diffDays === 1 ? stats.streak + 1 : 1;
+        } else {
+            stats.streak = 1;
+        }
+        stats.lastStudyDate = today;
+    }
+
+    // Reutiliza el sistema global de errores (mistakes) ya existente
+    function getTopMistakes(limit) {
+        return Object.values(mistakes)
+            .sort((a, b) => b.count - a.count)
+            .slice(0, limit)
+            .map(m => ({ ...m, word: vocabulary.find(v => v.id === m.id) }))
+            .filter(m => m.word);
+    }
+
+    function renderStats() {
+        const totalAnswers = stats.totalCorrect + stats.totalWrong;
+        const accuracy = totalAnswers > 0 ? Math.round((stats.totalCorrect / totalAnswers) * 100) : 0;
+        const topicsPracticed = Object.keys(stats.topicStats || {}).length;
+
+        const statCard = (value, label) => `<div class="stat-card"><div class="stat-value">${value}</div><div class="stat-label">${label}</div></div>`;
+
+        document.getElementById('stats-general').innerHTML =
+            statCard(stats.totalPractice, '📝 Prácticas completadas') +
+            statCard(stats.totalCorrect, '✅ Preguntas acertadas') +
+            statCard(stats.totalWrong, '❌ Preguntas falladas') +
+            statCard(accuracy + '%', '🎯 Porcentaje de aciertos') +
+            statCard(topicsPracticed, '📚 Temarios practicados') +
+            statCard(stats.streak, '🔥 Racha actual (días)');
+
+        document.getElementById('stats-words').innerHTML =
+            statCard(Object.keys(stats.practicedWords || {}).length, '📖 Palabras practicadas') +
+            statCard(Object.keys(stats.correctWords || {}).length, '✅ Palabras acertadas') +
+            statCard(Object.keys(mistakes).length, '🔁 Palabras pendientes de repaso');
+
+        // Palabras que más fallas
+        const hardest = getTopMistakes(5);
+        const hardestContainer = document.getElementById('stats-hardest');
+        if (!hardest.length) {
+            hardestContainer.innerHTML = `<p class="subtitle" style="margin:0; text-align:left;">🎉 ¡No tienes palabras con errores pendientes!</p>`;
+        } else {
+            hardestContainer.innerHTML = hardest.map(m => `
+                <div class="review-word-row">
+                    <div class="review-word-emoji">${m.word.emoji}</div>
+                    <div class="review-word-main">
+                        <div class="review-word-jp">${renderJapanese(m.word)}</div>
+                        <div class="review-word-es">${m.word.spanish}</div>
+                    </div>
+                    <div class="review-word-badge">✕ ${m.count}</div>
+                </div>
+            `).join('');
+        }
+
+        // Temarios (solo los que ya se han practicado al menos una vez)
+        const topicsHTML = topics.map(t => {
+            const ts = stats.topicStats && stats.topicStats[t.id];
+            const practiceCount = getTopicProgress(t.id);
+            if (!ts && practiceCount === 0) return '';
+            const total = ts ? ts.correct + ts.wrong : 0;
+            const pct = total > 0 ? Math.round((ts.correct / total) * 100) : 0;
+            return `
+                <div class="topic-card" style="cursor:default;">
+                    <div class="topic-icon">${t.icon}</div>
+                    <div class="topic-info">
+                        <div class="topic-title">${t.title}</div>
+                        <div class="topic-stats">${practiceCount} práctica${practiceCount === 1 ? '' : 's'} · ${pct}% aciertos</div>
+                    </div>
+                </div>
+            `;
+        }).filter(Boolean).join('');
+        document.getElementById('stats-topics').innerHTML = topicsHTML ||
+            `<p class="subtitle" style="margin:0; text-align:left;">Aún no has practicado ningún temario.</p>`;
     }
 
     // --- 9. BÚSQUEDA GLOBAL --- //
@@ -2223,6 +2805,8 @@
             currentSearchQuery = query;
         }
 
+        const hadMatchesBefore = currentSearchMatches.length > 0;
+
         const matches = vocabulary.filter(w =>
             (w.spanish && w.spanish.toLowerCase().includes(query)) ||
             (w.romaji && w.romaji.toLowerCase().includes(query)) ||
@@ -2234,10 +2818,14 @@
         resultsContainer.classList.add('visible');
 
         if (matches.length === 0) {
+            // Solo suena "sin resultados" al pasar de tener resultados a no tenerlos,
+            // no en cada tecla mientras el usuario sigue escribiendo una búsqueda vacía.
+            if (hadMatchesBefore) playSound('searchEmpty');
             resultsContainer.innerHTML = `<p class="search-summary">Sin resultados para "${escapeHtml(rawQuery)}"</p>`;
             return;
         }
 
+        if (!hadMatchesBefore) playSound('searchFound');
         renderSearchResults();
     }
 
@@ -2393,6 +2981,7 @@
 
         const myToken = ++dictionaryRequestToken;
 
+        playSound('open');
         titleEl.textContent = query;
         contentEl.className = 'dictionary-status';
         // El botón para ir directamente a Jisho.org se muestra desde el primer
@@ -2484,6 +3073,7 @@
 
     function closeDictionary() {
         document.getElementById('dictionary-modal').classList.remove('visible');
+        playSound('close');
     }
 
     function closeDictionaryOnOverlay(event) {
@@ -2514,7 +3104,7 @@
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });
 
     // Init
-    window.onload = () => { loadData(); renderHome(); currentScreenId = 'home'; updateScrollTopButton(); };
+    window.onload = () => { loadData(); renderHome(); currentScreenId = 'home'; updateScrollTopButton(); updateBottomNav('home'); };
 </script>
 
 </body>
