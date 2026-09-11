@@ -13,6 +13,7 @@
             --text-muted: #777777;
             --primary: #1cb0f6;
             --primary-hover: #1899d6;
+            --primary-shadow: #1899d6;
             --correct: #58cc02;
             --correct-bg: #d7ffb8;
             --wrong: #ff4b4b;
@@ -36,6 +37,7 @@
             --text-main: #ffffff;
             --text-muted: #afafaf;
             --primary: #1cb0f6;
+            --primary-shadow: #1899d6;
             --correct: #58cc02;
             --correct-bg: #1a3300;
             --wrong: #ff4b4b;
@@ -148,6 +150,187 @@
             margin-bottom: 24px;
         }
 
+        /* --- BOTÓN FLOTANTE DE AJUSTES --- */
+        .settings-fab {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: var(--transition);
+        }
+        .settings-fab:hover { transform: rotate(20deg) scale(1.05); border-color: var(--primary); }
+        .settings-fab:active { transform: rotate(20deg) scale(0.95); }
+
+        /* --- OVERLAY --- */
+        .settings-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease;
+            z-index: 1002;
+        }
+        .settings-overlay.open { opacity: 1; visibility: visible; }
+
+        /* --- PANEL DE AJUSTES --- */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 340px;
+            max-width: 88vw;
+            background: var(--card-bg);
+            border-left: 1px solid var(--border);
+            box-shadow: -8px 0 24px rgba(0,0,0,0.15);
+            z-index: 1003;
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .settings-panel.open { transform: translateX(0); }
+
+        .settings-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .settings-panel-header h3 { font-size: 18px; font-weight: 700; }
+
+        .settings-close-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .settings-close-btn:hover { background: var(--wrong-bg); color: var(--wrong); border-color: var(--wrong); }
+
+        .settings-panel-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .settings-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .settings-section { margin-bottom: 26px; }
+        .settings-section:last-child { margin-bottom: 4px; }
+
+        .panel-seg { width: 100%; }
+        .panel-seg .seg-btn { flex: 1; text-align: center; }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border);
+            background: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+        .theme-option:hover { border-color: var(--primary); transform: translateY(-1px); }
+        .theme-option:active { transform: translateY(0); }
+        .theme-option.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+        }
+
+        .theme-swatch {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-swatch.split {
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #1b2a3d 50%, #1b2a3d 100%);
+        }
+
+        .theme-option-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+        .theme-option-check {
+            margin-left: auto;
+            font-size: 14px;
+            color: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .theme-option.active .theme-option-check { opacity: 1; }
+
+        .custom-color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+        .custom-color-row label { font-size: 13px; font-weight: 600; color: var(--text-main); }
+        .custom-color-input {
+            width: 44px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+            padding: 0;
+            cursor: pointer;
+            background: none;
+        }
+
+        @media (max-width: 480px) {
+            .settings-panel { width: 100%; max-width: 100%; }
+            .theme-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         /* Cabecera fija: usada en pantallas con listas largas (p.ej. Teoría)
            para que el botón de volver siga siempre visible al hacer scroll */
         .header-controls.sticky-header {
@@ -184,7 +367,7 @@
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 0 #1899d6;
+            box-shadow: 0 4px 0 var(--primary-shadow);
             transition: transform 0.1s, box-shadow 0.1s;
             text-align: center;
             width: 100%;
@@ -193,7 +376,7 @@
             justify-content: center;
             align-items: center;
         }
-        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 #1899d6; }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-shadow); }
         .btn.outline {
             background-color: transparent;
             color: var(--primary);
@@ -203,6 +386,60 @@
         .btn.outline:active { box-shadow: var(--shadow-active); }
 
         /* --- GRID DE TEMARIOS --- */
+        .level-section { margin-bottom: 22px; }
+        .level-section:last-child { margin-bottom: 4px; }
+        .level-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .level-header-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .level-header-title .level-header-count {
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-left: 6px;
+        }
+        .level-progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .level-progress-bar {
+            width: 64px;
+            height: 6px;
+            border-radius: 4px;
+            background: var(--border);
+            overflow: hidden;
+        }
+        .level-progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .level-progress-pct {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 32px;
+            text-align: right;
+        }
+        .level-empty {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
         .topics-grid {
             display: grid;
             gap: 16px;
@@ -380,9 +617,9 @@
         .word-card.expanded .word-details { display: block; }
 
         @keyframes wordHighlightGlow {
-            0% { box-shadow: 0 0 0 0 rgba(28, 176, 246, 0.85); border-color: var(--primary); }
-            50% { box-shadow: 0 0 22px 10px rgba(28, 176, 246, 0.55); border-color: var(--primary); }
-            100% { box-shadow: 0 0 0 0 rgba(28, 176, 246, 0); border-color: var(--border); }
+            0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 85%, transparent); border-color: var(--primary); }
+            50% { box-shadow: 0 0 22px 10px color-mix(in srgb, var(--primary) 55%, transparent); border-color: var(--primary); }
+            100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent); border-color: var(--border); }
         }
         .word-card.highlight-flash { animation: wordHighlightGlow 1.6s ease-out; }
         
@@ -505,32 +742,60 @@
 <body>
 
 <div id="app" class="layout-auto">
+
+    <!-- BOTÓN Y PANEL DE AJUSTES (Apariencia) -->
+    <button id="settings-fab" class="settings-fab" onclick="toggleSettingsPanel()" aria-label="Ajustes" aria-haspopup="true" aria-expanded="false">⚙️</button>
+
+    <div id="settings-overlay" class="settings-overlay" onclick="closeSettingsPanel()"></div>
+
+    <div id="settings-panel" class="settings-panel" role="dialog" aria-modal="true" aria-label="Ajustes">
+        <div class="settings-panel-header">
+            <h3>⚙️ Ajustes</h3>
+            <button class="settings-close-btn" onclick="closeSettingsPanel()" aria-label="Cerrar ajustes">✕</button>
+        </div>
+        <div class="settings-panel-body">
+            <div class="settings-section">
+                <div class="settings-section-title">Apariencia</div>
+                <div class="theme-grid" id="theme-grid">
+                    <!-- Las opciones de tema se generan aquí por JS -->
+                </div>
+                <div id="custom-color-row" class="custom-color-row" style="display:none;">
+                    <label for="custom-color-input">Elige tu color base</label>
+                    <input type="color" id="custom-color-input" class="custom-color-input" value="#1cb0f6" oninput="setCustomThemeColor(this.value)">
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">📐 Tamaño</div>
+                <div class="segmented-control panel-seg" id="layout-controls">
+                    <button class="seg-btn active" onclick="setPref('layout', 'auto')">Auto</button>
+                    <button class="seg-btn" onclick="setPref('layout', 'mobile')">📱 Móvil</button>
+                    <button class="seg-btn" onclick="setPref('layout', 'pc')">💻 PC</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">あ Furigana</div>
+                <div class="segmented-control panel-seg" id="hiragana-controls">
+                    <button class="seg-btn active" onclick="setPref('hiragana', true)">あ ON</button>
+                    <button class="seg-btn" onclick="setPref('hiragana', false)">あ OFF</button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">🔊 Sonido</div>
+                <div class="segmented-control panel-seg" id="sound-controls">
+                    <button class="seg-btn active" onclick="setPref('sound', true)">🔊 Activado</button>
+                    <button class="seg-btn" onclick="setPref('sound', false)">🔇 Silencio</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
         <h1>日本語</h1>
         <p class="subtitle">Vocabulario japonés</p>
-
-        <!-- Controles de preferencias -->
-        <div class="settings-bar">
-            <div class="segmented-control" id="layout-controls">
-                <button class="seg-btn active" onclick="setPref('layout', 'auto')">Auto</button>
-                <button class="seg-btn" onclick="setPref('layout', 'mobile')">📱</button>
-                <button class="seg-btn" onclick="setPref('layout', 'pc')">💻</button>
-            </div>
-            <div class="segmented-control" id="theme-controls">
-                <button class="seg-btn active" onclick="setPref('theme', 'light')">☀️ Claro</button>
-                <button class="seg-btn" onclick="setPref('theme', 'dark')">🌙 Oscuro</button>
-            </div>
-            <div class="segmented-control" id="hiragana-controls">
-                <button class="seg-btn active" onclick="setPref('hiragana', true)">あ ON</button>
-                <button class="seg-btn" onclick="setPref('hiragana', false)">あ OFF</button>
-            </div>
-            <div class="segmented-control" id="sound-controls">
-                <button class="seg-btn active" onclick="setPref('sound', true)">🔊</button>
-                <button class="seg-btn" onclick="setPref('sound', false)">🔇</button>
-            </div>
-        </div>
 
         <div class="global-search">
             <label for="global-search-input">🔎 Buscar en todo el vocabulario</label>
@@ -539,8 +804,8 @@
         </div>
 
         <h2 style="margin-top: 8px;">Tus temarios</h2>
-        <div class="topics-grid" id="topics-container">
-            <!-- Los temarios se generan aquí por JS -->
+        <div id="topics-container">
+            <!-- Los niveles y temarios se generan aquí por JS -->
         </div>
     </div>
 
@@ -701,7 +966,7 @@
 
 <script>
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
-    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true };
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6' };
     let userProgress = {};
     // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
     let mistakes = {};
@@ -760,16 +1025,247 @@
         // Layout
         const app = document.getElementById('app');
         app.className = `layout-${prefs.layout}`;
-        
+
         // Theme
-        if (prefs.theme === 'dark') document.body.classList.add('dark-theme');
-        else document.body.classList.remove('dark-theme');
+        applyTheme();
 
         // Actualizar UI Botones
         updateSegControl('layout-controls', prefs.layout);
-        updateSegControl('theme-controls', prefs.theme);
         updateSegControl('hiragana-controls', prefs.hiragana);
         updateSegControl('sound-controls', prefs.sound);
+        renderThemeGrid();
+    }
+
+    // --- MOTOR DE TEMAS DE APARIENCIA --- //
+    // Colores base para cada tema predefinido (un único color semilla).
+    const THEME_BASE_COLORS = {
+        light:  '#1cb0f6',
+        dark:   '#1cb0f6',
+        blue:   '#2563eb',
+        beige:  '#a98a5e',
+        gray:   '#6b7280',
+        pink:   '#e8a1c4'
+    };
+
+    const THEME_META = [
+        { id: 'light',    label: 'Claro',      icon: '☀️' },
+        { id: 'dark',     label: 'Oscuro',     icon: '🌙' },
+        { id: 'auto',     label: 'Automático', icon: '🌗' },
+        { id: 'blue',     label: 'Azul',       icon: '🔵' },
+        { id: 'beige',    label: 'Beige',      icon: '🟤' },
+        { id: 'gray',     label: 'Gris',       icon: '⚪' },
+        { id: 'pink',     label: 'Rosa pastel',icon: '🌸' },
+        { id: 'custom',   label: 'Personalizado', icon: '🎨' }
+    ];
+
+    function hexToRgb(hex) {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+        const num = parseInt(hex, 16);
+        return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+    }
+    function rgbToHex(r, g, b) {
+        const c = v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0');
+        return `#${c(r)}${c(g)}${c(b)}`;
+    }
+    function rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+        if (max === min) { h = s = 0; }
+        else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                default: h = (r - g) / d + 4;
+            }
+            h /= 6;
+        }
+        return { h: h * 360, s: s * 100, l: l * 100 };
+    }
+    function hslToRgb(h, s, l) {
+        h /= 360; s /= 100; l /= 100;
+        let r, g, b;
+        if (s === 0) { r = g = b = l; }
+        else {
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1 / 6) return p + (q - p) * 6 * t;
+                if (t < 1 / 2) return q;
+                if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                return p;
+            };
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1 / 3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1 / 3);
+        }
+        return { r: r * 255, g: g * 255, b: b * 255 };
+    }
+    // Ajusta la luminosidad (l en 0-100) de un color base, manteniendo su matiz/saturación.
+    function shade(hex, lightness, satMult = 1) {
+        const { r, g, b } = hexToRgb(hex);
+        const hsl = rgbToHsl(r, g, b);
+        const s = Math.max(0, Math.min(100, hsl.s * satMult));
+        const rgb = hslToRgb(hsl.h, s, Math.max(0, Math.min(100, lightness)));
+        return rgbToHex(rgb.r, rgb.g, rgb.b);
+    }
+    // Contraste de texto según luminancia relativa (WCAG simplificado).
+    function relativeLuminance(hex) {
+        const { r, g, b } = hexToRgb(hex);
+        const chan = v => {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+        };
+        return 0.2126 * chan(r) + 0.7152 * chan(g) + 0.0722 * chan(b);
+    }
+    function textColorFor(bgHex) {
+        const lum = relativeLuminance(bgHex);
+        return lum > 0.45 ? '#2b2b2b' : '#ffffff';
+    }
+
+    // Genera una paleta completa de variables CSS a partir de un único color base
+    // y de si el resultado debe ser un tema claro u oscuro.
+    function generatePaletteFromColor(baseColor, mode) {
+        const isDark = mode === 'dark';
+        const bg        = isDark ? shade(baseColor, 12, 0.55) : shade(baseColor, 97, 0.35);
+        const bgSecond  = isDark ? shade(baseColor, 17, 0.5)  : shade(baseColor, 95, 0.4);
+        const card      = isDark ? shade(baseColor, 15, 0.5)  : shade(baseColor, 100, 0);
+        const border    = isDark ? shade(baseColor, 30, 0.4)  : shade(baseColor, 88, 0.4);
+        const primary   = shade(baseColor, isDark ? 62 : 50, 1);
+        const primaryHv = shade(baseColor, isDark ? 55 : 43, 1);
+        const textMain  = textColorFor(bg) === '#ffffff' ? '#f5f5f5' : '#33302c';
+        const textMuted = isDark ? shade(baseColor, 65, 0.15) : shade(baseColor, 40, 0.2);
+
+        return {
+            '--bg-color': bg,
+            '--bg-secondary': bgSecond,
+            '--card-bg': card,
+            '--border': border,
+            '--primary': primary,
+            '--primary-hover': primaryHv,
+            '--primary-shadow': primaryHv,
+            '--ruby-color': primary,
+            '--text-main': textMain,
+            '--text-muted': textMuted,
+            '--shadow': isDark ? `0 4px 0 ${shade(baseColor, 8, 0.5)}` : `0 4px 0 ${border}`,
+            '--shadow-active': isDark ? `0 0 0 ${shade(baseColor, 8, 0.5)}` : `0 0 0 ${border}`
+        };
+    }
+
+    function systemPrefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    // Aplica el tema activo (prefs.theme) al documento, generando variables CSS
+    // dinámicamente salvo para 'light'/'dark' clásicos que usan el CSS ya existente.
+    function applyTheme() {
+        const root = document.documentElement;
+        // Limpiar variables inline generadas antes de recalcular
+        Object.keys(THEME_BASE_COLORS).forEach(() => {}); // no-op, reservado
+        clearGeneratedVars(root);
+
+        let effective = prefs.theme;
+        if (effective === 'auto') {
+            effective = systemPrefersDark() ? 'dark' : 'light';
+        }
+
+        if (effective === 'light') {
+            document.body.classList.remove('dark-theme');
+            return;
+        }
+        if (effective === 'dark') {
+            document.body.classList.add('dark-theme');
+            return;
+        }
+
+        // Temas generados dinámicamente a partir de un color base
+        document.body.classList.remove('dark-theme');
+        const baseColor = effective === 'custom'
+            ? (prefs.customThemeColor || '#1cb0f6')
+            : THEME_BASE_COLORS[effective];
+        const mode = effective === 'custom'
+            ? (relativeLuminance(baseColor) < 0.4 ? 'dark' : 'light')
+            : 'light';
+        const palette = generatePaletteFromColor(baseColor, mode);
+        Object.entries(palette).forEach(([key, val]) => root.style.setProperty(key, val));
+        root.dataset.generatedTheme = '1';
+    }
+
+    function clearGeneratedVars(root) {
+        if (!root.dataset.generatedTheme) return;
+        ['--bg-color','--bg-secondary','--card-bg','--border','--primary','--primary-hover','--primary-shadow',
+         '--ruby-color','--text-main','--text-muted','--shadow','--shadow-active']
+            .forEach(v => root.style.removeProperty(v));
+        delete root.dataset.generatedTheme;
+    }
+
+    function setCustomThemeColor(hexColor) {
+        prefs.customThemeColor = hexColor;
+        if (prefs.theme !== 'custom') {
+            prefs.theme = 'custom';
+        }
+        saveData();
+        applyPrefs();
+    }
+
+    function renderThemeGrid() {
+        const grid = document.getElementById('theme-grid');
+        if (!grid) return;
+        grid.innerHTML = THEME_META.map(t => {
+            const active = prefs.theme === t.id;
+            let swatchStyle = '';
+            let swatchClass = 'theme-swatch';
+            if (t.id === 'auto') {
+                swatchClass += ' split';
+            } else if (t.id === 'custom') {
+                swatchStyle = `background:${prefs.customThemeColor || '#1cb0f6'};`;
+            } else if (t.id === 'light') {
+                swatchStyle = `background:#ffffff;`;
+            } else if (t.id === 'dark') {
+                swatchStyle = `background:#131f24;`;
+            } else {
+                swatchStyle = `background:${THEME_BASE_COLORS[t.id]};`;
+            }
+            return `
+                <button type="button" class="theme-option${active ? ' active' : ''}" onclick="setPref('theme', '${t.id}')">
+                    <span class="${swatchClass}" style="${swatchStyle}"></span>
+                    <span class="theme-option-label">${t.label}</span>
+                    <span class="theme-option-check">✓</span>
+                </button>`;
+        }).join('');
+
+        const customRow = document.getElementById('custom-color-row');
+        const customInput = document.getElementById('custom-color-input');
+        if (customRow) customRow.style.display = prefs.theme === 'custom' ? 'flex' : 'none';
+        if (customInput && prefs.customThemeColor) customInput.value = prefs.customThemeColor;
+    }
+
+    function toggleSettingsPanel() {
+        const panel = document.getElementById('settings-panel');
+        const overlay = document.getElementById('settings-overlay');
+        const fab = document.getElementById('settings-fab');
+        const isOpen = panel.classList.toggle('open');
+        overlay.classList.toggle('open', isOpen);
+        fab.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) renderThemeGrid();
+    }
+    function closeSettingsPanel() {
+        document.getElementById('settings-panel').classList.remove('open');
+        document.getElementById('settings-overlay').classList.remove('open');
+        document.getElementById('settings-fab').setAttribute('aria-expanded', 'false');
+    }
+
+    // Reaccionar a cambios del tema del sistema operativo cuando el modo es 'auto'
+    if (window.matchMedia) {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleSystemThemeChange = () => { if (prefs.theme === 'auto') applyTheme(); };
+        if (mq.addEventListener) mq.addEventListener('change', handleSystemThemeChange);
+        else if (mq.addListener) mq.addListener(handleSystemThemeChange);
     }
 
     function updateSegControl(containerId, activeValue) {
@@ -804,6 +1300,34 @@
         { id: 'polite', title: 'Cortesía japonesa', icon: '🙏' },
         { id: 'trouble', title: 'Problemas y urgencias', icon: '🏥' }
     ];
+
+    // Clasificación de los temarios existentes por nivel JLPT (solo agrupación visual,
+    // no altera el contenido, ids ni lógica de los temarios).
+    const JLPT_LEVELS = [
+        { id: 'n5-principiante', label: 'N5 · Principiante' },
+        { id: 'n5-avanzado',     label: 'N5 · Avanzado' },
+        { id: 'n4', label: 'N4' },
+        { id: 'n3', label: 'N3' },
+        { id: 'n2', label: 'N2' },
+        { id: 'n1', label: 'N1' }
+    ];
+    const topicLevelMap = {
+        // N5 Principiante: vocabulario esencial y de mayor frecuencia para el día a día
+        transport: 'n5-principiante',
+        city:      'n5-principiante',
+        food:      'n5-principiante',
+        time:      'n5-principiante',
+        basics:    'n5-principiante',
+        survival:  'n5-principiante',
+        // N5 Avanzado: vocabulario más específico o situacional
+        shopping:  'n5-avanzado',
+        hotel:     'n5-avanzado',
+        money:     'n5-avanzado',
+        places:    'n5-avanzado',
+        airport:   'n5-avanzado',
+        polite:    'n5-avanzado',
+        trouble:   'n5-avanzado'
+    };
 
     // Datos compactos: categoria|español|romaji|kana|kanji|emoji
     const rawVocab = [
@@ -2156,25 +2680,62 @@
         renderHome();
     }
 
+    function buildTopicCard(t) {
+        const vocabCount = vocabulary.filter(v => v.category === t.id).length;
+        const completed = getTopicProgress(t.id);
+        const numStr = (topics.indexOf(t) + 1).toString().padStart(2, '0');
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        card.onclick = () => openTopic(t.id);
+        card.innerHTML = `
+            <div class="topic-icon">${t.icon}</div>
+            <div class="topic-info">
+                <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${t.title}</div>
+                <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
+            </div>
+            ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
+        `;
+        return card;
+    }
+
     function renderHome() {
         const container = document.getElementById('topics-container');
         container.innerHTML = '';
-        topics.forEach((t, idx) => {
-            const vocabCount = vocabulary.filter(v => v.category === t.id).length;
-            const completed = getTopicProgress(t.id);
-            const card = document.createElement('div');
-            card.className = 'topic-card';
-            card.onclick = () => openTopic(t.id);
-            const numStr = (idx + 1).toString().padStart(2, '0');
-            card.innerHTML = `
-                <div class="topic-icon">${t.icon}</div>
-                <div class="topic-info">
-                    <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${t.title}</div>
-                    <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
+
+        JLPT_LEVELS.forEach(level => {
+            const levelTopics = topics.filter(t => topicLevelMap[t.id] === level.id);
+
+            const section = document.createElement('div');
+            section.className = 'level-section';
+
+            const total = levelTopics.length;
+            const practicedCount = levelTopics.filter(t => getTopicProgress(t.id) > 0).length;
+            const pct = total > 0 ? Math.round((practicedCount / total) * 100) : 0;
+
+            const header = document.createElement('div');
+            header.className = 'level-header';
+            header.innerHTML = `
+                <div class="level-header-title">${level.label}${total > 0 ? `<span class="level-header-count">${total} temario${total === 1 ? '' : 's'}</span>` : ''}</div>
+                <div class="level-progress-wrap">
+                    <div class="level-progress-bar"><div class="level-progress-bar-fill" style="width:${pct}%;"></div></div>
+                    <div class="level-progress-pct">${pct}%</div>
                 </div>
-                ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
             `;
-            container.appendChild(card);
+            section.appendChild(header);
+
+            if (total === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'level-empty';
+                empty.innerText = 'Próximamente';
+                section.appendChild(empty);
+            } else {
+                const grid = document.createElement('div');
+                grid.className = 'topics-grid';
+                levelTopics.forEach(t => grid.appendChild(buildTopicCard(t)));
+                section.appendChild(grid);
+            }
+
+            container.appendChild(section);
         });
     }
 
