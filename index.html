@@ -248,6 +248,26 @@
         .panel-seg { width: 100%; }
         .panel-seg .seg-btn { flex: 1; text-align: center; }
 
+        .settings-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+        .settings-action-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .settings-action-btn + .settings-action-btn { margin-top: 8px; }
+        .settings-action-btn.danger:hover { border-color: var(--wrong); color: var(--wrong); background: var(--wrong-bg); }
+
         .theme-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -545,16 +565,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
-            padding: 8px 4px 10px;
+            gap: 3px;
+            padding: 12px 4px 14px;
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
         }
-        .bottom-nav-item .bottom-nav-icon { font-size: 20px; }
+        .bottom-nav-item .bottom-nav-icon { font-size: 23px; }
         .bottom-nav-item.active { color: var(--primary); }
 
         /* Puntito rojo de aviso sobre "Repasar" cuando hay palabras pendientes */
@@ -819,6 +839,12 @@
                     <button class="seg-btn" data-value="false" onclick="setPref('sound', false)">🔇 Silencio</button>
                 </div>
             </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">📊 Progreso</div>
+                <button type="button" class="settings-action-btn" onclick="refreshProgressData(this)">🔄 Actualizar progreso</button>
+                <button type="button" class="settings-action-btn danger" onclick="resetStatsProgress(this)">🗑️ Borrar progreso de estadísticas</button>
+            </div>
         </div>
     </div>
     
@@ -994,7 +1020,7 @@
     <nav id="bottom-nav" class="bottom-nav">
         <div class="bottom-nav-inner">
             <button class="bottom-nav-item" data-nav="home" onclick="goToTemarios()">
-                <span class="bottom-nav-icon">📚</span><span>Temarios</span>
+                <span class="bottom-nav-icon">📚</span><span id="bottom-nav-home-label">Temarios</span>
             </button>
             <button class="bottom-nav-item" data-nav="review" onclick="openReviewHome()">
                 <span class="bottom-nav-icon">🔁</span><span>Repasar</span>
@@ -2705,15 +2731,25 @@
     // (p.ej. al pulsar "← Volver" desde un temario a la lista de temas).
     const scrollPositions = {};
     let currentScreenId = null;
+    // La posición de scroll de "Teoría" es específica de cada temario: solo se
+    // restaura si se vuelve a entrar al MISMO temario del que se salió la
+    // última vez; si se entra a la teoría de un temario distinto, empieza
+    // siempre desde arriba.
+    let theoryScrollTopicId = null;
+    // Igual, pero para la pantalla de "Nivel": solo se restaura el scroll si
+    // se vuelve a entrar al MISMO nivel del que se salió la última vez.
+    let levelScrollLevelId = null;
     // Recordamos si el usuario estaba en la portada (niveles) o dentro de un
     // nivel concreto, para poder volver ahí tal cual al salir de Repasar.
     let lastTopicsScreen = 'home';
 
-    function showScreen(screenId) {
+    function showScreen(screenId, forceScrollTop) {
         if(prefs.sound) initAudio();
         playSound('secondary');
         if (currentScreenId) {
             scrollPositions[currentScreenId] = window.scrollY;
+            if (currentScreenId === 'theory') theoryScrollTopicId = currentTopicId;
+            if (currentScreenId === 'level') levelScrollLevelId = currentLevelId;
         }
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(`screen-${screenId}`).classList.add('active');
@@ -2726,17 +2762,24 @@
         updateBottomNav(screenId);
         const settingsFab = document.getElementById('settings-fab');
         if (settingsFab) settingsFab.style.display = (screenId === 'theory' || screenId === 'practice') ? 'none' : 'flex';
+        // La teoría solo restaura el scroll si se vuelve a entrar al mismo
+        // temario del que se salió; si es uno distinto, empieza desde arriba
+        // y esa posición guardada deja de pertenecer a nadie hasta salir de nuevo.
+        const useTheoryTopScroll = screenId === 'theory' && currentTopicId !== theoryScrollTopicId;
+        // Mismo criterio para la pantalla de "Nivel": solo restaura si es el
+        // mismo nivel del que se salió la última vez.
+        const useLevelTopScroll = screenId === 'level' && currentLevelId !== levelScrollLevelId;
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                window.scrollTo(0, scrollPositions[screenId] || 0);
+                window.scrollTo(0, (forceScrollTop || useTheoryTopScroll || useLevelTopScroll) ? 0 : (scrollPositions[screenId] || 0));
             });
         });
     }
 
-    // Vuelve a la pantalla de "temarios" en la que el usuario estaba realmente
-    // (portada de niveles o el nivel concreto que tenía abierto), en vez de
-    // saltar siempre a la portada.
-    function goToTemarios() { showScreen(lastTopicsScreen); }
+    // Al pulsar el botón "Temarios/Niveles" de abajo, siempre lleva directo a la
+    // portada principal (con el buscador y el listado de niveles), sin importar
+    // en qué nivel/temario/teoría se encontrara el usuario.
+    function goToTemarios() { showScreen('home', true); }
 
     function getTopicProgress(topicId) {
         if (!userProgress[topicId]) { userProgress[topicId] = { completed: 0 }; saveData(); }
@@ -2781,10 +2824,10 @@
         refreshTopicsView();
     }
 
-    function buildTopicCard(t) {
+    function buildTopicCard(t, indexInLevel) {
         const vocabCount = vocabulary.filter(v => v.category === t.id).length;
         const completed = getTopicProgress(t.id);
-        const numStr = (topics.indexOf(t) + 1).toString().padStart(2, '0');
+        const numStr = (indexInLevel + 1).toString().padStart(2, '0');
         const card = document.createElement('div');
         card.className = 'topic-card';
         card.onclick = () => openTopic(t.id);
@@ -2868,7 +2911,7 @@
         } else {
             const grid = document.createElement('div');
             grid.className = 'topics-grid';
-            levelTopics.forEach(t => grid.appendChild(buildTopicCard(t)));
+            levelTopics.forEach((t, idx) => grid.appendChild(buildTopicCard(t, idx)));
             container.appendChild(grid);
         }
     }
@@ -3120,7 +3163,6 @@
         document.getElementById('btn-repeat-audio').style.display = 'flex';
 
         practiceState.results.push({ word: wordObj, isCorrect: isCorrect });
-        recordStatsAnswer(wordObj, isCorrect);
 
         // Info completa de la palabra (kanji, kana, romaji y significado). Se muestra
         // SIEMPRE, tanto si aciertas como si fallas: acertar la escritura o lectura no
@@ -3254,6 +3296,8 @@
         document.querySelectorAll('.bottom-nav-item').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.nav === activeTab);
         });
+        const homeLabel = document.getElementById('bottom-nav-home-label');
+        if (homeLabel) homeLabel.innerText = (lastTopicsScreen === 'home') ? 'Niveles' : 'Temarios';
         updateReviewBadge();
     }
 
@@ -3423,6 +3467,11 @@
     // Se llama desde showPracticeResult, único punto donde termina cualquier
     // sesión de práctica (normal o repaso).
     function recordPracticeSessionStats() {
+        // Los aciertos/fallos de cada pregunta solo se guardan en las estadísticas
+        // globales y por temario si la práctica se completa entera; si el usuario
+        // sale antes de terminar, no debe quedar registrado ningún acierto/fallo
+        // (los errores de repaso ya se guardan aparte, al instante, vía recordMistake).
+        practiceState.results.forEach(res => recordStatsAnswer(res.word, res.isCorrect));
         stats.totalPractice++;
         updateStreak();
         saveData();
@@ -3509,6 +3558,63 @@
         }).filter(Boolean).join('');
         document.getElementById('stats-topics').innerHTML = topicsHTML ||
             `<p class="subtitle" style="margin:0; text-align:left;">Aún no has practicado ningún temario.</p>`;
+    }
+
+    // Recalcula/limpia el progreso guardado (userProgress y stats.topicStats)
+    // quitando entradas de temarios que ya no existen en el listado actual,
+    // y refresca la pantalla de estadísticas con los datos ya actualizados.
+    function refreshProgressData(btnElement) {
+        const validTopicIds = new Set(topics.map(t => t.id));
+        Object.keys(userProgress).forEach(id => {
+            if (!validTopicIds.has(id)) delete userProgress[id];
+        });
+        if (stats.topicStats) {
+            Object.keys(stats.topicStats).forEach(id => {
+                if (!validTopicIds.has(id)) delete stats.topicStats[id];
+            });
+        }
+        saveData();
+        renderStats();
+        if (btnElement) {
+            const original = btnElement.innerHTML;
+            btnElement.innerHTML = '✅ Progreso actualizado';
+            setTimeout(() => { btnElement.innerHTML = original; }, 1500);
+        }
+    }
+
+    // Borra las estadísticas (prácticas, aciertos, fallos, palabras practicadas,
+    // temarios practicados...) manteniendo intacta la racha actual.
+    // Requiere doble toque (como el resto de borrados de la app) en vez de
+    // un diálogo nativo del navegador, para evitar bloqueos en algunos entornos.
+    let pendingResetStatsConfirm = false;
+    let pendingResetStatsTimeout = null;
+    function resetStatsProgress(btnElement) {
+        if (!pendingResetStatsConfirm) {
+            pendingResetStatsConfirm = true;
+            if (btnElement) btnElement.innerHTML = '⚠️ ¿Seguro? Toca de nuevo';
+            clearTimeout(pendingResetStatsTimeout);
+            pendingResetStatsTimeout = setTimeout(() => {
+                pendingResetStatsConfirm = false;
+                if (btnElement) btnElement.innerHTML = '🗑️ Borrar progreso de estadísticas';
+            }, 3000);
+            return;
+        }
+        clearTimeout(pendingResetStatsTimeout);
+        pendingResetStatsConfirm = false;
+        stats.totalPractice = 0;
+        stats.totalCorrect = 0;
+        stats.totalWrong = 0;
+        stats.practicedWords = {};
+        stats.correctWords = {};
+        stats.topicStats = {};
+        userProgress = {};
+        saveData();
+        renderStats();
+        if (btnElement) {
+            btnElement.innerHTML = '✅ Progreso borrado';
+            setTimeout(() => { btnElement.innerHTML = '🗑️ Borrar progreso de estadísticas'; }, 1500);
+        }
+        alert('Se ha borrado el progreso de tus estadísticas.');
     }
 
     // --- 9. BÚSQUEDA GLOBAL --- //
