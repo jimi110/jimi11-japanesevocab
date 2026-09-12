@@ -697,6 +697,19 @@
         .dictionary-info-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
         .dictionary-link { display: inline-block; margin-top: 18px; color: var(--primary); font-weight: 700; }
 
+        /* --- MODAL DE INFORMACIÓN (Ajustes) --- */
+        .info-modal { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); }
+        .info-modal.visible { display: flex; }
+        .info-dialog { position: relative; width: min(560px, 100%); max-height: 80vh; overflow-y: auto; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+        .info-close { position: absolute; right: 14px; top: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
+        .info-title { padding-right: 36px; font-size: 22px; color: var(--primary); margin-bottom: 14px; }
+        .info-subtitle { font-size: 15px; font-weight: 700; margin: 18px 0 8px; color: var(--text-main); }
+        .info-subtitle:first-of-type { margin-top: 0; }
+        .info-text { font-size: 14px; line-height: 1.55; color: var(--text-main); margin-bottom: 8px; }
+        .info-link { display: block; color: var(--primary); font-weight: 600; word-break: break-word; margin: 4px 0 10px; text-decoration: underline; }
+        .info-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+        .info-gambatte { text-align: center; font-weight: 700; font-size: 15px; margin-top: 18px; color: var(--primary); }
+
         /* Insignias (palabra común, niveles JLPT...) */
         .dictionary-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
         .dictionary-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
@@ -804,6 +817,10 @@
             <button class="settings-close-btn" onclick="closeSettingsPanel()" aria-label="Cerrar ajustes">✕</button>
         </div>
         <div class="settings-panel-body">
+            <div class="settings-section">
+                <button type="button" class="settings-action-btn" onclick="openInfoModal()">ℹ️ Información</button>
+            </div>
+
             <div class="settings-section">
                 <div class="settings-section-title">Apariencia</div>
                 <div class="theme-grid" id="theme-grid">
@@ -1039,6 +1056,34 @@
         <button class="dictionary-close" aria-label="Cerrar diccionario" onclick="closeDictionary()">×</button>
         <h2 id="dictionary-title" class="dictionary-title">Diccionario</h2>
         <div id="dictionary-content" class="dictionary-status">Cargando…</div>
+    </div>
+</div>
+
+<div id="info-modal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-title" onclick="closeInfoOnOverlay(event)">
+    <div class="info-dialog">
+        <button class="info-close" aria-label="Cerrar información" onclick="closeInfoModal()">×</button>
+        <h2 id="info-title" class="info-title">ℹ️ Información</h2>
+
+        <div class="info-subtitle">📚 Recomendación</div>
+        <p class="info-text">Para aprovechar mejor esta aplicación, es recomendable saber leer hiragana y katakana.</p>
+        <p class="info-text">No es necesario saber leer kanji, ya que la aplicación dispone de una opción de Furigana que permite mostrar la lectura de los kanjis.</p>
+        <p class="info-text">Si todavía no dominas hiragana y katakana, puedes aprenderlos rápidamente con estos recursos:</p>
+
+        <p class="info-text" style="margin-bottom:2px;"><strong>Aprender hiragana y katakana</strong></p>
+        <a class="info-link" href="https://uchisen.com/preschool" target="_blank" rel="noopener noreferrer">https://uchisen.com/preschool</a>
+
+        <p class="info-text" style="margin-bottom:2px;"><strong>Estudio rápido / práctica</strong></p>
+        <a class="info-link" href="https://uchisen.com/drills" target="_blank" rel="noopener noreferrer">https://uchisen.com/drills</a>
+
+        <p class="info-text">Con estudio diario y utilizando una dinámica de prueba y error, en aproximadamente 2 semanas muchas personas pueden llegar a aprenderlos con bastante facilidad.</p>
+
+        <hr class="info-divider">
+
+        <div class="info-subtitle">❤️ ¿Quieres apoyar el proyecto?</div>
+        <p class="info-text">Puedes seguir mi canal de YouTube:</p>
+        <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
+
+        <p class="info-gambatte">¡Ánimo y mucha suerte en tu aprendizaje! 頑張って (Gambatte)! 💪</p>
     </div>
 </div>
 
@@ -2127,6 +2172,162 @@
         { id: 'body', title: 'Partes del cuerpo y persona', icon: '👤' }, { id: 'home', title: 'Casa y objetos cotidianos', icon: '🏠' }, { id: 'clothes', title: 'Ropa y apariencia', icon: '👕' }, { id: 'daily', title: 'Acciones cotidianas', icon: '🍳' }, { id: 'routine', title: 'Rutinas y frecuencia', icon: '📅' }, { id: 'position', title: 'Posición y ubicación', icon: '📍' }, { id: 'quantity', title: 'Cantidad y comparación', icon: '📏' }, { id: 'colors', title: 'Colores, formas y características', icon: '🎨' }, { id: 'feelings', title: 'Emociones y estados', icon: '😊' }, { id: 'opinions', title: 'Opiniones y preferencias', icon: '🧠' }, { id: 'casual', title: 'Conversación informal', icon: '💬' }, { id: 'fillers', title: 'Muletillas y japonés hablado', icon: '🗯️' }, { id: 'phone', title: 'Teléfono y conversación a distancia', icon: '📞' }, { id: 'work', title: 'Trabajo y estudios', icon: '🧑‍💼' }, { id: 'family', title: 'Familia y relaciones', icon: '👨‍👩‍👧' }, { id: 'countries', title: 'Países, nacionalidades e idiomas', icon: '🌍' }, { id: 'nature', title: 'Naturaleza y paisaje', icon: '🌳' }, { id: 'animals', title: 'Animales', icon: '🐕' }, { id: 'japan', title: 'Japón específico', icon: '🎌' }, { id: 'connectors', title: 'Conectores y palabras funcionales', icon: '🧩' }, { id: 'quantifiers', title: 'Números y expresiones cuantitativas avanzadas', icon: '🔢' }, { id: 'nuances', title: 'Palabras que cambian mucho de significado', icon: '⚠️' }, { id: 'formal', title: 'Formal vs. informal', icon: '🗣️' }, { id: 'listening', title: 'Comprensión auditiva y japonés reducido', icon: '👂' }, { id: 'polysemy', title: 'Palabras con varios significados', icon: '🈶' }
     );
 
+    // ===================== NUEVOS TEMARIOS (bloque añadido) ===================== //
+    addTopicWords('calendar', '📅', 'Lunes~getsuyōbi~げつようび~月曜日~📅;Martes~kayōbi~かようび~火曜日~📅;Miércoles~suiyōbi~すいようび~水曜日~📅;Jueves~mokuyōbi~もくようび~木曜日~📅;Viernes~kin'+String.fromCharCode(39)+'yōbi~きんようび~金曜日~📅;Sábado~doyōbi~どようび~土曜日~📅;Domingo~nichiyōbi~にちようび~日曜日~📅;Día de la semana~yōbi~ようび~曜日~📅;Fecha~hizuke~ひづけ~日付~🗓️;Día del mes~nichi/ka~にち/か~日~🔢;Mes~tsuki~つき~月~🌙;Año~nen~ねん~年~📆;Cumpleaños~tanjōbi~たんじょうび~誕生日~🎂;Aniversario~kinenbi~きねんび~記念日~🎉;Festivo/día festivo~shukujitsu~しゅくじつ~祝日~🎌;Calendario~karendā~カレンダー~~📆;Semana~shū~しゅう~週~📅;Fin de semana~shūmatsu~しゅうまつ~週末~🏖️;Día laborable~heijitsu~へいじつ~平日~💼;Próxima vez/otra vez~kondo~こんど~今度~➡️;Programa/agenda~yotei~よてい~予定~🗓️;Plazo/fecha límite~kigen~きげん~期限~⏳');
+
+    addTopicWords('weather', '⛅', 'Tiempo/clima~tenki~てんき~天気~⛅;Despejado/soleado~hare~はれ~晴れ~☀️;Lluvia~ame~あめ~雨~🌧️;Nieve~yuki~ゆき~雪~❄️;Nublado~kumori~くもり~曇り~☁️;Despejarse~hareru~はれる~晴れる~☀️;Llover~ame ga furu~あめがふる~雨が降る~🌧️;Nevar~yuki ga furu~ゆきがふる~雪が降る~❄️;Viento~kaze~かぜ~風~🌬️;Viento fuerte~kyōfū~きょうふう~強風~🌪️;Tifón~taifū~たいふう~台風~🌀;Temperatura~kion~きおん~気温~🌡️;Grados/temperatura~ondo~おんど~温度~🌡️;Caluroso~atsui~あつい~暑い~🥵;Frío~samui~さむい~寒い~🥶;Cálido~atatakai~あたたかい~暖かい~🌤️;Fresco~suzushii~すずしい~涼しい~🍃;Bochornoso/húmedo y caluroso~mushiatsui~むしあつい~蒸し暑い~💦;Trueno~kaminari~かみなり~雷~⚡;Tormenta con truenos~raiu~らいう~雷雨~⛈️;Nube~kumo~くも~雲~☁️;Niebla~kiri~きり~霧~🌫️;Humedad~shitsudo~しつど~湿度~💧;Pronóstico del tiempo~tenki yohō~てんきよほう~天気予報~📡;Clima/temporada~kikō~きこう~気候~🌍;Primavera~haru~はる~春~🌸;Verano~natsu~なつ~夏~☀️;Otoño~aki~あき~秋~🍁;Invierno~fuyu~ふゆ~冬~❄️;Arcoíris~niji~にじ~虹~🌈;Paraguas~kasa~かさ~傘~☂️');
+
+    addTopicWords('greetings', '👋', 'Hola (durante el día)~konnichiwa~こんにちは~~👋;Buenos días~ohayō~おはよう~~🌅;Buenos días (formal)~ohayō gozaimasu~おはようございます~~🌅;Buenas tardes/noches~konbanwa~こんばんは~~🌆;Adiós~sayōnara~さようなら~~👋;Hasta luego~mata ne~またね~~👋;Hasta mañana~mata ashita~またあした~また明日~🌅;Buenas noches (al dormir)~oyasumi~おやすみ~~🌙;Buenas noches (formal)~oyasuminasai~おやすみなさい~~🌙;Gracias~arigatō~ありがとう~~🙏;Muchas gracias (formal)~arigatō gozaimasu~ありがとうございます~~🙏;De nada~dōitashimashite~どういたしまして~~🙆;Disculpe/perdón~sumimasen~すみません~~🙇;Lo siento~gomennasai~ごめんなさい~~😔;Encantado de conocerte~yoroshiku~よろしく~~🤝;Encantado de conocerte (formal)~yoroshiku onegaishimasu~よろしくおねがいします~よろしくお願いします~🤝;¿Cómo estás?~ogenki desu ka~おげんきですか~お元気ですか~😊;Estoy bien~genki desu~げんきです~元気です~😄;Disculpa que me vaya antes~osaki ni shitsurei shimasu~おさきにしつれいします~お先に失礼します~🚪;Ya me voy (frase al salir)~ittekimasu~いってきます~~🚶;Que te vaya bien (respuesta al salir)~itterasshai~いってらっしゃい~~👋;Ya he vuelto~tadaima~ただいま~~🏠;Bienvenido de vuelta~okaeri~おかえり~お帰り~🏠;Buen provecho~itadakimasu~いただきます~~🍽️;Gracias por la comida~gochisōsama deshita~ごちそうさまでした~~🙏');
+
+    addTopicWords('fruits', '🍎', 'Fruta~kudamono~くだもの~果物~🍎;Manzana~ringo~りんご~林檎~🍎;Plátano~banana~バナナ~~🍌;Naranja~orenji~オレンジ~~🍊;Mandarina~mikan~みかん~蜜柑~🍊;Fresa~ichigo~いちご~苺~🍓;Uva~budō~ぶどう~葡萄~🍇;Sandía~suika~すいか~西瓜~🍉;Melocotón~momo~もも~桃~🍑;Pera~nashi~なし~梨~🍐;Limón~remon~レモン~~🍋;Melón~meron~メロン~~🍈;Piña~painappuru~パイナップル~~🍍;Kiwi~kiwi~キウイ~~🥝;Verdura~yasai~やさい~野菜~🥦;Zanahoria~ninjin~にんじん~人参~🥕;Cebolla~tamanegi~たまねぎ~玉ねぎ~🧅;Patata~jagaimo~じゃがいも~じゃが芋~🥔;Tomate~tomato~トマト~~🍅;Pepino~kyūri~きゅうり~胡瓜~🥒;Col/repollo~kyabetsu~キャベツ~~🥬;Lechuga~retasu~レタス~~🥬;Berenjena~nasu~なす~茄子~🍆;Espinaca~hōrensō~ほうれんそう~ほうれん草~🥬');
+
+    addTopicWords('drinks', '🥤', 'Agua~mizu~みず~水~💧;Té~ocha~おちゃ~お茶~🍵;Té verde~ryokucha~りょくちゃ~緑茶~🍵;Té negro~kōcha~こうちゃ~紅茶~☕;Café~kōhī~コーヒー~~☕;Leche~gyūnyū~ぎゅうにゅう~牛乳~🥛;Zumo~jūsu~ジュース~~🧃;Zumo de naranja~orenji jūsu~オレンジジュース~~🍊;Bebida con gas~tansan~たんさん~炭酸~🥤;Refresco de cola~kōra~コーラ~~🥤;Bebida~nomimono~のみもの~飲み物~🥤;Agua caliente~oyu~おゆ~お湯~♨️;Agua fría~mizu~みず~水~🧊;Bebida caliente~atatakai nomimono~あたたかいのみもの~温かい飲み物~☕');
+
+    addTopicWords('school-basic', '🏫', 'Escuela~gakkō~がっこう~学校~🏫;Aula/clase~kyōshitsu~きょうしつ~教室~🏫;Profesor~sensei~せんせい~先生~🧑‍🏫;Alumno/estudiante~gakusei~がくせい~学生~🎓;Alumno (de primaria/secundaria)~seito~せいと~生徒~🎓;Universidad~daigaku~だいがく~大学~🏛️;Libro~hon~ほん~本~📖;Libro de texto~kyōkasho~きょうかしょ~教科書~📘;Cuaderno~nōto~ノート~~📓;Lápiz~enpitsu~えんぴつ~鉛筆~✏️;Bolígrafo~pen~ペン~~🖊️;Goma de borrar~keshigomu~けしごむ~消しゴム~🧽;Mesa/pupitre~tsukue~つくえ~机~🪑;Silla~isu~いす~椅子~🪑;Pizarra~kokuban~こくばん~黒板~⬛;Deberes~shukudai~しゅくだい~宿題~📝;Examen~shiken~しけん~試験~📝;Clase/lección~jugyō~じゅぎょう~授業~📖;Estudiar~benkyō suru~べんきょうする~勉強する~📚;Pregunta~shitsumon~しつもん~質問~❓;Respuesta~kotae~こたえ~答え~✅');
+
+    addTopicWords('hobbies', '🎨', 'Afición/hobby~shumi~しゅみ~趣味~🎯;Música~ongaku~おんがく~音楽~🎵;Película~eiga~えいが~映画~🎬;Lectura~dokusho~どくしょ~読書~📖;Videojuego~gēmu~ゲーム~~🎮;Deporte~supōtsu~スポーツ~~⚽;Fotografía~shashin~しゃしん~写真~📷;Viaje~ryokō~りょこう~旅行~✈️;Cocina~ryōri~りょうり~料理~🍳;Canción/canto~uta~うた~歌~🎤;Dibujo/pintura~e~え~絵~🎨;Cómic/manga~manga~まんが~漫画~📚;Paseo~sanpo~さんぽ~散歩~🚶;Escuchar música~ongaku o kiku~おんがくをきく~音楽を聞く~🎧;Ver una película~eiga o miru~えいがをみる~映画を見る~🎬;Leer un libro~hon o yomu~ほんをよむ~本を読む~📖;Jugar a videojuegos~gēmu o suru~ゲームをする~~🎮;Sacar fotos~shashin o toru~しゃしんをとる~写真を撮る~📷;Dibujar~e o kaku~えをかく~絵を描く~🎨;Cantar~utau~うたう~歌う~🎤;Bailar~odoru~おどる~踊る~💃;Coleccionar~atsumeru~あつめる~集める~🗂️');
+
+    addTopicWords('health', '🏥', 'Hospital~byōin~びょういん~病院~🏥;Médico~isha~いしゃ~医者~👨‍⚕️;Paciente~kanja~かんじゃ~患者~🧑‍🦽;Consulta médica~shinsatsu~しんさつ~診察~🩺;Cita/reserva~yoyaku~よやく~予約~📅;Medicina~kusuri~くすり~薬~💊;Enfermedad~byōki~びょうき~病気~🤒;Síntoma~shōjō~しょうじょう~症状~🩹;Fiebre~netsu~ねつ~熱~🌡️;Dolor de cabeza~zutsū~ずつう~頭痛~🤕;Dolor de estómago~fukutsū~ふくつう~腹痛~🤢;Tos~seki~せき~咳~😷;Garganta~nodo~のど~喉~🗣️;Moqueo/mocos~hanamizu~はなみず~鼻水~🤧;Resfriado~kaze~かぜ~風邪~🤧;Doler~itai~いたい~痛い~🤕;Cansarse~tsukareru~つかれる~疲れる~😩;Descansar~yasumu~やすむ~休む~🛌;Curarse~naoru~なおる~治る~✅;Me duele la cabeza~atama ga itai desu~あたまがいたいです~頭が痛いです~🤕;Tengo fiebre~netsu ga arimasu~ねつがあります~熱があります~🌡️;Tengo tos~seki ga demasu~せきがでます~咳が出ます~😷;No me encuentro bien~guai ga warui desu~ぐあいがわるいです~具合が悪いです~🤢');
+
+    addTopicWords('household', '🧹', 'Limpieza~sōji~そうじ~掃除~🧹;Colada/lavado~sentaku~せんたく~洗濯~🧺;Lavar~arau~あらう~洗う~🧼;Limpiar~sōji suru~そうじする~掃除する~🧹;Basura~gomi~ごみ~ゴミ~🗑️;Cubo de basura~gomibako~ごみばこ~ゴミ箱~🗑️;Bolsa de basura~gomibukuro~ごみぶくろ~ゴミ袋~🛍️;Separación de residuos~bunbetsu~ぶんべつ~分別~♻️;Reciclaje~risaikuru~リサイクル~~♻️;Tirar~suteru~すてる~捨てる~🗑️;Sacar (la basura)~dasu~だす~出す~📤;Ordenar/recoger~katazukeru~かたづける~片付ける~🧹;Sucio~kitanai~きたない~汚い~🧽;Limpio~kirei~きれい~綺麗~✨;Detergente~senzai~せんざい~洗剤~🧴');
+
+    addTopicWords('driving', '🚗', 'Coche~kuruma~くるま~車~🚗;Bicicleta~jitensha~じてんしゃ~自転車~🚲;Moto~baiku~バイク~~🏍️;Conducción~unten~うんてん~運転~🚙;Conducir~unten suru~うんてんする~運転する~🚗;Carretera~dōro~どうろ~道路~🛣️;Cruce/intersección~kōsaten~こうさてん~交差点~🚦;Semáforo~shingō~しんごう~信号~🚦;Aparcamiento (acción)~chūsha~ちゅうしゃ~駐車~🅿️;Aparcamiento (lugar)~chūshajō~ちゅうしゃじょう~駐車場~🅿️;Gasolina~gasorin~ガソリン~~⛽;Freno~burēki~ブレーキ~~🛑;Volante/manillar~handoru~ハンドル~~🚗;Girar~magaru~まがる~曲がる~↩️;Parar~tomaru~とまる~止まる~🛑;Avanzar~susumu~すすむ~進む~➡️;Accidente~jiko~じこ~事故~💥');
+
+    addTopicWords('postal', '📮', 'Oficina de correos~yūbinkyoku~ゆうびんきょく~郵便局~📮;Correo/servicio postal~yūbin~ゆうびん~郵便~✉️;Carta~tegami~てがみ~手紙~✉️;Paquete/equipaje~nimotsu~にもつ~荷物~📦;Paquete pequeño~kozutsumi~こづつみ~小包~📦;Enviar~okuru~おくる~送る~📤;Llegar~todoku~とどく~届く~📬;Entregar~todokeru~とどける~届ける~📬;Dirección~jūsho~じゅうしょ~住所~🏠;Código postal~yūbin bangō~ゆうびんばんごう~郵便番号~🔢;Sello~kitte~きって~切手~📮;Reparto/entrega~haitatsu~はいたつ~配達~🚚;Entrega a domicilio~takuhai~たくはい~宅配~📦;Recibir~uketoru~うけとる~受け取る~📥');
+
+    addTopicWords('admin-basic', '📋', 'Dirección~jūsho~じゅうしょ~住所~🏠;Nombre~namae~なまえ~名前~📛;Fecha de nacimiento~seinengappi~せいねんがっぴ~生年月日~🎂;Documento~shorui~しょるい~書類~📄;Solicitud (trámite)~shinsei~しんせい~申請~📝;Solicitud (inscripción)~mōshikomi~もうしこみ~申込~📝;Rellenar~kinyū~きにゅう~記入~✍️;Firma~shomei~しょめい~署名~✍️;Sello personal~inkan~いんかん~印鑑~🔖;Ventanilla~madoguchi~まどぐち~窓口~🏢;Recepción~uketsuke~うけつけ~受付~🛎️;Reserva/cita~yoyaku~よやく~予約~📅;Necesario~hitsuyō~ひつよう~必要~❗;Copia~kopī~コピー~~📄;Certificado~shōmeisho~しょうめいしょ~証明書~📜');
+
+    addTopicWords('disaster', '🚨', 'Terremoto~jishin~じしん~地震~🌍;Tsunami~tsunami~つなみ~津波~🌊;Tifón~taifū~たいふう~台風~🌀;Inundación~kōzui~こうずい~洪水~🌊;Incendio (general)~kaji~かじ~火事~🔥;Incendio/catástrofe por fuego~kasai~かさい~火災~🔥;Evacuar~hinan~ひなん~避難~🏃;Refugio/lugar de evacuación~hinanjo~ひなんじょ~避難所~🏫;Salida de emergencia~hijōguchi~ひじょうぐち~非常口~🚪;Prevención de desastres~bōsai~ぼうさい~防災~🦺;Alerta/aviso~keihō~けいほう~警報~🚨;Aviso de precaución~chūihō~ちゅういほう~注意報~⚠️;Seguridad~anzen~あんぜん~安全~✅;Peligro~kiken~きけん~危険~⚠️;Emergencia (auxilio)~kyūkyū~きゅうきゅう~救急~🚑;Urgente/emergencia~kinkyū~きんきゅう~緊急~🚨;Extintor~shōkaki~しょうかき~消火器~🧯');
+
+    addTopicWords('katakana', '📱', 'Tienda de conveniencia~konbini~コンビニ~~🏪;Supermercado~sūpā~スーパー~~🛒;Restaurante~resutoran~レストラン~~🍽️;Hotel~hoteru~ホテル~~🏨;Smartphone~sumaho~スマホ~~📱;Aplicación~apuri~アプリ~~📲;Internet~intānetto~インターネット~~🌐;Wifi~Wi-Fi~ワイファイ~~📶;Batería~batterī~バッテリー~~🔋;Menú~menyū~メニュー~~📋;Entrada/billete~chiketto~チケット~~🎫;Tarjeta~kādo~カード~~💳;Servicio~sābisu~サービス~~🛎️;Sistema~shisutemu~システム~~💻;Ascensor~erebētā~エレベーター~~🛗;Escalera mecánica~esukarētā~エスカレーター~~🛗');
+
+    addTopicWords('online-shopping', '🛍️', 'Pedido~chūmon~ちゅうもん~注文~🛒;Producto~shōhin~しょうひん~商品~📦;Página del producto~shōhin pēji~しょうひんページ~商品ページ~🖥️;Carrito~kāto~カート~~🛒;Compra~kōnyū~こうにゅう~購入~💳;Pago~shiharai~しはらい~支払い~💴;Envío (acción)~hassō~はっそう~発送~📤;Envío/reparto~haisō~はいそう~配送~🚚;Llegada~tōchaku~とうちゃく~到着~📬;Devolución~henpin~へんぴん~返品~↩️;Cambio~kōkan~こうかん~交換~🔄;Talla~saizu~サイズ~~📏;Stock~zaiko~ざいこ~在庫~📦;Agotado~urikire~うりきれ~売り切れ~❌;Gastos de envío~sōryō~そうりょう~送料~💴;Dirección de envío~haisōsaki~はいそうさき~配送先~🏠');
+
+    addTopicWords('technology', '💻', 'Smartphone~sumātofon~スマートフォン~~📱;Ordenador~pasokon~パソコン~~💻;Teléfono móvil~keitai denwa~けいたいでんわ~携帯電話~📱;Aplicación~apuri~アプリ~~📲;Cuenta~akaunto~アカウント~~👤;Contraseña~pasuwādo~パスワード~~🔑;Iniciar sesión~roguin~ログイン~~🔐;Cerrar sesión~roguauto~ログアウト~~🔓;Descargar~daunrōdo~ダウンロード~~⬇️;Subir (archivo)~apurōdo~アップロード~~⬆️;Instalar~insutōru~インストール~~⚙️;Actualizar~kōshin~こうしん~更新~🔄;Guardar~hozon~ほぞん~保存~💾;Eliminar~sakujo~さくじょ~削除~🗑️;Ajustes~settei~せってい~設定~⚙️;Pantalla~gamen~がめん~画面~🖥️;Archivo~fairu~ファイル~~📁;Foto~shashin~しゃしん~写真~📷;Vídeo~dōga~どうが~動画~🎥;Internet~intānetto~インターネット~~🌐;Notificación~tsūchi~つうち~通知~🔔');
+
+    addTopicWords('education', '🎓', 'Universidad~daigaku~だいがく~大学~🏛️;Facultad~gakubu~がくぶ~学部~🏛️;Departamento/carrera~gakka~がっか~学科~📚;Especialidad/carrera~senkō~せんこう~専攻~📖;Clase magistral~kōgi~こうぎ~講義~🎤;Clase/asignatura~jugyō~じゅぎょう~授業~📖;Examen~shiken~しけん~試験~📝;Notas/calificación~seiseki~せいせき~成績~📊;Crédito (académico)~tan'+String.fromCharCode(39)+'i~たんい~単位~🎓;Graduación~sotsugyō~そつぎょう~卒業~🎓;Ingreso/matriculación~nyūgaku~にゅうがく~入学~🏫;Estudiar en el extranjero~ryūgaku~りゅうがく~留学~✈️;Investigación~kenkyū~けんきゅう~研究~🔬;Informe/trabajo~repōto~レポート~~📄;Presentación~happyō~はっぴょう~発表~🎤');
+
+    addTopicWords('office', '🏢', 'Empresa~kaisha~かいしゃ~会社~🏢;Empleado~shain~しゃいん~社員~🧑‍💼;Jefe/superior~jōshi~じょうし~上司~👔;Subordinado~buka~ぶか~部下~🧑‍💼;Compañero de trabajo~dōryō~どうりょう~同僚~🤝;Departamento~busho~ぶしょ~部署~🏢;Reunión~kaigi~かいぎ~会議~🗣️;Sala de reuniones~kaigishitsu~かいぎしつ~会議室~🏢;Documentos/materiales~shiryō~しりょう~資料~📄;Trabajo/tarea~shigoto~しごと~仕事~💼;Horario/planes~yotei~よてい~予定~🗓️;Viaje de negocios~shutchō~しゅっちょう~出張~🧳;Vacaciones/permiso~kyūka~きゅうか~休暇~🏖️;Sueldo~kyūryō~きゅうりょう~給料~💴;Horas extra~zangyō~ざんぎょう~残業~🕗;Contacto/aviso~renraku~れんらく~連絡~📞;Informe~hōkoku~ほうこく~報告~📋;Consulta~sōdan~そうだん~相談~💬;Petición/encargo~irai~いらい~依頼~📩');
+
+    addTopicWords('events', '🎉', 'Evento~ibento~イベント~~🎉;Concierto~konsāto~コンサート~~🎶;Actuación en directo~raibu~ライブ~~🎤;Festival~matsuri~まつり~祭り~🎆;Entrada~chiketto~チケット~~🎫;Reserva~yoyaku~よやく~予約~📅;Plan~keikaku~けいかく~計画~🗓️;Quedada/cita~yakusoku~やくそく~約束~🤝;Cancelar~kyanseru suru~キャンセルする~~❌;Participar~sanka suru~さんかする~参加する~🙋;Organizar~kikaku suru~きかくする~企画する~🗂️');
+
+    addTopicWords('tourism', '🗺️', 'Turismo~kankō~かんこう~観光~🗺️;Lugar turístico~kankōchi~かんこうち~観光地~🏯;Viaje~ryokō~りょこう~旅行~✈️;Turista~ryokōsha~りょこうしゃ~旅行者~🧳;Lugar famoso~meisho~めいしょ~名所~📍;Paisaje~keshiki~けしき~景色~🏞️;Oficina de información~annaijo~あんないじょ~案内所~ℹ️;Información turística~kankō annai~かんこうあんない~観光案内~ℹ️;Reserva~yoyaku~よやく~予約~📅;Entrada (recinto)~nyūjōken~にゅうじょうけん~入場券~🎫;Billete~kippu~きっぷ~切符~🎫;Recuerdo/souvenir~omiyage~おみやげ~お土産~🎁;Foto~shashin~しゃしん~写真~📷;Mapa~chizu~ちず~地図~🗺️');
+
+    addTopicWords('services', '🛎️', 'Peluquería~biyōin~びよういん~美容院~💇;Barbería~tokoya~とこや~床屋~💈;Lavandería/tintorería~kuriningu~クリーニング~~🧺;Reparación~shūri~しゅうり~修理~🔧;Farmacia~yakkyoku~やっきょく~薬局~💊;Oficina de correos~yūbinkyoku~ゆうびんきょく~郵便局~📮;Servicios públicos~kōkyō sābisu~こうきょうサービス~公共サービス~🏛️;Restaurante~resutoran~レストラン~~🍽️;Tienda~mise~みせ~店~🏬;Cita/reserva~yoyaku~よやく~予約~📅;Encargar/pedir~tanomu~たのむ~頼む~🙏;Recogida~uketori~うけとり~受け取り~📥');
+
+    addTopicWords('administration', '🏛️', 'Ayuntamiento (general)~yakusho~やくしょ~役所~🏛️;Ayuntamiento (ciudad)~shiyakusho~しやくしょ~市役所~🏛️;Oficina de distrito~kuyakusho~くやくしょ~区役所~🏛️;Trámite~tetsuzuki~てつづき~手続き~📋;Notificación/registro~todokede~とどけで~届出~📝;Formulario de solicitud~shinseisho~しんせいしょ~申請書~📄;Certificado~shōmeisho~しょうめいしょ~証明書~📜;Tarjeta de residencia~zairyū kādo~ざいりゅうカード~在留カード~🪪;Renovación~kōshin~こうしん~更新~🔄;Permiso~kyoka~きょか~許可~✅;Registro~tōroku~とうろく~登録~📝;Sistema/régimen~seido~せいど~制度~🏛️');
+
+    addTopicWords('society', '🏘️', 'Región/zona~chiiki~ちいき~地域~🏘️;Sociedad~shakai~しゃかい~社会~🌍;Vecindario~kinjo~きんじょ~近所~🏘️;Residente/vecino~jūmin~じゅうみん~住民~🧑‍🤝‍🧑;Comunidad local~chiiki shakai~ちいきしゃかい~地域社会~🏘️;Norma/regla~rūru~ルール~~📏;Modales/etiqueta~manā~マナー~~🙏;Intercambio/relación~kōryū~こうりゅう~交流~🤝;Apoyo/soporte~shien~しえん~支援~🤲;Problema~mondai~もんだい~問題~❗;Tarea/desafío~kadai~かだい~課題~📋');
+
+    addTopicWords('digital-communication', '💬', 'Mensaje~messēji~メッセージ~~💬;Correo electrónico~mēru~メール~~📧;Archivo adjunto~tenpu~てんぷ~添付~📎;Respuesta~henshin~へんしん~返信~↩️;Reenviar~tensō~てんそう~転送~➡️;Compartir~kyōyū~きょうゆう~共有~🔗;Publicación~tōkō~とうこう~投稿~📤;Comentario~komento~コメント~~💬;Cuenta~akaunto~アカウント~~👤;Grupo~gurūpu~グループ~~👥;Notificación~tsūchi~つうち~通知~🔔;En línea~onrain~オンライン~~🟢');
+
+    addTopicWords('news', '📰', 'Noticia~nyūsu~ニュース~~📰;Reportaje/cobertura~hōdō~ほうどう~報道~📡;Anuncio/comunicado~happyō~はっぴょう~発表~📢;Accidente~jiko~じこ~事故~💥;Suceso/incidente~jiken~じけん~事件~🚨;Gobierno~seifu~せいふ~政府~🏛️;Empresa~kaisha~かいしゃ~会社~🏢;Economía~keizai~けいざい~経済~💹;Política (medidas)~seisaku~せいさく~政策~📜;Investigación/encuesta~chōsa~ちょうさ~調査~🔍;Resultado~kekka~けっか~結果~✅;Causa~genin~げんいん~原因~❓;Influencia/impacto~eikyō~えいきょう~影響~🌊;Anunciar~happyō suru~はっぴょうする~発表する~📢;Informar/reportar~hōjiru~ほうじる~報じる~📡');
+
+    addTopicWords('health-advanced', '⚕️', 'Tratamiento~chiryō~ちりょう~治療~⚕️;Ingreso hospitalario~nyūin~にゅういん~入院~🏥;Alta hospitalaria~taiin~たいいん~退院~🚪;Operación/cirugía~shujutsu~しゅじゅつ~手術~🔪;Prueba/análisis~kensa~けんさ~検査~🔬;Diagnóstico~shindan~しんだん~診断~📋;Medicina/sanidad~iryō~いりょう~医療~⚕️;Médico (formal)~ishi~いし~医師~👨‍⚕️;Enfermero/a~kangoshi~かんごし~看護師~👩‍⚕️;Especialista~senmon'+'i~せんもんい~専門医~🩺;Recuperación~kaifuku~かいふく~回復~📈;Síntoma~shōjō~しょうじょう~症状~🩹');
+
+    addTopicWords('keigo', '🙇', 'Lenguaje honorífico (hacia el otro)~sonkeigo~そんけいご~尊敬語~🙇;Lenguaje humilde (hacia uno mismo)~kenjōgo~けんじょうご~謙譲語~🙇;Expresión cortés~teinei hyōgen~ていねいひょうげん~丁寧表現~🙏;Cliente~okyakusama~おきゃくさま~お客様~🙇;Guía/atención~goannai~ごあんない~ご案内~📋;Espere, por favor~omachikudasai~おまちください~お待ちください~⏳;Espere un momento, por favor~shōshō omachikudasai~しょうしょうおまちください~少々お待ちください~⏳;Venir/ir/estar (honorífico)~irassharu~いらっしゃる~~🙇;Ir/preguntar/visitar (humilde)~ukagau~うかがう~伺う~🙇;Decir (humilde)~mōshiageru~もうしあげる~申し上げる~🙇;Ir/venir (humilde)~mairu~まいる~参る~🙇;Hacer (humilde)~itasu~いたす~致す~🙇;Ver (honorífico)~goran ni naru~ごらんになる~ご覧になる~👀;Dar (humilde, hacia arriba)~sashiageru~さしあげる~差し上げる~🎁;Recibir (humilde)~itadaku~いただく~頂く~🙏');
+
+    addTopicWords('economy', '📈', 'Economía~keizai~けいざい~経済~📈;Empresa/corporación~kigyō~きぎょう~企業~🏢;Coyuntura económica~keiki~けいき~景気~📊;Mercado~shijō~しじょう~市場~🏪;Consumo~shōhi~しょうひ~消費~🛒;Producción~seisan~せいさん~生産~🏭;Comercio~bōeki~ぼうえき~貿易~🚢;Precio~kakaku~かかく~価格~💴;Precios (nivel general)~bukka~ぶっか~物価~💹;Ventas~uriage~うりあげ~売上~💰;Beneficio~rieki~りえき~利益~📈;Pérdida~sonshitsu~そんしつ~損失~📉;Inversión~tōshi~とうし~投資~💹;Empleo~koyō~こよう~雇用~💼');
+
+    addTopicWords('abstract', '💭', 'Causa~genin~げんいん~原因~❓;Resultado/consecuencia~kekka~けっか~結果~✅;Objetivo/propósito~mokuteki~もくてき~目的~🎯;Método~hōhō~ほうほう~方法~🛠️;Situación~jōkyō~じょうきょう~状況~📊;Estado~jōtai~じょうたい~状態~📋;Tendencia~keikō~けいこう~傾向~📈;Posibilidad~kanōsei~かのうせい~可能性~🔮;Necesidad~hitsuyōsei~ひつようせい~必要性~❗;Importancia~jūyōsei~じゅうようせい~重要性~⭐;Efecto~kōka~こうか~効果~✨;Influencia/impacto~eikyō~えいきょう~影響~🌊;Respuesta/afrontamiento~taiō~たいおう~対応~🤝;Solución/resolución~kaiketsu~かいけつ~解決~✅');
+
+    addTopicWords('media-opinion', '🗞️', 'Opinión~iken~いけん~意見~💬;Argumento/postura~shuchō~しゅちょう~主張~📢;Contraargumento~hanron~はんろん~反論~↩️;Fundamento/base~konkyo~こんきょ~根拠~📐;A favor~sansei~さんせい~賛成~👍;En contra~hantai~はんたい~反対~👎;Crítica~hihan~ひはん~批判~⚠️;Valoración~hyōka~ひょうか~評価~⭐;Debate~giron~ぎろん~議論~🗣️;Artículo~kiji~きじ~記事~📰;Ensayo/artículo académico~ronbun~ろんぶん~論文~📄;Cobertura/reportaje~hōdō~ほうどう~報道~📡');
+
+    addTopicWords('academic', '📖', 'Concepto~gainen~がいねん~概念~💡;Teoría~riron~りろん~理論~📘;Análisis~bunseki~ぶんせき~分析~🔍;Estructura~kōzō~こうぞう~構造~🏗️;Elemento/factor~yōso~ようそ~要素~🧩;Definición~teigi~ていぎ~定義~📝;Suposición/premisa~zentei~ぜんてい~前提~📐;Fundamento/base~konkyo~こんきょ~根拠~📐;Perspectiva/punto de vista~shiten~してん~視点~👁️;Comparación~hikaku~ひかく~比較~⚖️;Explicación~setsumei~せつめい~説明~🗣️;Comprensión~rikai~りかい~理解~💡');
+
+    addTopicWords('politics-economy', '🏛️', 'Política~seiji~せいじ~政治~🏛️;Gobierno~seifu~せいふ~政府~🏛️;Sociedad~shakai~しゃかい~社会~🌍;Economía~keizai~けいざい~経済~📈;Política/medida (de gobierno)~seisaku~せいさく~政策~📜;Ley~hōritsu~ほうりつ~法律~⚖️;Elección/votación~senkyo~せんきょ~選挙~🗳️;Impuesto~zeikin~ぜいきん~税金~💴;Presupuesto~yosan~よさん~予算~💰;Diplomacia~gaikō~がいこう~外交~🤝;Sistema/régimen~seido~せいど~制度~🏛️;Reforma~kaikaku~かいかく~改革~🔧');
+
+    addTopicWords('written-language', '✍️', 'Artículo de prensa~kiji~きじ~記事~📰;Editorial/columna de opinión~shasetsu~しゃせつ~社説~✍️;Ensayo académico~ronbun~ろんぶん~論文~📄;Documento/informe~bunsho~ぶんしょ~文書~📄;Expresión~hyōgen~ひょうげん~表現~💬;Redacción/escritura~bunshō~ぶんしょう~文章~✍️;Párrafo~danraku~だんらく~段落~📄;Título/encabezado~midashi~みだし~見出し~🏷️;Resumen~yōyaku~ようやく~要約~📋;Cita/referencia~in'+String.fromCharCode(39)+'yō~いんよう~引用~💬');
+
+    addTopicWords('formal-nuance', '🎩', 'Matiz~nyuansu~ニュアンス~~🎩;Registro (de habla)~buntai~ぶんたい~文体~✍️;Formal~kettei~フォーマル~~🎩;Coloquial/informal~kudaketa~くだけた~砕けた~💬;Cortesía/consideración~hairyo~はいりょ~配慮~🙏;Rodeo/indirecta~enkyoku~えんきょく~婉曲~🌀;Manera de decir las cosas~iimawashi~いいまわし~言い回し~💬;Tono~chōshi~ちょうし~調子~🎚️;Impresión~inshō~いんしょう~印象~✨;Tacto/delicadeza~kizukai~きづかい~気遣い~🤲');
+
+    addTopicWords('collocations', '🧩', 'Tomar una decisión~kettei o kudasu~けっていをくだす~決定を下す~✅;Causar influencia~eikyō o ataeru~えいきょうをあたえる~影響を与える~🌊;Llevar a cabo una investigación~chōsa o okonau~ちょうさをおこなう~調査を行う~🔍;Alcanzar un objetivo~mokuteki o hatasu~もくてきをはたす~目的を果たす~🎯;Asumir una responsabilidad~sekinin o hatasu~せきにんをはたす~責任を果たす~✅;Presentar una propuesta~teian o dasu~ていあんをだす~提案を出す~📤;Reflejar la opinión~iken o hanei suru~いけんをはんえいする~意見を反映する~🔁;Resolver un problema~mondai o kaiketsu suru~もんだいをかいけつする~問題を解決する~🛠️;Ejercer influencia~eikyō o oyobosu~えいきょうをおよぼす~影響を及ぼす~🌊;Alcanzar un acuerdo~gōi ni tassuru~ごういにたっする~合意に達する~🤝');
+
+    addTopicWords('idioms', '🈺', 'Éxito inmediato/aprender rápido~isseki nichō~いっせきにちょう~一石二鳥~🎯;Cambio radical (a mejor)~shinki ichigen~しんきいちげん~心機一転~🔄;Esfuerzo constante~doryoku~どりょく~努力~💪;Unidad de mente y cuerpo~ishin denshin~いしんでんしん~以心伝心~💞;Cuatro estaciones/diversidad de situaciones~shiki oriori~しきおりおり~四季折々~🍂;Determinación firme~kesshin~けっしん~決心~🔥;Sentido común~jōshiki~じょうしき~常識~📘;Punto de inflexión~tenkanten~てんかんてん~転換点~🔄;Por fin/finalmente~tsui ni~ついに~遂に~🏁;Sin remedio/no hay más opción~yamu o enai~やむをえない~やむを得ない~🤷;A pesar de todo~sore ni mo kakawarazu~それにもかかわらず~~↩️;En otras palabras~iikaereba~いいかえれば~言い換えれば~🔁');
+
+    addTopicWords('onomatopoeia', '🔊', 'Corazón acelerado (nervios/emoción)~dokidoki~ドキドキ~~💓;Emoción/ilusión~wakuwaku~ワクワク~~🤩;Irritación~iraira~イライラ~~😤;Asco/náuseas~mukamuka~ムカムカ~~🤢;Nervios por preocupación~harahara~ハラハラ~~😬;Escalofrío de miedo/frío~hiyahiya~ヒヤヒヤ~~🥶;Decepción~gakkari~ガッカリ~~😞;Alivio~hotto~ほっと~~😌;Sorpresa~bikkuri~びっくり~~😲;Escalofrío de terror~zotto~ぞっと~~😱;Sonrisa amable~nikoniko~ニコニコ~~😊;Sonrisa maliciosa/pícara~niyaniya~ニヤニヤ~~😏;Risa a carcajadas~geragera~ゲラゲラ~~😂;Silencio absoluto~shīn~シーン~~🤫;Hablar con fluidez~perapera~ペラペラ~~🗣️;Murmurar/quejarse en voz baja~butsubutsu~ブツブツ~~🤫;Hacer algo a escondidas~kosokoso~コソコソ~~🤫;Estómago rugiendo de hambre~pekopeko~ペコペコ~~🍽️;Despacio~yukkuri~ゆっくり~~🐢;Rápido y de repente~satto~サッと~~⚡;De repente/rápidamente~patto~パッと~~✨;Con firmeza/apretar~gutto~ぐっと~~💪;Caminar despacio (paso corto)~tekuteku~テクテク~~🚶;Caminar cansado/arrastrando los pies~tobotobo~トボトボ~~🚶;Deambular sin rumbo~urouro~ウロウロ~~🔄;Pasear sin prisa~burabura~ブラブラ~~🚶;Mirar alrededor con curiosidad~kyorokyoro~キョロキョロ~~👀;Esponjoso/suave~fuwafuwa~フワフワ~~☁️;Textura blandita (comida)~mochimochi~モチモチ~~🍡;Suave y liso~sarasara~サラサラ~~💧;Áspero~zarazara~ザラザラ~~🪨;Pegajoso~betabeta~ベタベタ~~🍯;Resbaladizo/viscoso~nurunuru~ヌルヌル~~🐌;Deshecho/hecho puré~guchagucha~グチャグチャ~~🥣;Desgastado/hecho trizas~boroboro~ボロボロ~~🧵;Brillante (destello)~kirakira~キラキラ~~✨;Reluciente (superficie)~pikapika~ピカピカ~~✨;Claramente~hakkiri~はっきり~~✅;Parpadeo intermitente~chirachira~チラチラ~~✨;Lluvia fuerte y continua~zāzā~ザーザー~~🌧️;Lluvia fina y constante~shitoshito~シトシト~~🌦️;Lluvia a goterones~potsupotsu~ポツポツ~~🌦️;Trueno retumbando~gorogoro~ゴロゴロ~~⛈️;Traqueteo/vibración~gatagata~ガタガタ~~📳;Golpeteo fuerte/insistente~dondon~ドンドン~~🚪;Portazo~batan~バタン~~🚪;Sonido de puerta o cerradura~gachan~ガチャン~~🔑;Aplausos~pachipachi~パチパチ~~👏;Timbre de puerta~pinpon~ピンポーン~~🔔;Chorro de agua/ducha~jā~ジャー~~🚿;Ladrido de perro~wanwan~ワンワン~~🐕;Maullido de gato~nyānyā~ニャーニャー~~🐈');
+    // ===================== FIN NUEVOS TEMARIOS ===================== //
+
+    topics.push(
+        { id: 'calendar', title: 'Días, fechas y calendario', icon: '📅' },
+        { id: 'weather', title: 'Clima, tiempo atmosférico y estaciones', icon: '⛅' },
+        { id: 'greetings', title: 'Saludos, despedidas y expresiones sociales', icon: '👋' },
+        { id: 'fruits', title: 'Frutas y verduras', icon: '🍎' },
+        { id: 'drinks', title: 'Bebidas', icon: '🥤' },
+        { id: 'school-basic', title: 'Escuela y aula', icon: '🏫' },
+        { id: 'hobbies', title: 'Ocio, aficiones y tiempo libre', icon: '🎨' },
+        { id: 'health', title: 'Salud, médico y síntomas', icon: '🏥' },
+        { id: 'household', title: 'Limpieza, tareas domésticas y reciclaje', icon: '🧹' },
+        { id: 'driving', title: 'Coche, conducción y bicicleta', icon: '🚗' },
+        { id: 'postal', title: 'Correos, paquetes y envíos', icon: '📮' },
+        { id: 'admin-basic', title: 'Trámites cotidianos', icon: '📋' },
+        { id: 'disaster', title: 'Desastres y seguridad en Japón', icon: '🚨' },
+        { id: 'katakana', title: 'Katakana de uso cotidiano', icon: '📱' },
+        { id: 'online-shopping', title: 'Compras online y entregas', icon: '🛍️' },
+        { id: 'technology', title: 'Tecnología, móvil e internet', icon: '💻' },
+        { id: 'education', title: 'Universidad y estudios', icon: '🎓' },
+        { id: 'office', title: 'Trabajo y oficina', icon: '🏢' },
+        { id: 'events', title: 'Eventos, conciertos y planes', icon: '🎉' },
+        { id: 'tourism', title: 'Viajes y turismo', icon: '🗺️' },
+        { id: 'services', title: 'Servicios cotidianos', icon: '🛎️' },
+        { id: 'administration', title: 'Administración y trámites oficiales', icon: '🏛️' },
+        { id: 'society', title: 'Sociedad y vida en comunidad', icon: '🏘️' },
+        { id: 'digital-communication', title: 'Comunicación digital y redes', icon: '💬' },
+        { id: 'news', title: 'Noticias y actualidad', icon: '📰' },
+        { id: 'health-advanced', title: 'Salud avanzada y tratamientos', icon: '⚕️' },
+        { id: 'keigo', title: 'Keigo y atención al cliente', icon: '🙇' },
+        { id: 'economy', title: 'Sociedad, economía y empresa', icon: '📈' },
+        { id: 'abstract', title: 'Conceptos abstractos', icon: '💭' },
+        { id: 'media-opinion', title: 'Prensa, opinión y debate', icon: '🗞️' },
+        { id: 'academic', title: 'Vocabulario académico y abstracto', icon: '📖' },
+        { id: 'politics-economy', title: 'Sociedad, política y economía', icon: '🏛️' },
+        { id: 'written-language', title: 'Prensa y lenguaje escrito', icon: '✍️' },
+        { id: 'formal-nuance', title: 'Registro formal y matices', icon: '🎩' },
+        { id: 'collocations', title: 'Colocaciones y combinaciones frecuentes', icon: '🧩' },
+        { id: 'idioms', title: 'Expresiones idiomáticas y 四字熟語', icon: '🈺' },
+        { id: 'onomatopoeia', title: 'Onomatopeyas japonesas', icon: '🔊' }
+    );
+
+    Object.assign(topicLevelMap, {
+        calendar: 'n5-principiante',
+        weather: 'n5-principiante',
+        greetings: 'n5-principiante',
+        fruits: 'n5-principiante',
+        drinks: 'n5-principiante',
+        'school-basic': 'n5-principiante',
+        hobbies: 'n5-principiante',
+        health: 'n5-avanzado',
+        household: 'n5-avanzado',
+        driving: 'n5-avanzado',
+        postal: 'n5-avanzado',
+        'admin-basic': 'n5-avanzado',
+        disaster: 'n5-avanzado',
+        katakana: 'n5-avanzado',
+        'online-shopping': 'n5-avanzado',
+        technology: 'n4',
+        education: 'n4',
+        office: 'n4',
+        events: 'n4',
+        tourism: 'n4',
+        services: 'n4',
+        administration: 'n3',
+        society: 'n3',
+        'digital-communication': 'n3',
+        news: 'n3',
+        'health-advanced': 'n3',
+        keigo: 'n2',
+        economy: 'n2',
+        abstract: 'n2',
+        'media-opinion': 'n2',
+        academic: 'n1',
+        'politics-economy': 'n1',
+        'written-language': 'n1',
+        'formal-nuance': 'n1',
+        collocations: 'n1',
+        idioms: 'n1',
+        onomatopoeia: 'extras'
+    });
+
     let vocabulary = [];
     rawVocab.forEach((item, index) => {
         const [category, spanish, romaji, kana, kanji, emoji] = item.split('|');
@@ -2517,6 +2718,2955 @@
         "trouble|問題": [
             { jp: "何か＿＿＿＿がありますか。", es: "¿Hay algún problema?" }
         ],
+
+        // --- Frases añadidas: body, home, clothes, daily, routine, position --- //
+        "body|人": [
+            { jp: "あそこに＿＿＿＿がたくさんいます。", es: "Ahí hay mucha gente." }
+        ],
+        "body|男": [
+            { jp: "あの＿＿＿＿は先生です。", es: "Ese hombre es profesor." }
+        ],
+        "body|女": [
+            { jp: "あの＿＿＿＿は友達です。", es: "Esa mujer es mi amiga." }
+        ],
+        "body|子供": [
+            { jp: "公園で＿＿＿＿が遊んでいます。", es: "Los niños están jugando en el parque." }
+        ],
+        "body|女の子": [
+            { jp: "あの＿＿＿＿は私の娘です。", es: "Esa niña es mi hija." }
+        ],
+        "body|男の子": [
+            { jp: "あの＿＿＿＿は私の息子です。", es: "Ese chico es mi hijo." }
+        ],
+        "body|大人": [
+            { jp: "この映画は＿＿＿＿のための映画です。", es: "Esta película es para adultos." }
+        ],
+        "body|赤ちゃん": [
+            { jp: "＿＿＿＿が泣いています。", es: "El bebé está llorando." }
+        ],
+        "body|体": [
+            { jp: "毎朝、＿＿＿＿を動かします。", es: "Cada mañana muevo el cuerpo." }
+        ],
+        "body|頭": [
+            { jp: "＿＿＿＿が痛いです。", es: "Me duele la cabeza." }
+        ],
+        "body|顔": [
+            { jp: "朝、＿＿＿＿を洗います。", es: "Por la mañana me lavo la cara." }
+        ],
+        "body|髪": [
+            { jp: "彼女は＿＿＿＿が長いです。", es: "Ella tiene el pelo largo." }
+        ],
+        "body|額": [
+            { jp: "＿＿＿＿に汗をかきました。", es: "Me sudó la frente." }
+        ],
+        "body|目": [
+            { jp: "＿＿＿＿が疲れました。", es: "Se me cansaron los ojos." }
+        ],
+        "body|耳": [
+            { jp: "＿＿＿＿が痛いです。", es: "Me duele el oído." }
+        ],
+        "body|鼻": [
+            { jp: "＿＿＿＿が高いですね。", es: "Tienes la nariz respingona (elogio)." }
+        ],
+        "body|口": [
+            { jp: "＿＿＿＿を大きく開けてください。", es: "Abra bien la boca, por favor." }
+        ],
+        "body|歯": [
+            { jp: "毎日＿＿＿＿を磨きます。", es: "Me cepillo los dientes todos los días." }
+        ],
+        "body|舌": [
+            { jp: "熱くて＿＿＿＿をやけどしました。", es: "Estaba tan caliente que me quemé la lengua." }
+        ],
+        "body|首": [
+            { jp: "＿＿＿＿が痛いです。", es: "Me duele el cuello." }
+        ],
+        "body|肩": [
+            { jp: "＿＿＿＿が凝っています。", es: "Tengo el hombro entumecido." }
+        ],
+        "body|腕": [
+            { jp: "＿＿＿＿を怪我しました。", es: "Me lastimé el brazo." }
+        ],
+        "body|手": [
+            { jp: "食事の前に＿＿＿＿を洗います。", es: "Me lavo las manos antes de comer." }
+        ],
+        "body|指": [
+            { jp: "＿＿＿＿を切ってしまいました。", es: "Me corté el dedo." }
+        ],
+        "body|胸": [
+            { jp: "＿＿＿＿が痛いです。", es: "Me duele el pecho." }
+        ],
+        "body|背中": [
+            { jp: "＿＿＿＿が痛いです。", es: "Me duele la espalda." }
+        ],
+        "body|お腹": [
+            { jp: "＿＿＿＿がすきました。", es: "Tengo hambre (el estómago está vacío)." }
+        ],
+        "body|足": [
+            { jp: "＿＿＿＿が疲れました。", es: "Se me cansaron las piernas." }
+        ],
+        "body|膝": [
+            { jp: "＿＿＿＿を怪我しました。", es: "Me lastimé la rodilla." }
+        ],
+        "body|心": [
+            { jp: "＿＿＿＿が温かくなりました。", es: "Se me calentó el corazón (me emocioné)." }
+        ],
+        "body|血": [
+            { jp: "指から＿＿＿＿が出ています。", es: "Me sale sangre del dedo." }
+        ],
+        "body|肌": [
+            { jp: "彼女の＿＿＿＿はきれいです。", es: "Su piel es bonita." }
+        ],
+        "body|服": [
+            { jp: "新しい＿＿＿＿を買いました。", es: "Compré ropa nueva." }
+        ],
+        "body|靴": [
+            { jp: "＿＿＿＿を脱いでください。", es: "Quítese los zapatos, por favor." }
+        ],
+
+        "home|家": [
+            { jp: "今日は＿＿＿＿にいます。", es: "Hoy estoy en casa." }
+        ],
+        "home|部屋": [
+            { jp: "この＿＿＿＿はとても広いです。", es: "Esta habitación es muy amplia." }
+        ],
+        "home|居間": [
+            { jp: "家族はいつも＿＿＿＿でテレビを見ます。", es: "La familia siempre ve la tele en la sala de estar." }
+        ],
+        "home|室": [
+            { jp: "私の＿＿＿＿は二階にあります。", es: "Mi dormitorio está en el segundo piso." }
+        ],
+        "home|台所": [
+            { jp: "母は＿＿＿＿で料理しています。", es: "Mi madre está cocinando en la cocina." }
+        ],
+        "home|お風呂": [
+            { jp: "＿＿＿＿に入ります。", es: "Me voy a bañar." }
+        ],
+        "home|トイレ": [
+            { jp: "＿＿＿＿はどこですか。", es: "¿Dónde está el baño?" }
+        ],
+        "home|ドア": [
+            { jp: "＿＿＿＿を閉めてください。", es: "Cierre la puerta, por favor." }
+        ],
+        "home|扉": [
+            { jp: "＿＿＿＿がゆっくり開きました。", es: "La puerta corredera se abrió lentamente." }
+        ],
+        "home|窓": [
+            { jp: "＿＿＿＿を開けてもいいですか。", es: "¿Puedo abrir la ventana?" }
+        ],
+        "home|壁": [
+            { jp: "＿＿＿＿に絵を飾りました。", es: "Colgué un cuadro en la pared." }
+        ],
+        "home|天井": [
+            { jp: "＿＿＿＿が高い部屋ですね。", es: "Es una habitación con el techo alto." }
+        ],
+        "home|床": [
+            { jp: "＿＿＿＿を掃除しました。", es: "Limpié el suelo." }
+        ],
+        "home|机": [
+            { jp: "＿＿＿＿の上に本があります。", es: "Hay un libro encima de la mesa." }
+        ],
+        "home|椅子": [
+            { jp: "この＿＿＿＿に座ってください。", es: "Siéntese en esta silla, por favor." }
+        ],
+        "home|ベッド": [
+            { jp: "毎晩十時に＿＿＿＿に入ります。", es: "Cada noche me meto en la cama a las diez." }
+        ],
+        "home|ソファ": [
+            { jp: "＿＿＿＿でゆっくりしています。", es: "Estoy relajándome en el sofá." }
+        ],
+        "home|冷蔵庫": [
+            { jp: "牛乳を＿＿＿＿に入れました。", es: "Metí la leche en la nevera." }
+        ],
+        "home|電子レンジ": [
+            { jp: "＿＿＿＿で温めます。", es: "Lo calentaré en el microondas." }
+        ],
+        "home|洗濯機": [
+            { jp: "＿＿＿＿で服を洗います。", es: "Lavo la ropa con la lavadora." }
+        ],
+        "home|シャワー": [
+            { jp: "朝、＿＿＿＿を浴びます。", es: "Por la mañana me ducho." }
+        ],
+        "home|鏡": [
+            { jp: "＿＿＿＿を見て髪を整えました。", es: "Me miré al espejo y me arreglé el pelo." }
+        ],
+        "home|タオル": [
+            { jp: "新しい＿＿＿＿をください。", es: "Deme una toalla nueva, por favor." }
+        ],
+        "home|電気": [
+            { jp: "＿＿＿＿をつけてください。", es: "Encienda la luz, por favor." }
+        ],
+        "home|電球": [
+            { jp: "＿＿＿＿が切れました。", es: "Se fundió la bombilla." }
+        ],
+        "home|スイッチ": [
+            { jp: "＿＿＿＿を押してください。", es: "Pulse el interruptor, por favor." }
+        ],
+        "home|エアコン": [
+            { jp: "暑いので＿＿＿＿をつけました。", es: "Como hace calor, encendí el aire acondicionado." }
+        ],
+        "home|暖房": [
+            { jp: "冬は＿＿＿＿をつけます。", es: "En invierno enciendo la calefacción." }
+        ],
+        "home|扇風機": [
+            { jp: "夏は＿＿＿＿を使います。", es: "En verano uso el ventilador." }
+        ],
+        "home|コンセント": [
+            { jp: "＿＿＿＿はどこにありますか。", es: "¿Dónde hay un enchufe?" }
+        ],
+        "home|充電器": [
+            { jp: "＿＿＿＿を忘れました。", es: "Me olvidé el cargador." }
+        ],
+        "home|付ける": [
+            { jp: "電気を＿＿＿＿ください。", es: "Encienda la luz, por favor." }
+        ],
+        "home|消す": [
+            { jp: "テレビを＿＿＿＿ください。", es: "Apague la tele, por favor." }
+        ],
+        "home|開ける": [
+            { jp: "窓を＿＿＿＿ください。", es: "Abra la ventana, por favor." }
+        ],
+        "home|閉める": [
+            { jp: "ドアを＿＿＿＿ください。", es: "Cierre la puerta, por favor." }
+        ],
+        "home|充電する": [
+            { jp: "スマホを＿＿＿＿つもりです。", es: "Voy a cargar el móvil." }
+        ],
+
+        "clothes|服": [
+            { jp: "冬用の＿＿＿＿を買いました。", es: "Compré ropa de invierno." }
+        ],
+        "clothes|シャツ": [
+            { jp: "白い＿＿＿＿を着ています。", es: "Llevo puesta una camisa blanca." }
+        ],
+        "clothes|Tシャツ": [
+            { jp: "今日は＿＿＿＿を着ます。", es: "Hoy me pondré una camiseta." }
+        ],
+        "clothes|ズボン": [
+            { jp: "新しい＿＿＿＿を買いました。", es: "Compré unos pantalones nuevos." }
+        ],
+        "clothes|ジーンズ": [
+            { jp: "＿＿＿＿を履いています。", es: "Llevo puestos unos vaqueros." }
+        ],
+        "clothes|スカート": [
+            { jp: "彼女は＿＿＿＿をよく履きます。", es: "Ella suele llevar falda." }
+        ],
+        "clothes|ワンピース": [
+            { jp: "パーティーに＿＿＿＿を着ていきます。", es: "Iré a la fiesta con un vestido." }
+        ],
+        "clothes|ジャケット": [
+            { jp: "寒いので＿＿＿＿を着ます。", es: "Como hace frío, me pongo una chaqueta." }
+        ],
+        "clothes|コート": [
+            { jp: "冬は＿＿＿＿が必要です。", es: "En invierno hace falta un abrigo." }
+        ],
+        "clothes|セーター": [
+            { jp: "母が編んだ＿＿＿＿です。", es: "Es un jersey que tejió mi madre." }
+        ],
+        "clothes|パーカー": [
+            { jp: "黒い＿＿＿＿が好きです。", es: "Me gusta la sudadera negra." }
+        ],
+        "clothes|靴下": [
+            { jp: "＿＿＿＿を履いてください。", es: "Póngase los calcetines, por favor." }
+        ],
+        "clothes|靴": [
+            { jp: "新しい＿＿＿＿を買いました。", es: "Compré zapatos nuevos." }
+        ],
+        "clothes|スニーカー": [
+            { jp: "運動するとき＿＿＿＿を履きます。", es: "Cuando hago ejercicio llevo zapatillas deportivas." }
+        ],
+        "clothes|サンダル": [
+            { jp: "夏は＿＿＿＿が楽です。", es: "En verano las sandalias son cómodas." }
+        ],
+        "clothes|帽子": [
+            { jp: "太陽が強いので＿＿＿＿をかぶります。", es: "Como el sol pega fuerte, me pongo un sombrero." }
+        ],
+        "clothes|傘": [
+            { jp: "雨なので＿＿＿＿を持っていきます。", es: "Como llueve, me llevo el paraguas." }
+        ],
+        "clothes|手袋": [
+            { jp: "寒いので＿＿＿＿をします。", es: "Como hace frío, me pongo guantes." }
+        ],
+        "clothes|マフラー": [
+            { jp: "冬は＿＿＿＿を巻きます。", es: "En invierno me pongo la bufanda." }
+        ],
+        "clothes|ベルト": [
+            { jp: "ズボンに＿＿＿＿をつけます。", es: "Me pongo el cinturón en el pantalón." }
+        ],
+        "clothes|綺麗": [
+            { jp: "この服は＿＿＿＿ですね。", es: "Esta ropa está limpia, ¿verdad?" }
+        ],
+        "clothes|汚い": [
+            { jp: "服が＿＿＿＿になりました。", es: "La ropa se ensució." }
+        ],
+        "clothes|濡れている": [
+            { jp: "傘がないので服が＿＿＿＿。", es: "Como no tenía paraguas, la ropa está mojada." }
+        ],
+        "clothes|乾いた": [
+            { jp: "洗濯物がもう＿＿＿＿。", es: "La colada ya está seca." }
+        ],
+        "clothes|着る": [
+            { jp: "寒いのでコートを＿＿＿＿。", es: "Como hace frío, me pongo el abrigo." }
+        ],
+        "clothes|履く": [
+            { jp: "靴を＿＿＿＿から出かけます。", es: "Me pongo los zapatos y luego salgo." }
+        ],
+        "clothes|脱ぐ": [
+            { jp: "家に入る前に靴を＿＿＿＿。", es: "Me quito los zapatos antes de entrar en casa." }
+        ],
+        "clothes|着ている": [
+            { jp: "彼は青いシャツを＿＿＿＿。", es: "Él lleva puesta una camisa azul." }
+        ],
+        "clothes|履いている": [
+            { jp: "彼女は赤い靴を＿＿＿＿。", es: "Ella lleva puestos unos zapatos rojos." }
+        ],
+        "clothes|持つ": [
+            { jp: "傘を＿＿＿＿ください。", es: "Lleve el paraguas, por favor." }
+        ],
+
+        "daily|起きる": [
+            { jp: "毎朝七時に＿＿＿＿。", es: "Me levanto todas las mañanas a las siete." }
+        ],
+        "daily|寝る": [
+            { jp: "夜十一時に＿＿＿＿。", es: "Me acuesto a las once de la noche." }
+        ],
+        "daily|シャワーを浴びる": [
+            { jp: "朝、＿＿＿＿。", es: "Por la mañana me ducho." }
+        ],
+        "daily|入る": [
+            { jp: "お風呂に＿＿＿＿。", es: "Me meto en la bañera." }
+        ],
+        "daily|洗う": [
+            { jp: "食事の後で皿を＿＿＿＿。", es: "Después de comer lavo los platos." }
+        ],
+        "daily|顔を洗う": [
+            { jp: "起きたらすぐ＿＿＿＿。", es: "Al levantarme me lavo la cara enseguida." }
+        ],
+        "daily|歯を磨く": [
+            { jp: "食事の後で＿＿＿＿。", es: "Después de comer me cepillo los dientes." }
+        ],
+        "daily|着る": [
+            { jp: "出かける前に服を＿＿＿＿。", es: "Antes de salir me visto." }
+        ],
+        "daily|座る": [
+            { jp: "椅子に＿＿＿＿ください。", es: "Siéntese en la silla, por favor." }
+        ],
+        "daily|立つ": [
+            { jp: "電車の中でずっと＿＿＿＿いました。", es: "Estuve todo el rato de pie en el tren." }
+        ],
+        "daily|歩く": [
+            { jp: "駅まで＿＿＿＿。", es: "Voy caminando hasta la estación." }
+        ],
+        "daily|走る": [
+            { jp: "毎朝公園で＿＿＿＿。", es: "Corro todas las mañanas en el parque." }
+        ],
+        "daily|休む": [
+            { jp: "今日は家で＿＿＿＿つもりです。", es: "Hoy pienso descansar en casa." }
+        ],
+        "daily|食べる": [
+            { jp: "朝ご飯を＿＿＿＿。", es: "Como el desayuno." }
+        ],
+        "daily|飲む": [
+            { jp: "水をたくさん＿＿＿＿。", es: "Bebo mucha agua." }
+        ],
+        "daily|料理する": [
+            { jp: "週末はよく＿＿＿＿。", es: "Los fines de semana suelo cocinar." }
+        ],
+        "daily|掃除する": [
+            { jp: "土曜日に部屋を＿＿＿＿。", es: "Los sábados limpio la habitación." }
+        ],
+        "daily|勉強する": [
+            { jp: "毎晩日本語を＿＿＿＿。", es: "Estudio japonés todas las noches." }
+        ],
+        "daily|働く": [
+            { jp: "会社で＿＿＿＿いています。", es: "Trabajo en una empresa." }
+        ],
+        "daily|遊ぶ": [
+            { jp: "公園で子供と＿＿＿＿。", es: "Juego con los niños en el parque." }
+        ],
+        "daily|行く": [
+            { jp: "明日、学校へ＿＿＿＿。", es: "Mañana voy a la escuela." }
+        ],
+        "daily|来る": [
+            { jp: "友達が家に＿＿＿＿。", es: "Un amigo viene a mi casa." }
+        ],
+        "daily|帰る": [
+            { jp: "六時に家へ＿＿＿＿。", es: "Vuelvo a casa a las seis." }
+        ],
+        "daily|出る": [
+            { jp: "八時に家を＿＿＿＿。", es: "Salgo de casa a las ocho." }
+        ],
+
+        "routine|いつも": [
+            { jp: "彼は＿＿＿＿元気です。", es: "Él siempre está animado." }
+        ],
+        "routine|全然": [
+            { jp: "コーヒーは＿＿＿＿飲みません。", es: "No tomo café en absoluto." }
+        ],
+        "routine|普通": [
+            { jp: "＿＿＿＿七時に起きます。", es: "Normalmente me levanto a las siete." }
+        ],
+        "routine|大抵": [
+            { jp: "週末は＿＿＿＿家にいます。", es: "Los fines de semana suelo estar en casa." }
+        ],
+        "routine|よく": [
+            { jp: "この店に＿＿＿＿来ます。", es: "Vengo a menudo a esta tienda." }
+        ],
+        "routine|時々": [
+            { jp: "＿＿＿＿映画を見ます。", es: "A veces veo películas." }
+        ],
+        "routine|あまり": [
+            { jp: "肉は＿＿＿＿食べません。", es: "Casi no como carne." }
+        ],
+        "routine|未だ": [
+            { jp: "宿題が＿＿＿＿終わっていません。", es: "Todavía no he terminado los deberes." }
+        ],
+        "routine|もう": [
+            { jp: "＿＿＿＿食べました。", es: "Ya he comido." }
+        ],
+        "routine|前": [
+            { jp: "食事の＿＿＿＿に手を洗います。", es: "Me lavo las manos antes de comer." }
+        ],
+        "routine|後": [
+            { jp: "仕事の＿＿＿＿でジムに行きます。", es: "Después del trabajo voy al gimnasio." }
+        ],
+        "routine|早い": [
+            { jp: "今日は＿＿＿＿寝ます。", es: "Hoy me acuesto temprano." }
+        ],
+        "routine|遅い": [
+            { jp: "会議に＿＿＿＿来ました。", es: "Llegó tarde a la reunión." }
+        ],
+        "routine|毎日": [
+            { jp: "＿＿＿＿日本語を勉強します。", es: "Estudio japonés todos los días." }
+        ],
+        "routine|毎週": [
+            { jp: "＿＿＿＿ジムに行きます。", es: "Voy al gimnasio cada semana." }
+        ],
+        "routine|毎月": [
+            { jp: "＿＿＿＿家賃を払います。", es: "Pago el alquiler cada mes." }
+        ],
+        "routine|毎年": [
+            { jp: "＿＿＿＿旅行をします。", es: "Viajo cada año." }
+        ],
+        "routine|朝": [
+            { jp: "＿＿＿＿六時に起きます。", es: "Me levanto a las seis de la mañana." }
+        ],
+        "routine|昼": [
+            { jp: "＿＿＿＿にご飯を食べます。", es: "Como al mediodía." }
+        ],
+        "routine|夜": [
+            { jp: "＿＿＿＿はテレビを見ます。", es: "Por la noche veo la tele." }
+        ],
+        "routine|今日": [
+            { jp: "＿＿＿＿は晴れです。", es: "Hoy hace sol." }
+        ],
+        "routine|明日": [
+            { jp: "＿＿＿＿友達と会います。", es: "Mañana quedo con un amigo." }
+        ],
+        "routine|昨日": [
+            { jp: "＿＿＿＿映画を見ました。", es: "Ayer vi una película." }
+        ],
+
+        "position|上": [
+            { jp: "机の＿＿＿＿に本があります。", es: "Hay un libro encima de la mesa." }
+        ],
+        "position|下": [
+            { jp: "テーブルの＿＿＿＿に猫がいます。", es: "Hay un gato debajo de la mesa." }
+        ],
+        "position|中": [
+            { jp: "箱の＿＿＿＿に何がありますか。", es: "¿Qué hay dentro de la caja?" }
+        ],
+        "position|外": [
+            { jp: "今、＿＿＿＿は寒いです。", es: "Ahora fuera hace frío." }
+        ],
+        "position|前": [
+            { jp: "駅の＿＿＿＿で待っています。", es: "Te espero delante de la estación." }
+        ],
+        "position|後ろ": [
+            { jp: "建物の＿＿＿＿に駐車場があります。", es: "Detrás del edificio hay un aparcamiento." }
+        ],
+        "position|隣": [
+            { jp: "私の＿＿＿＿に座ってください。", es: "Siéntese a mi lado, por favor." }
+        ],
+        "position|横": [
+            { jp: "コンビニの＿＿＿＿に銀行があります。", es: "Junto a la tienda hay un banco." }
+        ],
+        "position|間": [
+            { jp: "銀行と駅の＿＿＿＿にあります。", es: "Está entre el banco y la estación." }
+        ],
+        "position|近く": [
+            { jp: "駅の＿＿＿＿に住んでいます。", es: "Vivo cerca de la estación." }
+        ],
+        "position|遠い": [
+            { jp: "学校から家まで＿＿＿＿です。", es: "Desde la escuela hasta casa está lejos." }
+        ],
+        "position|ここ": [
+            { jp: "＿＿＿＿に座ってください。", es: "Siéntese aquí, por favor." }
+        ],
+        "position|そこ": [
+            { jp: "本は＿＿＿＿にあります。", es: "El libro está ahí." }
+        ],
+        "position|あそこ": [
+            { jp: "＿＿＿＿にトイレがあります。", es: "El baño está allí." }
+        ],
+        "position|右": [
+            { jp: "次の角を＿＿＿＿に曲がってください。", es: "Gire a la derecha en la próxima esquina." }
+        ],
+        "position|左": [
+            { jp: "＿＿＿＿に郵便局があります。", es: "A la izquierda hay una oficina de correos." }
+        ],
+        "position|真ん中": [
+            { jp: "テーブルの＿＿＿＿にケーキを置きました。", es: "Puse la tarta en el centro de la mesa." }
+        ],
+        "position|内": [
+            { jp: "一週間＿＿＿＿に返事をください。", es: "Deme una respuesta dentro de una semana." }
+        ],
+        "position|角": [
+            { jp: "あの＿＿＿＿を右に曲がります。", es: "Giraré a la derecha en esa esquina." }
+        ],
+        "position|向かい": [
+            { jp: "駅の＿＿＿＿にカフェがあります。", es: "Enfrente de la estación hay una cafetería." }
+        ],
+
+        // --- Frases añadidas: quantity, colors, feelings, opinions --- //
+        "quantity|数": [
+            { jp: "学生の＿＿＿＿を数えます。", es: "Cuento el número de estudiantes." }
+        ],
+        "quantity|量": [
+            { jp: "この仕事は＿＿＿＿が多いです。", es: "Este trabajo tiene mucha cantidad de tareas." }
+        ],
+        "quantity|多い": [
+            { jp: "今日は宿題が＿＿＿＿です。", es: "Hoy hay muchos deberes." }
+        ],
+        "quantity|少ない": [
+            { jp: "お金が＿＿＿＿です。", es: "Tengo poco dinero." }
+        ],
+        "quantity|たくさん": [
+            { jp: "水を＿＿＿＿飲みました。", es: "Bebí mucha agua." }
+        ],
+        "quantity|少し": [
+            { jp: "＿＿＿＿待ってください。", es: "Espere un poco, por favor." }
+        ],
+        "quantity|ちょっと": [
+            { jp: "＿＿＿＿高いですね。", es: "Es un poco caro, ¿verdad?" }
+        ],
+        "quantity|全部": [
+            { jp: "＿＿＿＿食べました。", es: "Me lo comí todo." }
+        ],
+        "quantity|半分": [
+            { jp: "ケーキを＿＿＿＿に切りました。", es: "Corté la tarta por la mitad." }
+        ],
+        "quantity|ほとんど": [
+            { jp: "宿題は＿＿＿＿終わりました。", es: "Los deberes están casi terminados." }
+        ],
+        "quantity|いくつ": [
+            { jp: "りんごが＿＿＿＿ありますか。", es: "¿Cuántas manzanas hay?" }
+        ],
+        "quantity|いくら": [
+            { jp: "これは＿＿＿＿ですか。", es: "¿Cuánto cuesta esto?" }
+        ],
+        "quantity|何個": [
+            { jp: "卵を＿＿＿＿買いますか。", es: "¿Cuántos huevos vas a comprar?" }
+        ],
+        "quantity|何人": [
+            { jp: "家族は＿＿＿＿ですか。", es: "¿Cuántas personas hay en tu familia?" }
+        ],
+        "quantity|何枚": [
+            { jp: "紙が＿＿＿＿必要ですか。", es: "¿Cuántas hojas de papel necesitas?" }
+        ],
+        "quantity|何本": [
+            { jp: "ペンが＿＿＿＿ありますか。", es: "¿Cuántos bolígrafos hay?" }
+        ],
+        "quantity|何回": [
+            { jp: "日本へ＿＿＿＿行きましたか。", es: "¿Cuántas veces has ido a Japón?" }
+        ],
+        "quantity|一つ": [
+            { jp: "りんごを＿＿＿＿ください。", es: "Deme una manzana, por favor." }
+        ],
+        "quantity|二つ": [
+            { jp: "チケットを＿＿＿＿買いました。", es: "Compré dos entradas." }
+        ],
+        "quantity|三つ": [
+            { jp: "おにぎりを＿＿＿＿食べました。", es: "Comí tres onigiris." }
+        ],
+        "quantity|いくつか": [
+            { jp: "質問が＿＿＿＿あります。", es: "Tengo algunas preguntas." }
+        ],
+        "quantity|何人か": [
+            { jp: "＿＿＿＿友達が来ました。", es: "Vinieron algunos amigos." }
+        ],
+        "quantity|一番": [
+            { jp: "これが＿＿＿＿安いです。", es: "Esto es lo más barato." }
+        ],
+        "quantity|約": [
+            { jp: "＿＿＿＿三十分かかります。", es: "Tarda aproximadamente treinta minutos." }
+        ],
+        "quantity|くらい / ぐらい": [
+            { jp: "十分＿＿＿＿かかります。", es: "Tarda unos diez minutos." }
+        ],
+        "quantity|以上": [
+            { jp: "二十歳＿＿＿＿の人しか入れません。", es: "Solo pueden entrar los mayores de veinte años." }
+        ],
+        "quantity|以下": [
+            { jp: "十歳＿＿＿＿の子供は無料です。", es: "Los niños de diez años o menos entran gratis." }
+        ],
+        "quantity|だけ": [
+            { jp: "これ＿＿＿＿でいいです。", es: "Con esto solamente basta." }
+        ],
+        "quantity|しか": [
+            { jp: "百円＿＿＿＿ありません。", es: "Solo tengo cien yenes." }
+        ],
+        "quantity|もっと": [
+            { jp: "＿＿＿＿頑張りたいです。", es: "Quiero esforzarme más." }
+        ],
+        "quantity|もう少し": [
+            { jp: "＿＿＿＿ください。", es: "Un poco más, por favor." }
+        ],
+        "quantity|もう一つ": [
+            { jp: "＿＿＿＿ほしいです。", es: "Quiero uno más." }
+        ],
+        "quantity|比べる": [
+            { jp: "二つの値段を＿＿＿＿。", es: "Comparo los dos precios." }
+        ],
+        "quantity|同じ": [
+            { jp: "これとそれは＿＿＿＿です。", es: "Esto y eso son iguales." }
+        ],
+        "quantity|違う": [
+            { jp: "この二つは＿＿＿＿。", es: "Estas dos cosas son diferentes." }
+        ],
+        "quantity|より": [
+            { jp: "今日は昨日＿＿＿＿暑いです。", es: "Hoy hace más calor que ayer." }
+        ],
+        "quantity|ほど": [
+            { jp: "彼＿＿＿＿上手ではありません。", es: "No soy tan bueno como él." }
+        ],
+        "quantity|一番〜": [
+            { jp: "クラスで＿＿＿＿背が高いです。", es: "Es el más alto de la clase." }
+        ],
+        "quantity|より多い": [
+            { jp: "今年は去年＿＿＿＿雨が降りました。", es: "Este año llovió más que el año pasado." }
+        ],
+        "quantity|より少ない": [
+            { jp: "今月は先月＿＿＿＿お金を使いました。", es: "Este mes gasté menos dinero que el mes pasado." }
+        ],
+        "quantity|大きい": [
+            { jp: "この箱はとても＿＿＿＿です。", es: "Esta caja es muy grande." }
+        ],
+        "quantity|小さい": [
+            { jp: "この部屋は＿＿＿＿です。", es: "Esta habitación es pequeña." }
+        ],
+        "quantity|高い": [
+            { jp: "このかばんは＿＿＿＿です。", es: "Este bolso es caro." }
+        ],
+        "quantity|安い": [
+            { jp: "この店は＿＿＿＿です。", es: "Esta tienda es barata." }
+        ],
+        "quantity|長い": [
+            { jp: "この橋は＿＿＿＿です。", es: "Este puente es largo." }
+        ],
+        "quantity|短い": [
+            { jp: "今日の会議は＿＿＿＿でした。", es: "La reunión de hoy fue corta." }
+        ],
+        "quantity|重い": [
+            { jp: "このかばんは＿＿＿＿です。", es: "Esta bolsa pesa mucho." }
+        ],
+        "quantity|軽い": [
+            { jp: "このノートパソコンは＿＿＿＿です。", es: "Este portátil es ligero." }
+        ],
+        "quantity|速い": [
+            { jp: "新幹線は＿＿＿＿です。", es: "El shinkansen es rápido." }
+        ],
+        "quantity|遅い": [
+            { jp: "バスは電車より＿＿＿＿です。", es: "El autobús es más lento que el tren." }
+        ],
+        "quantity|AはBより大きい。": [
+            { jp: "象は猫＿＿＿＿。", es: "El elefante es más grande que el gato." }
+        ],
+        "quantity|AよりBのほうが大きい。": [
+            { jp: "猫より象の＿＿＿＿。", es: "El elefante es más grande que el gato." }
+        ],
+        "quantity|一番好き。": [
+            { jp: "寿司が＿＿＿＿", es: "Es lo que más me gusta: el sushi." }
+        ],
+        "quantity|どちらが好き？": [
+            { jp: "コーヒーと紅茶と＿＿＿＿", es: "Entre café y té, ¿cuál prefieres?" }
+        ],
+        "quantity|どちらでもいい。": [
+            { jp: "肉でも魚でも＿＿＿＿", es: "Carne o pescado, cualquiera está bien." }
+        ],
+        "quantity|同じくらい。": [
+            { jp: "身長は兄と＿＿＿＿", es: "Mi altura es más o menos igual que la de mi hermano." }
+        ],
+        "quantity|これより大きい。": [
+            { jp: "あのサイズは＿＿＿＿", es: "Esa talla es más grande que esta." }
+        ],
+        "quantity|これより小さい。": [
+            { jp: "あのサイズは＿＿＿＿", es: "Esa talla es más pequeña que esta." }
+        ],
+        "quantity|もう少しください。": [
+            { jp: "ご飯を＿＿＿＿", es: "Un poco más de arroz, por favor." }
+        ],
+        "quantity|これだけです。": [
+            { jp: "私が持っているのは＿＿＿＿", es: "Lo único que tengo es esto." }
+        ],
+
+        "colors|色": [
+            { jp: "好きな＿＿＿＿は何ですか。", es: "¿Cuál es tu color favorito?" }
+        ],
+        "colors|赤": [
+            { jp: "＿＿＿＿い車が好きです。", es: "Me gustan los coches rojos." }
+        ],
+        "colors|青": [
+            { jp: "空が＿＿＿＿いです。", es: "El cielo es azul." }
+        ],
+        "colors|白": [
+            { jp: "＿＿＿＿いシャツを着ています。", es: "Llevo una camisa blanca." }
+        ],
+        "colors|黒": [
+            { jp: "＿＿＿＿い靴を買いました。", es: "Compré unos zapatos negros." }
+        ],
+        "colors|黄色": [
+            { jp: "バナナは＿＿＿＿いです。", es: "El plátano es amarillo." }
+        ],
+        "colors|緑": [
+            { jp: "この葉は＿＿＿＿色です。", es: "Esta hoja es de color verde." }
+        ],
+        "colors|茶色": [
+            { jp: "＿＿＿＿のかばんを持っています。", es: "Tengo un bolso marrón." }
+        ],
+        "colors|オレンジ": [
+            { jp: "＿＿＿＿色のセーターを着ています。", es: "Llevo un jersey de color naranja." }
+        ],
+        "colors|ピンク": [
+            { jp: "娘は＿＿＿＿色が好きです。", es: "A mi hija le gusta el rosa." }
+        ],
+        "colors|紫": [
+            { jp: "＿＿＿＿色の花を買いました。", es: "Compré flores moradas." }
+        ],
+        "colors|灰色": [
+            { jp: "今日の空は＿＿＿＿です。", es: "El cielo de hoy está gris." }
+        ],
+        "colors|金色": [
+            { jp: "＿＿＿＿の指輪をもらいました。", es: "Me regalaron un anillo dorado." }
+        ],
+        "colors|銀色": [
+            { jp: "＿＿＿＿の時計をつけています。", es: "Llevo puesto un reloj plateado." }
+        ],
+        "colors|明るい": [
+            { jp: "この部屋は＿＿＿＿です。", es: "Esta habitación es luminosa." }
+        ],
+        "colors|暗い": [
+            { jp: "夜道は＿＿＿＿です。", es: "El camino de noche está oscuro." }
+        ],
+        "colors|淡い": [
+            { jp: "＿＿＿＿ピンクのドレスを着ています。", es: "Lleva un vestido de rosa pálido." }
+        ],
+        "colors|濃い": [
+            { jp: "＿＿＿＿青が好きです。", es: "Me gusta el azul intenso." }
+        ],
+        "colors|形": [
+            { jp: "この時計の＿＿＿＿は丸いです。", es: "La forma de este reloj es redonda." }
+        ],
+        "colors|丸い": [
+            { jp: "地球は＿＿＿＿です。", es: "La Tierra es redonda." }
+        ],
+        "colors|四角い": [
+            { jp: "この箱は＿＿＿＿です。", es: "Esta caja es cuadrada." }
+        ],
+        "colors|三角形": [
+            { jp: "この図形は＿＿＿＿です。", es: "Esta figura es un triángulo." }
+        ],
+        "colors|長方形": [
+            { jp: "テーブルは＿＿＿＿です。", es: "La mesa tiene forma de rectángulo." }
+        ],
+        "colors|丸": [
+            { jp: "紙に＿＿＿＿を描きました。", es: "Dibujé un círculo en el papel." }
+        ],
+        "colors|線": [
+            { jp: "まっすぐな＿＿＿＿を引きました。", es: "Tracé una línea recta." }
+        ],
+        "colors|点": [
+            { jp: "地図に＿＿＿＿をつけました。", es: "Marqué un punto en el mapa." }
+        ],
+        "colors|角": [
+            { jp: "机の＿＿＿＿にぶつかりました。", es: "Me golpeé con la esquina de la mesa." }
+        ],
+        "colors|平ら": [
+            { jp: "この土地は＿＿＿＿です。", es: "Este terreno es plano." }
+        ],
+        "colors|曲がった": [
+            { jp: "この道は＿＿＿＿道です。", es: "Este camino es un camino curvado." }
+        ],
+        "colors|真っ直ぐ": [
+            { jp: "＿＿＿＿行ってください。", es: "Siga recto, por favor." }
+        ],
+        "colors|大きい": [
+            { jp: "この犬はとても＿＿＿＿です。", es: "Este perro es muy grande." }
+        ],
+        "colors|小さい": [
+            { jp: "赤ちゃんの手は＿＿＿＿です。", es: "Las manos del bebé son pequeñas." }
+        ],
+        "colors|長い": [
+            { jp: "彼女の髪は＿＿＿＿です。", es: "Su pelo es largo." }
+        ],
+        "colors|短い": [
+            { jp: "このズボンは＿＿＿＿です。", es: "Este pantalón es corto." }
+        ],
+        "colors|高い": [
+            { jp: "あの建物は＿＿＿＿です。", es: "Ese edificio es alto." }
+        ],
+        "colors|低い": [
+            { jp: "この椅子は＿＿＿＿です。", es: "Esta silla es baja." }
+        ],
+        "colors|太い": [
+            { jp: "この木は＿＿＿＿です。", es: "Este árbol es grueso." }
+        ],
+        "colors|細い": [
+            { jp: "この道は＿＿＿＿です。", es: "Este camino es estrecho/fino." }
+        ],
+        "colors|厚い": [
+            { jp: "この本は＿＿＿＿です。", es: "Este libro es grueso." }
+        ],
+        "colors|薄い": [
+            { jp: "この紙は＿＿＿＿です。", es: "Este papel es fino." }
+        ],
+        "colors|広い": [
+            { jp: "この公園は＿＿＿＿です。", es: "Este parque es amplio." }
+        ],
+        "colors|狭い": [
+            { jp: "このアパートは＿＿＿＿です。", es: "Este apartamento es estrecho." }
+        ],
+        "colors|重い": [
+            { jp: "この石は＿＿＿＿です。", es: "Esta piedra es pesada." }
+        ],
+        "colors|軽い": [
+            { jp: "この鞄は＿＿＿＿です。", es: "Este bolso es ligero." }
+        ],
+        "colors|新しい": [
+            { jp: "＿＿＿＿スマホを買いました。", es: "Compré un móvil nuevo." }
+        ],
+        "colors|古い": [
+            { jp: "この建物は＿＿＿＿です。", es: "Este edificio es viejo." }
+        ],
+        "colors|若い": [
+            { jp: "彼はまだ＿＿＿＿です。", es: "Él todavía es joven." }
+        ],
+        "colors|きれい": [
+            { jp: "この花は＿＿＿＿です。", es: "Esta flor es bonita." }
+        ],
+        "colors|汚い": [
+            { jp: "この部屋は＿＿＿＿です。", es: "Esta habitación está sucia." }
+        ],
+        "colors|可愛い": [
+            { jp: "この猫は＿＿＿＿です。", es: "Este gato es adorable." }
+        ],
+        "colors|かっこいい": [
+            { jp: "あの俳優は＿＿＿＿です。", es: "Ese actor es guapo/atractivo." }
+        ],
+        "colors|美しい": [
+            { jp: "夕焼けが＿＿＿＿です。", es: "La puesta de sol es hermosa." }
+        ],
+        "colors|醜い": [
+            { jp: "その怪物は＿＿＿＿です。", es: "Ese monstruo es feo." }
+        ],
+        "colors|シンプル": [
+            { jp: "このデザインは＿＿＿＿です。", es: "Este diseño es sencillo." }
+        ],
+        "colors|複雑": [
+            { jp: "この問題は＿＿＿＿です。", es: "Este problema es complejo." }
+        ],
+        "colors|柔らかい": [
+            { jp: "このパンは＿＿＿＿です。", es: "Este pan es blando." }
+        ],
+        "colors|硬い": [
+            { jp: "この肉は＿＿＿＿です。", es: "Esta carne está dura." }
+        ],
+        "colors|滑らか": [
+            { jp: "この肌は＿＿＿＿です。", es: "Esta piel es suave/lisa." }
+        ],
+        "colors|ザラザラ": [
+            { jp: "この壁は＿＿＿＿しています。", es: "Esta pared es áspera." }
+        ],
+        "colors|ツルツル": [
+            { jp: "この床は＿＿＿＿しています。", es: "Este suelo está liso/resbaladizo." }
+        ],
+        "colors|熱い": [
+            { jp: "このスープは＿＿＿＿です。", es: "Esta sopa está caliente." }
+        ],
+        "colors|冷たい": [
+            { jp: "この水は＿＿＿＿です。", es: "Esta agua está fría." }
+        ],
+        "colors|温かい": [
+            { jp: "＿＿＿＿お茶を飲みました。", es: "Bebí té caliente/templado." }
+        ],
+        "colors|涼しい": [
+            { jp: "今朝は＿＿＿＿です。", es: "Esta mañana está fresca." }
+        ],
+        "colors|乾いている": [
+            { jp: "洗濯物はもう＿＿＿＿。", es: "La colada ya está seca." }
+        ],
+        "colors|濡れている": [
+            { jp: "傘がなくて服が＿＿＿＿。", es: "No tenía paraguas y la ropa está mojada." }
+        ],
+        "colors|甘い": [
+            { jp: "このケーキは＿＿＿＿です。", es: "Esta tarta es dulce." }
+        ],
+        "colors|辛い": [
+            { jp: "このカレーは＿＿＿＿です。", es: "Este curry es picante." }
+        ],
+        "colors|苦い": [
+            { jp: "このコーヒーは＿＿＿＿です。", es: "Este café es amargo." }
+        ],
+        "colors|酸っぱい": [
+            { jp: "このレモンは＿＿＿＿です。", es: "Este limón es ácido." }
+        ],
+        "colors|しょっぱい": [
+            { jp: "このスープは少し＿＿＿＿です。", es: "Esta sopa está un poco salada." }
+        ],
+        "colors|美味しい": [
+            { jp: "この料理はとても＿＿＿＿です。", es: "Esta comida está muy rica." }
+        ],
+        "colors|不味い": [
+            { jp: "このラーメンは＿＿＿＿です。", es: "Este ramen sabe mal." }
+        ],
+
+        "feelings|嬉しい": [
+            { jp: "プレゼントをもらって＿＿＿＿です。", es: "Estoy contento porque me dieron un regalo." }
+        ],
+        "feelings|楽しい": [
+            { jp: "旅行はとても＿＿＿＿でした。", es: "El viaje fue muy divertido." }
+        ],
+        "feelings|幸せ": [
+            { jp: "今、とても＿＿＿＿です。", es: "Ahora mismo soy muy feliz." }
+        ],
+        "feelings|好き": [
+            { jp: "日本料理が＿＿＿＿です。", es: "Me gusta la comida japonesa." }
+        ],
+        "feelings|大好き": [
+            { jp: "猫が＿＿＿＿です。", es: "Me encantan los gatos." }
+        ],
+        "feelings|愛している": [
+            { jp: "彼女を＿＿＿＿。", es: "La amo." }
+        ],
+        "feelings|安心": [
+            { jp: "無事に着いて＿＿＿＿しました。", es: "Me sentí tranquilo al llegar sin problemas." }
+        ],
+        "feelings|満足": [
+            { jp: "この結果に＿＿＿＿しています。", es: "Estoy satisfecho con este resultado." }
+        ],
+        "feelings|興奮": [
+            { jp: "試合を見て＿＿＿＿しました。", es: "Me emocioné viendo el partido." }
+        ],
+        "feelings|ワクワク": [
+            { jp: "旅行が楽しみで＿＿＿＿しています。", es: "Estoy ilusionado por el viaje." }
+        ],
+        "feelings|ドキドキ": [
+            { jp: "試験の前で心臓が＿＿＿＿しています。", es: "Antes del examen el corazón me late fuerte por los nervios." }
+        ],
+        "feelings|誇らしい": [
+            { jp: "息子の卒業がとても＿＿＿＿です。", es: "Estoy muy orgulloso de la graduación de mi hijo." }
+        ],
+        "feelings|悲しい": [
+            { jp: "そのニュースを聞いて＿＿＿＿です。", es: "Me puse triste al oír esa noticia." }
+        ],
+        "feelings|寂しい": [
+            { jp: "一人でいると＿＿＿＿です。", es: "Cuando estoy solo me siento solo." }
+        ],
+        "feelings|怖い": [
+            { jp: "夜の道は＿＿＿＿です。", es: "El camino de noche da miedo." }
+        ],
+        "feelings|不安": [
+            { jp: "明日の面接が＿＿＿＿です。", es: "Estoy ansioso por la entrevista de mañana." }
+        ],
+        "feelings|心配": [
+            { jp: "親は子供のことを＿＿＿＿しています。", es: "Los padres se preocupan por sus hijos." }
+        ],
+        "feelings|怒る": [
+            { jp: "彼は約束を破って＿＿＿＿。", es: "Se enfadó porque rompió la promesa." }
+        ],
+        "feelings|腹が立つ": [
+            { jp: "その態度に＿＿＿＿。", es: "Me enfadó esa actitud." }
+        ],
+        "feelings|イライラする": [
+            { jp: "電車が遅れて＿＿＿＿。", es: "Me irrité porque el tren llegó tarde." }
+        ],
+        "feelings|緊張する": [
+            { jp: "面接の前に＿＿＿＿。", es: "Me pongo nervioso antes de la entrevista." }
+        ],
+        "feelings|恥ずかしい": [
+            { jp: "みんなの前で転んで＿＿＿＿です。", es: "Me caí delante de todos y me dio vergüenza." }
+        ],
+        "feelings|がっかりする": [
+            { jp: "結果を聞いて＿＿＿＿。", es: "Me decepcioné al oír el resultado." }
+        ],
+        "feelings|疲れる": [
+            { jp: "仕事で＿＿＿＿。", es: "Me canso con el trabajo." }
+        ],
+        "feelings|退屈": [
+            { jp: "この映画は＿＿＿＿です。", es: "Esta película es aburrida." }
+        ],
+        "feelings|嫌い": [
+            { jp: "野菜が＿＿＿＿です。", es: "No me gustan las verduras." }
+        ],
+        "feelings|大嫌い": [
+            { jp: "虫が＿＿＿＿です。", es: "Odio los insectos." }
+        ],
+        "feelings|元気": [
+            { jp: "最近＿＿＿＿ですか。", es: "¿Estás bien últimamente?" }
+        ],
+        "feelings|疲れた": [
+            { jp: "今日はとても＿＿＿＿です。", es: "Hoy estoy muy cansado." }
+        ],
+        "feelings|眠い": [
+            { jp: "今、とても＿＿＿＿です。", es: "Ahora tengo mucho sueño." }
+        ],
+        "feelings|お腹が空いた": [
+            { jp: "＿＿＿＿から、何か食べたいです。", es: "Tengo hambre, así que quiero comer algo." }
+        ],
+        "feelings|喉が渇いた": [
+            { jp: "＿＿＿＿から、水をください。", es: "Tengo sed, así que deme agua, por favor." }
+        ],
+        "feelings|痛い": [
+            { jp: "頭が＿＿＿＿です。", es: "Me duele la cabeza." }
+        ],
+        "feelings|気持ちいい": [
+            { jp: "この温泉はとても＿＿＿＿です。", es: "Este onsen es muy agradable." }
+        ],
+        "feelings|気持ち悪い": [
+            { jp: "船に乗って＿＿＿＿です。", es: "Me mareé al subir al barco." }
+        ],
+        "feelings|大丈夫": [
+            { jp: "もう＿＿＿＿です。", es: "Ya estoy bien." }
+        ],
+        "feelings|暇": [
+            { jp: "今週末は＿＿＿＿です。", es: "Este fin de semana estoy libre." }
+        ],
+        "feelings|忙しい": [
+            { jp: "今週はとても＿＿＿＿です。", es: "Esta semana estoy muy ocupado." }
+        ],
+        "feelings|忙しくない": [
+            { jp: "今日はあまり＿＿＿＿です。", es: "Hoy no estoy muy ocupado." }
+        ],
+        "feelings|やった！": [
+            { jp: "テストに合格した！＿＿＿＿", es: "¡Aprobé el examen! ¡Sí!" }
+        ],
+        "feelings|残念": [
+            { jp: "行けなくて＿＿＿＿です。", es: "Es una lástima que no pueda ir." }
+        ],
+        "feelings|よかった！": [
+            { jp: "無事に着いて＿＿＿＿", es: "¡Menos mal que llegamos bien!" }
+        ],
+        "feelings|最悪": [
+            { jp: "今日は＿＿＿＿な一日でした。", es: "Hoy fue un día pésimo." }
+        ],
+        "feelings|大変": [
+            { jp: "この仕事はとても＿＿＿＿です。", es: "Este trabajo es muy duro." }
+        ],
+
+        "feelings|嬉しい！": [
+            { jp: "合格した！＿＿＿＿", es: "¡Aprobé! ¡Qué alegría!" }
+        ],
+        "feelings|楽しい！": [
+            { jp: "遊園地は＿＿＿＿", es: "¡El parque de atracciones es divertidísimo!" }
+        ],
+        "feelings|疲れた！": [
+            { jp: "一日中歩いて＿＿＿＿", es: "¡Caminé todo el día y estoy agotado!" }
+        ],
+        "feelings|眠い！": [
+            { jp: "もう夜中だ。＿＿＿＿", es: "Ya es medianoche. ¡Tengo mucho sueño!" }
+        ],
+        "feelings|お腹いっぱい！": [
+            { jp: "たくさん食べた。＿＿＿＿", es: "Comí mucho. ¡Estoy lleno!" }
+        ],
+        "feelings|怖い！": [
+            { jp: "急に音がした。＿＿＿＿", es: "Sonó algo de repente. ¡Qué miedo!" }
+        ],
+        "opinions|思う": [
+            { jp: "彼は正しいと＿＿＿＿。", es: "Pienso que él tiene razón." }
+        ],
+        "opinions|考える": [
+            { jp: "将来のことを＿＿＿＿。", es: "Estoy pensando en el futuro." }
+        ],
+        "opinions|知る": [
+            { jp: "そのニュースを＿＿＿＿いますか。", es: "¿Sabes esa noticia?" }
+        ],
+        "opinions|分かる": [
+            { jp: "この問題が＿＿＿＿。", es: "Entiendo este problema." }
+        ],
+        "opinions|感じる": [
+            { jp: "何か変な音を＿＿＿＿。", es: "Sentí un sonido raro." }
+        ],
+        "opinions|好む": [
+            { jp: "静かな場所を＿＿＿＿。", es: "Prefiero los lugares tranquilos." }
+        ],
+        "opinions|選ぶ": [
+            { jp: "どちらを＿＿＿＿か迷っています。", es: "No sé cuál elegir." }
+        ],
+        "opinions|決める": [
+            { jp: "行き先を＿＿＿＿ました。", es: "Decidí el destino." }
+        ],
+        "opinions|賛成する": [
+            { jp: "その意見に＿＿＿＿。", es: "Estoy de acuerdo con esa opinión." }
+        ],
+        "opinions|反対する": [
+            { jp: "その計画に＿＿＿＿。", es: "Estoy en contra de ese plan." }
+        ],
+        "opinions|意見": [
+            { jp: "あなたの＿＿＿＿を聞かせてください。", es: "Déjame escuchar tu opinión." }
+        ],
+        "opinions|考え": [
+            { jp: "いい＿＿＿＿がありますか。", es: "¿Tienes alguna buena idea?" }
+        ],
+        "opinions|本当": [
+            { jp: "それは＿＿＿＿ですか。", es: "¿Eso es verdad?" }
+        ],
+        "opinions|嘘": [
+            { jp: "それは＿＿＿＿です。", es: "Eso es mentira." }
+        ],
+        "opinions|正しい": [
+            { jp: "あなたの答えは＿＿＿＿です。", es: "Tu respuesta es correcta." }
+        ],
+        "opinions|間違っている": [
+            { jp: "その考え方は＿＿＿＿と思います。", es: "Creo que esa forma de pensar está equivocada." }
+        ],
+        "opinions|いい": [
+            { jp: "この案は＿＿＿＿と思います。", es: "Creo que esta propuesta es buena." }
+        ],
+        "opinions|悪い": [
+            { jp: "そのやり方は＿＿＿＿です。", es: "Esa forma de hacerlo es mala." }
+        ],
+        "opinions|面白い": [
+            { jp: "この本はとても＿＿＿＿です。", es: "Este libro es muy interesante." }
+        ],
+        "opinions|つまらない": [
+            { jp: "この授業は＿＿＿＿です。", es: "Esta clase es aburrida." }
+        ],
+        "opinions|重要": [
+            { jp: "これはとても＿＿＿＿な問題です。", es: "Este es un problema muy importante." }
+        ],
+        "opinions|必要": [
+            { jp: "パスポートが＿＿＿＿です。", es: "Se necesita pasaporte." }
+        ],
+        "opinions|便利": [
+            { jp: "このアプリはとても＿＿＿＿です。", es: "Esta aplicación es muy práctica." }
+        ],
+        "opinions|不便": [
+            { jp: "ここは交通が＿＿＿＿です。", es: "Aquí el transporte es poco práctico." }
+        ],
+        "opinions|簡単": [
+            { jp: "この問題は＿＿＿＿です。", es: "Este problema es fácil." }
+        ],
+        "opinions|難しい": [
+            { jp: "日本語の漢字は＿＿＿＿です。", es: "Los kanjis japoneses son difíciles." }
+        ],
+        "opinions|最高": [
+            { jp: "この景色は＿＿＿＿です。", es: "Este paisaje es genial." }
+        ],
+        "opinions|最悪": [
+            { jp: "今日の天気は＿＿＿＿です。", es: "El tiempo de hoy es horrible." }
+        ],
+        "opinions|好き": [
+            { jp: "音楽を聞くのが＿＿＿＿です。", es: "Me gusta escuchar música." }
+        ],
+        "opinions|大好き": [
+            { jp: "この歌が＿＿＿＿です。", es: "Me encanta esta canción." }
+        ],
+        "opinions|嫌い": [
+            { jp: "この味が＿＿＿＿です。", es: "No me gusta este sabor." }
+        ],
+        "opinions|大嫌い": [
+            { jp: "この匂いが＿＿＿＿です。", es: "Odio este olor." }
+        ],
+        "opinions|お気に入り": [
+            { jp: "これは私の＿＿＿＿の店です。", es: "Esta es mi tienda favorita." }
+        ],
+        "opinions|一番好き": [
+            { jp: "夏が＿＿＿＿です。", es: "El verano es lo que más me gusta." }
+        ],
+        "opinions|〜のほうが好き": [
+            { jp: "私はコーヒー＿＿＿＿です。", es: "Prefiero el café (a otra cosa)." }
+        ],
+        "opinions|どちらが好き？": [
+            { jp: "犬と猫と＿＿＿＿", es: "Entre perros y gatos, ¿cuál prefieres?" }
+        ],
+        "opinions|どっちが好き？": [
+            { jp: "紅茶とコーヒーと＿＿＿＿", es: "¿Cuál prefieres, té o café?" }
+        ],
+        "opinions|どちらでもいい": [
+            { jp: "映画でもドラマでも＿＿＿＿。", es: "Película o serie, cualquiera está bien." }
+        ],
+        "opinions|どっちでもいい": [
+            { jp: "こっちでもそっちでも＿＿＿＿。", es: "Este o ese, me da igual." }
+        ],
+        "opinions|好きなもの": [
+            { jp: "＿＿＿＿を教えてください。", es: "Cuéntame las cosas que te gustan." }
+        ],
+        "opinions|好きな食べ物": [
+            { jp: "＿＿＿＿は何ですか。", es: "¿Cuál es tu comida favorita?" }
+        ],
+        "opinions|趣味": [
+            { jp: "私の＿＿＿＿は読書です。", es: "Mi afición es la lectura." }
+        ],
+        "opinions|私は〜と思う。": [
+            { jp: "＿＿＿＿正しい。", es: "Yo creo que es correcto." }
+        ],
+        "opinions|〜と思います。": [
+            { jp: "明日は雨が降る＿＿＿＿", es: "Creo que mañana lloverá." }
+        ],
+        "opinions|私は〜が好き。": [
+            { jp: "＿＿＿＿猫。", es: "Me gustan los gatos." }
+        ],
+        "opinions|私は〜のほうが好き。": [
+            { jp: "＿＿＿＿夏。", es: "Prefiero el verano." }
+        ],
+        "opinions|いいと思う。": [
+            { jp: "その案は＿＿＿＿", es: "Creo que esa propuesta es buena." }
+        ],
+        "opinions|そう思う。": [
+            { jp: "本当に＿＿＿＿", es: "De verdad creo que sí, estoy de acuerdo." }
+        ],
+        "opinions|そう思わない。": [
+            { jp: "私は＿＿＿＿", es: "Yo no pienso eso." }
+        ],
+        "opinions|本当に？": [
+            { jp: "え、＿＿＿＿", es: "Eh, ¿de verdad?" }
+        ],
+        "opinions|そうだね。": [
+            { jp: "うん、＿＿＿＿", es: "Sí, es verdad." }
+        ],
+        "opinions|なるほど。": [
+            { jp: "＿＿＿＿、よく分かりました。", es: "Ya veo, lo entendí bien." }
+        ],
+        "opinions|確かに": [
+            { jp: "＿＿＿＿、それは大変ですね。", es: "Ciertamente, eso debe de ser duro." }
+        ],
+        "opinions|たぶん": [
+            { jp: "＿＿＿＿明日は晴れです。", es: "Probablemente mañana hará sol." }
+        ],
+        "opinions|もちろん": [
+            { jp: "＿＿＿＿手伝います。", es: "Por supuesto que te ayudo." }
+        ],
+        "opinions|絶対": [
+            { jp: "＿＿＿＿合格します。", es: "Voy a aprobar sin ninguna duda." }
+        ],
+        "opinions|別に": [
+            { jp: "＿＿＿＿興味がありません。", es: "No me interesa especialmente." }
+        ],
+
+        // --- Frases añadidas: fillers, phone, work, family, countries --- //
+        "fillers|えっと": [
+            { jp: "＿＿＿＿、それは難しいですね。", es: "Eh... eso es difícil, ¿no?" }
+        ],
+        "fillers|あの": [
+            { jp: "＿＿＿＿、質問があります。", es: "Esto... tengo una pregunta." }
+        ],
+        "fillers|何か": [
+            { jp: "＿＿＿＿、変な感じがします。", es: "Pues... tengo un mal presentimiento." }
+        ],
+        "fillers|そうですね": [
+            { jp: "＿＿＿＿、確かにそうですね。", es: "Ya veo, ciertamente es así." }
+        ],
+        "fillers|なるほど": [
+            { jp: "＿＿＿＿、分かりました。", es: "Entiendo, ya lo capté." }
+        ],
+        "fillers|多分": [
+            { jp: "＿＿＿＿、明日は雨です。", es: "Quizás mañana llueva." }
+        ],
+        "fillers|ちょっと": [
+            { jp: "それは＿＿＿＿難しいです。", es: "Eso es un poco difícil." }
+        ],
+        "fillers|でも": [
+            { jp: "行きたいです。＿＿＿＿、時間がありません。", es: "Quiero ir. Pero no tengo tiempo." }
+        ],
+        "fillers|だから": [
+            { jp: "遅刻しました。＿＿＿＿、謝りました。", es: "Llegué tarde. Por eso me disculpé." }
+        ],
+        "fillers|まあ": [
+            { jp: "＿＿＿＿、いいでしょう。", es: "Bueno... supongo que está bien." }
+        ],
+        "fillers|じゃあ": [
+            { jp: "＿＿＿＿、行きましょう。", es: "Bueno, pues vamos." }
+        ],
+        "fillers|それで": [
+            { jp: "＿＿＿＿、どうなりましたか。", es: "Así que, ¿qué pasó?" }
+        ],
+        "fillers|本当に": [
+            { jp: "これは＿＿＿＿おいしいです。", es: "Esto está realmente delicioso." }
+        ],
+        "fillers|その通り": [
+            { jp: "＿＿＿＿です！", es: "¡Exactamente!" }
+        ],
+        "fillers|らしい": [
+            { jp: "明日は晴れる＿＿＿＿です。", es: "Aparentemente mañana hará sol." }
+        ],
+
+        "phone|電話": [
+            { jp: "＿＿＿＿が鳴っています。", es: "Está sonando el teléfono." }
+        ],
+        "phone|スマホ": [
+            { jp: "＿＿＿＿を忘れました。", es: "Me olvidé el móvil." }
+        ],
+        "phone|電話する": [
+            { jp: "後で＿＿＿＿つもりです。", es: "Voy a llamar más tarde." }
+        ],
+        "phone|電話に出る": [
+            { jp: "運転中なので＿＿＿＿ことができません。", es: "Como estoy conduciendo, no puedo contestar el teléfono." }
+        ],
+        "phone|メール": [
+            { jp: "＿＿＿＿を送りました。", es: "Envié un mensaje/correo." }
+        ],
+        "phone|メッセージ": [
+            { jp: "友達に＿＿＿＿を送りました。", es: "Le envié un mensaje de texto a mi amigo." }
+        ],
+        "phone|番号": [
+            { jp: "＿＿＿＿を教えてください。", es: "Dame tu número, por favor." }
+        ],
+        "phone|電話番号": [
+            { jp: "＿＿＿＿は何番ですか。", es: "¿Cuál es tu número de teléfono?" }
+        ],
+        "phone|電波": [
+            { jp: "ここは＿＿＿＿が弱いです。", es: "Aquí la señal es débil." }
+        ],
+        "phone|電池": [
+            { jp: "＿＿＿＿がもうすぐ切れます。", es: "La batería se va a agotar pronto." }
+        ],
+        "phone|着信": [
+            { jp: "＿＿＿＿が三件ありました。", es: "Tenía tres llamadas perdidas." }
+        ],
+        "phone|かけ直す": [
+            { jp: "後でまた＿＿＿＿ます。", es: "Volveré a llamar más tarde." }
+        ],
+        "phone|繰り返す": [
+            { jp: "もう一度＿＿＿＿ください。", es: "Repítalo una vez más, por favor." }
+        ],
+        "phone|話す": [
+            { jp: "もっとゆっくり＿＿＿＿ください。", es: "Hable más despacio, por favor." }
+        ],
+        "phone|聞く": [
+            { jp: "よく＿＿＿＿えませんでした。", es: "No pude oír bien." }
+        ],
+        "phone|もう一度お願いします": [
+            { jp: "すみません、＿＿＿＿", es: "Disculpe, ¿puede repetirlo?" }
+        ],
+        "phone|もっとゆっくり": [
+            { jp: "＿＿＿＿話してください。", es: "Hable más despacio, por favor." }
+        ],
+
+        "work|仕事": [
+            { jp: "今日は＿＿＿＿が忙しいです。", es: "Hoy el trabajo está ajetreado." }
+        ],
+        "work|会社": [
+            { jp: "毎朝九時に＿＿＿＿へ行きます。", es: "Voy a la empresa a las nueve todas las mañanas." }
+        ],
+        "work|事務所": [
+            { jp: "＿＿＿＿は駅の近くにあります。", es: "La oficina está cerca de la estación." }
+        ],
+        "work|社会人": [
+            { jp: "来年から＿＿＿＿になります。", es: "Desde el año que viene seré empleado/trabajador." }
+        ],
+        "work|上司": [
+            { jp: "＿＿＿＿に相談しました。", es: "Consulté con mi jefe." }
+        ],
+        "work|同僚": [
+            { jp: "＿＿＿＿とランチに行きました。", es: "Fui a comer con un compañero de trabajo." }
+        ],
+        "work|学生": [
+            { jp: "彼は大学の＿＿＿＿です。", es: "Él es estudiante universitario." }
+        ],
+        "work|先生": [
+            { jp: "＿＿＿＿に質問しました。", es: "Le pregunté al profesor." }
+        ],
+        "work|教師": [
+            { jp: "彼女は小学校の＿＿＿＿です。", es: "Ella es maestra de primaria." }
+        ],
+        "work|大学": [
+            { jp: "＿＿＿＿で経済学を学んでいます。", es: "Estudio economía en la universidad." }
+        ],
+        "work|学校": [
+            { jp: "毎日＿＿＿＿に行きます。", es: "Voy a la escuela todos los días." }
+        ],
+        "work|高校": [
+            { jp: "妹はまだ＿＿＿＿生です。", es: "Mi hermana pequeña todavía es estudiante de instituto." }
+        ],
+        "work|授業": [
+            { jp: "次の＿＿＿＿は数学です。", es: "La próxima clase es de matemáticas." }
+        ],
+        "work|試験": [
+            { jp: "来週＿＿＿＿があります。", es: "La semana que viene hay un examen." }
+        ],
+        "work|勉強する": [
+            { jp: "毎晩日本語を＿＿＿＿。", es: "Estudio japonés todas las noches." }
+        ],
+        "work|働く": [
+            { jp: "彼は銀行で＿＿＿＿いています。", es: "Él trabaja en un banco." }
+        ],
+        "work|会議": [
+            { jp: "午後三時から＿＿＿＿があります。", es: "Hay una reunión a partir de las tres de la tarde." }
+        ],
+        "work|予定": [
+            { jp: "今日の＿＿＿＿は何ですか。", es: "¿Cuál es tu horario/plan de hoy?" }
+        ],
+        "work|休み": [
+            { jp: "来週は＿＿＿＿を取ります。", es: "La semana que viene me tomaré vacaciones." }
+        ],
+        "work|休日": [
+            { jp: "＿＿＿＿は家でゆっくりします。", es: "En mi día libre descanso en casa." }
+        ],
+
+        "family|家族": [
+            { jp: "私の＿＿＿＿は四人です。", es: "Mi familia es de cuatro personas." }
+        ],
+        "family|父": [
+            { jp: "私の＿＿＿＿は医者です。", es: "Mi padre es médico." }
+        ],
+        "family|お父さん": [
+            { jp: "あなたの＿＿＿＿はお元気ですか。", es: "¿Cómo está tu padre?" }
+        ],
+        "family|母": [
+            { jp: "私の＿＿＿＿は先生です。", es: "Mi madre es profesora." }
+        ],
+        "family|お母さん": [
+            { jp: "田中さんの＿＿＿＿に会いました。", es: "Conocí a la madre del señor Tanaka." }
+        ],
+        "family|兄": [
+            { jp: "私の＿＿＿＿は東京に住んでいます。", es: "Mi hermano mayor vive en Tokio." }
+        ],
+        "family|姉": [
+            { jp: "私の＿＿＿＿は看護師です。", es: "Mi hermana mayor es enfermera." }
+        ],
+        "family|弟": [
+            { jp: "私の＿＿＿＿はまだ学生です。", es: "Mi hermano menor todavía es estudiante." }
+        ],
+        "family|妹": [
+            { jp: "私の＿＿＿＿は高校生です。", es: "Mi hermana menor es estudiante de instituto." }
+        ],
+        "family|夫": [
+            { jp: "私の＿＿＿＿は会社員です。", es: "Mi marido es empleado de empresa." }
+        ],
+        "family|妻": [
+            { jp: "私の＿＿＿＿は料理が上手です。", es: "Mi esposa cocina muy bien." }
+        ],
+        "family|友達": [
+            { jp: "週末に＿＿＿＿と会います。", es: "Este fin de semana quedo con un amigo." }
+        ],
+        "family|恋人": [
+            { jp: "彼女には＿＿＿＿がいます。", es: "Ella tiene pareja." }
+        ],
+        "family|彼氏": [
+            { jp: "彼女の＿＿＿＿は優しいです。", es: "El novio de ella es amable." }
+        ],
+        "family|彼女": [
+            { jp: "私には＿＿＿＿がいません。", es: "Yo no tengo novia." }
+        ],
+        "family|知り合い": [
+            { jp: "彼は仕事の＿＿＿＿です。", es: "Él es un conocido del trabajo." }
+        ],
+        "family|仲間": [
+            { jp: "サークルの＿＿＿＿と旅行しました。", es: "Viajé con los compañeros del club." }
+        ],
+        "family|近所の人": [
+            { jp: "＿＿＿＿に挨拶しました。", es: "Saludé a un vecino." }
+        ],
+        "family|息子": [
+            { jp: "私の＿＿＿＿は五歳です。", es: "Mi hijo tiene cinco años." }
+        ],
+        "family|娘": [
+            { jp: "私の＿＿＿＿は大学生です。", es: "Mi hija es estudiante universitaria." }
+        ],
+
+        "countries|日本": [
+            { jp: "＿＿＿＿に住んでいます。", es: "Vivo en Japón." }
+        ],
+        "countries|スペイン": [
+            { jp: "来年＿＿＿＿へ旅行します。", es: "El año que viene viajaré a España." }
+        ],
+        "countries|スペイン人": [
+            { jp: "彼は＿＿＿＿です。", es: "Él es español." }
+        ],
+        "countries|スペイン語": [
+            { jp: "＿＿＿＿を勉強しています。", es: "Estoy estudiando español." }
+        ],
+        "countries|日本人": [
+            { jp: "彼女は＿＿＿＿です。", es: "Ella es japonesa." }
+        ],
+        "countries|日本語": [
+            { jp: "毎日＿＿＿＿を勉強します。", es: "Estudio japonés todos los días." }
+        ],
+        "countries|英語": [
+            { jp: "彼は＿＿＿＿が上手です。", es: "Él habla bien inglés." }
+        ],
+        "countries|イギリス人": [
+            { jp: "彼女は＿＿＿＿です。", es: "Ella es inglesa." }
+        ],
+        "countries|フランス語": [
+            { jp: "大学で＿＿＿＿を習っています。", es: "Estoy aprendiendo francés en la universidad." }
+        ],
+        "countries|ドイツ語": [
+            { jp: "＿＿＿＿は難しいと聞きました。", es: "He oído que el alemán es difícil." }
+        ],
+        "countries|中国語": [
+            { jp: "彼は＿＿＿＿を話せます。", es: "Él puede hablar chino." }
+        ],
+        "countries|韓国語": [
+            { jp: "＿＿＿＿の授業を取っています。", es: "Estoy tomando clases de coreano." }
+        ],
+        "countries|外国人": [
+            { jp: "この町には＿＿＿＿が多いです。", es: "En esta ciudad hay muchos extranjeros." }
+        ],
+        "countries|国": [
+            { jp: "あなたの＿＿＿＿はどこですか。", es: "¿Cuál es tu país?" }
+        ],
+        "countries|言語": [
+            { jp: "いくつの＿＿＿＿を話せますか。", es: "¿Cuántos idiomas puedes hablar?" }
+        ],
+        "countries|話す": [
+            { jp: "彼は日本語を＿＿＿＿ことができます。", es: "Él puede hablar japonés." }
+        ],
+        "countries|分かる": [
+            { jp: "英語が少し＿＿＿＿。", es: "Entiendo un poco de inglés." }
+        ],
+        "countries|習う": [
+            { jp: "学校で英語を＿＿＿＿。", es: "Aprendo inglés en la escuela." }
+        ],
+        "countries|教える": [
+            { jp: "彼は日本語を＿＿＿＿ています。", es: "Él enseña japonés." }
+        ],
+
+        // --- Frases añadidas: nature, animals, japan, connectors, quantifiers --- //
+        "nature|自然": [
+            { jp: "この町は＿＿＿＿が豊かです。", es: "Este pueblo tiene una naturaleza rica." }
+        ],
+        "nature|木": [
+            { jp: "公園に大きい＿＿＿＿があります。", es: "En el parque hay un árbol grande." }
+        ],
+        "nature|花": [
+            { jp: "庭に＿＿＿＿が咲いています。", es: "En el jardín están floreciendo flores." }
+        ],
+        "nature|草": [
+            { jp: "＿＿＿＿を刈りました。", es: "Corté la hierba." }
+        ],
+        "nature|森": [
+            { jp: "＿＿＿＿を散歩しました。", es: "Paseé por el bosque." }
+        ],
+        "nature|山": [
+            { jp: "週末に＿＿＿＿に登ります。", es: "Este fin de semana subiré a la montaña." }
+        ],
+        "nature|丘": [
+            { jp: "＿＿＿＿の上から町が見えます。", es: "Desde lo alto de la colina se ve el pueblo." }
+        ],
+        "nature|川": [
+            { jp: "この＿＿＿＿はとてもきれいです。", es: "Este río es muy limpio." }
+        ],
+        "nature|湖": [
+            { jp: "＿＿＿＿の周りを歩きました。", es: "Caminé alrededor del lago." }
+        ],
+        "nature|海": [
+            { jp: "夏は＿＿＿＿に行きます。", es: "En verano voy al mar." }
+        ],
+        "nature|ビーチ": [
+            { jp: "＿＿＿＿でのんびりしました。", es: "Me relajé en la playa." }
+        ],
+        "nature|島": [
+            { jp: "小さい＿＿＿＿に住んでいます。", es: "Vivo en una isla pequeña." }
+        ],
+        "nature|田舎": [
+            { jp: "祖父母は＿＿＿＿に住んでいます。", es: "Mis abuelos viven en el campo." }
+        ],
+        "nature|空": [
+            { jp: "今日の＿＿＿＿は青いです。", es: "El cielo de hoy está azul." }
+        ],
+        "nature|雲": [
+            { jp: "＿＿＿＿が多くなってきました。", es: "Ha empezado a haber más nubes." }
+        ],
+        "nature|太陽": [
+            { jp: "＿＿＿＿が眩しいです。", es: "El sol deslumbra." }
+        ],
+        "nature|月": [
+            { jp: "今夜の＿＿＿＿はきれいです。", es: "La luna de esta noche está bonita." }
+        ],
+        "nature|星": [
+            { jp: "夜空に＿＿＿＿がたくさん見えます。", es: "Se ven muchas estrellas en el cielo nocturno." }
+        ],
+        "nature|日の出": [
+            { jp: "＿＿＿＿を見に山へ行きました。", es: "Fui a la montaña a ver el amanecer." }
+        ],
+        "nature|夕焼け": [
+            { jp: "今日の＿＿＿＿はとてもきれいでした。", es: "El atardecer de hoy fue muy bonito." }
+        ],
+        "nature|景色": [
+            { jp: "この山からの＿＿＿＿は素晴らしいです。", es: "El paisaje desde esta montaña es maravilloso." }
+        ],
+        "nature|石": [
+            { jp: "川で＿＿＿＿を拾いました。", es: "Recogí una piedra en el río." }
+        ],
+
+        "animals|動物": [
+            { jp: "動物園でいろいろな＿＿＿＿を見ました。", es: "Vi varios animales en el zoo." }
+        ],
+        "animals|犬": [
+            { jp: "私の家には＿＿＿＿がいます。", es: "En mi casa tengo un perro." }
+        ],
+        "animals|猫": [
+            { jp: "＿＿＿＿が好きです。", es: "Me gustan los gatos." }
+        ],
+        "animals|鳥": [
+            { jp: "空を＿＿＿＿が飛んでいます。", es: "Un pájaro está volando por el cielo." }
+        ],
+        "animals|魚": [
+            { jp: "川で＿＿＿＿を釣りました。", es: "Pesqué un pez en el río." }
+        ],
+        "animals|馬": [
+            { jp: "＿＿＿＿に乗ったことがあります。", es: "He montado a caballo alguna vez." }
+        ],
+        "animals|牛": [
+            { jp: "牧場に＿＿＿＿がたくさんいます。", es: "Hay muchas vacas en la granja." }
+        ],
+        "animals|豚": [
+            { jp: "この農場では＿＿＿＿を育てています。", es: "En esta granja crían cerdos." }
+        ],
+        "animals|猿": [
+            { jp: "山で＿＿＿＿を見ました。", es: "Vi un mono en la montaña." }
+        ],
+        "animals|狐": [
+            { jp: "神社の前に＿＿＿＿の像があります。", es: "Delante del santuario hay una estatua de zorro." }
+        ],
+        "animals|鹿": [
+            { jp: "奈良には＿＿＿＿がたくさんいます。", es: "En Nara hay muchos ciervos." }
+        ],
+        "animals|熊": [
+            { jp: "山で＿＿＿＿に注意してください。", es: "Tenga cuidado con los osos en la montaña." }
+        ],
+        "animals|兎": [
+            { jp: "動物園で＿＿＿＿を触りました。", es: "Acaricié un conejo en el zoo." }
+        ],
+        "animals|虫": [
+            { jp: "夏は＿＿＿＿が多いです。", es: "En verano hay muchos insectos." }
+        ],
+        "animals|蝶": [
+            { jp: "花の周りに＿＿＿＿が飛んでいます。", es: "Hay una mariposa volando alrededor de las flores." }
+        ],
+        "animals|蚊": [
+            { jp: "＿＿＿＿に刺されました。", es: "Me picó un mosquito." }
+        ],
+        "animals|蜂": [
+            { jp: "庭で＿＿＿＿を見つけました。", es: "Encontré una abeja en el jardín." }
+        ],
+        "animals|蛇": [
+            { jp: "＿＿＿＿が怖いです。", es: "Las serpientes me dan miedo." }
+        ],
+        "animals|野生動物": [
+            { jp: "この森には＿＿＿＿がたくさんいます。", es: "En este bosque hay muchos animales salvajes." }
+        ],
+        "animals|ペット": [
+            { jp: "＿＿＿＿を飼っていますか。", es: "¿Tienes alguna mascota?" }
+        ],
+
+        "japan|コンビニ": [
+            { jp: "＿＿＿＿でお弁当を買いました。", es: "Compré un bento en la tienda de conveniencia." }
+        ],
+        "japan|お土産": [
+            { jp: "家族に＿＿＿＿を買いました。", es: "Compré souvenirs para mi familia." }
+        ],
+        "japan|祭り": [
+            { jp: "夏に＿＿＿＿があります。", es: "En verano hay un festival." }
+        ],
+        "japan|花火": [
+            { jp: "夜に＿＿＿＿を見ました。", es: "Vi fuegos artificiales por la noche." }
+        ],
+        "japan|桜": [
+            { jp: "春には＿＿＿＿がきれいです。", es: "En primavera las flores de cerezo son bonitas." }
+        ],
+        "japan|紅葉": [
+            { jp: "秋は＿＿＿＿が見ごろです。", es: "En otoño es la mejor época para ver las hojas otoñales." }
+        ],
+        "japan|弁当": [
+            { jp: "毎日＿＿＿＿を作ります。", es: "Preparo un bento todos los días." }
+        ],
+        "japan|お握り": [
+            { jp: "コンビニで＿＿＿＿を買いました。", es: "Compré un onigiri en la tienda de conveniencia." }
+        ],
+        "japan|お寺": [
+            { jp: "京都には有名な＿＿＿＿があります。", es: "En Kioto hay un templo famoso." }
+        ],
+        "japan|神社": [
+            { jp: "初詣に＿＿＿＿へ行きました。", es: "Fui a un santuario para la primera visita del año." }
+        ],
+        "japan|鳥居": [
+            { jp: "＿＿＿＿をくぐりました。", es: "Pasé por debajo del torii." }
+        ],
+        "japan|お守り": [
+            { jp: "旅行の安全を願って＿＿＿＿を買いました。", es: "Compré un amuleto deseando un viaje seguro." }
+        ],
+        "japan|おみくじ": [
+            { jp: "神社で＿＿＿＿を引きました。", es: "Saqué una fortuna en el santuario." }
+        ],
+        "japan|温泉": [
+            { jp: "冬は＿＿＿＿に入りたいです。", es: "En invierno quiero entrar en un baño termal." }
+        ],
+        "japan|浴衣": [
+            { jp: "夏祭りで＿＿＿＿を着ました。", es: "Me puse un yukata en el festival de verano." }
+        ],
+        "japan|着物": [
+            { jp: "＿＿＿＿を着て写真を撮りました。", es: "Me hice una foto vestido con kimono." }
+        ],
+        "japan|畳": [
+            { jp: "この部屋には＿＿＿＿があります。", es: "Esta habitación tiene tatami." }
+        ],
+        "japan|和室": [
+            { jp: "旅館の＿＿＿＿に泊まりました。", es: "Me alojé en una habitación japonesa del ryokan." }
+        ],
+        "japan|日本文化": [
+            { jp: "＿＿＿＿に興味があります。", es: "Me interesa la cultura japonesa." }
+        ],
+        "japan|武道": [
+            { jp: "彼は＿＿＿＿を習っています。", es: "Él está aprendiendo artes marciales." }
+        ],
+        "japan|アニメ": [
+            { jp: "日本の＿＿＿＿が好きです。", es: "Me gusta el anime japonés." }
+        ],
+        "japan|漫画": [
+            { jp: "この＿＿＿＿はとても面白いです。", es: "Este manga es muy interesante." }
+        ],
+        "japan|カラオケ": [
+            { jp: "友達と＿＿＿＿に行きました。", es: "Fui a karaoke con mis amigos." }
+        ],
+        "japan|居酒屋": [
+            { jp: "仕事の後、＿＿＿＿で飲みました。", es: "Después del trabajo bebimos en un izakaya." }
+        ],
+
+        "connectors|と / そして": [
+            { jp: "コーヒー＿＿＿＿紅茶があります。", es: "Hay café y té." }
+        ],
+        "connectors|でも": [
+            { jp: "行きたいです。＿＿＿＿お金がありません。", es: "Quiero ir. Pero no tengo dinero." }
+        ],
+        "connectors|から": [
+            { jp: "眠い＿＿＿＿早く寝ます。", es: "Tengo sueño, así que me voy a dormir pronto." }
+        ],
+        "connectors|だから": [
+            { jp: "雨です。＿＿＿＿、傘を持っていきます。", es: "Está lloviendo. Por eso llevaré paraguas." }
+        ],
+        "connectors|じゃあ / それで": [
+            { jp: "分かりました。＿＿＿＿、始めましょう。", es: "Entendido. Entonces, empecemos." }
+        ],
+        "connectors|も": [
+            { jp: "私＿＿＿＿行きます。", es: "Yo también voy." }
+        ],
+        "connectors|未だ": [
+            { jp: "彼は＿＿＿＿来ていません。", es: "Él todavía no ha venido." }
+        ],
+        "connectors|もう": [
+            { jp: "宿題は＿＿＿＿終わりました。", es: "Ya he terminado los deberes." }
+        ],
+        "connectors|多分": [
+            { jp: "＿＿＿＿彼は忙しいです。", es: "Quizás él esté ocupado." }
+        ],
+        "connectors|本当に": [
+            { jp: "それは＿＿＿＿すごいですね。", es: "Eso es realmente increíble." }
+        ],
+        "connectors|だけ": [
+            { jp: "少し＿＿＿＿食べました。", es: "Comí solamente un poco." }
+        ],
+        "connectors|ぐらい / くらい": [
+            { jp: "十分＿＿＿＿待ちました。", es: "Esperé aproximadamente diez minutos." }
+        ],
+        "connectors|さえ / でも": [
+            { jp: "子供＿＿＿＿分かります。", es: "Incluso un niño lo entiende." }
+        ],
+        "connectors|又": [
+            { jp: "彼は英語＿＿＿＿フランス語も話せます。", es: "Él habla inglés y además francés." }
+        ],
+        "connectors|然し": [
+            { jp: "頑張りました。＿＿＿＿、失敗しました。", es: "Me esforcé. Sin embargo, fallé." }
+        ],
+        "connectors|その上": [
+            { jp: "雨が降っています。＿＿＿＿、風も強いです。", es: "Está lloviendo. Además, el viento es fuerte." }
+        ],
+        "connectors|まず": [
+            { jp: "＿＿＿＿手を洗ってください。", es: "Primero, lávese las manos." }
+        ],
+        "connectors|最後に": [
+            { jp: "＿＿＿＿デザートを食べました。", es: "Finalmente comimos postre." }
+        ],
+        "connectors|一緒に": [
+            { jp: "＿＿＿＿映画を見ましょう。", es: "Veamos una película juntos." }
+        ],
+
+        "quantifiers|十ぐらい": [
+            { jp: "りんごが＿＿＿＿あります。", es: "Hay aproximadamente 10 manzanas." }
+        ],
+        "quantifiers|少し": [
+            { jp: "パンが＿＿＿＿残っています。", es: "Quedan unos pocos panes." }
+        ],
+        "quantifiers|幾つか": [
+            { jp: "質問が＿＿＿＿あります。", es: "Tengo varias preguntas." }
+        ],
+        "quantifiers|何度も": [
+            { jp: "＿＿＿＿説明しました。", es: "Lo expliqué muchas veces." }
+        ],
+        "quantifiers|何回か": [
+            { jp: "京都には＿＿＿＿行きました。", es: "He ido a Kioto varias veces." }
+        ],
+        "quantifiers|一回": [
+            { jp: "一日に＿＿＿＿薬を飲みます。", es: "Tomo la medicina una vez al día." }
+        ],
+        "quantifiers|二回": [
+            { jp: "この映画を＿＿＿＿見ました。", es: "Vi esta película dos veces." }
+        ],
+        "quantifiers|初めて": [
+            { jp: "＿＿＿＿日本に来ました。", es: "Vine a Japón por primera vez." }
+        ],
+        "quantifiers|二度目": [
+            { jp: "これは＿＿＿＿の挑戦です。", es: "Este es el segundo intento." }
+        ],
+        "quantifiers|三日間": [
+            { jp: "＿＿＿＿旅行しました。", es: "Viajé durante tres días." }
+        ],
+        "quantifiers|一週間": [
+            { jp: "＿＿＿＿休みました。", es: "Descansé durante una semana." }
+        ],
+        "quantifiers|から": [
+            { jp: "九時＿＿＿＿仕事です。", es: "Trabajo desde las nueve." }
+        ],
+        "quantifiers|まで": [
+            { jp: "五時＿＿＿＿働きます。", es: "Trabajo hasta las cinco." }
+        ],
+        "quantifiers|から…まで": [
+            { jp: "月曜日＿＿＿＿金曜日まで働きます。", es: "Trabajo de lunes a viernes." }
+        ],
+        "quantifiers|約": [
+            { jp: "＿＿＿＿百人が参加しました。", es: "Participaron aproximadamente cien personas." }
+        ],
+        "quantifiers|ぐらい": [
+            { jp: "駅まで十分＿＿＿＿かかります。", es: "Se tarda unos diez minutos hasta la estación." }
+        ],
+        "quantifiers|大体": [
+            { jp: "＿＿＿＿分かりました。", es: "Lo entendí más o menos." }
+        ],
+        "quantifiers|半分": [
+            { jp: "ケーキの＿＿＿＿を食べました。", es: "Me comí la mitad de la tarta." }
+        ],
+        "quantifiers|二倍": [
+            { jp: "去年の＿＿＿＿の値段になりました。", es: "El precio se ha vuelto el doble que el año pasado." }
+        ],
+        "quantifiers|三倍": [
+            { jp: "この量は前の＿＿＿＿です。", es: "Esta cantidad es el triple de la anterior." }
+        ],
+
+        // --- Frases añadidas: nuances, formal, listening, polysemy --- //
+        "nuances|ちょっと": [
+            { jp: "それは＿＿＿＿困ります。", es: "Eso es un poco complicado (rechazo indirecto)." }
+        ],
+        "nuances|もう": [
+            { jp: "＿＿＿＿一つください。", es: "Deme uno más, por favor." }
+        ],
+        "nuances|未だ": [
+            { jp: "彼は＿＿＿＿子供です。", es: "Él todavía es un niño." }
+        ],
+        "nuances|ちゃんと": [
+            { jp: "＿＿＿＿勉強してください。", es: "Estudie correctamente, por favor." }
+        ],
+        "nuances|本当に": [
+            { jp: "＿＿＿＿ありがとう。", es: "Muchas gracias de verdad." }
+        ],
+        "nuances|結構": [
+            { jp: "この店は＿＿＿＿人気です。", es: "Esta tienda es bastante popular." }
+        ],
+        "nuances|大丈夫": [
+            { jp: "この量なら＿＿＿＿です。", es: "Con esta cantidad está bien." }
+        ],
+        "nuances|良い": [
+            { jp: "この案は＿＿＿＿と思います。", es: "Creo que esta propuesta es buena." }
+        ],
+        "nuances|済みません": [
+            { jp: "＿＿＿＿、道を教えてください。", es: "Disculpe, indíqueme el camino, por favor." }
+        ],
+        "nuances|ずっと": [
+            { jp: "彼のことが＿＿＿＿好きでした。", es: "Me ha gustado mucho durante mucho tiempo." }
+        ],
+        "nuances|可成り": [
+            { jp: "この問題は＿＿＿＿難しいです。", es: "Este problema es bastante difícil." }
+        ],
+        "nuances|多分": [
+            { jp: "＿＿＿＿彼は来ません。", es: "Probablemente él no venga." }
+        ],
+        "nuances|大体": [
+            { jp: "話は＿＿＿＿分かりました。", es: "Entendí más o menos de qué iba la historia." }
+        ],
+
+        "formal|ありがとうございます": [
+            { jp: "本当に＿＿＿＿。", es: "Muchas gracias de verdad (formal)." }
+        ],
+        "formal|ありがとう": [
+            { jp: "手伝ってくれて＿＿＿＿。", es: "Gracias por ayudarme (informal)." }
+        ],
+        "formal|おはようございます": [
+            { jp: "皆さん、＿＿＿＿。", es: "Buenos días a todos (formal)." }
+        ],
+        "formal|おはよう": [
+            { jp: "＿＿＿＿、よく眠れた？", es: "Buenos días, ¿dormiste bien? (informal)" }
+        ],
+        "formal|そうですね": [
+            { jp: "＿＿＿＿、賛成です。", es: "Sí, tiene razón, estoy de acuerdo (formal)." }
+        ],
+        "formal|そうだね": [
+            { jp: "うん、＿＿＿＿。", es: "Sí, es verdad (informal)." }
+        ],
+        "formal|だいじょうぶです": [
+            { jp: "この時間で＿＿＿＿。", es: "Con esta hora está bien (formal)." }
+        ],
+        "formal|わかります": [
+            { jp: "その気持ちが＿＿＿＿。", es: "Entiendo ese sentimiento (formal)." }
+        ],
+        "formal|わかる": [
+            { jp: "その気持ち、＿＿＿＿。", es: "Entiendo ese sentimiento (informal)." }
+        ],
+        "formal|わかりません": [
+            { jp: "すみません、＿＿＿＿。", es: "Disculpe, no lo entiendo (formal)." }
+        ],
+        "formal|わからない": [
+            { jp: "答えが＿＿＿＿。", es: "No sé la respuesta (informal)." }
+        ],
+        "formal|ほしいです": [
+            { jp: "新しいパソコンが＿＿＿＿。", es: "Quiero un ordenador nuevo (formal)." }
+        ],
+        "formal|ほしい": [
+            { jp: "もっと時間が＿＿＿＿。", es: "Quiero más tiempo (informal)." }
+        ],
+        "formal|できます": [
+            { jp: "日本語が少し＿＿＿＿。", es: "Puedo hablar un poco de japonés (formal)." }
+        ],
+        "formal|できる": [
+            { jp: "この問題なら＿＿＿＿。", es: "Este problema sí lo puedo resolver (informal)." }
+        ],
+        "formal|できません": [
+            { jp: "今日は参加＿＿＿＿。", es: "Hoy no puedo participar (formal)." }
+        ],
+        "formal|できない": [
+            { jp: "それは私には＿＿＿＿。", es: "Eso yo no puedo hacerlo (informal)." }
+        ],
+        "formal|いきます": [
+            { jp: "明日、学校へ＿＿＿＿。", es: "Mañana voy a la escuela (formal)." }
+        ],
+        "formal|いく": [
+            { jp: "一緒に＿＿＿＿？", es: "¿Vamos juntos? (informal)" }
+        ],
+        "formal|きます": [
+            { jp: "友達が家に＿＿＿＿。", es: "Un amigo viene a casa (formal)." }
+        ],
+        "formal|くる": [
+            { jp: "彼女はもうすぐ＿＿＿＿。", es: "Ella vendrá pronto (informal)." }
+        ],
+        "formal|します": [
+            { jp: "宿題を＿＿＿＿。", es: "Hago los deberes (formal)." }
+        ],
+        "formal|する": [
+            { jp: "何を＿＿＿＿の？", es: "¿Qué vas a hacer? (informal)" }
+        ],
+        "formal|たべます": [
+            { jp: "朝ご飯を＿＿＿＿。", es: "Como el desayuno (formal)." }
+        ],
+        "formal|たべる": [
+            { jp: "一緒に＿＿＿＿？", es: "¿Comemos juntos? (informal)" }
+        ],
+        "formal|のみます": [
+            { jp: "水を＿＿＿＿。", es: "Bebo agua (formal)." }
+        ],
+        "formal|のむ": [
+            { jp: "コーヒーを＿＿＿＿？", es: "¿Tomas café? (informal)" }
+        ],
+        "formal|なんですか": [
+            { jp: "これは＿＿＿＿。", es: "¿Qué es esto? (formal)" }
+        ],
+        "formal|なに？": [
+            { jp: "それ、＿＿＿＿。", es: "¿Qué es eso? (informal)" }
+        ],
+        "formal|どうしてですか": [
+            { jp: "遅刻したのは＿＿＿＿。", es: "¿Por qué llegó tarde? (formal)" }
+        ],
+        "formal|なんで？": [
+            { jp: "＿＿＿＿来なかったの？", es: "¿Por qué no viniste? (informal)" }
+        ],
+        "formal|まってください": [
+            { jp: "少し＿＿＿＿。", es: "Espere un momento, por favor (formal)." }
+        ],
+        "formal|まって": [
+            { jp: "＿＿＿＿、忘れ物した。", es: "Espera, se me olvidó algo (informal)." }
+        ],
+        "formal|いきましょう": [
+            { jp: "そろそろ＿＿＿＿。", es: "Vayamos ya (formal)." }
+        ],
+        "formal|いこう": [
+            { jp: "映画に＿＿＿＿。", es: "Vamos al cine (informal)." }
+        ],
+        "formal|じゃあ": [
+            { jp: "＿＿＿＿、始めましょう。", es: "Entonces, empecemos." }
+        ],
+        "formal|っていう": [
+            { jp: "田中さん＿＿＿＿人を知っていますか。", es: "¿Conoces a una persona que se llama Tanaka?" }
+        ],
+        "formal|てる": [
+            { jp: "今、勉強し＿＿＿＿。", es: "Ahora estoy estudiando." }
+        ],
+        "formal|ちゃう": [
+            { jp: "全部食べ＿＿＿＿。", es: "Me lo acabé comiendo todo." }
+        ],
+        "formal|なきゃ": [
+            { jp: "早く帰ら＿＿＿＿。", es: "Tengo que volver pronto." }
+        ],
+        "formal|ってこと": [
+            { jp: "それは無理＿＿＿＿ですね。", es: "Eso quiere decir que es imposible, ¿no?" }
+        ],
+        "formal|わかんない": [
+            { jp: "答えが＿＿＿＿。", es: "No entiendo la respuesta." }
+        ],
+        "formal|すげえ": [
+            { jp: "これ＿＿＿＿な。", es: "Esto es increíble." }
+        ],
+        "formal|マジで / ほんとに": [
+            { jp: "＿＿＿＿疲れた。", es: "Estoy de verdad cansado." }
+        ],
+
+        "listening|ありがとーございます": [
+            { jp: "手伝ってくれて＿＿＿＿。", es: "Gracias por ayudarme (pronunciación reducida)." }
+        ],
+        "listening|すいません": [
+            { jp: "＿＿＿＿、遅れました。", es: "Disculpe, llegué tarde (reducido)." }
+        ],
+        "listening|わかんない": [
+            { jp: "この漢字が＿＿＿＿。", es: "No entiendo este kanji (reducido)." }
+        ],
+        "listening|てる": [
+            { jp: "今、走っ＿＿＿＿んだ。", es: "Ahora estoy corriendo." }
+        ],
+        "listening|てた": [
+            { jp: "さっきまで勉強し＿＿＿＿。", es: "Hasta hace un momento estaba estudiando." }
+        ],
+        "listening|じゃない": [
+            { jp: "それは本当＿＿＿＿？", es: "¿Eso no es verdad?" }
+        ],
+        "listening|じゃありません": [
+            { jp: "これは私のもの＿＿＿＿。", es: "Esto no es mío (formal reducido)." }
+        ],
+        "listening|っていう": [
+            { jp: "先生＿＿＿＿人が来た。", es: "Vino una persona llamada 'profesor'." }
+        ],
+        "listening|ってこと": [
+            { jp: "つまり無理＿＿＿＿？", es: "O sea, ¿eso significa que es imposible?" }
+        ],
+        "listening|なきゃ": [
+            { jp: "もう行か＿＿＿＿。", es: "Ya tengo que irme." }
+        ],
+        "listening|なきゃいけない": [
+            { jp: "宿題をやら＿＿＿＿。", es: "Tengo que hacer los deberes sí o sí." }
+        ],
+        "listening|ちゃう": [
+            { jp: "また忘れ＿＿＿＿。", es: "Otra vez se me olvidó (sin querer)." }
+        ],
+        "listening|じゃう": [
+            { jp: "全部飲ん＿＿＿＿。", es: "Me lo bebí todo (sin querer)." }
+        ],
+        "listening|なきゃならない": [
+            { jp: "明日早く起き＿＿＿＿。", es: "Mañana tengo que levantarme temprano sí o sí." }
+        ],
+
+        "polysemy|いい": [
+            { jp: "このレストランは＿＿＿＿ですね。", es: "Este restaurante está bien, ¿verdad?" }
+        ],
+        "polysemy|ちょっと": [
+            { jp: "＿＿＿＿待ってください。", es: "Espere un momento, por favor." }
+        ],
+        "polysemy|取る": [
+            { jp: "その本を＿＿＿＿ください。", es: "Coja ese libro, por favor." }
+        ],
+        "polysemy|入る": [
+            { jp: "この財布に硬貨が＿＿＿＿。", es: "En esta cartera caben monedas." }
+        ],
+        "polysemy|出る": [
+            { jp: "テレビに有名人が＿＿＿＿。", es: "Salió un famoso en la tele." }
+        ],
+        "polysemy|かける": [
+            { jp: "壁に絵を＿＿＿＿。", es: "Colgué un cuadro en la pared." }
+        ],
+        "polysemy|する": [
+            { jp: "宿題を＿＿＿＿つもりです。", es: "Voy a hacer los deberes." }
+        ],
+        "polysemy|なる": [
+            { jp: "医者に＿＿＿＿たいです。", es: "Quiero llegar a ser médico." }
+        ],
+        "polysemy|置く": [
+            { jp: "机の上に本を＿＿＿＿。", es: "Pongo el libro encima de la mesa." }
+        ],
+        "polysemy|開く": [
+            { jp: "新しい店が＿＿＿＿。", es: "Se inauguró una tienda nueva." }
+        ],
+        "polysemy|閉じる": [
+            { jp: "本を＿＿＿＿ください。", es: "Cierre el libro, por favor." }
+        ],
+        "polysemy|切る": [
+            { jp: "野菜を＿＿＿＿。", es: "Corto las verduras." }
+        ],
+        "polysemy|付く": [
+            { jp: "電気が＿＿＿＿ました。", es: "Se encendió la luz." }
+        ],
+        "polysemy|付ける": [
+            { jp: "名前を＿＿＿＿ました。", es: "Le puse un nombre." }
+        ],
+        "polysemy|落ちる": [
+            { jp: "試験に＿＿＿＿しまいました。", es: "Suspendí el examen." }
+        ],
+        "polysemy|上がる": [
+            { jp: "値段が＿＿＿＿ました。", es: "El precio subió." }
+        ],
+        "polysemy|下がる": [
+            { jp: "気温が＿＿＿＿ました。", es: "La temperatura bajó." }
+        ],
+        "polysemy|かかる": [
+            { jp: "駅まで十分＿＿＿＿。", es: "Se tarda diez minutos hasta la estación." }
+        ],
+        "polysemy|分かる": [
+            { jp: "その意味が＿＿＿＿。", es: "Entiendo ese significado." }
+        ],
+        "polysemy|聞く": [
+            { jp: "音楽を＿＿＿＿のが好きです。", es: "Me gusta escuchar música." }
+        ],
+        "polysemy|見る": [
+            { jp: "映画を＿＿＿＿ましょう。", es: "Veamos una película." }
+        ],
+        "polysemy|言う": [
+            { jp: "彼は何も＿＿＿＿ませんでした。", es: "Él no dijo nada." }
+        ],
+        "polysemy|思う": [
+            { jp: "それは正しいと＿＿＿＿。", es: "Pienso que eso es correcto." }
+        ],
+        "polysemy|知る": [
+            { jp: "そのニュースを＿＿＿＿いますか。", es: "¿Sabes esa noticia?" }
+        ],
+        "polysemy|使う": [
+            { jp: "このペンを＿＿＿＿もいいですか。", es: "¿Puedo usar este bolígrafo?" }
+        ],
+
+        // --- Frases añadidas: casual --- //
+        "casual|私": [
+            { jp: "＿＿＿＿は学生です。", es: "Yo soy estudiante." }
+        ],
+        "casual|僕": [
+            { jp: "＿＿＿＿は毎日走ります。", es: "Yo corro todos los días (masculino, informal)." }
+        ],
+        "casual|俺": [
+            { jp: "＿＿＿＿がやる。", es: "Yo lo haré (masculino, muy informal)." }
+        ],
+        "casual|あなた": [
+            { jp: "＿＿＿＿はどう思いますか。", es: "¿Qué opinas tú?" }
+        ],
+        "casual|君": [
+            { jp: "＿＿＿＿の名前は何？", es: "¿Cómo te llamas tú?" }
+        ],
+        "casual|彼": [
+            { jp: "＿＿＿＿は先生です。", es: "Él es profesor." }
+        ],
+        "casual|彼女": [
+            { jp: "＿＿＿＿は看護師です。", es: "Ella es enfermera." }
+        ],
+        "casual|みんな": [
+            { jp: "＿＿＿＿で行きましょう。", es: "Vayamos todos juntos." }
+        ],
+        "casual|自分": [
+            { jp: "＿＿＿＿でやります。", es: "Lo haré yo mismo." }
+        ],
+        "casual|ね": [
+            { jp: "今日は暑いです＿＿＿＿。", es: "Hoy hace calor, ¿verdad?" }
+        ],
+        "casual|よ": [
+            { jp: "もう終わりました＿＿＿＿。", es: "Ya terminó, ¿sabes?" }
+        ],
+        "casual|よね": [
+            { jp: "明日休みです＿＿＿＿。", es: "Mañana es día libre, ¿verdad?" }
+        ],
+        "casual|さ": [
+            { jp: "それでいい＿＿＿＿。", es: "Con eso vale, ¿eh?" }
+        ],
+        "casual|かな": [
+            { jp: "明日は晴れる＿＿＿＿。", es: "Me pregunto si mañana hará sol." }
+        ],
+        "casual|けど": [
+            { jp: "行きたい＿＿＿＿時間がない。", es: "Quiero ir, pero no tengo tiempo." }
+        ],
+        "casual|でも": [
+            { jp: "好きです。＿＿＿＿高いです。", es: "Me gusta. Pero es caro." }
+        ],
+        "casual|だから": [
+            { jp: "疲れた。＿＿＿＿休みたい。", es: "Estoy cansado. Por eso quiero descansar." }
+        ],
+        "casual|じゃあ": [
+            { jp: "＿＿＿＿、また明日。", es: "Bueno, pues hasta mañana." }
+        ],
+        "casual|まあ": [
+            { jp: "＿＿＿＿、いいか。", es: "Bueno... supongo que está bien." }
+        ],
+        "casual|なんか": [
+            { jp: "＿＿＿＿疲れた。", es: "Estoy como cansado (sin razón clara)." }
+        ],
+        "casual|ちょっと": [
+            { jp: "＿＿＿＿待って。", es: "Espera un momento." }
+        ],
+        "casual|やっぱり": [
+            { jp: "＿＿＿＿行くのをやめた。", es: "Al final decidí no ir, como pensaba." }
+        ],
+        "casual|たぶん": [
+            { jp: "＿＿＿＿大丈夫。", es: "Probablemente esté bien." }
+        ],
+        "casual|本当に": [
+            { jp: "それ＿＿＿＿すごいね。", es: "Eso es realmente increíble." }
+        ],
+        "casual|すごく": [
+            { jp: "＿＿＿＿楽しかった。", es: "Fue muchísimo divertido." }
+        ],
+        "casual|めっちゃ": [
+            { jp: "これ＿＿＿＿おいしい。", es: "Esto está súper rico." }
+        ],
+        "casual|全然": [
+            { jp: "＿＿＿＿問題ない。", es: "No hay ningún problema en absoluto." }
+        ],
+        "casual|かなり": [
+            { jp: "この本は＿＿＿＿面白い。", es: "Este libro es bastante interesante." }
+        ],
+        "casual|結構": [
+            { jp: "この店は＿＿＿＿人気だよ。", es: "Esta tienda es bastante popular, ¿sabes?" }
+        ],
+        "casual|ほぼ": [
+            { jp: "宿題は＿＿＿＿終わった。", es: "Los deberes están prácticamente terminados." }
+        ],
+        "casual|とりあえず": [
+            { jp: "＿＿＿＿これでいこう。", es: "De momento, vayamos con esto." }
+        ],
+        "casual|え？": [
+            { jp: "＿＿＿＿、本当？", es: "¿Eh? ¿De verdad?" }
+        ],
+        "casual|えっ？": [
+            { jp: "＿＿＿＿、聞いてない！", es: "¿Qué? ¡No me habían dicho nada!" }
+        ],
+        "casual|ああ": [
+            { jp: "＿＿＿＿、そうだった。", es: "Ah, es verdad, se me olvidó." }
+        ],
+        "casual|へえ": [
+            { jp: "＿＿＿＿、知らなかった。", es: "Vaya, no lo sabía." }
+        ],
+        "casual|そう？": [
+            { jp: "＿＿＿＿、じゃあやめよう。", es: "¿Ah, sí? Entonces dejémoslo." }
+        ],
+        "casual|そうなんだ": [
+            { jp: "＿＿＿＿、初めて聞いた。", es: "Ah, ya veo, es la primera vez que lo oigo." }
+        ],
+        "casual|そうだね": [
+            { jp: "うん、＿＿＿＿。", es: "Sí, es verdad." }
+        ],
+        "casual|ほんと？": [
+            { jp: "＿＿＿＿、やったね！", es: "¿De verdad? ¡Genial!" }
+        ],
+        "casual|マジ？": [
+            { jp: "＿＿＿＿、信じられない。", es: "¿En serio? No me lo puedo creer." }
+        ],
+        "casual|マジで？": [
+            { jp: "＿＿＿＿、それはすごい。", es: "¿En serio? Eso es increíble." }
+        ],
+        "casual|うん": [
+            { jp: "＿＿＿＿、分かった。", es: "Sí, entendido." }
+        ],
+        "casual|ううん": [
+            { jp: "＿＿＿＿、違うよ。", es: "No, no es eso." }
+        ],
+        "casual|なるほど": [
+            { jp: "＿＿＿＿、そういうことか。", es: "Ya veo, así que era eso." }
+        ],
+        "casual|分かった": [
+            { jp: "うん、＿＿＿＿。", es: "Vale, entendido." }
+        ],
+        "casual|分からない": [
+            { jp: "その答えは＿＿＿＿。", es: "No sé/no entiendo esa respuesta." }
+        ],
+        "casual|知らない": [
+            { jp: "その人は＿＿＿＿。", es: "No conozco a esa persona." }
+        ],
+        "casual|いいね": [
+            { jp: "その案、＿＿＿＿！", es: "¡Esa propuesta mola!" }
+        ],
+        "casual|すごい": [
+            { jp: "これ＿＿＿＿ね。", es: "Esto es increíble, ¿eh?" }
+        ],
+        "casual|すごっ": [
+            { jp: "＿＿＿＿、速い！", es: "¡Qué fuerte, qué rápido!" }
+        ],
+        "casual|やばい": [
+            { jp: "この味、＿＿＿＿。", es: "Este sabor es brutal (increíble)." }
+        ],
+        "casual|かわいい": [
+            { jp: "この犬、＿＿＿＿。", es: "Este perro es una monada." }
+        ],
+        "casual|かっこいい": [
+            { jp: "あの人、＿＿＿＿。", es: "Esa persona mola mucho." }
+        ],
+        "casual|最高": [
+            { jp: "この旅行は＿＿＿＿だった。", es: "Este viaje fue genial." }
+        ],
+        "casual|最悪": [
+            { jp: "今日は＿＿＿＿だった。", es: "Hoy fue fatal." }
+        ],
+        "casual|何？": [
+            { jp: "それ、＿＿＿＿？", es: "¿Eso qué es?" }
+        ],
+        "casual|誰？": [
+            { jp: "あの人、＿＿＿＿？", es: "¿Quién es esa persona?" }
+        ],
+        "casual|どこ？": [
+            { jp: "トイレは＿＿＿＿？", es: "¿Dónde está el baño?" }
+        ],
+        "casual|いつ？": [
+            { jp: "パーティーは＿＿＿＿？", es: "¿Cuándo es la fiesta?" }
+        ],
+        "casual|なんで？": [
+            { jp: "＿＿＿＿来なかったの？", es: "¿Por qué no viniste?" }
+        ],
+        "casual|どうして？": [
+            { jp: "＿＿＿＿泣いてるの？", es: "¿Por qué estás llorando?" }
+        ],
+        "casual|どう？": [
+            { jp: "この服、＿＿＿＿？", es: "¿Qué tal esta ropa?" }
+        ],
+        "casual|どういう意味？": [
+            { jp: "それ、＿＿＿＿？", es: "¿Eso qué significa?" }
+        ],
+        "casual|どうする？": [
+            { jp: "雨だけど＿＿＿＿？", es: "Llueve, ¿qué hacemos?" }
+        ],
+        "casual|どうした？": [
+            { jp: "顔色が悪いよ、＿＿＿＿？", es: "Tienes mala cara, ¿qué te pasa?" }
+        ],
+        "casual|大丈夫？": [
+            { jp: "顔が赤いけど＿＿＿＿？", es: "Tienes la cara roja, ¿estás bien?" }
+        ],
+        "casual|本当？": [
+            { jp: "それ、＿＿＿＿？", es: "¿Eso es de verdad?" }
+        ],
+        "casual|いい？": [
+            { jp: "これでいい？＿＿＿＿", es: "¿Está bien así?" }
+        ],
+        "casual|行く？": [
+            { jp: "一緒に＿＿＿＿？", es: "¿Vamos juntos?" }
+        ],
+        "casual|食べる？": [
+            { jp: "これ、＿＿＿＿？", es: "¿Te comes esto?" }
+        ],
+        "casual|分かる？": [
+            { jp: "この問題、＿＿＿＿？", es: "¿Entiendes este problema?" }
+        ],
+        "casual|知ってる？": [
+            { jp: "その店、＿＿＿＿？", es: "¿Conoces esa tienda?" }
+        ],
+        "casual|食べる": [
+            { jp: "お昼、何＿＿＿＿？", es: "¿Qué vas a comer al mediodía?" }
+        ],
+        "casual|行く": [
+            { jp: "明日どこへ＿＿＿＿の？", es: "¿A dónde vas mañana?" }
+        ],
+        "casual|見る": [
+            { jp: "一緒に映画＿＿＿＿？", es: "¿Vemos una película juntos?" }
+        ],
+        "casual|飲む": [
+            { jp: "何か＿＿＿＿？", es: "¿Bebes algo?" }
+        ],
+        "casual|する": [
+            { jp: "今日は何＿＿＿＿の？", es: "¿Qué vas a hacer hoy?" }
+        ],
+        "casual|来る": [
+            { jp: "明日＿＿＿＿の？", es: "¿Vienes mañana?" }
+        ],
+        "casual|分かる": [
+            { jp: "これ、＿＿＿＿？", es: "¿Esto lo entiendes?" }
+        ],
+        "casual|知ってる": [
+            { jp: "その話、＿＿＿＿？", es: "¿Sabes esa historia?" }
+        ],
+        "casual|持ってる": [
+            { jp: "お金、＿＿＿＿？", es: "¿Llevas dinero?" }
+        ],
+        "casual|待ってる": [
+            { jp: "駅で＿＿＿＿よ。", es: "Te estoy esperando en la estación." }
+        ],
+        "casual|思ってる": [
+            { jp: "無理だと＿＿＿＿。", es: "Estoy pensando que es imposible." }
+        ],
+        "casual|てる": [
+            { jp: "今、勉強し＿＿＿＿。", es: "Ahora estoy estudiando." }
+        ],
+        "casual|じゃない": [
+            { jp: "それ、変＿＿＿＿？", es: "Eso es raro, ¿no?" }
+        ],
+        "casual|っていう": [
+            { jp: "田中＿＿＿＿人、知ってる？", es: "¿Conoces a una persona llamada Tanaka?" }
+        ],
+        "casual|なんていう名前？": [
+            { jp: "その犬、＿＿＿＿？", es: "Ese perro, ¿cómo se llama?" }
+        ],
+        "casual|っていうか": [
+            { jp: "＿＿＿＿、それ無理だよ。", es: "O mejor dicho, eso es imposible." }
+        ],
+        "casual|〜なきゃ": [
+            { jp: "もう帰ら＿＿＿＿。", es: "Ya tengo que volver." }
+        ],
+        "casual|〜ちゃう / 〜じゃう": [
+            { jp: "全部食べ＿＿＿＿。", es: "Me lo acabé comiendo todo (sin querer)." }
+        ],
+        "casual|ちょっと待って。": [
+            { jp: "＿＿＿＿", es: "Espera un momento." }
+        ],
+        "casual|ちょっと待ってね。": [
+            { jp: "＿＿＿＿", es: "Espera un momento, ¿vale?" }
+        ],
+        "casual|分かった。": [
+            { jp: "＿＿＿＿", es: "Vale, entendido." }
+        ],
+        "casual|わかんない。": [
+            { jp: "＿＿＿＿", es: "No lo sé/no entiendo." }
+        ],
+        "casual|知らない。": [
+            { jp: "＿＿＿＿", es: "No sé." }
+        ],
+        "casual|知らなかった。": [
+            { jp: "＿＿＿＿", es: "No lo sabía." }
+        ],
+        "casual|どうしよう。": [
+            { jp: "遅刻する！＿＿＿＿", es: "¡Voy a llegar tarde! ¿Qué hago?" }
+        ],
+        "casual|どうでもいい。": [
+            { jp: "そんなこと＿＿＿＿", es: "Eso me da igual." }
+        ],
+        "casual|いいよ。": [
+            { jp: "＿＿＿＿", es: "Vale, está bien." }
+        ],
+        "casual|いいじゃん。": [
+            { jp: "その考え、＿＿＿＿", es: "Esa idea está bien/mola." }
+        ],
+        "casual|大丈夫だよ。": [
+            { jp: "心配しないで。＿＿＿＿", es: "No te preocupes. Estoy bien." }
+        ],
+        "casual|気をつけて。": [
+            { jp: "帰り道、＿＿＿＿", es: "Ten cuidado en el camino de vuelta." }
+        ],
+        "casual|またね。": [
+            { jp: "＿＿＿＿", es: "Hasta luego." }
+        ],
+        "casual|じゃあね。": [
+            { jp: "＿＿＿＿", es: "Nos vemos." }
+        ],
+        "casual|また今度。": [
+            { jp: "今日は無理だから＿＿＿＿", es: "Hoy no puede ser, así que será la próxima vez." }
+        ],
+        "casual|お疲れ。": [
+            { jp: "今日も＿＿＿＿", es: "Buen trabajo hoy también." }
+        ],
+        "casual|頑張って。": [
+            { jp: "試験、＿＿＿＿", es: "¡Ánimo con el examen!" }
+        ],
+        "casual|頑張ろう。": [
+            { jp: "一緒に＿＿＿＿", es: "Vamos a esforzarnos juntos." }
+        ],
+        "casual|しょうがない。": [
+            { jp: "電車が遅れたから＿＿＿＿", es: "El tren llegó tarde, así que no se puede evitar." }
+        ],
+        "casual|仕方ない。": [
+            { jp: "雨だから＿＿＿＿", es: "Como llueve, no hay nada que hacer." }
+        ],
+        "casual|しらん。": [
+            { jp: "そんなこと＿＿＿＿", es: "Eso ni idea (muy coloquial)." }
+        ],
+        "casual|めんどくさい。": [
+            { jp: "この宿題、＿＿＿＿", es: "Estos deberes dan mucha pereza." }
+        ],
+        "casual|うるさい。": [
+            { jp: "テレビの音が＿＿＿＿", es: "El sonido de la tele es muy ruidoso/cállate." }
+        ],
+        "casual|眠い。": [
+            { jp: "もう遅いから＿＿＿＿", es: "Ya es tarde, así que tengo sueño." }
+        ],
+        "casual|疲れた。": [
+            { jp: "今日は歩きすぎて＿＿＿＿", es: "Hoy caminé demasiado y estoy cansado." }
+        ],
+        "casual|お腹すいた。": [
+            { jp: "何も食べてないから＿＿＿＿", es: "No he comido nada, así que tengo hambre." }
+        ],
+        "casual|喉乾いた。": [
+            { jp: "暑いから＿＿＿＿", es: "Hace calor, así que tengo sed." }
+        ],
+        "casual|行こう。": [
+            { jp: "映画に＿＿＿＿", es: "Vamos al cine." }
+        ],
+        "casual|帰ろう。": [
+            { jp: "もう遅いから＿＿＿＿", es: "Ya es tarde, así que volvamos." }
+        ],
+        "casual|やめよう。": [
+            { jp: "危ないから＿＿＿＿", es: "Es peligroso, así que dejémoslo." }
+        ],
+        "casual|いい感じ。": [
+            { jp: "このデザイン、＿＿＿＿", es: "Este diseño tiene buena pinta." }
+        ],
+        "casual|そんな感じ。": [
+            { jp: "うん、＿＿＿＿", es: "Sí, algo así." }
+        ],
+        "casual|なんでもいい。": [
+            { jp: "食べたいもの、＿＿＿＿", es: "Lo que quiero comer, lo que sea." }
+        ],
+        "casual|別に。": [
+            { jp: "怒ってる？ ＿＿＿＿", es: "¿Estás enfadado? No especialmente." }
+        ],
+
+        // --- Lote 1: calendar, weather, greetings, fruits, drinks ---
+        "calendar|月曜日": [{ jp: "＿＿＿＿から仕事です。", es: "Trabajo desde el lunes." }],
+        "calendar|火曜日": [{ jp: "＿＿＿＿に病院へ行きます。", es: "El martes voy al hospital." }],
+        "calendar|水曜日": [{ jp: "＿＿＿＿は休みです。", es: "El miércoles es día libre." }],
+        "calendar|木曜日": [{ jp: "＿＿＿＿に会議があります。", es: "El jueves hay una reunión." }],
+        "calendar|金曜日": [{ jp: "＿＿＿＿の夜は友達と会います。", es: "El viernes por la noche quedo con amigos." }],
+        "calendar|土曜日": [{ jp: "＿＿＿＿は買い物に行きます。", es: "El sábado voy de compras." }],
+        "calendar|日曜日": [{ jp: "＿＿＿＿はゆっくり休みます。", es: "El domingo descanso tranquilamente." }],
+        "calendar|曜日": [{ jp: "今日は何＿＿＿＿ですか。", es: "¿Qué día de la semana es hoy?" }],
+        "calendar|日付": [{ jp: "＿＿＿＿を書いてください。", es: "Escribe la fecha, por favor." }],
+        "calendar|日": [{ jp: "今日は何＿＿＿＿ですか。", es: "¿Qué día del mes es hoy?" }],
+        "calendar|月": [{ jp: "今＿＿＿＿は何ですか。", es: "¿Qué mes es ahora?" }],
+        "calendar|年": [{ jp: "今＿＿＿＿は忙しいです。", es: "Este año estoy ocupado." }],
+        "calendar|誕生日": [{ jp: "＿＿＿＿おめでとう！", es: "¡Feliz cumpleaños!" }],
+        "calendar|記念日": [{ jp: "今日は結婚＿＿＿＿です。", es: "Hoy es nuestro aniversario de boda." }],
+        "calendar|祝日": [{ jp: "来週は＿＿＿＿です。", es: "La próxima semana es festivo." }],
+        "calendar|カレンダー": [{ jp: "壁に＿＿＿＿をかけます。", es: "Cuelgo un calendario en la pared." }],
+        "calendar|週": [{ jp: "一＿＿＿＿に三回運動します。", es: "Hago ejercicio tres veces a la semana." }],
+        "calendar|週末": [{ jp: "＿＿＿＿は家族と過ごします。", es: "El fin de semana lo paso con la familia." }],
+        "calendar|平日": [{ jp: "＿＿＿＿は早く起きます。", es: "Los días laborables me levanto temprano." }],
+        "calendar|今度": [{ jp: "＿＿＿＿一緒に行きましょう。", es: "Vayamos juntos la próxima vez." }],
+        "calendar|予定": [{ jp: "明日の＿＿＿＿を確認します。", es: "Voy a comprobar los planes de mañana." }],
+        "calendar|期限": [{ jp: "レポートの＿＿＿＿は金曜日です。", es: "El plazo del informe es el viernes." }],
+
+        "weather|天気": [{ jp: "今日の＿＿＿＿はいいです。", es: "El tiempo de hoy es bueno." }],
+        "weather|晴れ": [{ jp: "明日は＿＿＿＿です。", es: "Mañana estará despejado." }],
+        "weather|雨": [{ jp: "＿＿＿＿が降っています。", es: "Está lloviendo." }],
+        "weather|雪": [{ jp: "冬は＿＿＿＿がたくさん降ります。", es: "En invierno cae mucha nieve." }],
+        "weather|曇り": [{ jp: "今日は＿＿＿＿です。", es: "Hoy está nublado." }],
+        "weather|晴れる": [{ jp: "午後から＿＿＿＿でしょう。", es: "Probablemente despejará por la tarde." }],
+        "weather|雨が降る": [{ jp: "明日は＿＿＿＿＿＿＿＿そうです。", es: "Parece que mañana lloverá." }],
+        "weather|雪が降る": [{ jp: "山では＿＿＿＿＿＿＿＿ことが多いです。", es: "En la montaña suele nevar." }],
+        "weather|風": [{ jp: "今日は＿＿＿＿が強いです。", es: "Hoy el viento es fuerte." }],
+        "weather|強風": [{ jp: "＿＿＿＿に注意してください。", es: "Ten cuidado con el viento fuerte." }],
+        "weather|台風": [{ jp: "＿＿＿＿が来ています。", es: "Se acerca un tifón." }],
+        "weather|気温": [{ jp: "今日の＿＿＿＿は三十度です。", es: "La temperatura de hoy es de treinta grados." }],
+        "weather|温度": [{ jp: "部屋の＿＿＿＿を上げます。", es: "Subo la temperatura de la habitación." }],
+        "weather|暑い": [{ jp: "今日はとても＿＿＿＿です。", es: "Hoy hace mucho calor." }],
+        "weather|寒い": [{ jp: "冬はとても＿＿＿＿です。", es: "En invierno hace mucho frío." }],
+        "weather|暖かい": [{ jp: "今日は＿＿＿＿です。", es: "Hoy hace un tiempo cálido." }],
+        "weather|涼しい": [{ jp: "朝は＿＿＿＿です。", es: "Por la mañana está fresco." }],
+        "weather|蒸し暑い": [{ jp: "夏の東京は＿＿＿＿です。", es: "Tokio en verano es bochornoso." }],
+        "weather|雷": [{ jp: "遠くで＿＿＿＿が鳴っています。", es: "A lo lejos suenan truenos." }],
+        "weather|雷雨": [{ jp: "午後から＿＿＿＿になります。", es: "Por la tarde habrá tormenta con truenos." }],
+        "weather|雲": [{ jp: "空に＿＿＿＿がたくさんあります。", es: "Hay muchas nubes en el cielo." }],
+        "weather|霧": [{ jp: "今朝は＿＿＿＿が濃いです。", es: "Esta mañana la niebla es espesa." }],
+        "weather|湿度": [{ jp: "今日は＿＿＿＿が高いです。", es: "Hoy la humedad es alta." }],
+        "weather|天気予報": [{ jp: "＿＿＿＿を見ました。", es: "Vi el pronóstico del tiempo." }],
+        "weather|気候": [{ jp: "日本の＿＿＿＿は四季があります。", es: "El clima de Japón tiene cuatro estaciones." }],
+        "weather|春": [{ jp: "＿＿＿＿は桜がきれいです。", es: "En primavera los cerezos están preciosos." }],
+        "weather|夏": [{ jp: "＿＿＿＿は暑いです。", es: "En verano hace calor." }],
+        "weather|秋": [{ jp: "＿＿＿＿は涼しいです。", es: "En otoño hace fresco." }],
+        "weather|冬": [{ jp: "＿＿＿＿は雪が降ります。", es: "En invierno nieva." }],
+        "weather|虹": [{ jp: "雨のあと＿＿＿＿が出ました。", es: "Después de la lluvia salió un arcoíris." }],
+        "weather|傘": [{ jp: "雨だから＿＿＿＿を持って行きます。", es: "Como llueve, llevo paraguas." }],
+
+        "greetings|こんにちは": [{ jp: "＿＿＿＿、元気ですか。", es: "Hola, ¿qué tal estás?" }],
+        "greetings|おはよう": [{ jp: "＿＿＿＿、今日もいい天気だね。", es: "Buenos días, hoy también hace buen tiempo." }],
+        "greetings|おはようございます": [{ jp: "先生、＿＿＿＿＿＿＿＿＿＿。", es: "Buenos días, profesor." }],
+        "greetings|こんばんは": [{ jp: "＿＿＿＿、お疲れ様です。", es: "Buenas noches, gracias por su trabajo." }],
+        "greetings|さようなら": [{ jp: "＿＿＿＿、また会いましょう。", es: "Adiós, nos vemos otra vez." }],
+        "greetings|またね": [{ jp: "じゃあ、＿＿＿＿。", es: "Bueno, hasta luego." }],
+        "greetings|また明日": [{ jp: "＿＿＿＿＿＿、おやすみ。", es: "Hasta mañana, buenas noches." }],
+        "greetings|おやすみ": [{ jp: "そろそろ寝るね、＿＿＿＿。", es: "Ya me voy a dormir, buenas noches." }],
+        "greetings|おやすみなさい": [{ jp: "先生、＿＿＿＿＿＿＿＿＿。", es: "Buenas noches, profesor." }],
+        "greetings|ありがとう": [{ jp: "手伝ってくれて＿＿＿＿。", es: "Gracias por ayudarme." }],
+        "greetings|ありがとうございます": [{ jp: "本当に＿＿＿＿＿＿＿＿＿＿＿。", es: "Muchísimas gracias." }],
+        "greetings|どういたしまして": [{ jp: "いいえ、＿＿＿＿＿＿＿＿＿＿。", es: "No hay de qué, de nada." }],
+        "greetings|すみません": [{ jp: "＿＿＿＿、少しいいですか。", es: "Disculpe, ¿tiene un momento?" }],
+        "greetings|ごめんなさい": [{ jp: "遅れて＿＿＿＿＿＿。", es: "Lo siento por llegar tarde." }],
+        "greetings|よろしく": [{ jp: "はじめまして、＿＿＿＿。", es: "Mucho gusto, encantado." }],
+        "greetings|よろしくお願いします": [{ jp: "はじめまして、＿＿＿＿＿＿＿＿＿＿＿＿。", es: "Mucho gusto, un placer conocerle." }],
+        "greetings|お元気ですか": [{ jp: "お久しぶりです、＿＿＿＿＿＿＿。", es: "Cuánto tiempo, ¿cómo está?" }],
+        "greetings|元気です": [{ jp: "はい、＿＿＿＿＿。", es: "Sí, estoy bien." }],
+        "greetings|お先に失礼します": [{ jp: "お疲れ様でした、＿＿＿＿＿＿＿＿＿＿＿。", es: "Buen trabajo, me voy antes que usted." }],
+        "greetings|いってきます": [{ jp: "＿＿＿＿＿＿＿、行ってきます！", es: "¡Ya me voy!" }],
+        "greetings|いってらっしゃい": [{ jp: "気を付けてね、＿＿＿＿＿＿＿＿＿＿。", es: "Ten cuidado, que te vaya bien." }],
+        "greetings|ただいま": [{ jp: "＿＿＿＿、疲れた。", es: "Ya he vuelto, estoy cansado." }],
+        "greetings|お帰り": [{ jp: "＿＿＿＿＿、早かったね。", es: "Bienvenido de vuelta, has llegado pronto." }],
+        "greetings|いただきます": [{ jp: "＿＿＿＿＿＿、いい匂いですね。", es: "Buen provecho, huele bien." }],
+        "greetings|ごちそうさまでした": [{ jp: "＿＿＿＿＿＿＿＿＿＿＿、美味しかったです。", es: "Gracias por la comida, estaba delicioso." }],
+
+        "fruits|果物": [{ jp: "＿＿＿＿が好きです。", es: "Me gusta la fruta." }],
+        "fruits|林檎": [{ jp: "赤い＿＿＿＿を食べます。", es: "Como una manzana roja." }],
+        "fruits|バナナ": [{ jp: "朝＿＿＿＿を食べます。", es: "Por la mañana como un plátano." }],
+        "fruits|オレンジ": [{ jp: "＿＿＿＿のジュースを飲みます。", es: "Bebo zumo de naranja." }],
+        "fruits|蜜柑": [{ jp: "冬は＿＿＿＿をよく食べます。", es: "En invierno como mucha mandarina." }],
+        "fruits|苺": [{ jp: "＿＿＿＿のケーキを作ります。", es: "Hago un pastel de fresas." }],
+        "fruits|葡萄": [{ jp: "＿＿＿＿はとても甘いです。", es: "Las uvas son muy dulces." }],
+        "fruits|西瓜": [{ jp: "夏に＿＿＿＿を食べます。", es: "En verano como sandía." }],
+        "fruits|桃": [{ jp: "＿＿＿＿はジューシーです。", es: "El melocotón es jugoso." }],
+        "fruits|梨": [{ jp: "＿＿＿＿はシャキシャキしています。", es: "La pera está crujiente." }],
+        "fruits|レモン": [{ jp: "紅茶に＿＿＿＿を入れます。", es: "Pongo limón en el té." }],
+        "fruits|メロン": [{ jp: "＿＿＿＿は高いです。", es: "El melón es caro." }],
+        "fruits|パイナップル": [{ jp: "＿＿＿＿を切ります。", es: "Corto una piña." }],
+        "fruits|キウイ": [{ jp: "＿＿＿＿はビタミンが多いです。", es: "El kiwi tiene mucha vitamina." }],
+        "fruits|野菜": [{ jp: "＿＿＿＿をたくさん食べます。", es: "Como muchas verduras." }],
+        "fruits|人参": [{ jp: "＿＿＿＿を切ります。", es: "Corto una zanahoria." }],
+        "fruits|玉ねぎ": [{ jp: "＿＿＿＿を炒めます。", es: "Sofrío cebolla." }],
+        "fruits|じゃが芋": [{ jp: "＿＿＿＿を茹でます。", es: "Hiervo patatas." }],
+        "fruits|トマト": [{ jp: "サラダに＿＿＿＿を入れます。", es: "Pongo tomate en la ensalada." }],
+        "fruits|胡瓜": [{ jp: "＿＿＿＿を薄く切ります。", es: "Corto el pepino en rodajas finas." }],
+        "fruits|キャベツ": [{ jp: "＿＿＿＿を千切りにします。", es: "Corto la col en juliana." }],
+        "fruits|レタス": [{ jp: "＿＿＿＿を洗います。", es: "Lavo la lechuga." }],
+        "fruits|茄子": [{ jp: "＿＿＿＿を焼きます。", es: "Aso berenjena." }],
+        "fruits|ほうれん草": [{ jp: "＿＿＿＿＿＿＿を茹でます。", es: "Hiervo espinacas." }],
+
+        "drinks|水": [{ jp: "毎日＿＿＿＿を飲みます。", es: "Bebo agua todos los días." }],
+        "drinks|お茶": [{ jp: "＿＿＿＿を入れます。", es: "Preparo té." }],
+        "drinks|緑茶": [{ jp: "食後に＿＿＿＿を飲みます。", es: "Después de comer bebo té verde." }],
+        "drinks|紅茶": [{ jp: "＿＿＿＿に砂糖を入れます。", es: "Pongo azúcar en el té negro." }],
+        "drinks|コーヒー": [{ jp: "朝は＿＿＿＿を飲みます。", es: "Por la mañana bebo café." }],
+        "drinks|牛乳": [{ jp: "＿＿＿＿を冷蔵庫に入れます。", es: "Pongo la leche en la nevera." }],
+        "drinks|ジュース": [{ jp: "子供は＿＿＿＿が好きです。", es: "A los niños les gusta el zumo." }],
+        "drinks|オレンジジュース": [{ jp: "朝＿＿＿＿＿＿＿＿＿＿を飲みます。", es: "Por la mañana bebo zumo de naranja." }],
+        "drinks|炭酸": [{ jp: "＿＿＿＿の飲み物が好きです。", es: "Me gustan las bebidas con gas." }],
+        "drinks|コーラ": [{ jp: "＿＿＿＿を一本買います。", es: "Compro una cola." }],
+        "drinks|飲み物": [{ jp: "何か＿＿＿＿＿はいりますか。", es: "¿Quieres alguna bebida?" }],
+        "drinks|お湯": [{ jp: "＿＿＿＿を沸かします。", es: "Hiervo agua caliente." }],
+        "drinks|温かい飲み物": [{ jp: "冬は＿＿＿＿＿＿＿＿＿が飲みたいです。", es: "En invierno quiero beber algo caliente." }],
+
+        // --- Lote 2: school-basic, hobbies, health, household, driving ---
+        "school-basic|学校": [{ jp: "毎朝＿＿＿＿へ行きます。", es: "Voy al colegio cada mañana." }],
+        "school-basic|教室": [{ jp: "＿＿＿＿で勉強します。", es: "Estudio en el aula." }],
+        "school-basic|先生": [{ jp: "＿＿＿＿に質問します。", es: "Le pregunto al profesor." }],
+        "school-basic|学生": [{ jp: "私は大学の＿＿＿＿です。", es: "Soy estudiante universitario." }],
+        "school-basic|生徒": [{ jp: "この学校には＿＿＿＿が多いです。", es: "En esta escuela hay muchos alumnos." }],
+        "school-basic|大学": [{ jp: "＿＿＿＿で経済を勉強しています。", es: "Estudio economía en la universidad." }],
+        "school-basic|本": [{ jp: "図書館で＿＿＿＿を借ります。", es: "Cojo prestado un libro en la biblioteca." }],
+        "school-basic|教科書": [{ jp: "＿＿＿＿を忘れました。", es: "Me olvidé el libro de texto." }],
+        "school-basic|ノート": [{ jp: "＿＿＿＿にメモします。", es: "Tomo notas en el cuaderno." }],
+        "school-basic|鉛筆": [{ jp: "＿＿＿＿で書きます。", es: "Escribo con lápiz." }],
+        "school-basic|ペン": [{ jp: "＿＿＿＿で名前を書きます。", es: "Escribo mi nombre con bolígrafo." }],
+        "school-basic|消しゴム": [{ jp: "＿＿＿＿＿を貸してください。", es: "Préstame la goma de borrar, por favor." }],
+        "school-basic|机": [{ jp: "＿＿＿＿の上に本があります。", es: "Hay un libro encima de la mesa." }],
+        "school-basic|椅子": [{ jp: "＿＿＿＿に座ってください。", es: "Siéntate en la silla, por favor." }],
+        "school-basic|黒板": [{ jp: "先生が＿＿＿＿に字を書きます。", es: "El profesor escribe en la pizarra." }],
+        "school-basic|宿題": [{ jp: "＿＿＿＿を忘れました。", es: "Me olvidé los deberes." }],
+        "school-basic|試験": [{ jp: "来週＿＿＿＿があります。", es: "La próxima semana hay examen." }],
+        "school-basic|授業": [{ jp: "＿＿＿＿は九時に始まります。", es: "La clase empieza a las nueve." }],
+        "school-basic|勉強する": [{ jp: "毎日日本語を＿＿＿＿＿＿＿＿。", es: "Estudio japonés todos los días." }],
+        "school-basic|質問": [{ jp: "＿＿＿＿があります。", es: "Tengo una pregunta." }],
+        "school-basic|答え": [{ jp: "＿＿＿＿が分かりません。", es: "No sé la respuesta." }],
+
+        "hobbies|趣味": [{ jp: "私の＿＿＿＿は写真です。", es: "Mi hobby es la fotografía." }],
+        "hobbies|音楽": [{ jp: "＿＿＿＿を聞くのが好きです。", es: "Me gusta escuchar música." }],
+        "hobbies|映画": [{ jp: "週末に＿＿＿＿を見ます。", es: "El fin de semana veo una película." }],
+        "hobbies|読書": [{ jp: "私の趣味は＿＿＿＿です。", es: "Mi hobby es la lectura." }],
+        "hobbies|ゲーム": [{ jp: "毎晩＿＿＿＿をします。", es: "Juego a videojuegos cada noche." }],
+        "hobbies|スポーツ": [{ jp: "＿＿＿＿が好きです。", es: "Me gusta el deporte." }],
+        "hobbies|写真": [{ jp: "旅行で＿＿＿＿を撮ります。", es: "Hago fotos durante el viaje." }],
+        "hobbies|旅行": [{ jp: "＿＿＿＿が大好きです。", es: "Me encanta viajar." }],
+        "hobbies|料理": [{ jp: "＿＿＿＿を作るのが好きです。", es: "Me gusta cocinar." }],
+        "hobbies|歌": [{ jp: "好きな＿＿＿＿を歌います。", es: "Canto mi canción favorita." }],
+        "hobbies|絵": [{ jp: "＿＿＿＿を描くのが好きです。", es: "Me gusta dibujar." }],
+        "hobbies|漫画": [{ jp: "＿＿＿＿を読むのが好きです。", es: "Me gusta leer manga." }],
+        "hobbies|散歩": [{ jp: "毎朝＿＿＿＿をします。", es: "Doy un paseo cada mañana." }],
+        "hobbies|音楽を聞く": [{ jp: "電車で＿＿＿＿＿＿＿＿＿。", es: "Escucho música en el tren." }],
+        "hobbies|映画を見る": [{ jp: "週末に＿＿＿＿＿＿＿＿＿。", es: "Veo una película el fin de semana." }],
+        "hobbies|本を読む": [{ jp: "寝る前に＿＿＿＿＿＿＿。", es: "Leo un libro antes de dormir." }],
+        "hobbies|ゲームをする": [{ jp: "友達と＿＿＿＿＿＿＿＿＿。", es: "Juego a videojuegos con amigos." }],
+        "hobbies|写真を撮る": [{ jp: "旅行先で＿＿＿＿＿＿＿＿＿。", es: "Hago fotos en el destino del viaje." }],
+        "hobbies|絵を描く": [{ jp: "公園で＿＿＿＿＿＿＿。", es: "Dibujo en el parque." }],
+        "hobbies|歌う": [{ jp: "カラオケで＿＿＿＿＿。", es: "Canto en el karaoke." }],
+        "hobbies|踊る": [{ jp: "パーティーで＿＿＿＿＿。", es: "Bailo en la fiesta." }],
+        "hobbies|集める": [{ jp: "切手を＿＿＿＿＿＿。", es: "Colecciono sellos." }],
+
+        "health|病院": [{ jp: "＿＿＿＿へ行きます。", es: "Voy al hospital." }],
+        "health|医者": [{ jp: "＿＿＿＿に見てもらいます。", es: "Me revisa el médico." }],
+        "health|患者": [{ jp: "この病院には＿＿＿＿が多いです。", es: "En este hospital hay muchos pacientes." }],
+        "health|診察": [{ jp: "＿＿＿＿を受けます。", es: "Recibo una consulta médica." }],
+        "health|予約": [{ jp: "病院の＿＿＿＿をします。", es: "Hago una cita en el hospital." }],
+        "health|薬": [{ jp: "＿＿＿＿を飲みます。", es: "Tomo la medicina." }],
+        "health|病気": [{ jp: "＿＿＿＿になりました。", es: "Me he puesto enfermo." }],
+        "health|症状": [{ jp: "＿＿＿＿を説明します。", es: "Explico los síntomas." }],
+        "health|熱": [{ jp: "＿＿＿＿があります。", es: "Tengo fiebre." }],
+        "health|頭痛": [{ jp: "＿＿＿＿がします。", es: "Tengo dolor de cabeza." }],
+        "health|腹痛": [{ jp: "＿＿＿＿がひどいです。", es: "El dolor de estómago es muy fuerte." }],
+        "health|咳": [{ jp: "＿＿＿＿が止まりません。", es: "La tos no para." }],
+        "health|喉": [{ jp: "＿＿＿＿が痛いです。", es: "Me duele la garganta." }],
+        "health|鼻水": [{ jp: "＿＿＿＿が出ます。", es: "Me sale moqueo." }],
+        "health|風邪": [{ jp: "＿＿＿＿をひきました。", es: "Cogí un resfriado." }],
+        "health|痛い": [{ jp: "ここが＿＿＿＿です。", es: "Aquí me duele." }],
+        "health|疲れる": [{ jp: "仕事でとても＿＿＿＿＿。", es: "Me canso mucho con el trabajo." }],
+        "health|休む": [{ jp: "今日は家で＿＿＿＿＿。", es: "Hoy descanso en casa." }],
+        "health|治る": [{ jp: "早く病気が＿＿＿＿＿といいです。", es: "Ojalá la enfermedad se cure pronto." }],
+        "health|頭が痛いです": [{ jp: "＿＿＿＿＿＿＿＿＿。薬をください。", es: "Me duele la cabeza. Deme una medicina, por favor." }],
+        "health|熱があります": [{ jp: "すみません、＿＿＿＿＿＿＿＿。", es: "Disculpe, tengo fiebre." }],
+        "health|咳が出ます": [{ jp: "昨日から＿＿＿＿＿＿。", es: "Me sale tos desde ayer." }],
+        "health|具合が悪いです": [{ jp: "少し＿＿＿＿＿＿＿＿＿。", es: "Me encuentro un poco mal." }],
+
+        "household|掃除": [{ jp: "週末に部屋の＿＿＿＿をします。", es: "El fin de semana hago la limpieza de la habitación." }],
+        "household|洗濯": [{ jp: "毎日＿＿＿＿をします。", es: "Hago la colada todos los días." }],
+        "household|洗う": [{ jp: "手を＿＿＿＿＿。", es: "Me lavo las manos." }],
+        "household|掃除する": [{ jp: "部屋を＿＿＿＿＿＿＿。", es: "Limpio la habitación." }],
+        "household|ゴミ": [{ jp: "＿＿＿を出します。", es: "Saco la basura." }],
+        "household|ゴミ箱": [{ jp: "紙を＿＿＿＿＿に捨てます。", es: "Tiro el papel al cubo de basura." }],
+        "household|ゴミ袋": [{ jp: "＿＿＿＿＿を買います。", es: "Compro bolsas de basura." }],
+        "household|分別": [{ jp: "ゴミの＿＿＿＿をします。", es: "Hago la separación de residuos." }],
+        "household|リサイクル": [{ jp: "缶を＿＿＿＿＿＿します。", es: "Reciclo las latas." }],
+        "household|捨てる": [{ jp: "古い服を＿＿＿＿＿。", es: "Tiro la ropa vieja." }],
+        "household|出す": [{ jp: "朝ゴミを＿＿＿＿。", es: "Por la mañana saco la basura." }],
+        "household|片付ける": [{ jp: "部屋を＿＿＿＿＿＿＿。", es: "Ordeno la habitación." }],
+        "household|汚い": [{ jp: "この部屋は＿＿＿＿です。", es: "Esta habitación está sucia." }],
+        "household|綺麗": [{ jp: "部屋を＿＿＿＿にします。", es: "Dejo la habitación limpia." }],
+        "household|洗剤": [{ jp: "＿＿＿＿で服を洗います。", es: "Lavo la ropa con detergente." }],
+
+        "driving|車": [{ jp: "＿＿で会社へ行きます。", es: "Voy a la empresa en coche." }],
+        "driving|自転車": [{ jp: "＿＿＿＿で駅まで行きます。", es: "Voy a la estación en bicicleta." }],
+        "driving|バイク": [{ jp: "＿＿＿＿で通勤します。", es: "Voy al trabajo en moto." }],
+        "driving|運転": [{ jp: "＿＿＿＿は好きですか。", es: "¿Te gusta conducir?" }],
+        "driving|運転する": [{ jp: "毎日車を＿＿＿＿＿＿＿。", es: "Conduzco el coche todos los días." }],
+        "driving|道路": [{ jp: "＿＿＿＿を渡ります。", es: "Cruzo la carretera." }],
+        "driving|交差点": [{ jp: "＿＿＿＿で右に曲がります。", es: "Giro a la derecha en el cruce." }],
+        "driving|信号": [{ jp: "＿＿＿＿が赤です。", es: "El semáforo está en rojo." }],
+        "driving|駐車": [{ jp: "ここは＿＿＿＿禁止です。", es: "Aquí está prohibido aparcar." }],
+        "driving|駐車場": [{ jp: "＿＿＿＿＿＿に車を止めます。", es: "Dejo el coche en el aparcamiento." }],
+        "driving|ガソリン": [{ jp: "＿＿＿＿＿を入れます。", es: "Echo gasolina." }],
+        "driving|ブレーキ": [{ jp: "＿＿＿＿＿を踏みます。", es: "Piso el freno." }],
+        "driving|ハンドル": [{ jp: "＿＿＿＿＿を右に回します。", es: "Giro el volante a la derecha." }],
+        "driving|曲がる": [{ jp: "次の角を右に＿＿＿＿＿。", es: "Giro a la derecha en la próxima esquina." }],
+        "driving|止まる": [{ jp: "信号で＿＿＿＿＿。", es: "Me paro en el semáforo." }],
+        "driving|進む": [{ jp: "まっすぐ＿＿＿＿＿。", es: "Avanzo recto." }],
+        "driving|事故": [{ jp: "交差点で＿＿がありました。", es: "Hubo un accidente en el cruce." }],
+
+        // --- Lote 3: postal, admin-basic, disaster, katakana, online-shopping ---
+        "postal|郵便局": [{ jp: "＿＿＿＿＿へ手紙を出しに行きます。", es: "Voy a la oficina de correos a enviar una carta." }],
+        "postal|郵便": [{ jp: "＿＿＿＿で送ります。", es: "Lo envío por correo postal." }],
+        "postal|手紙": [{ jp: "友達に＿＿＿＿を書きます。", es: "Escribo una carta a un amigo." }],
+        "postal|荷物": [{ jp: "＿＿＿＿が届きました。", es: "Ha llegado el paquete." }],
+        "postal|小包": [{ jp: "＿＿＿＿を送ります。", es: "Envío un paquete pequeño." }],
+        "postal|送る": [{ jp: "手紙を＿＿＿＿。", es: "Envío una carta." }],
+        "postal|届く": [{ jp: "明日荷物が＿＿＿＿でしょう。", es: "Mañana probablemente llegará el paquete." }],
+        "postal|届ける": [{ jp: "荷物を＿＿＿＿＿＿。", es: "Entrego el paquete." }],
+        "postal|住所": [{ jp: "ここに＿＿＿＿を書いてください。", es: "Escriba aquí la dirección, por favor." }],
+        "postal|郵便番号": [{ jp: "＿＿＿＿＿＿＿を教えてください。", es: "Dígame el código postal, por favor." }],
+        "postal|切手": [{ jp: "封筒に＿＿＿＿を貼ります。", es: "Pego un sello en el sobre." }],
+        "postal|配達": [{ jp: "＿＿＿＿は午後です。", es: "El reparto es por la tarde." }],
+        "postal|宅配": [{ jp: "＿＿＿＿を頼みます。", es: "Pido una entrega a domicilio." }],
+        "postal|受け取る": [{ jp: "荷物を＿＿＿＿＿＿。", es: "Recibo el paquete." }],
+
+        "admin-basic|名前": [{ jp: "ここに＿＿＿＿を書いてください。", es: "Escriba aquí su nombre, por favor." }],
+        "admin-basic|生年月日": [{ jp: "＿＿＿＿＿＿＿を記入します。", es: "Escribo la fecha de nacimiento." }],
+        "admin-basic|書類": [{ jp: "＿＿＿＿を持ってきてください。", es: "Traiga los documentos, por favor." }],
+        "admin-basic|申請": [{ jp: "ビザの＿＿＿＿をします。", es: "Hago la solicitud del visado." }],
+        "admin-basic|申込": [{ jp: "＿＿＿＿の締め切りはいつですか。", es: "¿Cuándo es el plazo de la solicitud?" }],
+        "admin-basic|記入": [{ jp: "この用紙に＿＿＿＿してください。", es: "Rellene este formulario, por favor." }],
+        "admin-basic|署名": [{ jp: "ここに＿＿＿＿してください。", es: "Firme aquí, por favor." }],
+        "admin-basic|印鑑": [{ jp: "＿＿＿＿を押してください。", es: "Ponga su sello personal, por favor." }],
+        "admin-basic|窓口": [{ jp: "三番の＿＿＿＿へ行ってください。", es: "Vaya a la ventanilla número tres, por favor." }],
+        "admin-basic|受付": [{ jp: "＿＿＿＿はあちらです。", es: "La recepción está por allí." }],
+        "admin-basic|予約": [{ jp: "窓口の＿＿＿＿をします。", es: "Reservo cita en la ventanilla." }],
+        "admin-basic|必要": [{ jp: "この書類が＿＿＿＿です。", es: "Este documento es necesario." }],
+        "admin-basic|コピー": [{ jp: "パスポートの＿＿＿＿を取ります。", es: "Hago una copia del pasaporte." }],
+        "admin-basic|証明書": [{ jp: "住民票の＿＿＿＿＿をもらいます。", es: "Obtengo el certificado de residencia." }],
+
+        "disaster|地震": [{ jp: "昨夜大きい＿＿＿がありました。", es: "Anoche hubo un gran terremoto." }],
+        "disaster|津波": [{ jp: "＿＿＿警報が出ました。", es: "Se ha emitido una alerta de tsunami." }],
+        "disaster|台風": [{ jp: "＿＿＿＿が近づいています。", es: "Se acerca un tifón." }],
+        "disaster|洪水": [{ jp: "大雨で＿＿＿＿が起きました。", es: "Por la lluvia intensa se produjo una inundación." }],
+        "disaster|火事": [{ jp: "隣の家で＿＿があります。", es: "Hay un incendio en la casa de al lado." }],
+        "disaster|火災": [{ jp: "＿＿＿の訓練をします。", es: "Hacemos un simulacro de incendio." }],
+        "disaster|避難": [{ jp: "すぐに＿＿＿してください。", es: "Evacúen de inmediato, por favor." }],
+        "disaster|避難所": [{ jp: "＿＿＿＿へ行きます。", es: "Voy al refugio de evacuación." }],
+        "disaster|非常口": [{ jp: "＿＿＿＿はあちらです。", es: "La salida de emergencia está por allí." }],
+        "disaster|防災": [{ jp: "＿＿の準備をします。", es: "Me preparo para la prevención de desastres." }],
+        "disaster|警報": [{ jp: "大雨＿＿＿が出ています。", es: "Hay una alerta de lluvia intensa." }],
+        "disaster|注意報": [{ jp: "強風＿＿＿＿が出ています。", es: "Hay un aviso de precaución por viento fuerte." }],
+        "disaster|安全": [{ jp: "ここは＿＿＿な場所です。", es: "Este es un lugar seguro." }],
+        "disaster|危険": [{ jp: "この道は＿＿＿です。", es: "Esta calle es peligrosa." }],
+        "disaster|救急": [{ jp: "＿＿＿車を呼びます。", es: "Llamo a una ambulancia." }],
+        "disaster|緊急": [{ jp: "これは＿＿＿事態です。", es: "Esto es una situación de emergencia." }],
+        "disaster|消火器": [{ jp: "＿＿＿＿を使います。", es: "Uso el extintor." }],
+
+        "katakana|コンビニ": [{ jp: "＿＿＿＿でお弁当を買います。", es: "Compro un bentō en la tienda de conveniencia." }],
+        "katakana|スーパー": [{ jp: "＿＿＿＿で野菜を買います。", es: "Compro verduras en el supermercado." }],
+        "katakana|レストラン": [{ jp: "駅前の＿＿＿＿＿に行きます。", es: "Voy al restaurante de delante de la estación." }],
+        "katakana|ホテル": [{ jp: "＿＿＿＿を予約します。", es: "Reservo un hotel." }],
+        "katakana|スマホ": [{ jp: "＿＿＿＿を落としました。", es: "Se me cayó el smartphone." }],
+        "katakana|アプリ": [{ jp: "新しい＿＿＿＿をダウンロードします。", es: "Descargo una nueva aplicación." }],
+        "katakana|インターネット": [{ jp: "＿＿＿＿＿＿＿＿で調べます。", es: "Lo busco por internet." }],
+        "katakana|ワイファイ": [{ jp: "このカフェは＿＿＿＿＿があります。", es: "Esta cafetería tiene wifi." }],
+        "katakana|バッテリー": [{ jp: "＿＿＿＿＿＿が切れそうです。", es: "Se me está acabando la batería." }],
+        "katakana|メニュー": [{ jp: "＿＿＿＿をください。", es: "Deme el menú, por favor." }],
+        "katakana|チケット": [{ jp: "コンサートの＿＿＿＿＿を買いました。", es: "Compré la entrada del concierto." }],
+        "katakana|カード": [{ jp: "＿＿＿＿で払います。", es: "Pago con tarjeta." }],
+        "katakana|サービス": [{ jp: "このホテルの＿＿＿＿はいいです。", es: "El servicio de este hotel es bueno." }],
+        "katakana|システム": [{ jp: "新しい＿＿＿＿＿を使います。", es: "Uso un sistema nuevo." }],
+        "katakana|エレベーター": [{ jp: "＿＿＿＿＿＿＿で三階へ行きます。", es: "Subo al tercer piso en ascensor." }],
+        "katakana|エスカレーター": [{ jp: "＿＿＿＿＿＿＿＿＿で上がります。", es: "Subo por la escalera mecánica." }],
+
+        "online-shopping|注文": [{ jp: "商品を＿＿＿＿します。", es: "Hago el pedido del producto." }],
+        "online-shopping|商品": [{ jp: "この＿＿＿＿は人気です。", es: "Este producto es popular." }],
+        "online-shopping|商品ページ": [{ jp: "＿＿＿＿＿＿＿＿を確認します。", es: "Compruebo la página del producto." }],
+        "online-shopping|カート": [{ jp: "＿＿＿＿に商品を入れます。", es: "Añado el producto al carrito." }],
+        "online-shopping|購入": [{ jp: "オンラインで＿＿＿＿します。", es: "Compro online." }],
+        "online-shopping|支払い": [{ jp: "＿＿＿＿はクレジットカードです。", es: "El pago es con tarjeta de crédito." }],
+        "online-shopping|発送": [{ jp: "商品を＿＿＿＿します。", es: "Envío el producto." }],
+        "online-shopping|配送": [{ jp: "＿＿＿＿には三日かかります。", es: "El envío tarda tres días." }],
+        "online-shopping|到着": [{ jp: "＿＿＿＿予定日を確認します。", es: "Compruebo la fecha prevista de llegada." }],
+        "online-shopping|返品": [{ jp: "この商品を＿＿＿＿します。", es: "Devuelvo este producto." }],
+        "online-shopping|交換": [{ jp: "サイズを＿＿＿＿します。", es: "Cambio la talla." }],
+        "online-shopping|サイズ": [{ jp: "＿＿＿＿が合いません。", es: "No me queda bien la talla." }],
+        "online-shopping|在庫": [{ jp: "＿＿＿＿がありますか。", es: "¿Hay stock?" }],
+        "online-shopping|売り切れ": [{ jp: "この商品は＿＿＿＿です。", es: "Este producto está agotado." }],
+        "online-shopping|送料": [{ jp: "＿＿＿は無料です。", es: "Los gastos de envío son gratis." }],
+        "online-shopping|配送先": [{ jp: "＿＿＿＿＿を変更します。", es: "Cambio la dirección de envío." }],
+
+        // --- Lote 4: technology, education, office, events, tourism ---
+        "technology|スマートフォン": [{ jp: "新しい＿＿＿＿＿＿＿＿を買いました。", es: "Compré un smartphone nuevo." }],
+        "technology|パソコン": [{ jp: "＿＿＿＿で仕事をします。", es: "Trabajo con el ordenador." }],
+        "technology|携帯電話": [{ jp: "＿＿＿＿＿＿を家に忘れました。", es: "Me olvidé el móvil en casa." }],
+        "technology|アプリ": [{ jp: "便利な＿＿＿＿を見つけました。", es: "Encontré una aplicación útil." }],
+        "technology|アカウント": [{ jp: "新しい＿＿＿＿＿＿を作ります。", es: "Creo una cuenta nueva." }],
+        "technology|パスワード": [{ jp: "＿＿＿＿＿＿を忘れました。", es: "Me olvidé la contraseña." }],
+        "technology|ログイン": [{ jp: "サイトに＿＿＿＿＿します。", es: "Inicio sesión en la web." }],
+        "technology|ログアウト": [{ jp: "使い終わったら＿＿＿＿＿＿してください。", es: "Cierra sesión cuando termines de usarlo." }],
+        "technology|ダウンロード": [{ jp: "ファイルを＿＿＿＿＿＿＿します。", es: "Descargo el archivo." }],
+        "technology|アップロード": [{ jp: "写真を＿＿＿＿＿＿＿＿します。", es: "Subo la foto." }],
+        "technology|インストール": [{ jp: "アプリを＿＿＿＿＿＿＿します。", es: "Instalo la aplicación." }],
+        "technology|更新": [{ jp: "アプリを＿＿します。", es: "Actualizo la aplicación." }],
+        "technology|保存": [{ jp: "ファイルを＿＿します。", es: "Guardo el archivo." }],
+        "technology|削除": [{ jp: "古い写真を＿＿します。", es: "Elimino las fotos antiguas." }],
+        "technology|設定": [{ jp: "＿＿を変更します。", es: "Cambio los ajustes." }],
+        "technology|画面": [{ jp: "＿＿が割れました。", es: "Se ha roto la pantalla." }],
+        "technology|ファイル": [{ jp: "＿＿＿＿を開きます。", es: "Abro el archivo." }],
+        "technology|動画": [{ jp: "＿＿＿を見ます。", es: "Veo un vídeo." }],
+        "technology|通知": [{ jp: "＿＿＿が来ました。", es: "Ha llegado una notificación." }],
+
+        "education|学部": [{ jp: "私は経済＿＿の学生です。", es: "Soy estudiante de la facultad de economía." }],
+        "education|学科": [{ jp: "この＿＿は人気があります。", es: "Este departamento es popular." }],
+        "education|専攻": [{ jp: "私の＿＿は工学です。", es: "Mi especialidad es ingeniería." }],
+        "education|講義": [{ jp: "午後の＿＿に出ます。", es: "Asisto a la clase magistral de la tarde." }],
+        "education|授業": [{ jp: "＿＿は九時に始まります。", es: "La clase empieza a las nueve." }],
+        "education|試験": [{ jp: "来週＿＿があります。", es: "La próxima semana hay examen." }],
+        "education|成績": [{ jp: "今学期の＿＿がいいです。", es: "Mis notas de este semestre son buenas." }],
+        "education|単位": [{ jp: "＿＿を落としました。", es: "Suspendí el crédito." }],
+        "education|卒業": [{ jp: "来年＿＿します。", es: "Me gradúo el año que viene." }],
+        "education|入学": [{ jp: "四月に＿＿します。", es: "Ingreso en abril." }],
+        "education|留学": [{ jp: "日本へ＿＿します。", es: "Voy a estudiar al extranjero en Japón." }],
+        "education|研究": [{ jp: "環境問題を＿＿しています。", es: "Investigo problemas medioambientales." }],
+        "education|レポート": [{ jp: "明日までに＿＿＿＿を出します。", es: "Entrego el informe antes de mañana." }],
+        "education|発表": [{ jp: "来週＿＿があります。", es: "La próxima semana hay una presentación." }],
+
+        "office|会社": [{ jp: "＿＿へ行きます。", es: "Voy a la empresa." }],
+        "office|社員": [{ jp: "この＿＿は真面目です。", es: "Este empleado es serio y trabajador." }],
+        "office|上司": [{ jp: "＿＿に相談します。", es: "Consulto con mi jefe." }],
+        "office|部下": [{ jp: "＿＿に仕事を頼みます。", es: "Le encargo el trabajo a mi subordinado." }],
+        "office|同僚": [{ jp: "＿＿とランチに行きます。", es: "Voy a comer con un compañero de trabajo." }],
+        "office|部署": [{ jp: "私の＿＿は営業です。", es: "Mi departamento es el de ventas." }],
+        "office|会議": [{ jp: "十時から＿＿があります。", es: "Hay una reunión a partir de las diez." }],
+        "office|会議室": [{ jp: "＿＿＿＿を予約します。", es: "Reservo la sala de reuniones." }],
+        "office|資料": [{ jp: "＿＿を準備します。", es: "Preparo los documentos." }],
+        "office|仕事": [{ jp: "＿＿が忙しいです。", es: "Estoy ocupado con el trabajo." }],
+        "office|予定": [{ jp: "今日の＿＿を確認します。", es: "Compruebo el horario de hoy." }],
+        "office|出張": [{ jp: "来週大阪へ＿＿します。", es: "La próxima semana viajo a Osaka por trabajo." }],
+        "office|休暇": [{ jp: "来月＿＿を取ります。", es: "Cojo vacaciones el mes que viene." }],
+        "office|給料": [{ jp: "＿＿が上がりました。", es: "Me han subido el sueldo." }],
+        "office|残業": [{ jp: "今日は＿＿があります。", es: "Hoy tengo horas extra." }],
+        "office|連絡": [{ jp: "後で＿＿します。", es: "Te contacto más tarde." }],
+        "office|報告": [{ jp: "上司に＿＿します。", es: "Informo a mi jefe." }],
+        "office|相談": [{ jp: "同僚に＿＿します。", es: "Consulto con un compañero." }],
+        "office|依頼": [{ jp: "資料作成を＿＿します。", es: "Encargo la elaboración de los documentos." }],
+
+        "events|イベント": [{ jp: "会社の＿＿＿＿＿に参加します。", es: "Participo en el evento de la empresa." }],
+        "events|コンサート": [{ jp: "＿＿＿＿＿＿のチケットを買います。", es: "Compro entradas para el concierto." }],
+        "events|ライブ": [{ jp: "好きなバンドの＿＿＿を見に行きます。", es: "Voy a ver la actuación en directo de mi banda favorita." }],
+        "events|祭り": [{ jp: "夏の＿＿＿に行きます。", es: "Voy al festival de verano." }],
+        "events|チケット": [{ jp: "＿＿＿＿＿を予約しました。", es: "Reservé las entradas." }],
+        "events|予約": [{ jp: "レストランの＿＿＿をします。", es: "Hago una reserva en el restaurante." }],
+        "events|計画": [{ jp: "旅行の＿＿を立てます。", es: "Hago el plan del viaje." }],
+        "events|約束": [{ jp: "友達と＿＿があります。", es: "Tengo una quedada con amigos." }],
+        "events|キャンセルする": [{ jp: "予約を＿＿＿＿＿＿＿します。", es: "Cancelo la reserva." }],
+        "events|参加する": [{ jp: "イベントに＿＿＿＿＿＿。", es: "Participo en el evento." }],
+        "events|企画する": [{ jp: "パーティーを＿＿＿＿＿＿。", es: "Organizo la fiesta." }],
+
+        "tourism|観光": [{ jp: "京都へ＿＿に行きます。", es: "Voy a Kioto de turismo." }],
+        "tourism|観光地": [{ jp: "ここは有名な＿＿＿です。", es: "Este es un lugar turístico famoso." }],
+        "tourism|旅行": [{ jp: "夏休みに＿＿をします。", es: "Viajo en las vacaciones de verano." }],
+        "tourism|旅行者": [{ jp: "この街には＿＿＿＿が多いです。", es: "En esta ciudad hay muchos turistas." }],
+        "tourism|名所": [{ jp: "この寺は＿＿です。", es: "Este templo es un lugar famoso." }],
+        "tourism|景色": [{ jp: "山からの＿＿がきれいです。", es: "El paisaje desde la montaña es precioso." }],
+        "tourism|案内所": [{ jp: "駅の＿＿＿＿で聞きます。", es: "Pregunto en la oficina de información de la estación." }],
+        "tourism|観光案内": [{ jp: "＿＿＿＿＿＿をもらいます。", es: "Recojo información turística." }],
+        "tourism|入場券": [{ jp: "美術館の＿＿＿＿を買います。", es: "Compro la entrada del museo." }],
+        "tourism|切符": [{ jp: "電車の＿＿＿を買います。", es: "Compro el billete de tren." }],
+        "tourism|お土産": [{ jp: "家族に＿＿＿を買います。", es: "Compro un recuerdo para mi familia." }],
+        "tourism|地図": [{ jp: "＿＿を見ます。", es: "Miro el mapa." }],
+
+        // --- Lote 5: services, administration, society, digital-communication, news ---
+        "services|美容院": [{ jp: "＿＿＿＿で髪を切ります。", es: "Me corto el pelo en la peluquería." }],
+        "services|床屋": [{ jp: "父は＿＿＿へ行きます。", es: "Mi padre va a la barbería." }],
+        "services|クリーニング": [{ jp: "コートを＿＿＿＿＿＿に出します。", es: "Llevo el abrigo a la tintorería." }],
+        "services|修理": [{ jp: "自転車の＿＿を頼みます。", es: "Encargo la reparación de la bicicleta." }],
+        "services|薬局": [{ jp: "＿＿で薬を買います。", es: "Compro medicina en la farmacia." }],
+        "services|公共サービス": [{ jp: "この町の＿＿＿＿＿＿＿はいいです。", es: "Los servicios públicos de este pueblo son buenos." }],
+        "services|店": [{ jp: "この＿は安いです。", es: "Esta tienda es barata." }],
+        "services|頼む": [{ jp: "修理を＿＿＿。", es: "Encargo la reparación." }],
+        "services|受け取り": [{ jp: "荷物の＿＿＿＿をします。", es: "Hago la recogida del paquete." }],
+
+        "administration|役所": [{ jp: "＿＿＿で手続きをします。", es: "Hago el trámite en el ayuntamiento." }],
+        "administration|市役所": [{ jp: "＿＿＿＿へ行きます。", es: "Voy al ayuntamiento de la ciudad." }],
+        "administration|区役所": [{ jp: "＿＿＿＿で証明書をもらいます。", es: "Obtengo el certificado en la oficina de distrito." }],
+        "administration|手続き": [{ jp: "この＿＿＿＿には時間がかかります。", es: "Este trámite lleva tiempo." }],
+        "administration|届出": [{ jp: "住所変更の＿＿を出します。", es: "Presento la notificación de cambio de dirección." }],
+        "administration|申請書": [{ jp: "＿＿＿＿を記入します。", es: "Relleno el formulario de solicitud." }],
+        "administration|証明書": [{ jp: "住民票の＿＿＿＿をもらいます。", es: "Obtengo el certificado de residencia." }],
+        "administration|在留カード": [{ jp: "＿＿＿＿＿＿＿を見せてください。", es: "Muéstreme la tarjeta de residencia, por favor." }],
+        "administration|更新": [{ jp: "在留カードを＿＿します。", es: "Renuevo la tarjeta de residencia." }],
+        "administration|許可": [{ jp: "＿＿をもらいます。", es: "Obtengo el permiso." }],
+        "administration|登録": [{ jp: "住所の＿＿をします。", es: "Hago el registro de la dirección." }],
+        "administration|制度": [{ jp: "この＿＿は複雑です。", es: "Este sistema es complicado." }],
+
+        "society|地域": [{ jp: "この＿＿は静かです。", es: "Esta zona es tranquila." }],
+        "society|社会": [{ jp: "日本の＿＿について学びます。", es: "Aprendo sobre la sociedad japonesa." }],
+        "society|近所": [{ jp: "＿＿の人と話します。", es: "Hablo con un vecino." }],
+        "society|住民": [{ jp: "この町の＿＿は親切です。", es: "Los residentes de este pueblo son amables." }],
+        "society|地域社会": [{ jp: "＿＿＿＿に参加します。", es: "Participo en la comunidad local." }],
+        "society|ルール": [{ jp: "＿＿＿を守ります。", es: "Sigo las normas." }],
+        "society|マナー": [{ jp: "＿＿＿が大切です。", es: "Los modales son importantes." }],
+        "society|交流": [{ jp: "地域の人と＿＿します。", es: "Tengo intercambio con la gente de la zona." }],
+        "society|支援": [{ jp: "＿＿を受けます。", es: "Recibo apoyo." }],
+        "society|問題": [{ jp: "＿＿を解決します。", es: "Resuelvo el problema." }],
+        "society|課題": [{ jp: "大きな＿＿があります。", es: "Hay un gran desafío." }],
+
+        "digital-communication|メッセージ": [{ jp: "友達に＿＿＿＿＿を送ります。", es: "Envío un mensaje a un amigo." }],
+        "digital-communication|メール": [{ jp: "＿＿＿を送ります。", es: "Envío un correo electrónico." }],
+        "digital-communication|添付": [{ jp: "ファイルを＿＿します。", es: "Adjunto el archivo." }],
+        "digital-communication|返信": [{ jp: "すぐに＿＿します。", es: "Respondo enseguida." }],
+        "digital-communication|転送": [{ jp: "このメールを＿＿します。", es: "Reenvío este correo." }],
+        "digital-communication|共有": [{ jp: "写真を＿＿します。", es: "Comparto la foto." }],
+        "digital-communication|投稿": [{ jp: "SNSに＿＿します。", es: "Hago una publicación en redes sociales." }],
+        "digital-communication|コメント": [{ jp: "＿＿＿＿を書きます。", es: "Escribo un comentario." }],
+        "digital-communication|グループ": [{ jp: "＿＿＿＿＿に参加します。", es: "Me uno al grupo." }],
+        "digital-communication|オンライン": [{ jp: "＿＿＿＿＿で会議をします。", es: "Tenemos la reunión en línea." }],
+
+        "news|ニュース": [{ jp: "毎朝＿＿＿＿を見ます。", es: "Veo las noticias cada mañana." }],
+        "news|報道": [{ jp: "この件について＿＿があります。", es: "Hay cobertura sobre este asunto." }],
+        "news|事件": [{ jp: "昨日大きな＿＿がありました。", es: "Ayer ocurrió un gran incidente." }],
+        "news|政府": [{ jp: "＿＿が発表しました。", es: "El gobierno hizo el anuncio." }],
+        "news|経済": [{ jp: "＿＿が悪化しています。", es: "La economía está empeorando." }],
+        "news|政策": [{ jp: "新しい＿＿が始まります。", es: "Comienza una nueva política." }],
+        "news|調査": [{ jp: "原因を＿＿します。", es: "Investigo la causa." }],
+        "news|結果": [{ jp: "＿＿を発表します。", es: "Anuncio el resultado." }],
+        "news|原因": [{ jp: "事故の＿＿を調べます。", es: "Investigo la causa del accidente." }],
+        "news|影響": [{ jp: "経済への＿＿があります。", es: "Hay impacto en la economía." }],
+        "news|発表する": [{ jp: "新製品を＿＿＿＿＿＿。", es: "Anuncian un producto nuevo." }],
+        "news|報じる": [{ jp: "事件をニュースで＿＿＿＿。", es: "Informan del incidente en las noticias." }],
     };
 
     // Devuelve la clave de búsqueda de una palabra dentro del sentenceBank.
@@ -3929,6 +7079,21 @@
 
     function closeDictionaryOnOverlay(event) {
         if (event.target.id === 'dictionary-modal') closeDictionary();
+    }
+
+    // --- MODAL DE INFORMACIÓN (Ajustes) --- //
+    function openInfoModal() {
+        document.getElementById('info-modal').classList.add('visible');
+        if (typeof playSound === 'function') playSound('click');
+    }
+
+    function closeInfoModal() {
+        document.getElementById('info-modal').classList.remove('visible');
+        if (typeof playSound === 'function') playSound('close');
+    }
+
+    function closeInfoOnOverlay(event) {
+        if (event.target.id === 'info-modal') closeInfoModal();
     }
 
     // --- 11. BOTÓN FLOTANTE "SUBIR ARRIBA" --- //
