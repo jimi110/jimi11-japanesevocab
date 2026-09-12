@@ -964,7 +964,7 @@
     <!-- PANTALLA DE REPASO GLOBAL (ERRORES DE TODA LA APP) -->
     <div id="screen-review" class="screen">
         <div class="header-controls">
-            <button class="btn-back" onclick="goToTemarios()">← Salir</button>
+            <button class="btn-back" onclick="goBackToLastTopicsScreen()">← Salir</button>
         </div>
         <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
             <h2 style="margin-bottom:4px;">🔁 Repasar errores</h2>
@@ -995,7 +995,7 @@
     <!-- PANTALLA DE ESTADÍSTICAS -->
     <div id="screen-stats" class="screen">
         <div class="header-controls">
-            <button class="btn-back" onclick="showScreen('home')">← Salir</button>
+            <button class="btn-back" onclick="goBackToLastTopicsScreen()">← Salir</button>
         </div>
         <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
             <h2 style="font-size: 24px; margin-bottom:4px;">📊 Mis estadísticas</h2>
@@ -2779,7 +2779,18 @@
     // Al pulsar el botón "Temarios/Niveles" de abajo, siempre lleva directo a la
     // portada principal (con el buscador y el listado de niveles), sin importar
     // en qué nivel/temario/teoría se encontrara el usuario.
-    function goToTemarios() { showScreen('home', true); }
+    function goToTemarios() {
+        if (currentScreenId === 'review' || currentScreenId === 'review-category' || currentScreenId === 'stats') {
+            showScreen(lastTopicsScreen);
+        } else {
+            showScreen('home', true);
+        }
+    }
+
+    // Vuelve a la pantalla de "temarios" en la que el usuario estaba realmente
+    // (portada de niveles, nivel, temario o teoría), tal cual la dejó, restaurando
+    // su scroll con normalidad. Se usa al salir de Repasar/Estadísticas hacia atrás.
+    function goBackToLastTopicsScreen() { showScreen(lastTopicsScreen); }
 
     function getTopicProgress(topicId) {
         if (!userProgress[topicId]) { userProgress[topicId] = { completed: 0 }; saveData(); }
