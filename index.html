@@ -6092,6 +6092,8 @@
         gachaChime: () => {
             [784, 988, 1175, 1568].forEach((f, i) => tone({ freq: f, type: 'sine', duration: 0.4, gain: 0.15, filter: 4800, at: i * 0.12 }));
         },
+        // Simple "pop" al revelar el temario asignado (segunda fase del resultado).
+        gachaTopicPop: () => tone({ freq: 520, to: 260, type: 'sine', duration: 0.12, gain: 0.2, filter: 3000 }),
     };
 
     let lastSoundAt = 0;
@@ -6472,8 +6474,9 @@
     }
 
     // Desplaza todas las estrellas hacia el centro del stage, en una pequeña
-    // fila/abanico ordenado (no amontonadas unas sobre otras), y dispara el
-    // brillo final.
+    // fila/abanico ordenado (no amontonadas unas sobre otras) y las hace
+    // desaparecer con un pequeño "pop" (sin destello ni sonido de brillo: solo
+    // se oye el sonido de juntarse y, más adelante, el de aparición del nivel).
     function gatherStars(starEls, particlesLayer, flash, onDone) {
         playSound('gachaGather');
         const n = starEls.length;
@@ -6484,14 +6487,10 @@
                 starEl.style.left = `calc(50% + ${offset}px)`;
                 starEl.style.top = '50%';
                 starEl.classList.add('gathered');
-                playSound('gachaConverge');
             }, i * 90);
         });
 
         gachaSetTimeout(() => {
-            // Destello + partículas doradas + pequeño "pop" de las estrellas antes de desaparecer.
-            flash.classList.add('play');
-            playSound('gachaReveal');
             spawnGachaParticles(particlesLayer, starEls.length >= 5 ? 14 : 8);
             starEls.forEach(starEl => starEl.classList.add('burst'));
             gachaSetTimeout(onDone, 800);
@@ -6525,7 +6524,6 @@
             <div class="gacha-result-sub">${result.sub}</div>
         `;
         resultBox.classList.add('show');
-        playSound('gachaReveal');
         gachaSetTimeout(() => playSound('gachaChime'), 400);
 
         gachaSetTimeout(() => showGachaTopicReveal(result), 3200);
@@ -6565,7 +6563,7 @@
                 <div class="gacha-continue-hint">Toca cualquier punto de la pantalla para continuar</div>
             `;
             resultBox.classList.add('show');
-            playSound('gachaChime');
+            playSound('gachaTopicPop');
         }, 450);
     }
 
