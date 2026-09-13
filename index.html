@@ -6,7 +6,6 @@
     <title>日本語 — Vocabulario Japonés</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Titan+One&display=swap" rel="stylesheet">
     <style>
         /* --- VARIABLES GLOBALES (TEMA CLARO POR DEFECTO) --- */
         :root {
@@ -809,12 +808,14 @@
 
         /* ==================== SISTEMA GACHA JLPT ==================== */
         .gacha-blur-target { transition: filter 0.4s ease; }
-        .gacha-blur-target.blurred { filter: blur(14px) brightness(0.7); pointer-events: none; user-select: none; }
+        .gacha-blur-target.blurred { pointer-events: none; user-select: none; }
 
         .gacha-overlay {
             position: fixed; inset: 0; z-index: 3000;
             display: none; align-items: center; justify-content: center;
-            background: rgba(10,7,22,0.4);
+            background: rgba(8,5,18,0.45);
+            backdrop-filter: blur(14px) brightness(0.65);
+            -webkit-backdrop-filter: blur(14px) brightness(0.65);
             overflow: hidden;
         }
         .gacha-overlay.active { display: flex; animation: gachaFadeIn 0.35s ease; }
@@ -874,10 +875,10 @@
 
         .gacha-particle {
             position: absolute; left: 50%; top: 50%;
-            width: 5px; height: 5px; border-radius: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
             background: #ffe27a;
             opacity: 0;
-            box-shadow: 0 0 8px 2px rgba(255,226,122,0.85);
+            box-shadow: 0 0 5px 1px rgba(255,226,122,0.6);
         }
         .gacha-particle.fly {
             animation: gachaParticleFly 0.9s ease-out forwards;
@@ -901,14 +902,14 @@
             60%  { opacity: 1; transform: scale(1.12); }
             100% { opacity: 1; transform: scale(1); }
         }
-        .gacha-result-badge { font-family: var(--font-family); font-size: 15px; font-weight: 700; letter-spacing: 1px; color: #ffd966; text-transform: uppercase; }
-        .gacha-result-level { font-family: var(--font-family); font-weight: 800; font-size: 40px; color: #fff; }
+        .gacha-result-badge { font-family: var(--font-family); font-size: 15px; font-weight: 700; letter-spacing: 1px; color: var(--primary); text-transform: uppercase; }
+        .gacha-result-level { font-family: var(--font-family); font-weight: 700; font-size: 40px; color: #fff; }
         .gacha-result-sub { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
         .gacha-result-hint { margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.55); }
-        .gacha-level-dot {
-            width: 72px; height: 72px; border-radius: 50%;
+        .gacha-level-emoji {
+            font-size: 64px; line-height: 1;
             margin: 10px 0 4px;
-            box-shadow: 0 0 24px 4px rgba(255,255,255,0.35), inset -6px -6px 14px rgba(0,0,0,0.25);
+            opacity: 1;
             animation: gachaDotPop 0.6s cubic-bezier(.25,1.6,.4,1);
         }
         @keyframes gachaDotPop {
@@ -1342,7 +1343,7 @@
         <div id="gacha-stars-layer"></div>
         <div id="gacha-particles-layer"></div>
         <div id="gacha-result" class="gacha-result">
-            <div class="gacha-result-badge">¡Resultado del Gacha!</div>
+            <div class="gacha-result-badge">Resultado</div>
         </div>
     </div>
 </div>
@@ -6296,12 +6297,12 @@
     // ningún sistema de temarios/tests nuevo: solo elige el nivel y reutiliza
     // openTopic()/startPractice() ya existentes.
     const GACHA_TABLE = [
-        { stars: 1, weight: 41, levelId: 'n5-principiante', label: 'JLPT N5', sub: 'N5 · Principiante', color: '#3ddc84' },
-        { stars: 2, weight: 29, levelId: 'n5-avanzado',      label: 'JLPT N5', sub: 'N5 · Avanzado',      color: '#f2c94c' },
-        { stars: 3, weight: 17, levelId: 'n4',               label: 'JLPT N4', sub: 'N4',                 color: '#4a90e2' },
-        { stars: 4, weight: 6,  levelId: 'n3',               label: 'JLPT N3', sub: 'N3',                 color: '#9b59b6' },
-        { stars: 5, weight: 5,  levelId: 'n2',               label: 'JLPT N2', sub: 'N2',                 color: '#ff9500' },
-        { stars: 6, weight: 2,  levelId: 'n1',               label: 'JLPT N1', sub: 'N1',                 color: '#ff4b4b' }
+        { stars: 1, weight: 41, levelId: 'n5-principiante', label: 'JLPT N5', sub: 'N5 · Principiante', color: '#3ddc84', emoji: '🟢' },
+        { stars: 2, weight: 29, levelId: 'n5-avanzado',      label: 'JLPT N5', sub: 'N5 · Avanzado',      color: '#f2c94c', emoji: '🟡' },
+        { stars: 3, weight: 17, levelId: 'n4',               label: 'JLPT N4', sub: 'N4',                 color: '#4a90e2', emoji: '🔵' },
+        { stars: 4, weight: 6,  levelId: 'n3',               label: 'JLPT N3', sub: 'N3',                 color: '#9b59b6', emoji: '🟣' },
+        { stars: 5, weight: 5,  levelId: 'n2',               label: 'JLPT N2', sub: 'N2',                 color: '#ff9500', emoji: '🟠' },
+        { stars: 6, weight: 2,  levelId: 'n1',               label: 'JLPT N1', sub: 'N1',                 color: '#ff4b4b', emoji: '🔴' }
     ];
 
     let gachaActive = false;
@@ -6311,6 +6312,11 @@
     // Qué "fase" del gacha está en curso ahora mismo, para saber a qué
     // saltar directamente cuando se hace skip.
     let gachaPhase = null; // 'stars' | 'gathering' | 'result' | 'topic'
+    // Evita que hacer spam de clicks salte varias veces seguidas dentro de la
+    // misma fase (lo cual rompía la animación repitiéndola sin parar). Solo
+    // se permite UN salto por fase; hay que esperar a la fase siguiente para
+    // poder volver a saltar.
+    let gachaSkipUsedThisPhase = false;
     let gachaResultData = null;
     let gachaChosenTopic = null;
     let gachaLastTapAt = 0;
@@ -6355,9 +6361,18 @@
     }
 
     function skipGachaPhase() {
+        if (gachaSkipUsedThisPhase) return; // ya se saltó esta fase: ignorar spam de clicks
+        gachaSkipUsedThisPhase = true;
         gachaClearTimeouts();
-        if (gachaPhase === 'stars' || gachaPhase === 'gathering') {
+        if (gachaPhase === 'stars') {
             finishStarsAndGather();
+        } else if (gachaPhase === 'gathering') {
+            // Ya se estaban agrupando las estrellas: en vez de repetir esa
+            // animación desde cero (lo que causaba el bug de "spam de
+            // clicks"), se salta directamente al resultado.
+            document.getElementById('gacha-particles-layer').innerHTML = '';
+            gachaStarEls.forEach(starEl => starEl.remove());
+            showGachaResult(gachaResultData);
         } else if (gachaPhase === 'result') {
             showGachaTopicReveal(gachaResultData);
         }
@@ -6388,21 +6403,25 @@
         flash.classList.remove('play');
         stage.dataset.rarity = String(result.stars);
         gachaPhase = 'stars';
+        gachaSkipUsedThisPhase = false;
 
         document.getElementById('app').classList.add('blurred');
         overlay.classList.add('active');
         overlay.setAttribute('aria-hidden', 'false');
         playSound('gachaCharge');
 
-        // Posiciones en círculo (en % del stage) donde va apareciendo cada
-        // estrella antes de agruparse en el centro.
+        // Posiciones en círculo alrededor del centro del stage. Se calcula en
+        // píxeles (no en %) usando el tamaño real del stage, para que el
+        // círculo sea siempre perfecto y quede centrado en cualquier
+        // dispositivo, sin estirarse en pantallas estrechas y altas (móvil).
         const scatterSpots = [];
-        const radius = 32;
+        const stageRect = stage.getBoundingClientRect();
+        const radius = Math.min(stageRect.width, stageRect.height) * 0.3;
         for (let i = 0; i < 6; i++) {
             const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
             scatterSpots.push({
-                left: `${50 + Math.cos(angle) * radius}%`,
-                top: `${50 + Math.sin(angle) * radius}%`
+                left: `calc(50% + ${Math.cos(angle) * radius}px)`,
+                top: `calc(50% + ${Math.sin(angle) * radius}px)`
             });
         }
 
@@ -6443,6 +6462,7 @@
     function finishStarsAndGather() {
         gachaClearTimeouts();
         gachaPhase = 'gathering';
+        gachaSkipUsedThisPhase = false;
         gachaStarEls.forEach(starEl => starEl.classList.add('show'));
         const particlesLayer = document.getElementById('gacha-particles-layer');
         const flash = document.getElementById('gacha-flash');
@@ -6472,7 +6492,7 @@
             // Destello + partículas doradas + pequeño "pop" de las estrellas antes de desaparecer.
             flash.classList.add('play');
             playSound('gachaReveal');
-            spawnGachaParticles(particlesLayer, starEls.length >= 5 ? 26 : 14);
+            spawnGachaParticles(particlesLayer, starEls.length >= 5 ? 14 : 8);
             starEls.forEach(starEl => starEl.classList.add('burst'));
             gachaSetTimeout(onDone, 800);
         }, n * 90 + 2400);
@@ -6497,10 +6517,11 @@
     // a la FASE 2 con el temario concreto.
     function showGachaResult(result) {
         gachaPhase = 'result';
+        gachaSkipUsedThisPhase = false;
         const resultBox = document.getElementById('gacha-result');
         resultBox.innerHTML = `
-            <div class="gacha-result-badge">¡Resultado del Gacha!</div>
-            <div class="gacha-level-dot" style="background: radial-gradient(circle at 32% 28%, #ffffff55, ${result.color} 60%, ${result.color}dd 100%);"></div>
+            <div class="gacha-result-badge">Resultado</div>
+            <div class="gacha-level-emoji">${result.emoji}</div>
             <div class="gacha-result-sub">${result.sub}</div>
         `;
         resultBox.classList.add('show');
@@ -6516,6 +6537,7 @@
     // lanza el test directamente. No hay pantallas ni modales aparte.
     function showGachaTopicReveal(result) {
         gachaPhase = 'topic';
+        gachaSkipUsedThisPhase = false;
         const levelTopics = topics.filter(t => topicLevelMap[t.id] === result.levelId);
         const chosenTopic = levelTopics.length > 0
             ? levelTopics[Math.floor(Math.random() * levelTopics.length)]
