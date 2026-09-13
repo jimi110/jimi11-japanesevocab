@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>日本語 — Vocabulario Japonés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Titan+One&display=swap" rel="stylesheet">
     <style>
         /* --- VARIABLES GLOBALES (TEMA CLARO POR DEFECTO) --- */
         :root {
@@ -100,6 +103,23 @@
         h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; text-align: center; }
         h2 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
         p.subtitle { color: var(--text-muted); font-size: 15px; text-align: center; margin-bottom: 24px; }
+
+        /* --- TÍTULO DE LA APP (pantalla inicial) --- */
+        .app-title-kanji {
+            font-family: var(--font-family);
+            font-weight: 800;
+            font-size: 52px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        .app-title-subtitle {
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 56px;
+        }
         
         /* --- FURIGANA (Hiragana sobre Kanji) --- */
         ruby { ruby-align: center; }
@@ -141,6 +161,83 @@
             background: var(--card-bg);
             color: var(--text-main);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* --- GRÁFICO DE PALABRAS PRACTICADAS POR DÍA --- */
+        .practice-chart-scroll {
+            overflow-x: auto;
+            overflow-y: visible;
+            padding-top: 26px;
+            margin-top: -26px;
+        }
+        .practice-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 140px;
+            padding: 8px 4px 0;
+            border-bottom: 1px solid var(--border);
+            min-width: 100%;
+        }
+        .practice-chart.dense { min-width: max-content; }
+        .practice-chart-bar-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            min-width: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        .practice-chart-tooltip {
+            position: absolute;
+            top: -26px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: var(--text-main);
+            color: var(--bg-color);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            z-index: 5;
+        }
+        .practice-chart-tooltip.visible {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        .practice-chart-bar {
+            width: 100%;
+            max-width: 18px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+            transition: var(--transition);
+        }
+        .practice-chart-labels {
+            display: flex;
+            gap: 4px;
+            padding: 6px 4px 0;
+            min-width: 100%;
+        }
+        .practice-chart-labels.dense { min-width: max-content; }
+        .practice-chart-label {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            min-width: 10px;
+        }
+        .practice-chart-empty {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 24px 0;
         }
 
         .header-controls {
@@ -698,7 +795,7 @@
         .dictionary-link { display: inline-block; margin-top: 18px; color: var(--primary); font-weight: 700; }
 
         /* --- MODAL DE INFORMACIÓN (Ajustes) --- */
-        .info-modal { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); }
+        .info-modal { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.48); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
         .info-modal.visible { display: flex; }
         .info-dialog { position: relative; width: min(560px, 100%); max-height: 80vh; overflow-y: auto; background: var(--card-bg); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
         .info-close { position: absolute; right: 14px; top: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
@@ -709,6 +806,150 @@
         .info-link { display: block; color: var(--primary); font-weight: 600; word-break: break-word; margin: 4px 0 10px; text-decoration: underline; }
         .info-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
         .info-gambatte { text-align: center; font-weight: 700; font-size: 15px; margin-top: 18px; color: var(--primary); }
+
+        /* ==================== SISTEMA GACHA JLPT ==================== */
+        .gacha-blur-target { transition: filter 0.4s ease; }
+        .gacha-blur-target.blurred { filter: blur(14px) brightness(0.7); pointer-events: none; user-select: none; }
+
+        .gacha-overlay {
+            position: fixed; inset: 0; z-index: 3000;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(10,7,22,0.4);
+            overflow: hidden;
+        }
+        .gacha-overlay.active { display: flex; animation: gachaFadeIn 0.35s ease; }
+        @keyframes gachaFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .gacha-stage {
+            position: relative; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            max-width: 620px; max-height: 620px; margin: auto;
+        }
+
+        .gacha-star {
+            position: absolute;
+            font-size: 44px;
+            line-height: 1;
+            opacity: 0;
+            color: #ffffff;
+            transform: translate(-50%, -50%) scale(0.2) rotate(-25deg);
+            filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
+            will-change: transform, opacity, left, top;
+            transition: left 0.9s cubic-bezier(.3,1.4,.5,1), top 0.9s cubic-bezier(.3,1.4,.5,1),
+                        transform 0.9s cubic-bezier(.3,1.4,.5,1), opacity 0.5s ease;
+        }
+        .gacha-star.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            animation: gachaStarPop 0.55s cubic-bezier(.25,1.6,.4,1);
+        }
+        .gacha-star.gathered {
+            transform: translate(-50%, -50%) scale(1.15) rotate(0deg);
+        }
+        .gacha-star.burst {
+            animation: gachaStarBurst 0.6s ease forwards;
+        }
+        @keyframes gachaStarPop {
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.2) rotate(-25deg); }
+            60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.35) rotate(8deg); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+        @keyframes gachaStarBurst {
+            0%   { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+            40%  { opacity: 1; transform: translate(-50%, -50%) scale(1.7); filter: drop-shadow(0 0 24px rgba(255,255,255,0.95)); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+        }
+
+        .gacha-flash {
+            position: absolute; inset: 0; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0; pointer-events: none;
+        }
+        .gacha-flash.play { animation: gachaFlash 0.7s ease forwards; }
+        @keyframes gachaFlash {
+            0%   { opacity: 0; transform: scale(0.2); }
+            35%  { opacity: 1; transform: scale(1.4); }
+            100% { opacity: 0; transform: scale(2.2); }
+        }
+
+        .gacha-particle {
+            position: absolute; left: 50%; top: 50%;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: #ffe27a;
+            opacity: 0;
+            box-shadow: 0 0 8px 2px rgba(255,226,122,0.85);
+        }
+        .gacha-particle.fly {
+            animation: gachaParticleFly 0.9s ease-out forwards;
+        }
+        @keyframes gachaParticleFly {
+            0%   { opacity: 1; transform: translate(-50%, -50%) translate(0,0) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--gpx), var(--gpy)) scale(0.3); }
+        }
+
+        .gacha-result {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 6px; opacity: 0; pointer-events: none; text-align: center;
+        }
+        .gacha-result.show {
+            opacity: 1; pointer-events: auto;
+            animation: gachaResultIn 0.7s cubic-bezier(.25,1.5,.4,1) forwards;
+        }
+        @keyframes gachaResultIn {
+            0%   { opacity: 0; transform: scale(0.4); }
+            60%  { opacity: 1; transform: scale(1.12); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .gacha-result-badge { font-family: var(--font-family); font-size: 15px; font-weight: 700; letter-spacing: 1px; color: #ffd966; text-transform: uppercase; }
+        .gacha-result-level { font-family: var(--font-family); font-weight: 800; font-size: 40px; color: #fff; }
+        .gacha-result-sub { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
+        .gacha-result-hint { margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.55); }
+        .gacha-level-dot {
+            width: 72px; height: 72px; border-radius: 50%;
+            margin: 10px 0 4px;
+            box-shadow: 0 0 24px 4px rgba(255,255,255,0.35), inset -6px -6px 14px rgba(0,0,0,0.25);
+            animation: gachaDotPop 0.6s cubic-bezier(.25,1.6,.4,1);
+        }
+        @keyframes gachaDotPop {
+            0%   { transform: scale(0.3); opacity: 0; }
+            60%  { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Segunda fase del resultado: temario asignado, dentro del propio Gacha */
+        .gacha-topic-icon {
+            font-size: 56px;
+            margin: 8px 0 4px;
+            opacity: 1;
+            animation: gachaDotPop 0.6s cubic-bezier(.25,1.6,.4,1);
+        }
+        .gacha-continue-hint {
+            margin-top: 22px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.3px;
+            animation: gachaContinuePulse 1.6s ease-in-out infinite;
+        }
+        @keyframes gachaContinuePulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+
+        /* Rareza: a más estrellas, colores y glow más intensos */
+        .gacha-stage[data-rarity="1"] .gacha-star, .gacha-stage[data-rarity="2"] .gacha-star { color: #eef2fb; }
+        .gacha-stage[data-rarity="3"] .gacha-star, .gacha-stage[data-rarity="4"] .gacha-star { color: #ffe27a; filter: drop-shadow(0 0 12px rgba(255,215,0,0.85)); }
+        .gacha-stage[data-rarity="5"] .gacha-star { color: #ffcf4d; filter: drop-shadow(0 0 18px rgba(255,190,60,0.95)); }
+        .gacha-stage[data-rarity="6"] .gacha-star { color: #ff8a5c; filter: drop-shadow(0 0 22px rgba(255,110,60,1)); }
+        .gacha-stage[data-rarity="6"] .gacha-result-level { color: #ffdcb0; }
+        .gacha-stage[data-rarity="5"] .gacha-flash.play, .gacha-stage[data-rarity="6"] .gacha-flash.play { animation-duration: 0.9s; }
+
+        @media (max-width: 480px) {
+            .gacha-star { font-size: 34px; }
+            .gacha-result-level { font-size: 34px; }
+        }
 
         /* Insignias (palabra común, niveles JLPT...) */
         .dictionary-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
@@ -804,7 +1045,7 @@
 </head>
 <body>
 
-<div id="app" class="layout-auto">
+<div id="app" class="layout-auto gacha-blur-target">
 
     <!-- BOTÓN Y PANEL DE AJUSTES (Apariencia) -->
     <button id="settings-fab" class="settings-fab" onclick="toggleSettingsPanel()" aria-label="Ajustes" aria-haspopup="true" aria-expanded="false">⚙️</button>
@@ -867,8 +1108,8 @@
     
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
-        <h1>日本語</h1>
-        <p class="subtitle">Vocabulario japonés</p>
+        <h1 class="app-title-kanji" onclick="startJLPTGacha()" role="button" tabindex="0" title="¡Toca para el Gacha de nivel JLPT!" style="cursor:pointer;">日本語</h1>
+        <p class="subtitle app-title-subtitle">Vocabulario japonés</p>
 
         <div class="global-search">
             <label for="global-search-input">🔎 Buscar en todo el vocabulario</label>
@@ -1022,6 +1263,13 @@
         <h2 style="font-size:16px;">Progreso general</h2>
         <div class="stats-grid" id="stats-general"></div>
 
+        <h2 style="font-size:16px; margin-top:28px;">Palabras practicadas por día</h2>
+        <div class="segmented-control" id="practice-chart-range" style="margin-bottom:14px;">
+            <button class="seg-btn active" data-value="7" onclick="setPracticeChartRange(7)">7 días</button>
+            <button class="seg-btn" data-value="30" onclick="setPracticeChartRange(30)">30 días</button>
+        </div>
+        <div id="practice-chart-container"></div>
+
         <h2 style="font-size:16px; margin-top:28px;">Palabras</h2>
         <div class="stats-grid" id="stats-words"></div>
 
@@ -1075,7 +1323,7 @@
         <p class="info-text" style="margin-bottom:2px;"><strong>Estudio rápido / práctica</strong></p>
         <a class="info-link" href="https://uchisen.com/drills" target="_blank" rel="noopener noreferrer">https://uchisen.com/drills</a>
 
-        <p class="info-text">Con estudio diario y utilizando una dinámica de prueba y error, en aproximadamente 2 semanas muchas personas pueden llegar a aprenderlos con bastante facilidad.</p>
+        <p class="info-text">Con estudio diario y utilizando una dinámica de prueba y error, es posible aprenderlos de manera eficaz.</p>
 
         <hr class="info-divider">
 
@@ -1084,6 +1332,18 @@
         <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
 
         <p class="info-gambatte">¡Ánimo y mucha suerte en tu aprendizaje! 頑張って (Gambatte)! 💪</p>
+    </div>
+</div>
+
+<!-- OVERLAY DEL GACHA DE NIVEL JLPT -->
+<div id="gacha-overlay" class="gacha-overlay" aria-hidden="true">
+    <div id="gacha-stage" class="gacha-stage" data-rarity="0" onclick="handleGachaStageTap()">
+        <div id="gacha-flash" class="gacha-flash"></div>
+        <div id="gacha-stars-layer"></div>
+        <div id="gacha-particles-layer"></div>
+        <div id="gacha-result" class="gacha-result">
+            <div class="gacha-result-badge">¡Resultado del Gacha!</div>
+        </div>
     </div>
 </div>
 
@@ -1102,7 +1362,8 @@
         correctWords: {},     // { wordId: true } - palabras acertadas al menos una vez
         streak: 0,
         lastStudyDate: null,  // 'YYYY-MM-DD'
-        topicStats: {}        // { topicId: { correct, wrong } }
+        topicStats: {},       // { topicId: { correct, wrong } }
+        practicedByDate: {}   // { 'YYYY-MM-DD': count } - nº de palabras practicadas ese día
     };
 
     function loadData() {
@@ -1150,7 +1411,7 @@
     function applyPrefs() {
         // Layout
         const app = document.getElementById('app');
-        app.className = `layout-${prefs.layout}`;
+        app.className = `layout-${prefs.layout} gacha-blur-target`;
 
         // Theme
         applyTheme();
@@ -5814,6 +6075,22 @@
         reward: () => {
             [523, 659, 784, 1047].forEach((f, i) => tone({ freq: f, type: 'triangle', duration: 0.22, gain: 0.15, filter: 3800, at: i * 0.08 }));
         },
+
+        // --- Sistema Gacha JLPT ---
+        gachaCharge: () => { tone({ freq: 220, to: 340, type: 'sine', duration: 0.9, gain: 0.10, filter: 1600 });
+                              tone({ freq: 330, to: 520, type: 'triangle', duration: 0.9, gain: 0.06, filter: 2000, at: 0.15 }); },
+        gachaStar:   () => { tone({ freq: 880, to: 1320, type: 'sine', duration: 0.22, gain: 0.18, filter: 4200 });
+                              tone({ freq: 1760, type: 'triangle', duration: 0.16, gain: 0.09, filter: 5000, at: 0.05 }); },
+        gachaConverge: () => tone({ freq: 700, to: 1100, type: 'sine', duration: 0.14, gain: 0.09, filter: 3800 }),
+        gachaGather: () => {
+            [440, 587, 740, 880].forEach((f, i) => tone({ freq: f, to: f * 1.5, type: 'sine', duration: 0.28, gain: 0.14, filter: 4500, at: i * 0.06 }));
+        },
+        gachaReveal: () => {
+            [523, 659, 784, 988, 1319].forEach((f, i) => tone({ freq: f, type: 'triangle', duration: 0.32, gain: 0.19, filter: 5200, at: i * 0.07 }));
+        },
+        gachaChime: () => {
+            [784, 988, 1175, 1568].forEach((f, i) => tone({ freq: f, type: 'sine', duration: 0.4, gain: 0.15, filter: 4800, at: i * 0.12 }));
+        },
     };
 
     let lastSoundAt = 0;
@@ -6011,6 +6288,292 @@
         const practicedCount = levelTopics.filter(t => getTopicProgress(t.id) > 0).length;
         const pct = total > 0 ? Math.round((practicedCount / total) * 100) : 0;
         return { levelTopics, total, practicedCount, pct };
+    }
+
+    // ==================== SISTEMA GACHA JLPT ==================== //
+    // Determina aleatoriamente, con probabilidades ponderadas exactas, cuántas
+    // estrellas obtiene el usuario y a qué nivel JLPT corresponde. No crea
+    // ningún sistema de temarios/tests nuevo: solo elige el nivel y reutiliza
+    // openTopic()/startPractice() ya existentes.
+    const GACHA_TABLE = [
+        { stars: 1, weight: 41, levelId: 'n5-principiante', label: 'JLPT N5', sub: 'N5 · Principiante', color: '#3ddc84' },
+        { stars: 2, weight: 29, levelId: 'n5-avanzado',      label: 'JLPT N5', sub: 'N5 · Avanzado',      color: '#f2c94c' },
+        { stars: 3, weight: 17, levelId: 'n4',               label: 'JLPT N4', sub: 'N4',                 color: '#4a90e2' },
+        { stars: 4, weight: 6,  levelId: 'n3',               label: 'JLPT N3', sub: 'N3',                 color: '#9b59b6' },
+        { stars: 5, weight: 5,  levelId: 'n2',               label: 'JLPT N2', sub: 'N2',                 color: '#ff9500' },
+        { stars: 6, weight: 2,  levelId: 'n1',               label: 'JLPT N1', sub: 'N1',                 color: '#ff4b4b' }
+    ];
+
+    let gachaActive = false;
+    // Timeouts pendientes de la animación en curso, para poder cancelarlos
+    // todos de golpe si el usuario hace doble click para saltar (skip).
+    let gachaTimeouts = [];
+    // Qué "fase" del gacha está en curso ahora mismo, para saber a qué
+    // saltar directamente cuando se hace skip.
+    let gachaPhase = null; // 'stars' | 'gathering' | 'result' | 'topic'
+    let gachaResultData = null;
+    let gachaChosenTopic = null;
+    let gachaLastTapAt = 0;
+
+    function gachaSetTimeout(fn, ms) {
+        const id = setTimeout(fn, ms);
+        gachaTimeouts.push(id);
+        return id;
+    }
+    function gachaClearTimeouts() {
+        gachaTimeouts.forEach(id => clearTimeout(id));
+        gachaTimeouts = [];
+    }
+
+    // Selección aleatoria ponderada real: el resultado se decide UNA vez aquí,
+    // no estrella a estrella.
+    function rollJLPTGacha() {
+        const totalWeight = GACHA_TABLE.reduce((sum, e) => sum + e.weight, 0); // 100
+        let roll = Math.random() * totalWeight;
+        for (const entry of GACHA_TABLE) {
+            if (roll < entry.weight) return entry;
+            roll -= entry.weight;
+        }
+        return GACHA_TABLE[0]; // fallback de seguridad, no debería alcanzarse
+    }
+
+    // En la fase final (temario asignado), un solo toque en cualquier punto
+    // de la pantalla arranca directamente el test. En el resto de fases, un
+    // doble click/tap salta inmediatamente a la fase siguiente de la
+    // animación en curso.
+    function handleGachaStageTap() {
+        if (!gachaActive) return;
+        if (gachaPhase === 'topic') {
+            startGachaTestFromOverlay();
+            return;
+        }
+        const now = performance.now();
+        const isDoubleTap = now - gachaLastTapAt < 400;
+        gachaLastTapAt = now;
+        if (!isDoubleTap) return;
+        skipGachaPhase();
+    }
+
+    function skipGachaPhase() {
+        gachaClearTimeouts();
+        if (gachaPhase === 'stars' || gachaPhase === 'gathering') {
+            finishStarsAndGather();
+        } else if (gachaPhase === 'result') {
+            showGachaTopicReveal(gachaResultData);
+        }
+        // Si ya está en la fase de temario, el propio botón "toca para
+        // continuar" es el único avance posible: no hay nada que saltar.
+    }
+
+    function startJLPTGacha() {
+        if (gachaActive) return; // evita dobles gachas por clicks repetidos
+        gachaActive = true;
+        gachaClearTimeouts();
+        playSound('primary');
+
+        const result = rollJLPTGacha();
+        gachaResultData = result;
+        const overlay = document.getElementById('gacha-overlay');
+        const stage = document.getElementById('gacha-stage');
+        const starsLayer = document.getElementById('gacha-stars-layer');
+        const particlesLayer = document.getElementById('gacha-particles-layer');
+        const resultBox = document.getElementById('gacha-result');
+        const flash = document.getElementById('gacha-flash');
+
+        // Reset de cualquier resto de una ejecución anterior
+        starsLayer.innerHTML = '';
+        particlesLayer.innerHTML = '';
+        resultBox.classList.remove('show');
+        resultBox.innerHTML = '';
+        flash.classList.remove('play');
+        stage.dataset.rarity = String(result.stars);
+        gachaPhase = 'stars';
+
+        document.getElementById('app').classList.add('blurred');
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        playSound('gachaCharge');
+
+        // Posiciones en círculo (en % del stage) donde va apareciendo cada
+        // estrella antes de agruparse en el centro.
+        const scatterSpots = [];
+        const radius = 32;
+        for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+            scatterSpots.push({
+                left: `${50 + Math.cos(angle) * radius}%`,
+                top: `${50 + Math.sin(angle) * radius}%`
+            });
+        }
+
+        const starEls = [];
+        for (let i = 0; i < result.stars; i++) {
+            const starEl = document.createElement('div');
+            starEl.className = 'gacha-star';
+            starEl.textContent = '★';
+            starEl.style.left = scatterSpots[i].left;
+            starEl.style.top = scatterSpots[i].top;
+            starsLayer.appendChild(starEl);
+            starEls.push(starEl);
+        }
+        gachaStarEls = starEls;
+
+        // Aparición progresiva y pausada: 1ª estrella tras una espera inicial
+        // para generar tensión, luego cada 2s, salvo el salto a la 6ª
+        // estrella, que es de 3s, tal como se pidió.
+        let delay = 1400;
+        starEls.forEach((starEl, idx) => {
+            gachaSetTimeout(() => {
+                starEl.classList.add('show');
+                playSound('gachaStar');
+            }, delay);
+            const isJumpToSixth = idx === 4; // de la 5ª a la 6ª estrella
+            delay += isJumpToSixth ? 3000 : 2000;
+        });
+
+        // Pequeña pausa extra tras la última estrella antes de agruparlas,
+        // para dar tiempo a asimilar el resultado antes de la reunión final.
+        gachaSetTimeout(() => finishStarsAndGather(), delay + 1100);
+    }
+
+    let gachaStarEls = [];
+
+    // Asegura que todas las estrellas del resultado están visibles (por si se
+    // hizo skip a mitad de la aparición) y lanza la fase de agrupación.
+    function finishStarsAndGather() {
+        gachaClearTimeouts();
+        gachaPhase = 'gathering';
+        gachaStarEls.forEach(starEl => starEl.classList.add('show'));
+        const particlesLayer = document.getElementById('gacha-particles-layer');
+        const flash = document.getElementById('gacha-flash');
+        gatherStars(gachaStarEls, particlesLayer, flash, () => {
+            showGachaResult(gachaResultData);
+        });
+    }
+
+    // Desplaza todas las estrellas hacia el centro del stage, en una pequeña
+    // fila/abanico ordenado (no amontonadas unas sobre otras), y dispara el
+    // brillo final.
+    function gatherStars(starEls, particlesLayer, flash, onDone) {
+        playSound('gachaGather');
+        const n = starEls.length;
+        const spacing = 34; // separación horizontal entre estrellas agrupadas
+        starEls.forEach((starEl, i) => {
+            const offset = (i - (n - 1) / 2) * spacing;
+            gachaSetTimeout(() => {
+                starEl.style.left = `calc(50% + ${offset}px)`;
+                starEl.style.top = '50%';
+                starEl.classList.add('gathered');
+                playSound('gachaConverge');
+            }, i * 90);
+        });
+
+        gachaSetTimeout(() => {
+            // Destello + partículas doradas + pequeño "pop" de las estrellas antes de desaparecer.
+            flash.classList.add('play');
+            playSound('gachaReveal');
+            spawnGachaParticles(particlesLayer, starEls.length >= 5 ? 26 : 14);
+            starEls.forEach(starEl => starEl.classList.add('burst'));
+            gachaSetTimeout(onDone, 800);
+        }, n * 90 + 2400);
+    }
+
+    function spawnGachaParticles(layer, count) {
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'gacha-particle';
+            const angle = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+            const dist = 90 + Math.random() * 90;
+            p.style.setProperty('--gpx', `${Math.cos(angle) * dist}px`);
+            p.style.setProperty('--gpy', `${Math.sin(angle) * dist}px`);
+            layer.appendChild(p);
+            requestAnimationFrame(() => p.classList.add('fly'));
+            setTimeout(() => p.remove(), 950);
+        }
+    }
+
+    // FASE 1 de resultado: muestra el nivel obtenido (con su bolita de color,
+    // como en la portada de niveles). Tras un tiempo (o al hacer skip), pasa
+    // a la FASE 2 con el temario concreto.
+    function showGachaResult(result) {
+        gachaPhase = 'result';
+        const resultBox = document.getElementById('gacha-result');
+        resultBox.innerHTML = `
+            <div class="gacha-result-badge">¡Resultado del Gacha!</div>
+            <div class="gacha-level-dot" style="background: radial-gradient(circle at 32% 28%, #ffffff55, ${result.color} 60%, ${result.color}dd 100%);"></div>
+            <div class="gacha-result-sub">${result.sub}</div>
+        `;
+        resultBox.classList.add('show');
+        playSound('gachaReveal');
+        gachaSetTimeout(() => playSound('gachaChime'), 400);
+
+        gachaSetTimeout(() => showGachaTopicReveal(result), 3200);
+    }
+
+    // FASE 2 de resultado: elige un temario al azar dentro del nivel obtenido
+    // y lo muestra DENTRO del propio overlay del Gacha (mismo sitio que el
+    // nivel), con su icono y título, y un botón "toca para continuar" que
+    // lanza el test directamente. No hay pantallas ni modales aparte.
+    function showGachaTopicReveal(result) {
+        gachaPhase = 'topic';
+        const levelTopics = topics.filter(t => topicLevelMap[t.id] === result.levelId);
+        const chosenTopic = levelTopics.length > 0
+            ? levelTopics[Math.floor(Math.random() * levelTopics.length)]
+            : null;
+        gachaChosenTopic = chosenTopic;
+
+        const resultBox = document.getElementById('gacha-result');
+        if (!chosenTopic) {
+            // Salvaguarda por si algún nivel no tuviera temarios todavía.
+            resultBox.innerHTML = `<div class="gacha-result-sub">Próximamente para este nivel</div>`;
+            gachaSetTimeout(() => closeGachaOverlay(), 1400);
+            return;
+        }
+        const vocabCount = vocabulary.filter(v => v.category === chosenTopic.id).length;
+
+        resultBox.classList.remove('show');
+        // Pequeño respiro antes de mostrar la segunda fase, para que no se
+        // sienta como un corte brusco tras el nivel.
+        gachaSetTimeout(() => {
+            resultBox.innerHTML = `
+                <div class="gacha-result-badge">📖 Temario asignado</div>
+                <div class="gacha-topic-icon">${chosenTopic.icon}</div>
+                <div class="gacha-result-level" style="font-size:28px;">${chosenTopic.title}</div>
+                <div class="gacha-result-sub">${vocabCount} palabras · Test de 10 preguntas</div>
+                <div class="gacha-continue-hint">Toca cualquier punto de la pantalla para continuar</div>
+            `;
+            resultBox.classList.add('show');
+            playSound('gachaChime');
+        }, 450);
+    }
+
+    // Cierra el overlay del Gacha dejando la app completamente limpia (sin
+    // blur, sin overlay, sin restos de estrellas/partículas).
+    function closeGachaOverlay() {
+        gachaClearTimeouts();
+        const overlay = document.getElementById('gacha-overlay');
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.getElementById('app').classList.remove('blurred');
+        document.getElementById('gacha-stars-layer').innerHTML = '';
+        document.getElementById('gacha-particles-layer').innerHTML = '';
+        document.getElementById('gacha-result').classList.remove('show');
+        document.getElementById('gacha-result').innerHTML = '';
+        document.getElementById('gacha-flash').classList.remove('play');
+        gachaActive = false;
+        gachaPhase = null;
+        gachaStarEls = [];
+    }
+
+    // Al tocar "continuar" en la fase de temario: cierra el overlay del Gacha
+    // y arranca el test reutilizando exactamente el sistema de práctica ya
+    // existente (openTopic + startPractice), con 10 preguntas como siempre.
+    function startGachaTestFromOverlay() {
+        const chosenTopic = gachaChosenTopic;
+        closeGachaOverlay();
+        if (!chosenTopic) { showScreen('home'); return; }
+        openTopic(chosenTopic.id);
+        startPractice(); // sin argumentos: usa currentTopicId y ya coge 10 preguntas
     }
 
     function renderHome() {
@@ -6613,6 +7176,9 @@
     // cualquier respuesta (práctica normal o repaso).
     function recordStatsAnswer(wordObj, isCorrect) {
         stats.practicedWords[wordObj.id] = true;
+        const today = new Date().toISOString().slice(0, 10);
+        if (!stats.practicedByDate) stats.practicedByDate = {};
+        stats.practicedByDate[today] = (stats.practicedByDate[today] || 0) + 1;
         if (isCorrect) {
             stats.totalCorrect++;
             stats.correctWords[wordObj.id] = true;
@@ -6662,10 +7228,71 @@
             .filter(m => m.word);
     }
 
+    let practiceChartRange = 7;
+
+    // Muestra/oculta el número de palabras practicadas al pulsar una barra
+    // del gráfico; se cierra al pulsar en cualquier otro sitio de la página.
+    function togglePracticeChartTooltip(barWrap, count) {
+        const tooltip = barWrap.querySelector('.practice-chart-tooltip');
+        const wasVisible = tooltip.classList.contains('visible');
+        document.querySelectorAll('.practice-chart-tooltip.visible').forEach(t => t.classList.remove('visible'));
+        if (!wasVisible) tooltip.classList.add('visible');
+    }
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.practice-chart-tooltip.visible').forEach(t => t.classList.remove('visible'));
+    });
+
+    function setPracticeChartRange(days) {
+        practiceChartRange = days;
+        document.querySelectorAll('#practice-chart-range .seg-btn').forEach(btn => {
+            btn.classList.toggle('active', Number(btn.dataset.value) === days);
+        });
+        renderPracticeChart(days);
+    }
+
+    // Dibuja un gráfico de barras simple (sin dependencias) con el nº de
+    // palabras practicadas cada día de los últimos "days" días.
+    function renderPracticeChart(days) {
+        const container = document.getElementById('practice-chart-container');
+        if (!container) return;
+        const byDate = stats.practicedByDate || {};
+        const today = new Date();
+        const entries = [];
+        for (let i = days - 1; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+            const key = d.toISOString().slice(0, 10);
+            entries.push({ key, count: byDate[key] || 0, date: d });
+        }
+
+        const total = entries.reduce((sum, e) => sum + e.count, 0);
+        if (total === 0) {
+            container.innerHTML = `<div class="practice-chart-empty">Aún no hay práctica registrada en este periodo.</div>`;
+            return;
+        }
+
+        const max = Math.max(...entries.map(e => e.count), 1);
+        const showLabelEvery = days > 7 ? 5 : 1;
+        const bars = entries.map((e, idx) => {
+            const heightPct = Math.round((e.count / max) * 100);
+            return `<div class="practice-chart-bar-wrap" onclick="event.stopPropagation(); togglePracticeChartTooltip(this, ${e.count})">
+                <div class="practice-chart-tooltip" id="practice-chart-tooltip-${idx}">${e.count}</div>
+                <div class="practice-chart-bar" style="height:${e.count > 0 ? Math.max(heightPct, 4) : 0}%;"></div>
+            </div>`;
+        }).join('');
+        const labels = entries.map((e, idx) => {
+            const showLabel = (entries.length - 1 - idx) % showLabelEvery === 0;
+            const label = showLabel ? `${e.date.getDate()}/${e.date.getMonth() + 1}` : '';
+            return `<div class="practice-chart-label">${label}</div>`;
+        }).join('');
+
+        container.innerHTML = `<div class="practice-chart-scroll"><div class="practice-chart${days > 7 ? ' dense' : ''}">${bars}</div><div class="practice-chart-labels${days > 7 ? ' dense' : ''}">${labels}</div></div>`;
+    }
+
     function renderStats() {
         const totalAnswers = stats.totalCorrect + stats.totalWrong;
         const accuracy = totalAnswers > 0 ? Math.round((stats.totalCorrect / totalAnswers) * 100) : 0;
-        const topicsPracticed = Object.keys(stats.topicStats || {}).length;
+        const topicsPracticed = topics.filter(t => getTopicProgress(t.id) > 0).length;
 
         const statCard = (value, label, extraClass) => `<div class="stat-card${extraClass ? ' ' + extraClass : ''}"><div class="stat-value">${value}</div><div class="stat-label">${label}</div></div>`;
 
@@ -6681,6 +7308,8 @@
             statCard(Object.keys(stats.practicedWords || {}).length, '📖 Palabras practicadas') +
             statCard(Object.keys(stats.correctWords || {}).length, '✅ Palabras acertadas') +
             statCard(Object.keys(mistakes).length, '🔁 Palabras pendientes de repaso');
+
+        renderPracticeChart(practiceChartRange);
 
         // Palabras que más fallas
         const hardest = getTopMistakes(5);
@@ -6700,11 +7329,11 @@
             `).join('');
         }
 
-        // Temarios (solo los que ya se han practicado al menos una vez)
+        // Temarios (solo los que ya se han completado al menos una práctica entera)
         const topicsHTML = topics.map(t => {
             const ts = stats.topicStats && stats.topicStats[t.id];
             const practiceCount = getTopicProgress(t.id);
-            if (!ts && practiceCount === 0) return '';
+            if (practiceCount === 0) return '';
             const total = ts ? ts.correct + ts.wrong : 0;
             const pct = total > 0 ? Math.round((ts.correct / total) * 100) : 0;
             return `
@@ -6768,6 +7397,7 @@
         stats.practicedWords = {};
         stats.correctWords = {};
         stats.topicStats = {};
+        stats.practicedByDate = {};
         userProgress = {};
         saveData();
         renderStats();
@@ -6775,7 +7405,6 @@
             btnElement.innerHTML = '✅ Progreso borrado';
             setTimeout(() => { btnElement.innerHTML = '🗑️ Borrar progreso de estadísticas'; }, 1500);
         }
-        alert('Se ha borrado el progreso de tus estadísticas.');
     }
 
     // --- 9. BÚSQUEDA GLOBAL --- //
