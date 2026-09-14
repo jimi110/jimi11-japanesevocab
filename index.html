@@ -1432,10 +1432,6 @@
         // si alguien la tenía guardada, la migramos a un tema concreto existente.
         if (prefs.theme === 'auto') prefs.theme = systemPrefersDark() ? 'dark' : 'light';
         applyPrefs();
-        // Si el idioma coreano ya estaba activado en una sesión anterior, se
-        // vuelve a cargar automáticamente (vocabulary aún no existe en este
-        // punto de loadData, así que se difiere con setTimeout(0)).
-        if (prefs.koreanMode) setTimeout(() => loadKoreanDataIfNeeded(), 0);
     }
 
     function saveData() {
@@ -1457,14 +1453,14 @@
         if (key === 'sound' ? value : soundWasOn) playSound('toggle');
 
         if (key === 'koreanMode') {
-            if (value) {
-                loadKoreanDataIfNeeded().then(() => refreshCurrentScreenAfterLanguageChange());
-            } else {
-                restoreJapaneseVocabulary();
-                const statusEl = document.getElementById('korean-mode-status');
-                if (statusEl) statusEl.style.display = 'none';
-                refreshCurrentScreenAfterLanguageChange();
-            }
+            // Recargamos la página entera: así todas las pantallas (inicio, nivel,
+            // teoría, búsqueda, práctica...) se regeneran desde cero con el idioma
+            // correcto, en vez de tener que refrescar cada una a mano. La preferencia
+            // ya ha quedado guardada en localStorage justo arriba (saveData()), así
+            // que loadData() la recupera sola al volver a cargar y aplica el idioma
+            // elegido automáticamente.
+            window.location.reload();
+            return;
         }
 
         if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) {
@@ -7991,7 +7987,19 @@
     window.addEventListener('scroll', updateScrollTopButton, { passive: true });
 
     // Init
-    window.onload = () => { loadData(); renderHome(); currentScreenId = 'home'; updateScrollTopButton(); updateBottomNav('home'); };
+    window.onload = () => {
+        loadData();
+        // Si el modo coreano está activo, esperamos a que termine de cargar
+        // el vocabulario coreano antes de pintar la pantalla de inicio, para
+        // que no aparezca un instante en japonés y luego cambie de golpe.
+        const afterLanguageReady = prefs.koreanMode ? loadKoreanDataIfNeeded() : Promise.resolve();
+        afterLanguageReady.then(() => {
+            renderHome();
+            currentScreenId = 'home';
+            updateScrollTopButton();
+            updateBottomNav('home');
+        });
+    };
 </script>
 
 <script>
