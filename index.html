@@ -1136,6 +1136,15 @@
             </div>
 
             <div class="settings-section">
+                <div class="settings-section-title">🌐 Idioma del vocabulario</div>
+                <div class="segmented-control panel-seg" id="korean-mode-controls">
+                    <button class="seg-btn active" data-value="false" onclick="setPref('koreanMode', false)">日本語</button>
+                    <button class="seg-btn" data-value="true" onclick="setPref('koreanMode', true)">한국어</button>
+                </div>
+                <div id="korean-mode-status" class="settings-hint" style="display:none; font-size:12px; color:var(--text-muted); margin-top:8px;"></div>
+            </div>
+
+            <div class="settings-section">
                 <div class="settings-section-title">📊 Progreso</div>
                 <button type="button" class="settings-action-btn" onclick="refreshProgressData(this)">🔄 Actualizar progreso</button>
                 <button type="button" class="settings-action-btn danger" onclick="resetStatsProgress(this)">🗑️ Borrar progreso de estadísticas</button>
@@ -1388,7 +1397,7 @@
 
 <script>
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
-    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6' };
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false };
     let userProgress = {};
     // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
     let mistakes = {};
@@ -1423,6 +1432,10 @@
         // si alguien la tenía guardada, la migramos a un tema concreto existente.
         if (prefs.theme === 'auto') prefs.theme = systemPrefersDark() ? 'dark' : 'light';
         applyPrefs();
+        // Si el idioma coreano ya estaba activado en una sesión anterior, se
+        // vuelve a cargar automáticamente (vocabulary aún no existe en este
+        // punto de loadData, así que se difiere con setTimeout(0)).
+        if (prefs.koreanMode) setTimeout(() => loadKoreanDataIfNeeded(), 0);
     }
 
     function saveData() {
@@ -1442,6 +1455,20 @@
         // Si se acaba de desactivar el sonido, no reproducir nada (ni el propio
         // toggle). Si se acaba de activar, sí se oye para confirmar el cambio.
         if (key === 'sound' ? value : soundWasOn) playSound('toggle');
+
+        if (key === 'koreanMode') {
+            if (value) {
+                loadKoreanDataIfNeeded().then(() => {
+                    if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) renderTheory();
+                });
+            } else {
+                restoreJapaneseVocabulary();
+                const statusEl = document.getElementById('korean-mode-status');
+                if (statusEl) statusEl.style.display = 'none';
+                if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) renderTheory();
+            }
+        }
+
         if (currentTopicId && document.getElementById('screen-theory').classList.contains('active')) {
             renderTheory(); // Refrescar furigana instantáneamente en teoría
         }
@@ -1459,6 +1486,7 @@
         updateSegControl('layout-controls', prefs.layout);
         updateSegControl('hiragana-controls', prefs.hiragana);
         updateSegControl('sound-controls', prefs.sound);
+        updateSegControl('korean-mode-controls', prefs.koreanMode);
         renderThemeGrid();
     }
 
@@ -5978,7 +6006,71 @@
     // todavía no se ha escrito ninguna para ella (así el resto de la app
     // sigue funcionando con normalidad para las palabras que aún no tienen).
     function getWordSentences(word) {
+        // Modo coreano: si hay frases coreanas cargadas para este id, se usan
+        // esas; si no, se cae de vuelta a las frases japonesas originales.
+        if (prefs.koreanMode && koreanSentenceBank[word.id]) {
+            return koreanSentenceBank[word.id];
+        }
         return sentenceBank[getSentenceKey(word)] || null;
+    }
+
+    // ===================== MODO COREANO (opcional, vía Ajustes) ===================== //
+    // Todo este bloque es aditivo: si no se activa desde Ajustes, o si el
+    // archivo vocab-ko.json no está disponible, la app funciona exactamente
+    // igual que antes, en japonés. No se modifica ninguna estructura de datos
+    // original; solo se guarda una "copia japonesa" y se sustituyen algunos
+    // campos en memoria cuando el modo coreano está activo.
+    let koreanDataLoaded = false;
+    let koreanSentenceBank = {};
+    let originalVocabularySnapshot = null; // copia japonesa de 'vocabulary', para poder volver atrás
+
+    async function loadKoreanDataIfNeeded() {
+        if (!prefs.koreanMode || koreanDataLoaded) return;
+        const statusEl = document.getElementById('korean-mode-status');
+        try {
+            const res = await fetch('vocab-ko.json');
+            if (!res.ok) throw new Error('No se pudo cargar vocab-ko.json');
+            const koData = await res.json();
+
+            // Guardamos el japonés original la primera vez, para poder restaurarlo.
+            if (!originalVocabularySnapshot) {
+                originalVocabularySnapshot = vocabulary.map(w => ({ ...w }));
+            }
+
+            let translated = 0;
+            vocabulary.forEach(word => {
+                const ko = koData.words && koData.words[word.id];
+                if (ko) {
+                    word.romaji = ko.romanization;
+                    word.kana = ko.hangul;
+                    word.kanji = '';
+                    translated++;
+                }
+            });
+
+            koreanSentenceBank = koData.sentences || {};
+            koreanDataLoaded = true;
+
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                const total = vocabulary.length;
+                statusEl.textContent = `${translated} de ${total} palabras traducidas al coreano. El resto se muestra en japonés hasta que se traduzcan.`;
+            }
+        } catch (e) {
+            if (statusEl) {
+                statusEl.style.display = 'block';
+                statusEl.textContent = 'No se pudo cargar el vocabulario en coreano (vocab-ko.json). Mostrando japonés.';
+            }
+        }
+    }
+
+    function restoreJapaneseVocabulary() {
+        if (!originalVocabularySnapshot) return;
+        originalVocabularySnapshot.forEach((original, i) => {
+            vocabulary[i].romaji = original.romaji;
+            vocabulary[i].kana = original.kana;
+            vocabulary[i].kanji = original.kanji;
+        });
     }
 
     // --- 3. ESTADO DE LA APLICACIÓN --- //

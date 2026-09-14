@@ -1,0 +1,1461 @@
+{
+ "meta": {
+  "coveredCategories": [
+   "transport",
+   "basics",
+   "greetings",
+   "survival",
+   "polite"
+  ]
+ },
+ "words": {
+  "transport0": {
+   "hangul": "역",
+   "romanization": "yeok"
+  },
+  "transport1": {
+   "hangul": "역무원",
+   "romanization": "yeongmuwon"
+  },
+  "transport2": {
+   "hangul": "전철",
+   "romanization": "jeoncheol"
+  },
+  "transport3": {
+   "hangul": "고속철도",
+   "romanization": "gosokcheoldo"
+  },
+  "transport4": {
+   "hangul": "지하철",
+   "romanization": "jihacheol"
+  },
+  "transport5": {
+   "hangul": "열차",
+   "romanization": "yeolcha"
+  },
+  "transport6": {
+   "hangul": "객차",
+   "romanization": "gaekcha"
+  },
+  "transport7": {
+   "hangul": "버스",
+   "romanization": "beoseu"
+  },
+  "transport8": {
+   "hangul": "버스 정류장",
+   "romanization": "beoseu jeongnyujang"
+  },
+  "transport9": {
+   "hangul": "택시",
+   "romanization": "taeksi"
+  },
+  "transport10": {
+   "hangul": "공항",
+   "romanization": "gonghang"
+  },
+  "transport11": {
+   "hangul": "역 앞",
+   "romanization": "yeok ap"
+  },
+  "transport12": {
+   "hangul": "개찰구",
+   "romanization": "gaechalgu"
+  },
+  "transport13": {
+   "hangul": "개찰구 입구",
+   "romanization": "gaechalgu ipgu"
+  },
+  "transport14": {
+   "hangul": "출구",
+   "romanization": "chulgu"
+  },
+  "transport15": {
+   "hangul": "입구",
+   "romanization": "ipgu"
+  },
+  "transport16": {
+   "hangul": "북쪽 출구",
+   "romanization": "bukjjok chulgu"
+  },
+  "transport17": {
+   "hangul": "남쪽 출구",
+   "romanization": "namjjok chulgu"
+  },
+  "transport18": {
+   "hangul": "동쪽 출구",
+   "romanization": "dongjjok chulgu"
+  },
+  "transport19": {
+   "hangul": "서쪽 출구",
+   "romanization": "seojjok chulgu"
+  },
+  "transport20": {
+   "hangul": "표",
+   "romanization": "pyo"
+  },
+  "transport21": {
+   "hangul": "매표소",
+   "romanization": "maepyoso"
+  },
+  "transport22": {
+   "hangul": "발권기",
+   "romanization": "balgwongi"
+  },
+  "transport23": {
+   "hangul": "승차권",
+   "romanization": "seungchagwon"
+  },
+  "transport24": {
+   "hangul": "정기권",
+   "romanization": "jeonggigwon"
+  },
+  "transport25": {
+   "hangul": "교통카드",
+   "romanization": "gyotongkadeu"
+  },
+  "transport26": {
+   "hangul": "교통카드",
+   "romanization": "gyotongkadeu"
+  },
+  "transport27": {
+   "hangul": "잔액",
+   "romanization": "janaek"
+  },
+  "transport28": {
+   "hangul": "충전",
+   "romanization": "chungjeon"
+  },
+  "transport29": {
+   "hangul": "승강장",
+   "romanization": "seunggangjang"
+  },
+  "transport30": {
+   "hangul": "스크린도어",
+   "romanization": "seukeurindoeo"
+  },
+  "transport31": {
+   "hangul": "승차장",
+   "romanization": "seungchajang"
+  },
+  "transport32": {
+   "hangul": "환승",
+   "romanization": "hwanseung"
+  },
+  "transport33": {
+   "hangul": "노선",
+   "romanization": "noseon"
+  },
+  "transport34": {
+   "hangul": "선",
+   "romanization": "seon"
+  },
+  "transport35": {
+   "hangul": "역 이름",
+   "romanization": "yeok ireum"
+  },
+  "transport36": {
+   "hangul": "시간표",
+   "romanization": "siganpyo"
+  },
+  "transport37": {
+   "hangul": "출발",
+   "romanization": "chulbal"
+  },
+  "transport38": {
+   "hangul": "도착",
+   "romanization": "dochak"
+  },
+  "transport39": {
+   "hangul": "첫차",
+   "romanization": "cheotcha"
+  },
+  "transport40": {
+   "hangul": "막차",
+   "romanization": "makcha"
+  },
+  "transport41": {
+   "hangul": "지연",
+   "romanization": "jiyeon"
+  },
+  "transport42": {
+   "hangul": "운행 중지",
+   "romanization": "unhaeng jungji"
+  },
+  "transport43": {
+   "hangul": "운행",
+   "romanization": "unhaeng"
+  },
+  "transport44": {
+   "hangul": "급행",
+   "romanization": "geuphaeng"
+  },
+  "transport45": {
+   "hangul": "쾌속",
+   "romanization": "kwaesok"
+  },
+  "transport46": {
+   "hangul": "특급",
+   "romanization": "teukgeup"
+  },
+  "transport47": {
+   "hangul": "완행",
+   "romanization": "wanhaeng"
+  },
+  "transport48": {
+   "hangul": "각역 정차",
+   "romanization": "gagyeok jeongcha"
+  },
+  "transport49": {
+   "hangul": "모든 역",
+   "romanization": "modeun yeok"
+  },
+  "transport50": {
+   "hangul": "방면",
+   "romanization": "bangmyeon"
+  },
+  "transport51": {
+   "hangul": "행",
+   "romanization": "haeng"
+  },
+  "transport52": {
+   "hangul": "종점",
+   "romanization": "jongjeom"
+  },
+  "transport53": {
+   "hangul": "시발역",
+   "romanization": "sibaryeok"
+  },
+  "transport54": {
+   "hangul": "다음 역",
+   "romanization": "daeum yeok"
+  },
+  "transport55": {
+   "hangul": "이전 역",
+   "romanization": "ijeon yeok"
+  },
+  "transport56": {
+   "hangul": "열차 안",
+   "romanization": "yeolcha an"
+  },
+  "transport57": {
+   "hangul": "노약자석",
+   "romanization": "noyakjaseok"
+  },
+  "transport58": {
+   "hangul": "자동 개찰기",
+   "romanization": "jadong gaechalgi"
+  },
+  "transport59": {
+   "hangul": "계단",
+   "romanization": "gyedan"
+  },
+  "transport60": {
+   "hangul": "에스컬레이터",
+   "romanization": "eseukeolleiteo"
+  },
+  "transport61": {
+   "hangul": "엘리베이터",
+   "romanization": "ellibeiteo"
+  },
+  "transport62": {
+   "hangul": "버스 터미널",
+   "romanization": "beoseu teomineol"
+  },
+  "transport63": {
+   "hangul": "승차",
+   "romanization": "seungcha"
+  },
+  "transport64": {
+   "hangul": "하차",
+   "romanization": "hacha"
+  },
+  "transport65": {
+   "hangul": "운임",
+   "romanization": "unim"
+  },
+  "transport66": {
+   "hangul": "요금",
+   "romanization": "yogeum"
+  },
+  "transport67": {
+   "hangul": "편도",
+   "romanization": "pyeondo"
+  },
+  "transport68": {
+   "hangul": "왕복",
+   "romanization": "wangbok"
+  },
+  "transport69": {
+   "hangul": "지정석",
+   "romanization": "jijeongseok"
+  },
+  "transport70": {
+   "hangul": "자유석",
+   "romanization": "jayuseok"
+  },
+  "transport71": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "transport72": {
+   "hangul": "호차",
+   "romanization": "hocha"
+  },
+  "transport73": {
+   "hangul": "짐",
+   "romanization": "jim"
+  },
+  "transport74": {
+   "hangul": "분실물",
+   "romanization": "bunsilmul"
+  },
+  "transport75": {
+   "hangul": "주차장",
+   "romanization": "juchajang"
+  },
+  "transport76": {
+   "hangul": "파출소",
+   "romanization": "pachulso"
+  },
+  "basics460": {
+   "hangul": "화장실",
+   "romanization": "hwajangsil"
+  },
+  "basics461": {
+   "hangul": "화장실",
+   "romanization": "hwajangsil"
+  },
+  "basics462": {
+   "hangul": "물",
+   "romanization": "mul"
+  },
+  "basics463": {
+   "hangul": "음식",
+   "romanization": "eumsik"
+  },
+  "basics464": {
+   "hangul": "음료",
+   "romanization": "eumnyo"
+  },
+  "basics465": {
+   "hangul": "식사",
+   "romanization": "siksa"
+  },
+  "basics466": {
+   "hangul": "도움",
+   "romanization": "doum"
+  },
+  "basics467": {
+   "hangul": "돕다",
+   "romanization": "dopda"
+  },
+  "basics468": {
+   "hangul": "도와주세요",
+   "romanization": "dowajuseyo"
+  },
+  "basics469": {
+   "hangul": "긴급",
+   "romanization": "gingeup"
+  },
+  "basics470": {
+   "hangul": "긴급 상황",
+   "romanization": "gingeup sanghwang"
+  },
+  "basics471": {
+   "hangul": "구급차",
+   "romanization": "gugeupcha"
+  },
+  "basics472": {
+   "hangul": "경찰",
+   "romanization": "gyeongchal"
+  },
+  "basics473": {
+   "hangul": "파출소",
+   "romanization": "pachulso"
+  },
+  "basics474": {
+   "hangul": "병원",
+   "romanization": "byeongwon"
+  },
+  "basics475": {
+   "hangul": "약국",
+   "romanization": "yakguk"
+  },
+  "basics476": {
+   "hangul": "약",
+   "romanization": "yak"
+  },
+  "basics477": {
+   "hangul": "의사",
+   "romanization": "uisa"
+  },
+  "basics478": {
+   "hangul": "아파요",
+   "romanization": "apayo"
+  },
+  "basics479": {
+   "hangul": "병",
+   "romanization": "byeong"
+  },
+  "basics480": {
+   "hangul": "열",
+   "romanization": "yeol"
+  },
+  "basics481": {
+   "hangul": "열려 있다",
+   "romanization": "yeollyeo itda"
+  },
+  "basics482": {
+   "hangul": "영업 중",
+   "romanization": "yeongeop jung"
+  },
+  "basics483": {
+   "hangul": "닫혀 있다",
+   "romanization": "dachyeo itda"
+  },
+  "basics484": {
+   "hangul": "폐점",
+   "romanization": "pyejeom"
+  },
+  "basics485": {
+   "hangul": "길",
+   "romanization": "gil"
+  },
+  "basics486": {
+   "hangul": "미아",
+   "romanization": "mia"
+  },
+  "basics487": {
+   "hangul": "길을 잃다",
+   "romanization": "gireul ilta"
+  },
+  "basics488": {
+   "hangul": "지갑",
+   "romanization": "jigap"
+  },
+  "basics489": {
+   "hangul": "휴대폰",
+   "romanization": "hyudaepon"
+  },
+  "basics490": {
+   "hangul": "스마트폰",
+   "romanization": "seumateupon"
+  },
+  "basics491": {
+   "hangul": "충전",
+   "romanization": "chungjeon"
+  },
+  "basics492": {
+   "hangul": "충전기",
+   "romanization": "chungjeongi"
+  },
+  "basics493": {
+   "hangul": "휴지",
+   "romanization": "hyuji"
+  },
+  "basics494": {
+   "hangul": "입구",
+   "romanization": "ipgu"
+  },
+  "basics495": {
+   "hangul": "출구",
+   "romanization": "chulgu"
+  },
+  "basics496": {
+   "hangul": "안내",
+   "romanization": "annae"
+  },
+  "basics497": {
+   "hangul": "정보",
+   "romanization": "jeongbo"
+  },
+  "basics498": {
+   "hangul": "전화",
+   "romanization": "jeonhwa"
+  },
+  "greetings1502": {
+   "hangul": "안녕하세요",
+   "romanization": "annyeonghaseyo"
+  },
+  "greetings1503": {
+   "hangul": "좋은 아침",
+   "romanization": "joeun achim"
+  },
+  "greetings1504": {
+   "hangul": "안녕하세요 (아침 인사)",
+   "romanization": "annyeonghaseyo"
+  },
+  "greetings1505": {
+   "hangul": "안녕하세요 (저녁 인사)",
+   "romanization": "annyeonghaseyo"
+  },
+  "greetings1506": {
+   "hangul": "안녕히 가세요",
+   "romanization": "annyeonghi gaseyo"
+  },
+  "greetings1507": {
+   "hangul": "또 봐요",
+   "romanization": "tto bwayo"
+  },
+  "greetings1508": {
+   "hangul": "내일 봐요",
+   "romanization": "naeil bwayo"
+  },
+  "greetings1509": {
+   "hangul": "잘 자",
+   "romanization": "jal ja"
+  },
+  "greetings1510": {
+   "hangul": "안녕히 주무세요",
+   "romanization": "annyeonghi jumuseyo"
+  },
+  "greetings1511": {
+   "hangul": "고마워",
+   "romanization": "gomawo"
+  },
+  "greetings1512": {
+   "hangul": "감사합니다",
+   "romanization": "gamsahamnida"
+  },
+  "greetings1513": {
+   "hangul": "천만에요",
+   "romanization": "cheonmaneyo"
+  },
+  "greetings1514": {
+   "hangul": "죄송합니다",
+   "romanization": "joesonghamnida"
+  },
+  "greetings1515": {
+   "hangul": "미안해요",
+   "romanization": "mianhaeyo"
+  },
+  "greetings1516": {
+   "hangul": "잘 부탁해",
+   "romanization": "jal butakhae"
+  },
+  "greetings1517": {
+   "hangul": "잘 부탁드립니다",
+   "romanization": "jal butakdeurimnida"
+  },
+  "greetings1518": {
+   "hangul": "잘 지내세요?",
+   "romanization": "jal jinaeseyo?"
+  },
+  "greetings1519": {
+   "hangul": "잘 지내요",
+   "romanization": "jal jinaeyo"
+  },
+  "greetings1520": {
+   "hangul": "먼저 실례하겠습니다",
+   "romanization": "meonjeo sillyehagesseumnida"
+  },
+  "greetings1521": {
+   "hangul": "다녀오겠습니다",
+   "romanization": "danyeoogesseumnida"
+  },
+  "greetings1522": {
+   "hangul": "다녀오세요",
+   "romanization": "danyeooseyo"
+  },
+  "greetings1523": {
+   "hangul": "다녀왔습니다",
+   "romanization": "danyeowasseumnida"
+  },
+  "greetings1524": {
+   "hangul": "어서 와",
+   "romanization": "eoseo wa"
+  },
+  "greetings1525": {
+   "hangul": "잘 먹겠습니다",
+   "romanization": "jal meokgesseumnida"
+  },
+  "greetings1526": {
+   "hangul": "잘 먹었습니다",
+   "romanization": "jal meogeosseumnida"
+  },
+  "survival366": {
+   "hangul": "이것",
+   "romanization": "igeot"
+  },
+  "survival367": {
+   "hangul": "그것",
+   "romanization": "geugeot"
+  },
+  "survival368": {
+   "hangul": "저것",
+   "romanization": "jeogeot"
+  },
+  "survival369": {
+   "hangul": "여기",
+   "romanization": "yeogi"
+  },
+  "survival370": {
+   "hangul": "거기",
+   "romanization": "geogi"
+  },
+  "survival371": {
+   "hangul": "저기",
+   "romanization": "jeogi"
+  },
+  "survival372": {
+   "hangul": "어디",
+   "romanization": "eodi"
+  },
+  "survival373": {
+   "hangul": "무엇",
+   "romanization": "mueot"
+  },
+  "survival374": {
+   "hangul": "누구",
+   "romanization": "nugu"
+  },
+  "survival375": {
+   "hangul": "언제",
+   "romanization": "eonje"
+  },
+  "survival376": {
+   "hangul": "어느 것",
+   "romanization": "eoneu geot"
+  },
+  "survival377": {
+   "hangul": "어느",
+   "romanization": "eoneu"
+  },
+  "survival378": {
+   "hangul": "얼마",
+   "romanization": "eolma"
+  },
+  "survival379": {
+   "hangul": "몇 개",
+   "romanization": "myeot gae"
+  },
+  "survival380": {
+   "hangul": "있어요?",
+   "romanization": "isseoyo?"
+  },
+  "survival381": {
+   "hangul": "있어요? (사람)",
+   "romanization": "isseoyo?"
+  },
+  "survival382": {
+   "hangul": "알아요",
+   "romanization": "arayo"
+  },
+  "survival383": {
+   "hangul": "몰라요",
+   "romanization": "mollayo"
+  },
+  "survival384": {
+   "hangul": "모릅니다",
+   "romanization": "moreumnida"
+  },
+  "survival385": {
+   "hangul": "괜찮아요",
+   "romanization": "gwaenchanayo"
+  },
+  "survival386": {
+   "hangul": "다시 한번 말해 주세요",
+   "romanization": "dasi hanbeon malhae juseyo"
+  },
+  "survival387": {
+   "hangul": "천천히 말해 주세요",
+   "romanization": "cheoncheonhi malhae juseyo"
+  },
+  "survival388": {
+   "hangul": "한국어를 조금 알아요",
+   "romanization": "hangugeoreul jogeum arayo"
+  },
+  "survival389": {
+   "hangul": "영어 할 수 있어요?",
+   "romanization": "yeongeo hal su isseoyo?"
+  },
+  "survival390": {
+   "hangul": "한국어밖에 못해요",
+   "romanization": "hangugeobakke motaeyo"
+  },
+  "survival391": {
+   "hangul": "이게 뭐예요?",
+   "romanization": "ige mwoyeyo?"
+  },
+  "survival392": {
+   "hangul": "이거 얼마예요?",
+   "romanization": "igeo eolmayeyo?"
+  },
+  "survival393": {
+   "hangul": "화장실이 어디예요?",
+   "romanization": "hwajangsiri eodiyeyo?"
+  },
+  "survival394": {
+   "hangul": "역이 어디예요?",
+   "romanization": "yeogi eodiyeyo?"
+  },
+  "survival395": {
+   "hangul": "여기예요?",
+   "romanization": "yeogiyeyo?"
+  },
+  "survival396": {
+   "hangul": "이거 주세요",
+   "romanization": "igeo juseyo"
+  },
+  "survival397": {
+   "hangul": "부탁드립니다",
+   "romanization": "butakdeurimnida"
+  },
+  "survival398": {
+   "hangul": "도와주세요",
+   "romanization": "dowajuseyo"
+  },
+  "survival399": {
+   "hangul": "잠깐만 기다려 주세요",
+   "romanization": "jamkkanman gidaryeo juseyo"
+  },
+  "survival400": {
+   "hangul": "사진 찍어도 돼요?",
+   "romanization": "sajin jjigeodo dwaeyo?"
+  },
+  "survival401": {
+   "hangul": "다시 한번",
+   "romanization": "dasi hanbeon"
+  },
+  "survival402": {
+   "hangul": "천천히",
+   "romanization": "cheoncheonhi"
+  },
+  "survival403": {
+   "hangul": "네",
+   "romanization": "ne"
+  },
+  "survival404": {
+   "hangul": "아니요",
+   "romanization": "aniyo"
+  },
+  "survival405": {
+   "hangul": "물론이죠",
+   "romanization": "mullyeonijyo"
+  },
+  "survival406": {
+   "hangul": "아마도",
+   "romanization": "amado"
+  },
+  "survival407": {
+   "hangul": "진짜요?",
+   "romanization": "jinjjayo?"
+  },
+  "survival408": {
+   "hangul": "알겠습니다",
+   "romanization": "algesseumnida"
+  },
+  "survival409": {
+   "hangul": "좀...",
+   "romanization": "jom..."
+  },
+  "survival410": {
+   "hangul": "괜찮아요",
+   "romanization": "gwaenchanayo"
+  },
+  "polite599": {
+   "hangul": "안녕하세요",
+   "romanization": "annyeonghaseyo"
+  },
+  "polite600": {
+   "hangul": "감사합니다",
+   "romanization": "gamsahamnida"
+  },
+  "polite601": {
+   "hangul": "죄송합니다",
+   "romanization": "joesonghamnida"
+  },
+  "polite602": {
+   "hangul": "부탁드립니다",
+   "romanization": "butakdeurimnida"
+  },
+  "polite603": {
+   "hangul": "괜찮습니다",
+   "romanization": "gwaenchanseumnida"
+  },
+  "polite604": {
+   "hangul": "실례합니다",
+   "romanization": "sillyehamnida"
+  },
+  "polite605": {
+   "hangul": "잘 먹겠습니다",
+   "romanization": "jal meokgesseumnida"
+  },
+  "polite606": {
+   "hangul": "잘 먹었습니다",
+   "romanization": "jal meogeosseumnida"
+  },
+  "polite607": {
+   "hangul": "좋은 아침입니다",
+   "romanization": "joeun achimimnida"
+  }
+ },
+ "sentences": {
+  "transport0": [
+   {
+    "ko": "이 ＿＿＿＿에서 전철을 탑니다.",
+    "es": "Voy a subir al tren desde esta estación."
+   }
+  ],
+  "transport1": [
+   {
+    "ko": "＿＿＿＿에게 표 사는 법을 물어봤어요.",
+    "es": "Le pregunté al empleado de la estación cómo comprar el billete."
+   }
+  ],
+  "transport2": [
+   {
+    "ko": "＿＿＿＿은 일곱 시에 출발합니다.",
+    "es": "El tren sale a las siete."
+   }
+  ],
+  "transport3": [
+   {
+    "ko": "＿＿＿＿로 오사카까지 갑니다.",
+    "es": "Voy a Osaka en tren bala."
+   }
+  ],
+  "transport4": [
+   {
+    "ko": "＿＿＿＿은 비 오는 날에도 편리해요.",
+    "es": "El metro es práctico incluso los días de lluvia."
+   }
+  ],
+  "transport5": [
+   {
+    "ko": "다음 ＿＿＿＿는 몇 시에 와요?",
+    "es": "¿A qué hora llega el próximo tren?"
+   }
+  ],
+  "transport6": [
+   {
+    "ko": "이 ＿＿＿＿는 사람이 아주 많아요.",
+    "es": "Este vagón tiene muchísima gente."
+   }
+  ],
+  "transport7": [
+   {
+    "ko": "＿＿＿＿는 역 앞에 섭니다.",
+    "es": "El autobús para delante de la estación."
+   }
+  ],
+  "transport8": [
+   {
+    "ko": "＿＿＿＿은 편의점 앞이에요.",
+    "es": "La parada de autobús está delante de la tienda de conveniencia."
+   }
+  ],
+  "transport9": [
+   {
+    "ko": "비가 와서 ＿＿＿＿를 탔어요.",
+    "es": "Como llovía, cogí un taxi."
+   }
+  ],
+  "transport10": [
+   {
+    "ko": "＿＿＿＿까지 한 시간 걸려요.",
+    "es": "Se tarda una hora hasta el aeropuerto."
+   }
+  ],
+  "transport11": [
+   {
+    "ko": "＿＿＿＿에 큰 슈퍼마켓이 있어요.",
+    "es": "Delante de la estación hay un supermercado grande."
+   }
+  ],
+  "transport12": [
+   {
+    "ko": "＿＿＿＿에 표를 넣어 주세요.",
+    "es": "Introduzca el billete en la barrera de acceso, por favor."
+   }
+  ],
+  "transport13": [
+   {
+    "ko": "＿＿＿＿ 앞에서 기다리고 있어요.",
+    "es": "Te espero delante de la puerta de acceso."
+   }
+  ],
+  "transport14": [
+   {
+    "ko": "＿＿＿＿는 저쪽이에요.",
+    "es": "La salida está por allí."
+   }
+  ],
+  "transport15": [
+   {
+    "ko": "＿＿＿＿가 어디예요?",
+    "es": "¿Dónde está la entrada?"
+   }
+  ],
+  "transport16": [
+   {
+    "ko": "＿＿＿＿에서 만나요.",
+    "es": "Quedamos en la salida norte."
+   }
+  ],
+  "transport17": [
+   {
+    "ko": "＿＿＿＿에 택시 승강장이 있어요.",
+    "es": "En la salida sur hay una parada de taxis."
+   }
+  ],
+  "transport18": [
+   {
+    "ko": "＿＿＿＿에서 버스를 타요.",
+    "es": "Cojo el autobús desde la salida este."
+   }
+  ],
+  "transport19": [
+   {
+    "ko": "＿＿＿＿에는 사람이 별로 없어요.",
+    "es": "En la salida oeste no hay mucha gente."
+   }
+  ],
+  "transport20": [
+   {
+    "ko": "＿＿＿＿를 두 장 샀어요.",
+    "es": "Compré dos billetes."
+   }
+  ],
+  "transport21": [
+   {
+    "ko": "＿＿＿＿는 저기에 있어요.",
+    "es": "La taquilla de billetes está allí."
+   }
+  ],
+  "transport22": [
+   {
+    "ko": "＿＿＿＿에서 표를 삽니다.",
+    "es": "Compro el billete en la máquina expendedora."
+   }
+  ],
+  "transport23": [
+   {
+    "ko": "＿＿＿＿을 잃어버렸어요.",
+    "es": "He perdido el billete de transporte."
+   }
+  ],
+  "transport24": [
+   {
+    "ko": "매달 ＿＿＿＿을 사고 있어요.",
+    "es": "Compro un abono cada mes."
+   }
+  ],
+  "transport25": [
+   {
+    "ko": "＿＿＿＿로도 전철을 탈 수 있어요.",
+    "es": "También se puede coger el tren con la tarjeta IC."
+   }
+  ],
+  "transport26": [
+   {
+    "ko": "＿＿＿＿는 편의점에서도 쓸 수 있어요.",
+    "es": "La tarjeta IC de transporte también se puede usar en la tienda de conveniencia."
+   }
+  ],
+  "transport27": [
+   {
+    "ko": "카드 ＿＿＿＿이 부족해요.",
+    "es": "El saldo de la tarjeta no es suficiente."
+   }
+  ],
+  "transport28": [
+   {
+    "ko": "역에서 ＿＿＿＿을 했어요.",
+    "es": "Recargué la tarjeta en la estación."
+   }
+  ],
+  "transport29": [
+   {
+    "ko": "＿＿＿＿에서 전철을 기다리고 있어요.",
+    "es": "Espero el tren en el andén."
+   }
+  ],
+  "transport30": [
+   {
+    "ko": "＿＿＿＿가 닫혀 있어요.",
+    "es": "Las puertas del andén están cerradas."
+   }
+  ],
+  "transport31": [
+   {
+    "ko": "버스 ＿＿＿＿은 어디예요?",
+    "es": "¿Dónde está la parada del autobús?"
+   }
+  ],
+  "transport32": [
+   {
+    "ko": "다음 역에서 ＿＿＿＿합니다.",
+    "es": "Hago transbordo en la próxima estación."
+   }
+  ],
+  "transport33": [
+   {
+    "ko": "이 ＿＿＿＿은 신주쿠를 지나가요.",
+    "es": "Esta línea pasa por Shinjuku."
+   }
+  ],
+  "transport34": [
+   {
+    "ko": "야마노테 ＿＿＿＿을 타요.",
+    "es": "Cojo la línea Yamanote."
+   }
+  ],
+  "transport35": [
+   {
+    "ko": "＿＿＿＿을 잊어버렸어요.",
+    "es": "Se me ha olvidado el nombre de la estación."
+   }
+  ],
+  "transport36": [
+   {
+    "ko": "＿＿＿＿를 봐 주세요.",
+    "es": "Mira el horario, por favor."
+   }
+  ],
+  "transport37": [
+   {
+    "ko": "전철이 곧 ＿＿＿＿합니다.",
+    "es": "El tren va a salir pronto."
+   }
+  ],
+  "transport38": [
+   {
+    "ko": "＿＿＿＿은 아홉 시 예정이에요.",
+    "es": "La llegada está prevista para las nueve."
+   }
+  ],
+  "transport39": [
+   {
+    "ko": "＿＿＿＿는 다섯 시예요.",
+    "es": "El primer tren es a las cinco."
+   }
+  ],
+  "transport40": [
+   {
+    "ko": "＿＿＿＿를 놓쳤어요.",
+    "es": "No llegué a tiempo para el último tren."
+   }
+  ],
+  "transport41": [
+   {
+    "ko": "전철에 ＿＿＿＿이 있어요.",
+    "es": "El tren lleva retraso."
+   }
+  ],
+  "transport42": [
+   {
+    "ko": "태풍으로 ＿＿＿＿예요.",
+    "es": "Está suspendido por el tifón."
+   }
+  ],
+  "transport43": [
+   {
+    "ko": "오늘은 정상적으로 ＿＿＿＿하고 있어요.",
+    "es": "Hoy circula con normalidad."
+   }
+  ],
+  "transport44": [
+   {
+    "ko": "＿＿＿＿은 이 역에 서지 않아요.",
+    "es": "El tren rápido no para en esta estación."
+   }
+  ],
+  "transport45": [
+   {
+    "ko": "＿＿＿＿이 더 빨라요.",
+    "es": "El tren rápido (kwaesok) es más rápido."
+   }
+  ],
+  "transport46": [
+   {
+    "ko": "＿＿＿＿은 추가 요금이 필요해요.",
+    "es": "El tren limitado express necesita suplemento."
+   }
+  ],
+  "transport47": [
+   {
+    "ko": "＿＿＿＿은 모든 역에 서요.",
+    "es": "El tren normal para en todas las estaciones."
+   }
+  ],
+  "transport48": [
+   {
+    "ko": "＿＿＿＿는 느려요.",
+    "es": "El tren de paradas en todas las estaciones es lento."
+   }
+  ],
+  "transport49": [
+   {
+    "ko": "＿＿＿＿에 섭니다.",
+    "es": "Para en todas las estaciones."
+   }
+  ],
+  "transport50": [
+   {
+    "ko": "시부야 ＿＿＿＿ 전철을 타 주세요.",
+    "es": "Coge el tren en dirección a Shibuya."
+   }
+  ],
+  "transport51": [
+   {
+    "ko": "도쿄 ＿＿＿＿ 전철이에요.",
+    "es": "Es el tren con destino a Tokio."
+   }
+  ],
+  "transport52": [
+   {
+    "ko": "＿＿＿＿에서 내려 주세요.",
+    "es": "Bájese en la última parada."
+   }
+  ],
+  "transport53": [
+   {
+    "ko": "이 역은 ＿＿＿＿이에요.",
+    "es": "Esta estación es la estación de origen."
+   }
+  ],
+  "transport54": [
+   {
+    "ko": "＿＿＿＿에서 내려요.",
+    "es": "Me bajo en la siguiente estación."
+   }
+  ],
+  "transport55": [
+   {
+    "ko": "＿＿＿＿에서 환승했어요.",
+    "es": "Hice transbordo en la estación anterior."
+   }
+  ],
+  "transport56": [
+   {
+    "ko": "＿＿＿＿에서는 조용히 해 주세요.",
+    "es": "Guarde silencio dentro del tren, por favor."
+   }
+  ],
+  "transport57": [
+   {
+    "ko": "＿＿＿＿에 어르신이 앉아 있어요.",
+    "es": "Un anciano está sentado en el asiento prioritario."
+   }
+  ],
+  "transport58": [
+   {
+    "ko": "＿＿＿＿에 카드를 댑니다.",
+    "es": "Toco la tarjeta en el torniquete automático."
+   }
+  ],
+  "transport59": [
+   {
+    "ko": "＿＿＿＿을 올라가 주세요.",
+    "es": "Sube las escaleras, por favor."
+   }
+  ],
+  "transport60": [
+   {
+    "ko": "＿＿＿＿로 이 층에 올라가요.",
+    "es": "Subo al segundo piso en la escalera mecánica."
+   }
+  ],
+  "transport61": [
+   {
+    "ko": "짐이 많아서 ＿＿＿＿를 이용해요.",
+    "es": "Como llevo mucho equipaje, uso el ascensor."
+   }
+  ],
+  "transport62": [
+   {
+    "ko": "＿＿＿＿은 역 동쪽 출구에 있어요.",
+    "es": "La terminal de autobuses está en la salida este de la estación."
+   }
+  ],
+  "transport63": [
+   {
+    "ko": "삼 번 승강장에서 ＿＿＿＿해 주세요.",
+    "es": "Suba al tren desde la vía tres, por favor."
+   }
+  ],
+  "transport64": [
+   {
+    "ko": "다음 역에서 ＿＿＿＿합니다.",
+    "es": "Me bajo en la próxima estación."
+   }
+  ],
+  "transport65": [
+   {
+    "ko": "버스 ＿＿＿＿은 얼마예요?",
+    "es": "¿Cuánto cuesta el billete de autobús?"
+   }
+  ],
+  "transport66": [
+   {
+    "ko": "이 전철은 ＿＿＿＿이 비싸요.",
+    "es": "Este tren tiene una tarifa alta."
+   }
+  ],
+  "transport67": [
+   {
+    "ko": "＿＿＿＿ 표 주세요.",
+    "es": "Un billete de ida, por favor."
+   }
+  ],
+  "transport68": [
+   {
+    "ko": "＿＿＿＿ 표가 더 싸요.",
+    "es": "El billete de ida y vuelta es más barato."
+   }
+  ],
+  "transport69": [
+   {
+    "ko": "＿＿＿＿을 예약했어요.",
+    "es": "Reservé un asiento reservado."
+   }
+  ],
+  "transport70": [
+   {
+    "ko": "＿＿＿＿은 항상 붐벼요.",
+    "es": "El vagón de asientos libres siempre va lleno."
+   }
+  ],
+  "transport71": [
+   {
+    "ko": "전화로 ＿＿＿＿을 했어요.",
+    "es": "Hice la reserva por teléfono."
+   }
+  ],
+  "transport72": [
+   {
+    "ko": "제 자리는 삼 ＿＿＿＿예요.",
+    "es": "Mi asiento está en el vagón número tres."
+   }
+  ],
+  "transport73": [
+   {
+    "ko": "＿＿＿＿은 선반 위에 놓아 주세요.",
+    "es": "Ponga el equipaje en el estante de arriba, por favor."
+   }
+  ],
+  "transport74": [
+   {
+    "ko": "전철 안에 ＿＿＿＿을 했어요.",
+    "es": "Me dejé algo olvidado en el tren."
+   }
+  ],
+  "transport75": [
+   {
+    "ko": "역 근처에 ＿＿＿＿이 있어요.",
+    "es": "Cerca de la estación hay un aparcamiento."
+   }
+  ],
+  "transport76": [
+   {
+    "ko": "＿＿＿＿에서 길을 물어봤어요.",
+    "es": "Pregunté el camino en el puesto de policía."
+   }
+  ],
+  "greetings1502": [
+   {
+    "ko": "＿＿＿＿, 잘 지내요?",
+    "es": "Hola, ¿qué tal estás?"
+   }
+  ],
+  "greetings1503": [
+   {
+    "ko": "＿＿＿＿, 오늘도 날씨가 좋네.",
+    "es": "Buenos días, hoy también hace buen tiempo."
+   }
+  ],
+  "greetings1504": [
+   {
+    "ko": "선생님, ＿＿＿＿＿＿＿＿＿.",
+    "es": "Buenos días, profesor."
+   }
+  ],
+  "greetings1505": [
+   {
+    "ko": "＿＿＿＿, 수고하셨습니다.",
+    "es": "Buenas noches, gracias por su trabajo."
+   }
+  ],
+  "greetings1506": [
+   {
+    "ko": "＿＿＿＿, 또 만나요.",
+    "es": "Adiós, nos vemos otra vez."
+   }
+  ],
+  "greetings1507": [
+   {
+    "ko": "그럼, ＿＿＿＿.",
+    "es": "Bueno, hasta luego."
+   }
+  ],
+  "greetings1508": [
+   {
+    "ko": "＿＿＿＿, 잘 자.",
+    "es": "Hasta mañana, buenas noches."
+   }
+  ],
+  "greetings1509": [
+   {
+    "ko": "이제 잘게, ＿＿＿＿.",
+    "es": "Ya me voy a dormir, buenas noches."
+   }
+  ],
+  "greetings1510": [
+   {
+    "ko": "선생님, ＿＿＿＿＿＿＿＿.",
+    "es": "Buenas noches, profesor."
+   }
+  ],
+  "greetings1511": [
+   {
+    "ko": "도와줘서 ＿＿＿＿.",
+    "es": "Gracias por ayudarme."
+   }
+  ],
+  "greetings1512": [
+   {
+    "ko": "정말 ＿＿＿＿＿＿＿＿.",
+    "es": "Muchísimas gracias."
+   }
+  ],
+  "greetings1513": [
+   {
+    "ko": "아니요, ＿＿＿＿＿＿＿.",
+    "es": "No hay de qué, de nada."
+   }
+  ],
+  "greetings1514": [
+   {
+    "ko": "＿＿＿＿, 잠깐 괜찮으세요?",
+    "es": "Disculpe, ¿tiene un momento?"
+   }
+  ],
+  "greetings1515": [
+   {
+    "ko": "늦어서 ＿＿＿＿.",
+    "es": "Lo siento por llegar tarde."
+   }
+  ],
+  "greetings1516": [
+   {
+    "ko": "처음 뵙겠습니다, ＿＿＿＿.",
+    "es": "Mucho gusto, encantado."
+   }
+  ],
+  "greetings1517": [
+   {
+    "ko": "처음 뵙겠습니다, ＿＿＿＿＿＿＿＿＿.",
+    "es": "Mucho gusto, un placer conocerle."
+   }
+  ],
+  "greetings1518": [
+   {
+    "ko": "오랜만이에요, ＿＿＿＿＿＿＿?",
+    "es": "Cuánto tiempo, ¿cómo está?"
+   }
+  ],
+  "greetings1519": [
+   {
+    "ko": "네, ＿＿＿＿.",
+    "es": "Sí, estoy bien."
+   }
+  ],
+  "greetings1520": [
+   {
+    "ko": "수고하셨습니다, ＿＿＿＿＿＿＿＿＿＿.",
+    "es": "Buen trabajo, me voy antes que usted."
+   }
+  ],
+  "greetings1521": [
+   {
+    "ko": "＿＿＿＿＿＿＿, 다녀올게요!",
+    "es": "¡Ya me voy!"
+   }
+  ],
+  "greetings1522": [
+   {
+    "ko": "조심해, ＿＿＿＿＿.",
+    "es": "Ten cuidado, que te vaya bien."
+   }
+  ],
+  "greetings1523": [
+   {
+    "ko": "＿＿＿＿, 힘들었어.",
+    "es": "Ya he vuelto, estoy cansado."
+   }
+  ],
+  "greetings1524": [
+   {
+    "ko": "＿＿＿, 빨리 왔네.",
+    "es": "Bienvenido de vuelta, has llegado pronto."
+   }
+  ],
+  "greetings1525": [
+   {
+    "ko": "＿＿＿＿＿＿, 냄새 좋네요.",
+    "es": "Buen provecho, huele bien."
+   }
+  ],
+  "greetings1526": [
+   {
+    "ko": "＿＿＿＿＿＿, 맛있었어요.",
+    "es": "Gracias por la comida, estaba delicioso."
+   }
+  ],
+  "polite599": [
+   {
+    "ko": "낮에 만나면 ＿＿＿＿라고 말해요.",
+    "es": "Si te encuentras con alguien de día, dices \"hola\"."
+   }
+  ],
+  "polite600": [
+   {
+    "ko": "도움을 받으면 ＿＿＿＿라고 말해요.",
+    "es": "Si alguien te ayuda, dices \"muchas gracias\"."
+   }
+  ],
+  "polite601": [
+   {
+    "ko": "사람과 부딪히면 ＿＿＿＿라고 말해요.",
+    "es": "Si chocas con alguien, dices \"disculpe\"."
+   }
+  ],
+  "polite602": [
+   {
+    "ko": "무언가를 부탁할 때 ＿＿＿＿라고 말해요.",
+    "es": "Cuando pides algo, dices \"por favor\"."
+   }
+  ],
+  "polite603": [
+   {
+    "ko": "거절하고 싶을 때 ＿＿＿＿라고 말해요.",
+    "es": "Cuando quieres rechazar algo, dices \"está bien, no hace falta\"."
+   }
+  ],
+  "polite604": [
+   {
+    "ko": "방에 들어갈 때 ＿＿＿＿라고 말해요.",
+    "es": "Al entrar en una habitación, dices \"disculpe\"."
+   }
+  ],
+  "polite605": [
+   {
+    "ko": "먹기 전에 ＿＿＿＿라고 말해요.",
+    "es": "Antes de comer, dices \"jal meokgesseumnida\"."
+   }
+  ],
+  "polite606": [
+   {
+    "ko": "다 먹고 나서 ＿＿＿＿라고 말해요.",
+    "es": "Al terminar de comer, dices \"jal meogeosseumnida\"."
+   }
+  ],
+  "polite607": [
+   {
+    "ko": "아침에 만나면 ＿＿＿＿라고 말해요.",
+    "es": "Si te encuentras con alguien por la mañana, dices \"buenos días\"."
+   }
+  ]
+ }
+}
