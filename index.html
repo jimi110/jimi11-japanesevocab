@@ -713,6 +713,22 @@
             background: #ff3b30;
         }
 
+        /* Puntito rojo de aviso sobre el botón de Ajustes (⚙️) y sobre el botón
+           "Información" dentro del panel de Ajustes, para animar al usuario a
+           leer la información al menos una vez. Desaparece en cuanto se abre.
+           Mismo estilo y tamaño que .review-badge-dot. */
+        .info-badge-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ff3b30;
+        }
+        .settings-action-btn { position: relative; }
+        .settings-action-btn .info-badge-dot { top: 6px; right: 10px; }
+
         /* --- FILAS DE PALABRAS EN "REPASAR ERRORES" --- */
         .review-word-row {
             display: flex; align-items: center; gap: 12px;
@@ -1085,7 +1101,7 @@
 <div id="app" class="layout-auto gacha-blur-target">
 
     <!-- BOTÓN Y PANEL DE AJUSTES (Apariencia) -->
-    <button id="settings-fab" class="settings-fab" onclick="toggleSettingsPanel()" aria-label="Ajustes" aria-haspopup="true" aria-expanded="false">⚙️</button>
+    <button id="settings-fab" class="settings-fab" onclick="toggleSettingsPanel()" aria-label="Ajustes" aria-haspopup="true" aria-expanded="false">⚙️<span id="settings-info-dot" class="info-badge-dot" style="display:none;"></span></button>
 
     <div id="settings-overlay" class="settings-overlay" onclick="closeSettingsPanel()"></div>
 
@@ -1096,7 +1112,7 @@
         </div>
         <div class="settings-panel-body">
             <div class="settings-section">
-                <button type="button" class="settings-action-btn" onclick="openInfoModal()">ℹ️ Información</button>
+                <button type="button" class="settings-action-btn" onclick="openInfoModal()">ℹ️ Información<span id="info-btn-dot" class="info-badge-dot" style="display:none;"></span></button>
             </div>
 
             <div class="settings-section">
@@ -1267,9 +1283,6 @@
 
     <!-- PANTALLA DE REPASO GLOBAL (ERRORES DE TODA LA APP) -->
     <div id="screen-review" class="screen">
-        <div class="header-controls">
-            <button class="btn-back" onclick="goBackToLastTopicsScreen()">← Salir</button>
-        </div>
         <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
             <h2 style="margin-bottom:4px;">🔁 Repasar errores</h2>
             <p class="subtitle" id="review-pending-count" style="margin-bottom:0;">0 palabras pendientes</p>
@@ -1298,9 +1311,6 @@
 
     <!-- PANTALLA DE ESTADÍSTICAS -->
     <div id="screen-stats" class="screen">
-        <div class="header-controls">
-            <button class="btn-back" onclick="goBackToLastTopicsScreen()">← Salir</button>
-        </div>
         <div style="text-align: center; margin-bottom: 24px; margin-top: 8px;">
             <h2 style="font-size: 24px; margin-bottom:4px;">📊 Mis estadísticas</h2>
             <p class="subtitle" style="margin-bottom:0;">Tu progreso en la app</p>
@@ -1413,6 +1423,11 @@
         topicStats: {},       // { topicId: { correct, wrong } }
         practicedByDate: {}   // { 'YYYY-MM-DD': count } - nº de palabras practicadas ese día
     };
+    // Indica si el usuario ya ha abierto alguna vez el modal de Información.
+    // Mientras sea false, se muestra un puntito rojo de aviso sobre el botón
+    // de Ajustes (⚙️) y sobre "Información" dentro del panel, para animar a
+    // leerlo al menos una vez.
+    let hasSeenInfoModal = false;
 
     function loadData() {
         try {
@@ -1427,6 +1442,8 @@
 
             const savedStats = localStorage.getItem('nihongoStats');
             if (savedStats) stats = { ...stats, ...JSON.parse(savedStats) };
+
+            hasSeenInfoModal = localStorage.getItem('nihongoInfoSeen') === '1';
         } catch(e) {}
         // La opción de tema 'Automático' se ha eliminado de Ajustes > Apariencia;
         // si alguien la tenía guardada, la migramos a un tema concreto existente.
@@ -1484,6 +1501,8 @@
         renderThemeGrid();
         applyKoreanTitle();
         applySearchPlaceholder();
+        applyInfoModalText();
+        updateInfoBadgeDots();
         // El furigana es un recurso exclusivo de la escritura japonesa (kanji
         // + lectura en hiragana): en coreano no tiene sentido, así que se
         // oculta el interruptor mientras el modo coreano esté activo.
@@ -1545,6 +1564,66 @@
     function applySearchPlaceholder() {
         const input = document.getElementById('global-search-input');
         if (input) input.placeholder = prefs.koreanMode ? 'Escribe coreano, romanji o español…' : 'Escribe japonés, romaji o español…';
+    }
+
+    // Cambia el contenido del modal de Información entre japonés y coreano.
+    function applyInfoModalText() {
+        const infoDialog = document.querySelector('#info-modal .info-dialog');
+        if (!infoDialog) return;
+        if (prefs.koreanMode) {
+            infoDialog.innerHTML = `
+        <button class="info-close" aria-label="Cerrar información" onclick="closeInfoModal()">×</button>
+        <h2 id="info-title" class="info-title">ℹ️ Información</h2>
+
+        <div class="info-subtitle">📚 Recomendación</div>
+        <p class="info-text">Para aprovechar mejor esta aplicación, es recomendable saber leer hangul, el alfabeto coreano.</p>
+        <p class="info-text">No es necesario saber hanja , ya que no son necesarios para empezar a aprender coreano. La aplicación está pensada para que puedas avanzar utilizando principalmente el hangul.</p>
+        <p class="info-text">Si todavía no dominas el hangul, puedes aprenderlo rápidamente con estos recursos:</p>
+
+        <p class="info-text" style="margin-bottom:2px;"><strong>Aprender hangul</strong></p>
+        <a class="info-link" href="https://www.lenguia.com/tools/alphabet/hangul" target="_blank" rel="noopener noreferrer">https://www.lenguia.com/tools/alphabet/hangul</a>
+
+        <p class="info-text">Con estudio diario y utilizando una dinámica de prueba y error, es posible aprender a leer hangul de manera eficaz.</p>
+
+        <hr class="info-divider">
+
+        <div class="info-subtitle">❤️ ¿Quieres apoyar el proyecto?</div>
+        <p class="info-text">Puedes seguir mi canal de YouTube:</p>
+        <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
+
+        <p class="info-gambatte">¡Ánimo y mucha suerte en tu aprendizaje! 화이팅 (Hwaiting)! 💪</p>
+
+        <p class="info-easter-egg">Dicen que 한국어 esconde algo... quizás baste con tocarlo.</p>
+            `;
+        } else {
+            infoDialog.innerHTML = `
+        <button class="info-close" aria-label="Cerrar información" onclick="closeInfoModal()">×</button>
+        <h2 id="info-title" class="info-title">ℹ️ Información</h2>
+
+        <div class="info-subtitle">📚 Recomendación</div>
+        <p class="info-text">Para aprovechar mejor esta aplicación, es recomendable saber leer hiragana y katakana.</p>
+        <p class="info-text">No es necesario saber leer kanji, ya que la aplicación dispone de una opción de Furigana que permite mostrar la lectura de los kanjis.</p>
+        <p class="info-text">Si todavía no dominas hiragana y katakana, puedes aprenderlos rápidamente con estos recursos:</p>
+
+        <p class="info-text" style="margin-bottom:2px;"><strong>Aprender hiragana y katakana</strong></p>
+        <a class="info-link" href="https://uchisen.com/preschool" target="_blank" rel="noopener noreferrer">https://uchisen.com/preschool</a>
+
+        <p class="info-text" style="margin-bottom:2px;"><strong>Estudio rápido / práctica</strong></p>
+        <a class="info-link" href="https://uchisen.com/drills" target="_blank" rel="noopener noreferrer">https://uchisen.com/drills</a>
+
+        <p class="info-text">Con estudio diario y utilizando una dinámica de prueba y error, es posible aprenderlos de manera eficaz.</p>
+
+        <hr class="info-divider">
+
+        <div class="info-subtitle">❤️ ¿Quieres apoyar el proyecto?</div>
+        <p class="info-text">Puedes seguir mi canal de YouTube:</p>
+        <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
+
+        <p class="info-gambatte">¡Ánimo y mucha suerte en tu aprendizaje! 頑張って (Gambatte)! 💪</p>
+
+        <p class="info-easter-egg">Dicen que 日本語 esconde algo... quizás baste con tocarlo.</p>
+            `;
+        }
     }
 
     // --- MOTOR DE TEMAS DE APARIENCIA --- //
@@ -7972,10 +8051,26 @@
         if (event.target.id === 'dictionary-modal') closeDictionary();
     }
 
+    // Muestra/oculta los puntitos de aviso sobre el botón de Ajustes (⚙️) y
+    // sobre "Información" dentro del panel, según si el usuario ya ha
+    // abierto alguna vez el modal de Información.
+    function updateInfoBadgeDots() {
+        const fabDot = document.getElementById('settings-info-dot');
+        const btnDot = document.getElementById('info-btn-dot');
+        const show = hasSeenInfoModal ? 'none' : 'block';
+        if (fabDot) fabDot.style.display = show;
+        if (btnDot) btnDot.style.display = show;
+    }
+
     // --- MODAL DE INFORMACIÓN (Ajustes) --- //
     function openInfoModal() {
         document.getElementById('info-modal').classList.add('visible');
         if (typeof playSound === 'function') playSound('click');
+        if (!hasSeenInfoModal) {
+            hasSeenInfoModal = true;
+            try { localStorage.setItem('nihongoInfoSeen', '1'); } catch(e) {}
+            updateInfoBadgeDots();
+        }
     }
 
     function closeInfoModal() {
