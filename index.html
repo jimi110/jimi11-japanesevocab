@@ -1154,8 +1154,8 @@
     
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
-        <h1 class="app-title-kanji" onclick="startJLPTGacha(); this.classList.remove('kanji-bounce'); void this.offsetWidth; this.classList.add('kanji-bounce');" role="button" tabindex="0" title="¡Toca para el Gacha de nivel JLPT!" style="cursor:pointer;">日本語</h1>
-        <p class="subtitle app-title-subtitle">Vocabulario japonés</p>
+        <h1 id="app-title-main" class="app-title-kanji" onclick="startJLPTGacha(); this.classList.remove('kanji-bounce'); void this.offsetWidth; this.classList.add('kanji-bounce');" role="button" tabindex="0" title="¡Toca para el Gacha de nivel JLPT!" style="cursor:pointer;">日本語</h1>
+        <p id="app-title-subtitle" class="subtitle app-title-subtitle">Vocabulario japonés</p>
 
         <div class="global-search">
             <label for="global-search-input">🔎 Buscar en todo el vocabulario</label>
@@ -1488,6 +1488,17 @@
         updateSegControl('sound-controls', prefs.sound);
         updateSegControl('korean-mode-controls', prefs.koreanMode);
         renderThemeGrid();
+        applyKoreanTitle();
+    }
+
+    // Cambia el título grande de la pantalla inicial (y la pestaña del
+    // navegador) entre japonés y coreano, sin tocar nada más del HTML.
+    function applyKoreanTitle() {
+        const titleEl = document.getElementById('app-title-main');
+        const subtitleEl = document.getElementById('app-title-subtitle');
+        if (titleEl) titleEl.textContent = prefs.koreanMode ? '한국어' : '日本語';
+        if (subtitleEl) subtitleEl.textContent = prefs.koreanMode ? 'Vocabulario coreano' : 'Vocabulario japonés';
+        document.title = prefs.koreanMode ? '한국어 — Vocabulario Coreano' : '日本語 — Vocabulario Japonés';
     }
 
     // --- MOTOR DE TEMAS DE APARIENCIA --- //
@@ -6050,6 +6061,7 @@
 
             koreanSentenceBank = koData.sentences || {};
             koreanDataLoaded = true;
+            invalidateFuriganaDictionary();
 
             if (statusEl) {
                 statusEl.style.display = 'block';
@@ -6071,6 +6083,7 @@
             vocabulary[i].kana = original.kana;
             vocabulary[i].kanji = original.kanji;
         });
+        invalidateFuriganaDictionary();
     }
 
     // --- 3. ESTADO DE LA APLICACIÓN --- //
@@ -6112,6 +6125,13 @@
         return furiganaDictionary;
     }
 
+    // Se invalida cada vez que 'vocabulary' cambia de contenido (p.ej. al
+    // activar/desactivar el modo coreano), para que no se quede un diccionario
+    // obsoleto mezclando palabras de un idioma con otro.
+    function invalidateFuriganaDictionary() {
+        furiganaDictionary = null;
+    }
+
     // Convierte una frase en japonés a HTML seguro, añadiendo <ruby> sobre las
     // palabras reconocidas cuando la lectura en hiragana está activada.
     function renderSentenceHTML(jpText) {
@@ -6123,7 +6143,7 @@
             if (dict.length) {
                 for (const entry of dict) {
                     const len = entry.kanji.length;
-                    if (jpText.substr(i, len) === entry.kanji) {
+                    if (len > 0 && jpText.substr(i, len) === entry.kanji) {
                         html += `<ruby>${entry.kanji}<rt>${entry.kana}</rt></ruby>`;
                         i += len;
                         continue outer;
@@ -6262,7 +6282,9 @@
         if (!window.speechSynthesis || !prefs.sound) return;
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ja-JP';
+        // En modo coreano, el texto que se lee es hangul (guardado en word.kana),
+        // así que la síntesis de voz debe usar el idioma coreano; si no, japonés.
+        utterance.lang = prefs.koreanMode ? 'ko-KR' : 'ja-JP';
         utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
     }
