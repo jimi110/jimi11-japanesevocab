@@ -6,6 +6,21 @@
     <title>日本語 — Vocabulario Japonés</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ===== PWA: manifest y metadatos de instalación (no afecta a navegadores sin soporte) ===== -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3a3a42">
+
+    <!-- ===== PWA: soporte específico para iOS/iPadOS (incluye iOS 12) ===== -->
+    <!-- Estas etiquetas son las que usa Safari antiguo; ignoradas sin problema por el resto de navegadores -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="日本語">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- ===== Icono estándar para pestañas y favoritos (navegadores de escritorio) ===== -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <style>
         /* --- VARIABLES GLOBALES (TEMA CLARO POR DEFECTO) --- */
         :root {
@@ -110,6 +125,20 @@
             font-size: 52px;
             letter-spacing: 2px;
             margin-bottom: 6px;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .app-title-kanji:hover {
+            transform: scale(0.96) translateY(2px);
+        }
+        .app-title-kanji.kanji-bounce {
+            animation: kanjiBounce 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        @keyframes kanjiBounce {
+            0%   { transform: scale(0.9) translateY(3px); }
+            50%  { transform: scale(1.08) translateY(-4px); }
+            75%  { transform: scale(0.98) translateY(1px); }
+            100% { transform: scale(1) translateY(0); }
         }
         .app-title-subtitle {
             font-family: var(--font-family);
@@ -805,6 +834,7 @@
         .info-link { display: block; color: var(--primary); font-weight: 600; word-break: break-word; margin: 4px 0 10px; text-decoration: underline; }
         .info-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
         .info-gambatte { text-align: center; font-weight: 700; font-size: 15px; margin-top: 18px; color: var(--primary); }
+        .info-easter-egg { text-align: center; font-size: 11px; font-style: italic; color: var(--text-muted); opacity: 0.6; margin-top: 10px; }
 
         /* ==================== SISTEMA GACHA JLPT ==================== */
         .gacha-blur-target { transition: filter 0.4s ease; }
@@ -837,7 +867,8 @@
             filter: drop-shadow(0 0 6px rgba(255,215,0,0.7));
             will-change: transform, opacity, left, top;
             transition: left 0.9s cubic-bezier(.3,1.4,.5,1), top 0.9s cubic-bezier(.3,1.4,.5,1),
-                        transform 0.9s cubic-bezier(.3,1.4,.5,1), opacity 0.5s ease;
+                        transform 0.9s cubic-bezier(.3,1.4,.5,1), opacity 0.5s ease,
+                        color 0.7s ease, filter 0.7s ease;
         }
         .gacha-star.show {
             opacity: 1;
@@ -946,6 +977,11 @@
         .gacha-stage[data-rarity="6"] .gacha-star { color: #ff8a5c; filter: drop-shadow(0 0 22px rgba(255,110,60,1)); }
         .gacha-stage[data-rarity="6"] .gacha-result-level { color: #ffdcb0; }
         .gacha-stage[data-rarity="5"] .gacha-flash.play, .gacha-stage[data-rarity="6"] .gacha-flash.play { animation-duration: 0.9s; }
+
+        /* Evento especial: 1% de posibilidad por estrella de que salga morada;
+           si ocurre, todas las estrellas contagian ese color morado. */
+        .gacha-stage.gacha-purple-event .gacha-star { color: #c46bff; filter: drop-shadow(0 0 20px rgba(196,90,255,0.95)); }
+        .gacha-stage.gacha-purple-event .gacha-flash.play { animation-duration: 0.9s; }
 
         @media (max-width: 480px) {
             .gacha-star { font-size: 34px; }
@@ -1109,7 +1145,7 @@
     
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
-        <h1 class="app-title-kanji" onclick="startJLPTGacha()" role="button" tabindex="0" title="¡Toca para el Gacha de nivel JLPT!" style="cursor:pointer;">日本語</h1>
+        <h1 class="app-title-kanji" onclick="startJLPTGacha(); this.classList.remove('kanji-bounce'); void this.offsetWidth; this.classList.add('kanji-bounce');" role="button" tabindex="0" title="¡Toca para el Gacha de nivel JLPT!" style="cursor:pointer;">日本語</h1>
         <p class="subtitle app-title-subtitle">Vocabulario japonés</p>
 
         <div class="global-search">
@@ -1333,6 +1369,8 @@
         <a class="info-link" href="https://www.youtube.com/@jimi11_" target="_blank" rel="noopener noreferrer">https://www.youtube.com/@jimi11_</a>
 
         <p class="info-gambatte">¡Ánimo y mucha suerte en tu aprendizaje! 頑張って (Gambatte)! 💪</p>
+
+        <p class="info-easter-egg">Dicen que 日本語 esconde algo... quizás baste con tocarlo.</p>
     </div>
 </div>
 
@@ -6094,6 +6132,10 @@
         },
         // Simple "pop" al revelar el temario asignado (segunda fase del resultado).
         gachaTopicPop: () => tone({ freq: 520, to: 260, type: 'sine', duration: 0.12, gain: 0.2, filter: 3000 }),
+        // Pequeño destello sonoro para el evento especial de estrellas moradas.
+        gachaPurple: () => {
+            [660, 990, 1320].forEach((f, i) => tone({ freq: f, to: f * 1.15, type: 'triangle', duration: 0.24, gain: 0.16, filter: 4600, at: i * 0.07 }));
+        },
     };
 
     let lastSoundAt = 0;
@@ -6322,6 +6364,9 @@
     let gachaResultData = null;
     let gachaChosenTopic = null;
     let gachaLastTapAt = 0;
+    // Evento especial: si alguna estrella "contagia" el color morado durante
+    // la aparición, se activa este flag para forzar el temario a "Extras".
+    let gachaPurpleActive = false;
 
     function gachaSetTimeout(fn, ms) {
         const id = setTimeout(fn, ms);
@@ -6403,7 +6448,13 @@
         resultBox.classList.remove('show');
         resultBox.innerHTML = '';
         flash.classList.remove('play');
-        stage.dataset.rarity = String(result.stars);
+        // Siempre se empieza mostrando el aspecto de "1 estrella": si el
+        // resultado real tiene más rareza, el color irá cambiando de forma
+        // sutil (ver transición CSS) a medida que salgan más estrellas, en
+        // vez de delatar el resultado final desde la primera.
+        stage.dataset.rarity = '1';
+        stage.classList.remove('gacha-purple-event');
+        gachaPurpleActive = false;
         gachaPhase = 'stars';
         gachaSkipUsedThisPhase = false;
 
@@ -6447,6 +6498,17 @@
             gachaSetTimeout(() => {
                 starEl.classList.add('show');
                 playSound('gachaStar');
+                // Revelado progresivo de la rareza: solo al salir esta
+                // estrella se actualiza el color de todas (de forma sutil,
+                // vía transición CSS), nunca de golpe desde el principio.
+                stage.dataset.rarity = String(idx + 1);
+                // 1% de posibilidad, en cada estrella que sale, de que sea
+                // morada; si ocurre, contagia el color a todas las estrellas.
+                if (!gachaPurpleActive && Math.random() < 0.01) {
+                    gachaPurpleActive = true;
+                    stage.classList.add('gacha-purple-event');
+                    playSound('gachaPurple');
+                }
             }, delay);
             const isJumpToSixth = idx === 4; // de la 5ª a la 6ª estrella
             delay += isJumpToSixth ? 3000 : 2000;
@@ -6466,6 +6528,9 @@
         gachaPhase = 'gathering';
         gachaSkipUsedThisPhase = false;
         gachaStarEls.forEach(starEl => starEl.classList.add('show'));
+        // Si se saltó la fase antes de que salieran todas las estrellas, se
+        // fuerza aquí la rareza final para que coincida con el resultado.
+        document.getElementById('gacha-stage').dataset.rarity = String(gachaResultData.stars);
         const particlesLayer = document.getElementById('gacha-particles-layer');
         const flash = document.getElementById('gacha-flash');
         gatherStars(gachaStarEls, particlesLayer, flash, () => {
@@ -6518,10 +6583,14 @@
         gachaPhase = 'result';
         gachaSkipUsedThisPhase = false;
         const resultBox = document.getElementById('gacha-result');
+        // Si se activó el evento especial de estrellas moradas, el nivel
+        // mostrado pasa a ser "Extras" en vez del nivel JLPT obtenido.
+        const displayEmoji = gachaPurpleActive ? '✨' : result.emoji;
+        const displaySub = gachaPurpleActive ? 'Extras' : result.sub;
         resultBox.innerHTML = `
             <div class="gacha-result-badge">Resultado</div>
-            <div class="gacha-level-emoji">${result.emoji}</div>
-            <div class="gacha-result-sub">${result.sub}</div>
+            <div class="gacha-level-emoji">${displayEmoji}</div>
+            <div class="gacha-result-sub">${displaySub}</div>
         `;
         resultBox.classList.add('show');
         gachaSetTimeout(() => playSound('gachaChime'), 400);
@@ -6536,7 +6605,11 @@
     function showGachaTopicReveal(result) {
         gachaPhase = 'topic';
         gachaSkipUsedThisPhase = false;
-        const levelTopics = topics.filter(t => topicLevelMap[t.id] === result.levelId);
+        // Si se activó el evento especial de estrellas moradas, el temario
+        // siempre sale de "Extras", sin importar el nivel JLPT obtenido.
+        const levelTopics = gachaPurpleActive
+            ? topics.filter(t => topicLevelMap[t.id] === 'extras')
+            : topics.filter(t => topicLevelMap[t.id] === result.levelId);
         const chosenTopic = levelTopics.length > 0
             ? levelTopics[Math.floor(Math.random() * levelTopics.length)]
             : null;
@@ -6580,6 +6653,8 @@
         document.getElementById('gacha-result').classList.remove('show');
         document.getElementById('gacha-result').innerHTML = '';
         document.getElementById('gacha-flash').classList.remove('play');
+        document.getElementById('gacha-stage').classList.remove('gacha-purple-event');
+        gachaPurpleActive = false;
         gachaActive = false;
         gachaPhase = null;
         gachaStarEls = [];
@@ -7770,6 +7845,24 @@
 
     // Init
     window.onload = () => { loadData(); renderHome(); currentScreenId = 'home'; updateScrollTopButton(); updateBottomNav('home'); };
+</script>
+
+<script>
+    // ===== Registro del Service Worker (PWA) =====
+    // Comprobación de compatibilidad: si el navegador no soporta Service Workers
+    // (por ejemplo, Safari en iOS 12 y navegadores muy antiguos), este bloque
+    // simplemente no hace nada y la página sigue funcionando con normalidad,
+    // exactamente igual que antes de añadir la PWA.
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .catch(() => {
+                    // Si el registro falla por cualquier motivo (por ejemplo,
+                    // servir el archivo por file:// o falta de HTTPS en local),
+                    // no se interrumpe ni se altera el funcionamiento normal de la web.
+                });
+        });
+    }
 </script>
 
 </body>
