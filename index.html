@@ -7948,13 +7948,29 @@
         const titleEl = document.getElementById('dictionary-title');
         const contentEl = document.getElementById('dictionary-content');
         const query = word.kanji || word.kana || word.romaji;
-        const directUrl = `https://jisho.org/search/${encodeURIComponent(query)}`;
 
         const myToken = ++dictionaryRequestToken;
 
         playSound('open');
         titleEl.textContent = query;
         contentEl.className = 'dictionary-status';
+
+        // Jisho.org es un diccionario específico de japonés (basado en JMdict) y no
+        // tiene datos de coreano, así que en modo coreano no tiene sentido consultarlo:
+        // en su lugar se enlaza directamente al diccionario coreano-español de Naver
+        // (el equivalente coreano a Jisho, con el mismo nivel de detalle).
+        if (prefs.koreanMode) {
+            const naverQuery = word.kana || word.kanji || word.romaji;
+            const directUrl = `https://ko.dict.naver.com/#/search?query=${encodeURIComponent(naverQuery)}&range=word`;
+            contentEl.innerHTML = `
+                <p>Consulta la ficha completa de esta palabra en el diccionario de Naver.</p>
+                <a class="dictionary-link" href="${directUrl}" target="_blank" rel="noopener">Ver "${escapeHtml(naverQuery)}" en Naver Dictionary →</a>
+            `;
+            modal.classList.add('visible');
+            return;
+        }
+
+        const directUrl = `https://jisho.org/search/${encodeURIComponent(query)}`;
         // El botón para ir directamente a Jisho.org se muestra desde el primer
         // instante, sin esperar a que termine (o falle) la búsqueda automática.
         contentEl.innerHTML = `
