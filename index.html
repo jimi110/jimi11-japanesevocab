@@ -1501,6 +1501,30 @@
         document.title = prefs.koreanMode ? '한국어 — Vocabulario Coreano' : '日本語 — Vocabulario Japonés';
     }
 
+    // Algunos títulos de temario mencionan literalmente "japonés/japonesa/Japón"
+    // en su nombre (p.ej. "Cortesía japonesa", "Japón específico"). En modo
+    // coreano no tiene sentido mostrar esas palabras, así que aquí se define
+    // una traducción específica para esos títulos; el resto de títulos (que no
+    // mencionan el idioma) se muestran igual en ambos modos. Esta función se
+    // usa en todos los sitios donde se pinta topic.title, para no tener que
+    // tocar el array 'topics' original.
+    const koreanTopicTitleOverrides = {
+        city: 'La calle y moverse por Corea',
+        polite: 'Cortesía coreana',
+        fillers: 'Muletillas y coreano hablado',
+        listening: 'Comprensión auditiva y coreano reducido',
+        disaster: 'Desastres y seguridad en Corea',
+        onomatopoeia: 'Onomatopeyas coreanas',
+        japan: 'Corea específico'
+    };
+    function displayTopicTitle(topic) {
+        if (!topic) return '';
+        if (prefs.koreanMode && koreanTopicTitleOverrides[topic.id]) {
+            return koreanTopicTitleOverrides[topic.id];
+        }
+        return topic.title;
+    }
+
     // Al activar/desactivar el modo coreano, el array 'vocabulary' cambia en
     // memoria, pero cualquier pantalla que ya estuviera pintada con el idioma
     // anterior se queda con ese texto "congelado" en el HTML hasta que se
@@ -6454,7 +6478,7 @@
         card.innerHTML = `
             <div class="topic-icon">${t.icon}</div>
             <div class="topic-info">
-                <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${t.title}</div>
+                <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${displayTopicTitle(t)}</div>
                 <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
             </div>
             ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
@@ -6768,7 +6792,7 @@
             resultBox.innerHTML = `
                 <div class="gacha-result-badge">📖 Temario asignado</div>
                 <div class="gacha-topic-icon">${chosenTopic.icon}</div>
-                <div class="gacha-result-level" style="font-size:28px;">${chosenTopic.title}</div>
+                <div class="gacha-result-level" style="font-size:28px;">${displayTopicTitle(chosenTopic)}</div>
                 <div class="gacha-result-sub">${vocabCount} palabras · Test de 10 preguntas</div>
                 <div class="gacha-continue-hint">Toca cualquier punto de la pantalla para continuar</div>
             `;
@@ -6888,7 +6912,7 @@
         const topic = topics.find(t => t.id === topicId);
         const vocabCount = vocabulary.filter(v => v.category === topicId).length;
         document.getElementById('topic-detail-icon').innerText = topic.icon;
-        document.getElementById('topic-detail-title').innerText = topic.title;
+        document.getElementById('topic-detail-title').innerText = displayTopicTitle(topic);
         document.getElementById('topic-detail-count').innerText = `${vocabCount} elementos`;
         showScreen('topic');
     }
@@ -6919,8 +6943,8 @@
                 </div>
                 <div class="word-details">
                     <div class="detail-row"><span class="detail-label">Significado:</span> <span class="detail-value">${word.spanish}</span></div>
-                    <div class="detail-row"><span class="detail-label">Romaji:</span> <span class="detail-value" style="color:var(--text-muted)">${word.romaji}</span></div>
-                    <div class="detail-row"><span class="detail-label">Kana:</span> <span class="detail-value">${word.kana}</span></div>
+                    <div class="detail-row"><span class="detail-label">${prefs.koreanMode ? 'Romanización:' : 'Romaji:'}</span> <span class="detail-value" style="color:var(--text-muted)">${word.romaji}</span></div>
+                    <div class="detail-row"><span class="detail-label">${prefs.koreanMode ? 'Hangul:' : 'Kana:'}</span> <span class="detail-value">${word.kana}</span></div>
                     ${word.kanji ? `<div class="detail-row"><span class="detail-label">Kanji:</span> <span class="detail-value" style="color:var(--primary)">${word.kanji}</span></div>` : ''}
                     <button class="btn-audio" onclick="event.stopPropagation(); speakJapanese('${speakText}')">🔊</button>
                 </div>
@@ -7322,7 +7346,7 @@
             card.innerHTML = `
                 <div class="topic-icon">${topic.icon}</div>
                 <div class="topic-info">
-                    <div class="topic-title">${topic.title}</div>
+                    <div class="topic-title">${displayTopicTitle(topic)}</div>
                     <div class="topic-stats">${counts[categoryId]} pendiente${counts[categoryId] === 1 ? '' : 's'}</div>
                 </div>
             `;
@@ -7335,7 +7359,7 @@
         const pendingWords = getPendingWords().filter(w => w.category === categoryId);
 
         document.getElementById('review-category-icon').innerText = topic.icon;
-        document.getElementById('review-category-title').innerText = topic.title;
+        document.getElementById('review-category-title').innerText = displayTopicTitle(topic);
         document.getElementById('review-category-count').innerText =
             `${pendingWords.length} palabra${pendingWords.length === 1 ? '' : 's'} pendiente${pendingWords.length === 1 ? '' : 's'}`;
 
@@ -7578,7 +7602,7 @@
                 <div class="topic-card" style="cursor:default;">
                     <div class="topic-icon">${t.icon}</div>
                     <div class="topic-info">
-                        <div class="topic-title">${t.title}</div>
+                        <div class="topic-title">${displayTopicTitle(t)}</div>
                         <div class="topic-stats">${practiceCount} práctica${practiceCount === 1 ? '' : 's'} · ${pct}% aciertos</div>
                     </div>
                 </div>
@@ -7706,7 +7730,7 @@
 
         const listHtml = limited.map(w => {
             const topic = topics.find(t => t.id === w.category);
-            const topicTitle = topic ? topic.title : w.category;
+            const topicTitle = topic ? displayTopicTitle(topic) : w.category;
             const idx = vocabulary.indexOf(w);
             return `
                 <div class="search-word-card">
