@@ -22,7 +22,60 @@
    "routine",
    "position",
    "quantity",
-   "colors"
+   "colors",
+   "feelings",
+   "opinions",
+   "casual",
+   "fillers",
+   "phone",
+   "work",
+   "family",
+   "countries",
+   "nature",
+   "animals",
+   "japan",
+   "connectors",
+   "quantifiers",
+   "nuances",
+   "formal",
+   "listening",
+   "polysemy",
+   "calendar",
+   "weather",
+   "fruits",
+   "drinks",
+   "school-basic",
+   "hobbies",
+   "health",
+   "household",
+   "driving",
+   "postal",
+   "admin-basic",
+   "disaster",
+   "katakana",
+   "online-shopping",
+   "technology",
+   "education",
+   "office",
+   "events",
+   "tourism",
+   "services",
+   "administration",
+   "society",
+   "digital-communication",
+   "news",
+   "health-advanced",
+   "keigo",
+   "economy",
+   "abstract",
+   "media-opinion",
+   "academic",
+   "politics-economy",
+   "written-language",
+   "formal-nuance",
+   "collocations",
+   "idioms",
+   "onomatopoeia"
   ]
  },
  "words": {
@@ -3821,6 +3874,4882 @@
   "colors923": {
    "hangul": "맛없는",
    "romanization": "masieopneun"
+  },
+  "time_num_1": {
+   "hangul": "일",
+   "romanization": "il"
+  },
+  "time_num_2": {
+   "hangul": "이",
+   "romanization": "i"
+  },
+  "time_num_3": {
+   "hangul": "삼",
+   "romanization": "sam"
+  },
+  "time_num_4": {
+   "hangul": "사",
+   "romanization": "sa"
+  },
+  "time_num_5": {
+   "hangul": "오",
+   "romanization": "o"
+  },
+  "time_num_6": {
+   "hangul": "육",
+   "romanization": "yuk"
+  },
+  "time_num_7": {
+   "hangul": "칠",
+   "romanization": "chil"
+  },
+  "time_num_8": {
+   "hangul": "팔",
+   "romanization": "pal"
+  },
+  "time_num_9": {
+   "hangul": "구",
+   "romanization": "gu"
+  },
+  "time_num_10": {
+   "hangul": "십",
+   "romanization": "sip"
+  },
+  "time_num_11": {
+   "hangul": "십일",
+   "romanization": "sipil"
+  },
+  "time_num_12": {
+   "hangul": "십이",
+   "romanization": "sipi"
+  },
+  "time_num_13": {
+   "hangul": "십삼",
+   "romanization": "sipsam"
+  },
+  "time_num_14": {
+   "hangul": "십사",
+   "romanization": "sipsa"
+  },
+  "time_num_15": {
+   "hangul": "십오",
+   "romanization": "sipo"
+  },
+  "time_num_16": {
+   "hangul": "십육",
+   "romanization": "sipyuk"
+  },
+  "time_num_17": {
+   "hangul": "십칠",
+   "romanization": "sipchil"
+  },
+  "time_num_18": {
+   "hangul": "십팔",
+   "romanization": "sippal"
+  },
+  "time_num_19": {
+   "hangul": "십구",
+   "romanization": "sipgu"
+  },
+  "time_num_20": {
+   "hangul": "이십",
+   "romanization": "isip"
+  },
+  "time_num_21": {
+   "hangul": "이십일",
+   "romanization": "isipil"
+  },
+  "time_num_22": {
+   "hangul": "이십이",
+   "romanization": "isipi"
+  },
+  "time_num_23": {
+   "hangul": "이십삼",
+   "romanization": "isipsam"
+  },
+  "time_num_24": {
+   "hangul": "이십사",
+   "romanization": "isipsa"
+  },
+  "time_num_25": {
+   "hangul": "이십오",
+   "romanization": "isipo"
+  },
+  "time_num_26": {
+   "hangul": "이십육",
+   "romanization": "isipyuk"
+  },
+  "time_num_27": {
+   "hangul": "이십칠",
+   "romanization": "isipchil"
+  },
+  "time_num_28": {
+   "hangul": "이십팔",
+   "romanization": "isippal"
+  },
+  "time_num_29": {
+   "hangul": "이십구",
+   "romanization": "isipgu"
+  },
+  "time_num_30": {
+   "hangul": "삼십",
+   "romanization": "samsip"
+  },
+  "time_num_31": {
+   "hangul": "삼십일",
+   "romanization": "samsipil"
+  },
+  "time_num_32": {
+   "hangul": "삼십이",
+   "romanization": "samsipi"
+  },
+  "time_num_33": {
+   "hangul": "삼십삼",
+   "romanization": "samsipsam"
+  },
+  "time_num_34": {
+   "hangul": "삼십사",
+   "romanization": "samsipsa"
+  },
+  "time_num_35": {
+   "hangul": "삼십오",
+   "romanization": "samsipo"
+  },
+  "time_num_36": {
+   "hangul": "삼십육",
+   "romanization": "samsipyuk"
+  },
+  "time_num_37": {
+   "hangul": "삼십칠",
+   "romanization": "samsipchil"
+  },
+  "time_num_38": {
+   "hangul": "삼십팔",
+   "romanization": "samsippal"
+  },
+  "time_num_39": {
+   "hangul": "삼십구",
+   "romanization": "samsipgu"
+  },
+  "time_num_40": {
+   "hangul": "사십",
+   "romanization": "sasip"
+  },
+  "time_num_41": {
+   "hangul": "사십일",
+   "romanization": "sasipil"
+  },
+  "time_num_42": {
+   "hangul": "사십이",
+   "romanization": "sasipi"
+  },
+  "time_num_43": {
+   "hangul": "사십삼",
+   "romanization": "sasipsam"
+  },
+  "time_num_44": {
+   "hangul": "사십사",
+   "romanization": "sasipsa"
+  },
+  "time_num_45": {
+   "hangul": "사십오",
+   "romanization": "sasipo"
+  },
+  "time_num_46": {
+   "hangul": "사십육",
+   "romanization": "sasipyuk"
+  },
+  "time_num_47": {
+   "hangul": "사십칠",
+   "romanization": "sasipchil"
+  },
+  "time_num_48": {
+   "hangul": "사십팔",
+   "romanization": "sasippal"
+  },
+  "time_num_49": {
+   "hangul": "사십구",
+   "romanization": "sasipgu"
+  },
+  "time_num_50": {
+   "hangul": "오십",
+   "romanization": "osip"
+  },
+  "time_num_51": {
+   "hangul": "오십일",
+   "romanization": "osipil"
+  },
+  "time_num_52": {
+   "hangul": "오십이",
+   "romanization": "osipi"
+  },
+  "time_num_53": {
+   "hangul": "오십삼",
+   "romanization": "osipsam"
+  },
+  "time_num_54": {
+   "hangul": "오십사",
+   "romanization": "osipsa"
+  },
+  "time_num_55": {
+   "hangul": "오십오",
+   "romanization": "osipo"
+  },
+  "time_num_56": {
+   "hangul": "오십육",
+   "romanization": "osipyuk"
+  },
+  "time_num_57": {
+   "hangul": "오십칠",
+   "romanization": "osipchil"
+  },
+  "time_num_58": {
+   "hangul": "오십팔",
+   "romanization": "osippal"
+  },
+  "time_num_59": {
+   "hangul": "오십구",
+   "romanization": "osipgu"
+  },
+  "time_num_60": {
+   "hangul": "육십",
+   "romanization": "yuksip"
+  },
+  "time_num_61": {
+   "hangul": "육십일",
+   "romanization": "yuksipil"
+  },
+  "time_num_62": {
+   "hangul": "육십이",
+   "romanization": "yuksipi"
+  },
+  "time_num_63": {
+   "hangul": "육십삼",
+   "romanization": "yuksipsam"
+  },
+  "time_num_64": {
+   "hangul": "육십사",
+   "romanization": "yuksipsa"
+  },
+  "time_num_65": {
+   "hangul": "육십오",
+   "romanization": "yuksipo"
+  },
+  "time_num_66": {
+   "hangul": "육십육",
+   "romanization": "yuksipyuk"
+  },
+  "time_num_67": {
+   "hangul": "육십칠",
+   "romanization": "yuksipchil"
+  },
+  "time_num_68": {
+   "hangul": "육십팔",
+   "romanization": "yuksippal"
+  },
+  "time_num_69": {
+   "hangul": "육십구",
+   "romanization": "yuksipgu"
+  },
+  "time_num_70": {
+   "hangul": "칠십",
+   "romanization": "chilsip"
+  },
+  "time_num_71": {
+   "hangul": "칠십일",
+   "romanization": "chilsipil"
+  },
+  "time_num_72": {
+   "hangul": "칠십이",
+   "romanization": "chilsipi"
+  },
+  "time_num_73": {
+   "hangul": "칠십삼",
+   "romanization": "chilsipsam"
+  },
+  "time_num_74": {
+   "hangul": "칠십사",
+   "romanization": "chilsipsa"
+  },
+  "time_num_75": {
+   "hangul": "칠십오",
+   "romanization": "chilsipo"
+  },
+  "time_num_76": {
+   "hangul": "칠십육",
+   "romanization": "chilsipyuk"
+  },
+  "time_num_77": {
+   "hangul": "칠십칠",
+   "romanization": "chilsipchil"
+  },
+  "time_num_78": {
+   "hangul": "칠십팔",
+   "romanization": "chilsippal"
+  },
+  "time_num_79": {
+   "hangul": "칠십구",
+   "romanization": "chilsipgu"
+  },
+  "time_num_80": {
+   "hangul": "팔십",
+   "romanization": "palsip"
+  },
+  "time_num_81": {
+   "hangul": "팔십일",
+   "romanization": "palsipil"
+  },
+  "time_num_82": {
+   "hangul": "팔십이",
+   "romanization": "palsipi"
+  },
+  "time_num_83": {
+   "hangul": "팔십삼",
+   "romanization": "palsipsam"
+  },
+  "time_num_84": {
+   "hangul": "팔십사",
+   "romanization": "palsipsa"
+  },
+  "time_num_85": {
+   "hangul": "팔십오",
+   "romanization": "palsipo"
+  },
+  "time_num_86": {
+   "hangul": "팔십육",
+   "romanization": "palsipyuk"
+  },
+  "time_num_87": {
+   "hangul": "팔십칠",
+   "romanization": "palsipchil"
+  },
+  "time_num_88": {
+   "hangul": "팔십팔",
+   "romanization": "palsippal"
+  },
+  "time_num_89": {
+   "hangul": "팔십구",
+   "romanization": "palsipgu"
+  },
+  "time_num_90": {
+   "hangul": "구십",
+   "romanization": "gusip"
+  },
+  "time_num_91": {
+   "hangul": "구십일",
+   "romanization": "gusipil"
+  },
+  "time_num_92": {
+   "hangul": "구십이",
+   "romanization": "gusipi"
+  },
+  "time_num_93": {
+   "hangul": "구십삼",
+   "romanization": "gusipsam"
+  },
+  "time_num_94": {
+   "hangul": "구십사",
+   "romanization": "gusipsa"
+  },
+  "time_num_95": {
+   "hangul": "구십오",
+   "romanization": "gusipo"
+  },
+  "time_num_96": {
+   "hangul": "구십육",
+   "romanization": "gusipyuk"
+  },
+  "time_num_97": {
+   "hangul": "구십칠",
+   "romanization": "gusipchil"
+  },
+  "time_num_98": {
+   "hangul": "구십팔",
+   "romanization": "gusippal"
+  },
+  "time_num_99": {
+   "hangul": "구십구",
+   "romanization": "gusipgu"
+  },
+  "time_num_100": {
+   "hangul": "백",
+   "romanization": "baek"
+  },
+  "feelings924": {
+   "hangul": "기쁘다",
+   "romanization": "gippeuda"
+  },
+  "feelings925": {
+   "hangul": "즐겁다",
+   "romanization": "jeulgeopda"
+  },
+  "feelings926": {
+   "hangul": "행복",
+   "romanization": "haengbok"
+  },
+  "feelings927": {
+   "hangul": "좋아하다",
+   "romanization": "joahada"
+  },
+  "feelings928": {
+   "hangul": "너무 좋아하다",
+   "romanization": "neomu joahada"
+  },
+  "feelings929": {
+   "hangul": "사랑하다",
+   "romanization": "saranghada"
+  },
+  "feelings930": {
+   "hangul": "안심",
+   "romanization": "ansim"
+  },
+  "feelings931": {
+   "hangul": "만족",
+   "romanization": "manjok"
+  },
+  "feelings932": {
+   "hangul": "흥분",
+   "romanization": "heungbun"
+  },
+  "feelings933": {
+   "hangul": "두근두근",
+   "romanization": "dugeundugeun"
+  },
+  "feelings934": {
+   "hangul": "두근두근",
+   "romanization": "dugeundugeun"
+  },
+  "feelings935": {
+   "hangul": "자랑스럽다",
+   "romanization": "jarangseureopda"
+  },
+  "feelings936": {
+   "hangul": "슬프다",
+   "romanization": "seulpeuda"
+  },
+  "feelings937": {
+   "hangul": "외롭다",
+   "romanization": "oeropda"
+  },
+  "feelings938": {
+   "hangul": "무섭다",
+   "romanization": "museopda"
+  },
+  "feelings939": {
+   "hangul": "불안",
+   "romanization": "buran"
+  },
+  "feelings940": {
+   "hangul": "걱정",
+   "romanization": "geokjeong"
+  },
+  "feelings941": {
+   "hangul": "화내다",
+   "romanization": "hwanaeda"
+  },
+  "feelings942": {
+   "hangul": "화가 나다",
+   "romanization": "hwaga nada"
+  },
+  "feelings943": {
+   "hangul": "짜증나다",
+   "romanization": "jjajeungnada"
+  },
+  "feelings944": {
+   "hangul": "긴장하다",
+   "romanization": "ginjanghada"
+  },
+  "feelings945": {
+   "hangul": "부끄럽다",
+   "romanization": "bukkeureopda"
+  },
+  "feelings946": {
+   "hangul": "실망하다",
+   "romanization": "silmanghada"
+  },
+  "feelings947": {
+   "hangul": "피곤하다",
+   "romanization": "pigonhada"
+  },
+  "feelings948": {
+   "hangul": "지루함",
+   "romanization": "jiruham"
+  },
+  "feelings949": {
+   "hangul": "싫어하다",
+   "romanization": "silheohada"
+  },
+  "feelings950": {
+   "hangul": "매우 싫어하다",
+   "romanization": "maeu silheohada"
+  },
+  "feelings951": {
+   "hangul": "건강하다",
+   "romanization": "geonganghada"
+  },
+  "feelings952": {
+   "hangul": "피곤한",
+   "romanization": "pigonhan"
+  },
+  "feelings953": {
+   "hangul": "졸리다",
+   "romanization": "jollida"
+  },
+  "feelings954": {
+   "hangul": "배고프다",
+   "romanization": "baegopeuda"
+  },
+  "feelings955": {
+   "hangul": "목마르다",
+   "romanization": "mongmareuda"
+  },
+  "feelings956": {
+   "hangul": "아프다",
+   "romanization": "apeuda"
+  },
+  "feelings957": {
+   "hangul": "기분 좋다",
+   "romanization": "gibun jota"
+  },
+  "feelings958": {
+   "hangul": "기분 나쁘다",
+   "romanization": "gibun nappeuda"
+  },
+  "feelings959": {
+   "hangul": "괜찮다",
+   "romanization": "gwaenchanta"
+  },
+  "feelings960": {
+   "hangul": "한가하다",
+   "romanization": "hangahada"
+  },
+  "feelings961": {
+   "hangul": "바쁘다",
+   "romanization": "bappeuda"
+  },
+  "feelings962": {
+   "hangul": "안 바쁘다",
+   "romanization": "an bappeuda"
+  },
+  "feelings963": {
+   "hangul": "기쁘다!",
+   "romanization": "gippeuda!"
+  },
+  "feelings964": {
+   "hangul": "즐겁다!",
+   "romanization": "jeulgeopda!"
+  },
+  "feelings965": {
+   "hangul": "피곤해!",
+   "romanization": "pigonhae!"
+  },
+  "feelings966": {
+   "hangul": "졸려!",
+   "romanization": "jollyeo!"
+  },
+  "feelings967": {
+   "hangul": "배불러!",
+   "romanization": "baebulleo!"
+  },
+  "feelings968": {
+   "hangul": "무서워!",
+   "romanization": "museowo!"
+  },
+  "feelings969": {
+   "hangul": "해냈다!",
+   "romanization": "haenaetda!"
+  },
+  "feelings970": {
+   "hangul": "아쉽다",
+   "romanization": "aswipda"
+  },
+  "feelings971": {
+   "hangul": "다행이다!",
+   "romanization": "dahaengida!"
+  },
+  "feelings972": {
+   "hangul": "최악",
+   "romanization": "choeak"
+  },
+  "feelings973": {
+   "hangul": "힘들다",
+   "romanization": "himdeulda"
+  },
+  "opinions974": {
+   "hangul": "생각하다",
+   "romanization": "saenggakhada"
+  },
+  "opinions975": {
+   "hangul": "고려하다",
+   "romanization": "goryeohada"
+  },
+  "opinions976": {
+   "hangul": "알다",
+   "romanization": "alda"
+  },
+  "opinions977": {
+   "hangul": "이해하다",
+   "romanization": "ihaehada"
+  },
+  "opinions978": {
+   "hangul": "느끼다",
+   "romanization": "neukkida"
+  },
+  "opinions979": {
+   "hangul": "선호하다",
+   "romanization": "seonhohada"
+  },
+  "opinions980": {
+   "hangul": "고르다",
+   "romanization": "goreuda"
+  },
+  "opinions981": {
+   "hangul": "결정하다",
+   "romanization": "gyeoljeonghada"
+  },
+  "opinions982": {
+   "hangul": "찬성하다",
+   "romanization": "chanseonghada"
+  },
+  "opinions983": {
+   "hangul": "반대하다",
+   "romanization": "bandaehada"
+  },
+  "opinions984": {
+   "hangul": "의견",
+   "romanization": "uigyeon"
+  },
+  "opinions985": {
+   "hangul": "생각",
+   "romanization": "saenggak"
+  },
+  "opinions986": {
+   "hangul": "진실",
+   "romanization": "jinsil"
+  },
+  "opinions987": {
+   "hangul": "거짓말",
+   "romanization": "geojitmal"
+  },
+  "opinions988": {
+   "hangul": "맞다",
+   "romanization": "matda"
+  },
+  "opinions989": {
+   "hangul": "틀리다",
+   "romanization": "teullida"
+  },
+  "opinions990": {
+   "hangul": "좋다",
+   "romanization": "jota"
+  },
+  "opinions991": {
+   "hangul": "나쁘다",
+   "romanization": "nappeuda"
+  },
+  "opinions992": {
+   "hangul": "재미있다",
+   "romanization": "jaemiitda"
+  },
+  "opinions993": {
+   "hangul": "지루하다",
+   "romanization": "jiruhada"
+  },
+  "opinions994": {
+   "hangul": "중요하다",
+   "romanization": "jungyohada"
+  },
+  "opinions995": {
+   "hangul": "필요하다",
+   "romanization": "piryohada"
+  },
+  "opinions996": {
+   "hangul": "편리하다",
+   "romanization": "pyeollihada"
+  },
+  "opinions997": {
+   "hangul": "불편하다",
+   "romanization": "bulpyeonhada"
+  },
+  "opinions998": {
+   "hangul": "쉽다",
+   "romanization": "swipda"
+  },
+  "opinions999": {
+   "hangul": "어렵다",
+   "romanization": "eoryeopda"
+  },
+  "opinions1000": {
+   "hangul": "최고",
+   "romanization": "choego"
+  },
+  "opinions1001": {
+   "hangul": "최악",
+   "romanization": "choeak"
+  },
+  "opinions1002": {
+   "hangul": "좋아하다",
+   "romanization": "joahada"
+  },
+  "opinions1003": {
+   "hangul": "너무 좋아하다",
+   "romanization": "neomu joahada"
+  },
+  "opinions1004": {
+   "hangul": "싫어하다",
+   "romanization": "silheohada"
+  },
+  "opinions1005": {
+   "hangul": "매우 싫어하다",
+   "romanization": "maeu silheohada"
+  },
+  "opinions1006": {
+   "hangul": "즐겨찾기",
+   "romanization": "jeulgyeochatgi"
+  },
+  "opinions1007": {
+   "hangul": "제일 좋아하다",
+   "romanization": "jeil joahada"
+  },
+  "opinions1008": {
+   "hangul": "～쪽을 더 좋아하다",
+   "romanization": "~jjogeul deo joahada"
+  },
+  "opinions1009": {
+   "hangul": "어느 쪽을 좋아해요?",
+   "romanization": "eoneu jjogeul joahaeyo?"
+  },
+  "opinions1010": {
+   "hangul": "어느 게 좋아?",
+   "romanization": "eoneu ge joa?"
+  },
+  "opinions1011": {
+   "hangul": "아무거나 좋아요",
+   "romanization": "amugeona joayo"
+  },
+  "opinions1012": {
+   "hangul": "아무거나 상관없어",
+   "romanization": "amugeona sanggwaneopseo"
+  },
+  "opinions1013": {
+   "hangul": "좋아하는 것",
+   "romanization": "joahaneun geot"
+  },
+  "opinions1014": {
+   "hangul": "좋아하는 음식",
+   "romanization": "joahaneun eumsik"
+  },
+  "opinions1015": {
+   "hangul": "취미",
+   "romanization": "chwimi"
+  },
+  "opinions1016": {
+   "hangul": "나는 ～라고 생각해.",
+   "romanization": "naneun ~rago saenggakhae."
+  },
+  "opinions1017": {
+   "hangul": "～라고 생각합니다.",
+   "romanization": "~rago saenggakhamnida."
+  },
+  "opinions1018": {
+   "hangul": "나는 ～을 좋아해.",
+   "romanization": "naneun ~eul joahae."
+  },
+  "opinions1019": {
+   "hangul": "나는 ～쪽이 더 좋아.",
+   "romanization": "naneun ~jjogi deo joa."
+  },
+  "opinions1020": {
+   "hangul": "좋다고 생각해.",
+   "romanization": "jotago saenggakhae."
+  },
+  "opinions1021": {
+   "hangul": "그렇게 생각해.",
+   "romanization": "geureoke saenggakhae."
+  },
+  "opinions1022": {
+   "hangul": "그렇게 생각 안 해.",
+   "romanization": "geureoke saenggak an hae."
+  },
+  "opinions1023": {
+   "hangul": "정말?",
+   "romanization": "jeongmal?"
+  },
+  "opinions1024": {
+   "hangul": "맞아.",
+   "romanization": "maja."
+  },
+  "opinions1025": {
+   "hangul": "그렇구나.",
+   "romanization": "geureokuna."
+  },
+  "opinions1026": {
+   "hangul": "확실히",
+   "romanization": "hwaksilhi"
+  },
+  "opinions1027": {
+   "hangul": "아마",
+   "romanization": "ama"
+  },
+  "opinions1028": {
+   "hangul": "물론",
+   "romanization": "mullon"
+  },
+  "opinions1029": {
+   "hangul": "절대",
+   "romanization": "jeoldae"
+  },
+  "opinions1030": {
+   "hangul": "딱히",
+   "romanization": "ttakhi"
+  },
+  "casual1031": {
+   "hangul": "나",
+   "romanization": "na"
+  },
+  "casual1032": {
+   "hangul": "나",
+   "romanization": "na"
+  },
+  "casual1033": {
+   "hangul": "나",
+   "romanization": "na"
+  },
+  "casual1034": {
+   "hangul": "너",
+   "romanization": "neo"
+  },
+  "casual1035": {
+   "hangul": "너",
+   "romanization": "neo"
+  },
+  "casual1036": {
+   "hangul": "그",
+   "romanization": "geu"
+  },
+  "casual1037": {
+   "hangul": "그녀",
+   "romanization": "geunyeo"
+  },
+  "casual1038": {
+   "hangul": "모두",
+   "romanization": "modu"
+  },
+  "casual1039": {
+   "hangul": "자신",
+   "romanization": "jasin"
+  },
+  "casual1040": {
+   "hangul": "지",
+   "romanization": "ji"
+  },
+  "casual1041": {
+   "hangul": "요",
+   "romanization": "yo"
+  },
+  "casual1042": {
+   "hangul": "지?",
+   "romanization": "ji?"
+  },
+  "casual1043": {
+   "hangul": "말이야",
+   "romanization": "mariya"
+  },
+  "casual1044": {
+   "hangul": "-려나",
+   "romanization": "-ryeona"
+  },
+  "casual1045": {
+   "hangul": "근데",
+   "romanization": "geunde"
+  },
+  "casual1046": {
+   "hangul": "그래도",
+   "romanization": "geuraedo"
+  },
+  "casual1047": {
+   "hangul": "그래서",
+   "romanization": "geuraeseo"
+  },
+  "casual1048": {
+   "hangul": "그럼",
+   "romanization": "geureom"
+  },
+  "casual1049": {
+   "hangul": "뭐...",
+   "romanization": "mwo..."
+  },
+  "casual1050": {
+   "hangul": "뭔가",
+   "romanization": "mwonga"
+  },
+  "casual1051": {
+   "hangul": "좀",
+   "romanization": "jom"
+  },
+  "casual1052": {
+   "hangul": "역시",
+   "romanization": "yeoksi"
+  },
+  "casual1053": {
+   "hangul": "아마",
+   "romanization": "ama"
+  },
+  "casual1054": {
+   "hangul": "진짜",
+   "romanization": "jinjja"
+  },
+  "casual1055": {
+   "hangul": "엄청",
+   "romanization": "eomcheong"
+  },
+  "casual1056": {
+   "hangul": "완전",
+   "romanization": "wanjeon"
+  },
+  "casual1057": {
+   "hangul": "전혀",
+   "romanization": "jeonhyeo"
+  },
+  "casual1058": {
+   "hangul": "꽤",
+   "romanization": "kkwae"
+  },
+  "casual1059": {
+   "hangul": "꽤",
+   "romanization": "kkwae"
+  },
+  "casual1060": {
+   "hangul": "거의",
+   "romanization": "geoui"
+  },
+  "casual1061": {
+   "hangul": "일단",
+   "romanization": "ildan"
+  },
+  "casual1062": {
+   "hangul": "어?",
+   "romanization": "eo?"
+  },
+  "casual1063": {
+   "hangul": "엥?",
+   "romanization": "eng?"
+  },
+  "casual1064": {
+   "hangul": "아",
+   "romanization": "a"
+  },
+  "casual1065": {
+   "hangul": "오~",
+   "romanization": "o~"
+  },
+  "casual1066": {
+   "hangul": "그래?",
+   "romanization": "geurae?"
+  },
+  "casual1067": {
+   "hangul": "아 그렇구나",
+   "romanization": "a geureokuna"
+  },
+  "casual1068": {
+   "hangul": "그렇지",
+   "romanization": "geureochi"
+  },
+  "casual1069": {
+   "hangul": "진짜?",
+   "romanization": "jinjja?"
+  },
+  "casual1070": {
+   "hangul": "레알?",
+   "romanization": "real?"
+  },
+  "casual1071": {
+   "hangul": "진심?",
+   "romanization": "jinsim?"
+  },
+  "casual1072": {
+   "hangul": "응",
+   "romanization": "eung"
+  },
+  "casual1073": {
+   "hangul": "아니",
+   "romanization": "ani"
+  },
+  "casual1074": {
+   "hangul": "그렇구나",
+   "romanization": "geureokuna"
+  },
+  "casual1075": {
+   "hangul": "알았어",
+   "romanization": "arasseo"
+  },
+  "casual1076": {
+   "hangul": "모르겠어",
+   "romanization": "moreugesseo"
+  },
+  "casual1077": {
+   "hangul": "몰라",
+   "romanization": "molla"
+  },
+  "casual1078": {
+   "hangul": "좋네",
+   "romanization": "jonne"
+  },
+  "casual1079": {
+   "hangul": "대박",
+   "romanization": "daebak"
+  },
+  "casual1080": {
+   "hangul": "대박!",
+   "romanization": "daebak!"
+  },
+  "casual1081": {
+   "hangul": "헐",
+   "romanization": "heol"
+  },
+  "casual1082": {
+   "hangul": "귀엽다",
+   "romanization": "gwiyeopda"
+  },
+  "casual1083": {
+   "hangul": "멋있다",
+   "romanization": "meositda"
+  },
+  "casual1084": {
+   "hangul": "최고",
+   "romanization": "choego"
+  },
+  "casual1085": {
+   "hangul": "최악",
+   "romanization": "choeak"
+  },
+  "casual1086": {
+   "hangul": "뭐?",
+   "romanization": "mwo?"
+  },
+  "casual1087": {
+   "hangul": "누구?",
+   "romanization": "nugu?"
+  },
+  "casual1088": {
+   "hangul": "어디?",
+   "romanization": "eodi?"
+  },
+  "casual1089": {
+   "hangul": "언제?",
+   "romanization": "eonje?"
+  },
+  "casual1090": {
+   "hangul": "왜?",
+   "romanization": "wae?"
+  },
+  "casual1091": {
+   "hangul": "어째서?",
+   "romanization": "eojjaeseo?"
+  },
+  "casual1092": {
+   "hangul": "어때?",
+   "romanization": "eottae?"
+  },
+  "casual1093": {
+   "hangul": "무슨 뜻이야?",
+   "romanization": "museun tteusiya?"
+  },
+  "casual1094": {
+   "hangul": "어떡하지?",
+   "romanization": "eotteokaji?"
+  },
+  "casual1095": {
+   "hangul": "무슨 일이야?",
+   "romanization": "museun iriya?"
+  },
+  "casual1096": {
+   "hangul": "괜찮아?",
+   "romanization": "gwaenchana?"
+  },
+  "casual1097": {
+   "hangul": "진짜?",
+   "romanization": "jinjja?"
+  },
+  "casual1098": {
+   "hangul": "괜찮아?",
+   "romanization": "gwaenchana?"
+  },
+  "casual1099": {
+   "hangul": "갈래?",
+   "romanization": "gallae?"
+  },
+  "casual1100": {
+   "hangul": "먹을래?",
+   "romanization": "meogeullae?"
+  },
+  "casual1101": {
+   "hangul": "알겠어?",
+   "romanization": "algesseo?"
+  },
+  "casual1102": {
+   "hangul": "알아?",
+   "romanization": "ara?"
+  },
+  "casual1103": {
+   "hangul": "먹다",
+   "romanization": "meokda"
+  },
+  "casual1104": {
+   "hangul": "가다",
+   "romanization": "gada"
+  },
+  "casual1105": {
+   "hangul": "보다",
+   "romanization": "boda"
+  },
+  "casual1106": {
+   "hangul": "마시다",
+   "romanization": "masida"
+  },
+  "casual1107": {
+   "hangul": "하다",
+   "romanization": "hada"
+  },
+  "casual1108": {
+   "hangul": "오다",
+   "romanization": "oda"
+  },
+  "casual1109": {
+   "hangul": "알다",
+   "romanization": "alda"
+  },
+  "casual1110": {
+   "hangul": "알고 있다",
+   "romanization": "algo itda"
+  },
+  "casual1111": {
+   "hangul": "가지고 있다",
+   "romanization": "gajigo itda"
+  },
+  "casual1112": {
+   "hangul": "기다리고 있다",
+   "romanization": "gidarigo itda"
+  },
+  "casual1113": {
+   "hangul": "생각하고 있다",
+   "romanization": "saenggakhago itda"
+  },
+  "casual1114": {
+   "hangul": "~하고 있다",
+   "romanization": "~hago itda"
+  },
+  "casual1115": {
+   "hangul": "아니야",
+   "romanization": "aniya"
+  },
+  "casual1116": {
+   "hangul": "-라고",
+   "romanization": "-rago"
+  },
+  "casual1117": {
+   "hangul": "이름이 뭐야?",
+   "romanization": "ireumi mwoya?"
+  },
+  "casual1118": {
+   "hangul": "아니 그러니까",
+   "romanization": "ani geureonikka"
+  },
+  "casual1119": {
+   "hangul": "~해야 돼",
+   "romanization": "~haeya dwae"
+  },
+  "casual1120": {
+   "hangul": "~해 버리다",
+   "romanization": "~hae beorida"
+  },
+  "casual1121": {
+   "hangul": "잠깐만 기다려.",
+   "romanization": "jamkkanman gidaryeo."
+  },
+  "casual1122": {
+   "hangul": "잠깐만 기다려 줘.",
+   "romanization": "jamkkanman gidaryeo jwo."
+  },
+  "casual1123": {
+   "hangul": "알았어.",
+   "romanization": "arasseo."
+  },
+  "casual1124": {
+   "hangul": "모르겠어.",
+   "romanization": "moreugesseo."
+  },
+  "casual1125": {
+   "hangul": "몰라.",
+   "romanization": "molla."
+  },
+  "casual1126": {
+   "hangul": "몰랐어.",
+   "romanization": "mollasseo."
+  },
+  "casual1127": {
+   "hangul": "어떡하지.",
+   "romanization": "eotteokaji."
+  },
+  "casual1128": {
+   "hangul": "아무래도 상관없어.",
+   "romanization": "amuraedo sanggwaneopseo."
+  },
+  "casual1129": {
+   "hangul": "좋아.",
+   "romanization": "joa."
+  },
+  "casual1130": {
+   "hangul": "좋잖아.",
+   "romanization": "jojana."
+  },
+  "casual1131": {
+   "hangul": "괜찮아.",
+   "romanization": "gwaenchana."
+  },
+  "casual1132": {
+   "hangul": "조심해.",
+   "romanization": "josimhae."
+  },
+  "casual1133": {
+   "hangul": "또 봐.",
+   "romanization": "tto bwa."
+  },
+  "casual1134": {
+   "hangul": "안녕.",
+   "romanization": "annyeong."
+  },
+  "casual1135": {
+   "hangul": "다음에 또.",
+   "romanization": "daeume tto."
+  },
+  "casual1136": {
+   "hangul": "수고했어.",
+   "romanization": "sugohaesseo."
+  },
+  "casual1137": {
+   "hangul": "힘내.",
+   "romanization": "himnae."
+  },
+  "casual1138": {
+   "hangul": "힘내자.",
+   "romanization": "himnaeja."
+  },
+  "casual1139": {
+   "hangul": "어쩔 수 없어.",
+   "romanization": "eojjeol su eopseo."
+  },
+  "casual1140": {
+   "hangul": "방법이 없어.",
+   "romanization": "bangbeobi eopseo."
+  },
+  "casual1141": {
+   "hangul": "몰라.",
+   "romanization": "molla."
+  },
+  "casual1142": {
+   "hangul": "귀찮아.",
+   "romanization": "gwichana."
+  },
+  "casual1143": {
+   "hangul": "시끄러워.",
+   "romanization": "sikkeureowo."
+  },
+  "casual1144": {
+   "hangul": "졸려.",
+   "romanization": "jollyeo."
+  },
+  "casual1145": {
+   "hangul": "피곤해.",
+   "romanization": "pigonhae."
+  },
+  "casual1146": {
+   "hangul": "배고파.",
+   "romanization": "baegopa."
+  },
+  "casual1147": {
+   "hangul": "목말라.",
+   "romanization": "mongmalla."
+  },
+  "casual1148": {
+   "hangul": "가자.",
+   "romanization": "gaja."
+  },
+  "casual1149": {
+   "hangul": "집에 가자.",
+   "romanization": "jibe gaja."
+  },
+  "casual1150": {
+   "hangul": "그만하자.",
+   "romanization": "geumanhaja."
+  },
+  "casual1151": {
+   "hangul": "느낌 좋다.",
+   "romanization": "neukkim jota."
+  },
+  "casual1152": {
+   "hangul": "그런 느낌.",
+   "romanization": "geureon neukkim."
+  },
+  "casual1153": {
+   "hangul": "아무거나 좋아.",
+   "romanization": "amugeona joa."
+  },
+  "casual1154": {
+   "hangul": "딱히.",
+   "romanization": "ttakhi."
+  },
+  "fillers1155": {
+   "hangul": "음...",
+   "romanization": "eum..."
+  },
+  "fillers1156": {
+   "hangul": "저기...",
+   "romanization": "jeogi..."
+  },
+  "fillers1157": {
+   "hangul": "뭔가",
+   "romanization": "mwonga"
+  },
+  "fillers1158": {
+   "hangul": "그렇네요",
+   "romanization": "geureonneyo"
+  },
+  "fillers1159": {
+   "hangul": "그렇군요",
+   "romanization": "geureokunyo"
+  },
+  "fillers1160": {
+   "hangul": "아마도",
+   "romanization": "amado"
+  },
+  "fillers1161": {
+   "hangul": "조금",
+   "romanization": "jogeum"
+  },
+  "fillers1162": {
+   "hangul": "뭔가",
+   "romanization": "mwonga"
+  },
+  "fillers1163": {
+   "hangul": "그런데",
+   "romanization": "geureonde"
+  },
+  "fillers1164": {
+   "hangul": "그래서",
+   "romanization": "geuraeseo"
+  },
+  "fillers1165": {
+   "hangul": "음...",
+   "romanization": "eum..."
+  },
+  "fillers1166": {
+   "hangul": "그럼",
+   "romanization": "geureom"
+  },
+  "fillers1167": {
+   "hangul": "그래서",
+   "romanization": "geuraeseo"
+  },
+  "fillers1168": {
+   "hangul": "정말로",
+   "romanization": "jeongmallo"
+  },
+  "fillers1169": {
+   "hangul": "바로 그거예요",
+   "romanization": "baro geugeoyeyo"
+  },
+  "fillers1170": {
+   "hangul": "~인 것 같다",
+   "romanization": "~in geot gatda"
+  },
+  "phone1171": {
+   "hangul": "전화",
+   "romanization": "jeonhwa"
+  },
+  "phone1172": {
+   "hangul": "스마트폰",
+   "romanization": "seumateupon"
+  },
+  "phone1173": {
+   "hangul": "전화하다",
+   "romanization": "jeonhwahada"
+  },
+  "phone1174": {
+   "hangul": "전화를 받다",
+   "romanization": "jeonhwareul batda"
+  },
+  "phone1175": {
+   "hangul": "메일",
+   "romanization": "meil"
+  },
+  "phone1176": {
+   "hangul": "메시지",
+   "romanization": "mesiji"
+  },
+  "phone1177": {
+   "hangul": "번호",
+   "romanization": "beonho"
+  },
+  "phone1178": {
+   "hangul": "전화번호",
+   "romanization": "jeonhwabeonho"
+  },
+  "phone1179": {
+   "hangul": "전파",
+   "romanization": "jeonpa"
+  },
+  "phone1180": {
+   "hangul": "배터리",
+   "romanization": "baeteori"
+  },
+  "phone1181": {
+   "hangul": "부재중 전화",
+   "romanization": "bujaejung jeonhwa"
+  },
+  "phone1182": {
+   "hangul": "다시 걸다",
+   "romanization": "dasi geolda"
+  },
+  "phone1183": {
+   "hangul": "반복하다",
+   "romanization": "banbokhada"
+  },
+  "phone1184": {
+   "hangul": "말하다",
+   "romanization": "malhada"
+  },
+  "phone1185": {
+   "hangul": "듣다",
+   "romanization": "deutda"
+  },
+  "phone1186": {
+   "hangul": "다시 한번 말해 주세요",
+   "romanization": "dasi hanbeon malhae juseyo"
+  },
+  "phone1187": {
+   "hangul": "더 천천히",
+   "romanization": "deo cheoncheonhi"
+  },
+  "work1188": {
+   "hangul": "일",
+   "romanization": "il"
+  },
+  "work1189": {
+   "hangul": "회사",
+   "romanization": "hoesa"
+  },
+  "work1190": {
+   "hangul": "사무소",
+   "romanization": "samuso"
+  },
+  "work1191": {
+   "hangul": "직장인",
+   "romanization": "jikjangin"
+  },
+  "work1192": {
+   "hangul": "상사",
+   "romanization": "sangsa"
+  },
+  "work1193": {
+   "hangul": "동료",
+   "romanization": "dongnyo"
+  },
+  "work1194": {
+   "hangul": "학생",
+   "romanization": "haksaeng"
+  },
+  "work1195": {
+   "hangul": "선생님",
+   "romanization": "seonsaengnim"
+  },
+  "work1196": {
+   "hangul": "교사",
+   "romanization": "gyosa"
+  },
+  "work1197": {
+   "hangul": "대학교",
+   "romanization": "daehakgyo"
+  },
+  "work1198": {
+   "hangul": "학교",
+   "romanization": "hakgyo"
+  },
+  "work1199": {
+   "hangul": "고등학교",
+   "romanization": "godeunghakgyo"
+  },
+  "work1200": {
+   "hangul": "수업",
+   "romanization": "sueop"
+  },
+  "work1201": {
+   "hangul": "시험",
+   "romanization": "siheom"
+  },
+  "work1202": {
+   "hangul": "공부하다",
+   "romanization": "gongbuhada"
+  },
+  "work1203": {
+   "hangul": "일하다",
+   "romanization": "ilhada"
+  },
+  "work1204": {
+   "hangul": "회의",
+   "romanization": "hoeui"
+  },
+  "work1205": {
+   "hangul": "일정",
+   "romanization": "iljeong"
+  },
+  "work1206": {
+   "hangul": "휴가",
+   "romanization": "hyuga"
+  },
+  "work1207": {
+   "hangul": "휴일",
+   "romanization": "hyuil"
+  },
+  "family1208": {
+   "hangul": "가족",
+   "romanization": "gajok"
+  },
+  "family1209": {
+   "hangul": "아버지",
+   "romanization": "abeoji"
+  },
+  "family1210": {
+   "hangul": "아버님",
+   "romanization": "abeonim"
+  },
+  "family1211": {
+   "hangul": "어머니",
+   "romanization": "eomeoni"
+  },
+  "family1212": {
+   "hangul": "어머님",
+   "romanization": "eomeonim"
+  },
+  "family1213": {
+   "hangul": "형/오빠",
+   "romanization": "hyeong/oppa"
+  },
+  "family1214": {
+   "hangul": "누나/언니",
+   "romanization": "nuna/eonni"
+  },
+  "family1215": {
+   "hangul": "남동생",
+   "romanization": "namdongsaeng"
+  },
+  "family1216": {
+   "hangul": "여동생",
+   "romanization": "yeodongsaeng"
+  },
+  "family1217": {
+   "hangul": "남편",
+   "romanization": "nampyeon"
+  },
+  "family1218": {
+   "hangul": "아내",
+   "romanization": "anae"
+  },
+  "family1219": {
+   "hangul": "친구",
+   "romanization": "chingu"
+  },
+  "family1220": {
+   "hangul": "애인",
+   "romanization": "aein"
+  },
+  "family1221": {
+   "hangul": "남자친구",
+   "romanization": "namja chingu"
+  },
+  "family1222": {
+   "hangul": "여자친구",
+   "romanization": "yeoja chingu"
+  },
+  "family1223": {
+   "hangul": "아는 사람",
+   "romanization": "aneun saram"
+  },
+  "family1224": {
+   "hangul": "동료",
+   "romanization": "dongnyo"
+  },
+  "family1225": {
+   "hangul": "이웃",
+   "romanization": "iut"
+  },
+  "family1226": {
+   "hangul": "아들",
+   "romanization": "adeul"
+  },
+  "family1227": {
+   "hangul": "딸",
+   "romanization": "ttal"
+  },
+  "countries1228": {
+   "hangul": "일본",
+   "romanization": "ilbon"
+  },
+  "countries1229": {
+   "hangul": "스페인",
+   "romanization": "seupein"
+  },
+  "countries1230": {
+   "hangul": "스페인 사람",
+   "romanization": "seupein saram"
+  },
+  "countries1231": {
+   "hangul": "스페인어",
+   "romanization": "seupeineo"
+  },
+  "countries1232": {
+   "hangul": "일본 사람",
+   "romanization": "ilbon saram"
+  },
+  "countries1233": {
+   "hangul": "일본어",
+   "romanization": "ilboneo"
+  },
+  "countries1234": {
+   "hangul": "영어",
+   "romanization": "yeongeo"
+  },
+  "countries1235": {
+   "hangul": "영국 사람",
+   "romanization": "yeongguk saram"
+  },
+  "countries1236": {
+   "hangul": "프랑스어",
+   "romanization": "peurangseueo"
+  },
+  "countries1237": {
+   "hangul": "독일어",
+   "romanization": "dogireo"
+  },
+  "countries1238": {
+   "hangul": "중국어",
+   "romanization": "junggugeo"
+  },
+  "countries1239": {
+   "hangul": "한국어",
+   "romanization": "hangugeo"
+  },
+  "countries1240": {
+   "hangul": "외국인",
+   "romanization": "oegugin"
+  },
+  "countries1241": {
+   "hangul": "나라",
+   "romanization": "nara"
+  },
+  "countries1242": {
+   "hangul": "언어",
+   "romanization": "eoneo"
+  },
+  "countries1243": {
+   "hangul": "말하다",
+   "romanization": "malhada"
+  },
+  "countries1244": {
+   "hangul": "이해하다",
+   "romanization": "ihaehada"
+  },
+  "countries1245": {
+   "hangul": "배우다",
+   "romanization": "baeuda"
+  },
+  "countries1246": {
+   "hangul": "가르치다",
+   "romanization": "gareuchida"
+  },
+  "nature1247": {
+   "hangul": "자연",
+   "romanization": "jayeon"
+  },
+  "nature1248": {
+   "hangul": "나무",
+   "romanization": "namu"
+  },
+  "nature1249": {
+   "hangul": "꽃",
+   "romanization": "kkot"
+  },
+  "nature1250": {
+   "hangul": "풀",
+   "romanization": "pul"
+  },
+  "nature1251": {
+   "hangul": "숲",
+   "romanization": "sup"
+  },
+  "nature1252": {
+   "hangul": "산",
+   "romanization": "san"
+  },
+  "nature1253": {
+   "hangul": "언덕",
+   "romanization": "eondeok"
+  },
+  "nature1254": {
+   "hangul": "강",
+   "romanization": "gang"
+  },
+  "nature1255": {
+   "hangul": "호수",
+   "romanization": "hosu"
+  },
+  "nature1256": {
+   "hangul": "바다",
+   "romanization": "bada"
+  },
+  "nature1257": {
+   "hangul": "해변",
+   "romanization": "haebyeon"
+  },
+  "nature1258": {
+   "hangul": "섬",
+   "romanization": "seom"
+  },
+  "nature1259": {
+   "hangul": "시골",
+   "romanization": "sigol"
+  },
+  "nature1260": {
+   "hangul": "하늘",
+   "romanization": "haneul"
+  },
+  "nature1261": {
+   "hangul": "구름",
+   "romanization": "gureum"
+  },
+  "nature1262": {
+   "hangul": "태양",
+   "romanization": "taeyang"
+  },
+  "nature1263": {
+   "hangul": "달",
+   "romanization": "dal"
+  },
+  "nature1264": {
+   "hangul": "별",
+   "romanization": "byeol"
+  },
+  "nature1265": {
+   "hangul": "일출",
+   "romanization": "ilchul"
+  },
+  "nature1266": {
+   "hangul": "노을",
+   "romanization": "noeul"
+  },
+  "nature1267": {
+   "hangul": "경치",
+   "romanization": "gyeongchi"
+  },
+  "nature1268": {
+   "hangul": "돌",
+   "romanization": "dol"
+  },
+  "animals1269": {
+   "hangul": "동물",
+   "romanization": "dongmul"
+  },
+  "animals1270": {
+   "hangul": "개",
+   "romanization": "gae"
+  },
+  "animals1271": {
+   "hangul": "고양이",
+   "romanization": "goyangi"
+  },
+  "animals1272": {
+   "hangul": "새",
+   "romanization": "sae"
+  },
+  "animals1273": {
+   "hangul": "물고기",
+   "romanization": "mulgogi"
+  },
+  "animals1274": {
+   "hangul": "말",
+   "romanization": "mal"
+  },
+  "animals1275": {
+   "hangul": "소",
+   "romanization": "so"
+  },
+  "animals1276": {
+   "hangul": "돼지",
+   "romanization": "dwaeji"
+  },
+  "animals1277": {
+   "hangul": "닭",
+   "romanization": "dak"
+  },
+  "animals1278": {
+   "hangul": "원숭이",
+   "romanization": "wonsungi"
+  },
+  "animals1279": {
+   "hangul": "여우",
+   "romanization": "yeou"
+  },
+  "animals1280": {
+   "hangul": "사슴",
+   "romanization": "saseum"
+  },
+  "animals1281": {
+   "hangul": "곰",
+   "romanization": "gom"
+  },
+  "animals1282": {
+   "hangul": "토끼",
+   "romanization": "tokki"
+  },
+  "animals1283": {
+   "hangul": "벌레",
+   "romanization": "beolle"
+  },
+  "animals1284": {
+   "hangul": "나비",
+   "romanization": "nabi"
+  },
+  "animals1285": {
+   "hangul": "모기",
+   "romanization": "mogi"
+  },
+  "animals1286": {
+   "hangul": "벌",
+   "romanization": "beol"
+  },
+  "animals1287": {
+   "hangul": "뱀",
+   "romanization": "baem"
+  },
+  "animals1288": {
+   "hangul": "야생동물",
+   "romanization": "yasaengdongmul"
+  },
+  "animals1289": {
+   "hangul": "반려동물",
+   "romanization": "banryeodongmul"
+  },
+  "japan1290": {
+   "hangul": "편의점",
+   "romanization": "pyeoneujeom"
+  },
+  "japan1291": {
+   "hangul": "기념품",
+   "romanization": "ginyeompum"
+  },
+  "japan1292": {
+   "hangul": "축제",
+   "romanization": "chukje"
+  },
+  "japan1293": {
+   "hangul": "불꽃놀이",
+   "romanization": "bulkkotnori"
+  },
+  "japan1294": {
+   "hangul": "벚꽃",
+   "romanization": "beotkkot"
+  },
+  "japan1295": {
+   "hangul": "단풍",
+   "romanization": "danpung"
+  },
+  "japan1296": {
+   "hangul": "도시락",
+   "romanization": "dosirak"
+  },
+  "japan1297": {
+   "hangul": "주먹밥",
+   "romanization": "jumeokbap"
+  },
+  "japan1298": {
+   "hangul": "절",
+   "romanization": "jeol"
+  },
+  "japan1299": {
+   "hangul": "신사",
+   "romanization": "sinsa"
+  },
+  "japan1300": {
+   "hangul": "도리이",
+   "romanization": "dorii"
+  },
+  "japan1301": {
+   "hangul": "부적",
+   "romanization": "bujeok"
+  },
+  "japan1302": {
+   "hangul": "운세 뽑기",
+   "romanization": "unse ppopgi"
+  },
+  "japan1303": {
+   "hangul": "온천",
+   "romanization": "oncheon"
+  },
+  "japan1304": {
+   "hangul": "유카타",
+   "romanization": "yukata"
+  },
+  "japan1305": {
+   "hangul": "기모노",
+   "romanization": "gimono"
+  },
+  "japan1306": {
+   "hangul": "다다미",
+   "romanization": "dadami"
+  },
+  "japan1307": {
+   "hangul": "일본식 방",
+   "romanization": "ilbonsik bang"
+  },
+  "japan1308": {
+   "hangul": "일본 문화",
+   "romanization": "ilbon munhwa"
+  },
+  "japan1309": {
+   "hangul": "무도",
+   "romanization": "mudo"
+  },
+  "japan1310": {
+   "hangul": "애니메이션",
+   "romanization": "aenimeisyeon"
+  },
+  "japan1311": {
+   "hangul": "만화",
+   "romanization": "manhwa"
+  },
+  "japan1312": {
+   "hangul": "노래방",
+   "romanization": "noraebang"
+  },
+  "japan1313": {
+   "hangul": "이자카야",
+   "romanization": "ijakaya"
+  },
+  "connectors1314": {
+   "hangul": "그리고",
+   "romanization": "geurigo"
+  },
+  "connectors1315": {
+   "hangul": "하지만",
+   "romanization": "hajiman"
+  },
+  "connectors1316": {
+   "hangul": "왜냐하면",
+   "romanization": "waenyahamyeon"
+  },
+  "connectors1317": {
+   "hangul": "그래서",
+   "romanization": "geuraeseo"
+  },
+  "connectors1318": {
+   "hangul": "그럼",
+   "romanization": "geureom"
+  },
+  "connectors1319": {
+   "hangul": "도",
+   "romanization": "do"
+  },
+  "connectors1320": {
+   "hangul": "아직",
+   "romanization": "ajik"
+  },
+  "connectors1321": {
+   "hangul": "이미",
+   "romanization": "imi"
+  },
+  "connectors1322": {
+   "hangul": "아마도",
+   "romanization": "amado"
+  },
+  "connectors1323": {
+   "hangul": "정말로",
+   "romanization": "jeongmallo"
+  },
+  "connectors1324": {
+   "hangul": "만",
+   "romanization": "man"
+  },
+  "connectors1325": {
+   "hangul": "정도",
+   "romanization": "jeongdo"
+  },
+  "connectors1326": {
+   "hangul": "조차",
+   "romanization": "jocha"
+  },
+  "connectors1327": {
+   "hangul": "또한",
+   "romanization": "ttohan"
+  },
+  "connectors1328": {
+   "hangul": "그러나",
+   "romanization": "geureona"
+  },
+  "connectors1329": {
+   "hangul": "게다가",
+   "romanization": "gedaga"
+  },
+  "connectors1330": {
+   "hangul": "먼저",
+   "romanization": "meonjeo"
+  },
+  "connectors1331": {
+   "hangul": "마지막으로",
+   "romanization": "majimageuro"
+  },
+  "connectors1332": {
+   "hangul": "함께",
+   "romanization": "hamkke"
+  },
+  "quantifiers1333": {
+   "hangul": "열 개 정도",
+   "romanization": "yeol gae jeongdo"
+  },
+  "quantifiers1334": {
+   "hangul": "조금",
+   "romanization": "jogeum"
+  },
+  "quantifiers1335": {
+   "hangul": "몇 개",
+   "romanization": "myeot gae"
+  },
+  "quantifiers1336": {
+   "hangul": "여러 번",
+   "romanization": "yeoreo beon"
+  },
+  "quantifiers1337": {
+   "hangul": "몇 번",
+   "romanization": "myeot beon"
+  },
+  "quantifiers1338": {
+   "hangul": "한 번",
+   "romanization": "han beon"
+  },
+  "quantifiers1339": {
+   "hangul": "두 번",
+   "romanization": "du beon"
+  },
+  "quantifiers1340": {
+   "hangul": "처음",
+   "romanization": "cheoeum"
+  },
+  "quantifiers1341": {
+   "hangul": "두 번째",
+   "romanization": "du beonjjae"
+  },
+  "quantifiers1342": {
+   "hangul": "삼 일 동안",
+   "romanization": "sam il dongan"
+  },
+  "quantifiers1343": {
+   "hangul": "일주일 동안",
+   "romanization": "iljuil dongan"
+  },
+  "quantifiers1344": {
+   "hangul": "부터",
+   "romanization": "buteo"
+  },
+  "quantifiers1345": {
+   "hangul": "까지",
+   "romanization": "kkaji"
+  },
+  "quantifiers1346": {
+   "hangul": "부터…까지",
+   "romanization": "buteo...kkaji"
+  },
+  "quantifiers1347": {
+   "hangul": "약",
+   "romanization": "yak"
+  },
+  "quantifiers1348": {
+   "hangul": "정도",
+   "romanization": "jeongdo"
+  },
+  "quantifiers1349": {
+   "hangul": "대체로",
+   "romanization": "daechero"
+  },
+  "quantifiers1350": {
+   "hangul": "절반",
+   "romanization": "jeolban"
+  },
+  "quantifiers1351": {
+   "hangul": "두 배",
+   "romanization": "du bae"
+  },
+  "quantifiers1352": {
+   "hangul": "세 배",
+   "romanization": "se bae"
+  },
+  "nuances1353": {
+   "hangul": "좀",
+   "romanization": "jom"
+  },
+  "nuances1354": {
+   "hangul": "이미",
+   "romanization": "imi"
+  },
+  "nuances1355": {
+   "hangul": "아직",
+   "romanization": "ajik"
+  },
+  "nuances1356": {
+   "hangul": "제대로",
+   "romanization": "jedaero"
+  },
+  "nuances1357": {
+   "hangul": "정말로",
+   "romanization": "jeongmallo"
+  },
+  "nuances1358": {
+   "hangul": "꽤",
+   "romanization": "kkwae"
+  },
+  "nuances1359": {
+   "hangul": "괜찮다",
+   "romanization": "gwaenchanta"
+  },
+  "nuances1360": {
+   "hangul": "좋다",
+   "romanization": "jota"
+  },
+  "nuances1361": {
+   "hangul": "죄송합니다",
+   "romanization": "joesonghamnida"
+  },
+  "nuances1362": {
+   "hangul": "계속",
+   "romanization": "gyesok"
+  },
+  "nuances1363": {
+   "hangul": "상당히",
+   "romanization": "sangdanghi"
+  },
+  "nuances1364": {
+   "hangul": "아마도",
+   "romanization": "amado"
+  },
+  "nuances1365": {
+   "hangul": "대체로",
+   "romanization": "daechero"
+  },
+  "formal1366": {
+   "hangul": "감사합니다",
+   "romanization": "gamsahamnida"
+  },
+  "formal1367": {
+   "hangul": "고마워",
+   "romanization": "gomawo"
+  },
+  "formal1368": {
+   "hangul": "안녕하세요",
+   "romanization": "annyeonghaseyo"
+  },
+  "formal1369": {
+   "hangul": "안녕",
+   "romanization": "annyeong"
+  },
+  "formal1370": {
+   "hangul": "그렇네요",
+   "romanization": "geureonneyo"
+  },
+  "formal1371": {
+   "hangul": "그렇지",
+   "romanization": "geureochi"
+  },
+  "formal1372": {
+   "hangul": "괜찮습니다",
+   "romanization": "gwaenchanseumnida"
+  },
+  "formal1373": {
+   "hangul": "이해합니다",
+   "romanization": "ihaehamnida"
+  },
+  "formal1374": {
+   "hangul": "이해해",
+   "romanization": "ihaehae"
+  },
+  "formal1375": {
+   "hangul": "이해 못 합니다",
+   "romanization": "ihae mot hamnida"
+  },
+  "formal1376": {
+   "hangul": "이해 못 해",
+   "romanization": "ihae mot hae"
+  },
+  "formal1377": {
+   "hangul": "원합니다",
+   "romanization": "wonhamnida"
+  },
+  "formal1378": {
+   "hangul": "원해",
+   "romanization": "wonhae"
+  },
+  "formal1379": {
+   "hangul": "할 수 있습니다",
+   "romanization": "hal su itseumnida"
+  },
+  "formal1380": {
+   "hangul": "할 수 있어",
+   "romanization": "hal su isseo"
+  },
+  "formal1381": {
+   "hangul": "할 수 없습니다",
+   "romanization": "hal su eopseumnida"
+  },
+  "formal1382": {
+   "hangul": "할 수 없어",
+   "romanization": "hal su eopseo"
+  },
+  "formal1383": {
+   "hangul": "갑니다",
+   "romanization": "gamnida"
+  },
+  "formal1384": {
+   "hangul": "가",
+   "romanization": "ga"
+  },
+  "formal1385": {
+   "hangul": "옵니다",
+   "romanization": "omnida"
+  },
+  "formal1386": {
+   "hangul": "와",
+   "romanization": "wa"
+  },
+  "formal1387": {
+   "hangul": "합니다",
+   "romanization": "hamnida"
+  },
+  "formal1388": {
+   "hangul": "해",
+   "romanization": "hae"
+  },
+  "formal1389": {
+   "hangul": "먹습니다",
+   "romanization": "meokseumnida"
+  },
+  "formal1390": {
+   "hangul": "먹어",
+   "romanization": "meogeo"
+  },
+  "formal1391": {
+   "hangul": "마십니다",
+   "romanization": "masimnida"
+  },
+  "formal1392": {
+   "hangul": "마셔",
+   "romanization": "masyeo"
+  },
+  "formal1393": {
+   "hangul": "뭐예요?",
+   "romanization": "mwoyeyo?"
+  },
+  "formal1394": {
+   "hangul": "뭐?",
+   "romanization": "mwo?"
+  },
+  "formal1395": {
+   "hangul": "왜 그런가요?",
+   "romanization": "wae geureongayo?"
+  },
+  "formal1396": {
+   "hangul": "왜?",
+   "romanization": "wae?"
+  },
+  "formal1397": {
+   "hangul": "기다려 주세요",
+   "romanization": "gidaryeo juseyo"
+  },
+  "formal1398": {
+   "hangul": "기다려",
+   "romanization": "gidaryeo"
+  },
+  "formal1399": {
+   "hangul": "갑시다",
+   "romanization": "gapsida"
+  },
+  "formal1400": {
+   "hangul": "가자",
+   "romanization": "gaja"
+  },
+  "formal1401": {
+   "hangul": "그럼",
+   "romanization": "geureom"
+  },
+  "formal1402": {
+   "hangul": "-라고",
+   "romanization": "-rago"
+  },
+  "formal1403": {
+   "hangul": "~하고 있다",
+   "romanization": "~hago itda"
+  },
+  "formal1404": {
+   "hangul": "~해 버리다",
+   "romanization": "~hae beorida"
+  },
+  "formal1405": {
+   "hangul": "~해야 돼",
+   "romanization": "~haeya dwae"
+  },
+  "formal1406": {
+   "hangul": "~라는 거",
+   "romanization": "~raneun geo"
+  },
+  "formal1407": {
+   "hangul": "모르겠어",
+   "romanization": "moreugesseo"
+  },
+  "formal1408": {
+   "hangul": "쩐다",
+   "romanization": "jjeonda"
+  },
+  "formal1409": {
+   "hangul": "진짜로",
+   "romanization": "jinjjaro"
+  },
+  "listening1410": {
+   "hangul": "감사합니다~",
+   "romanization": "gamsahamnida~"
+  },
+  "listening1411": {
+   "hangul": "죄송해요",
+   "romanization": "joesonghaeyo"
+  },
+  "listening1412": {
+   "hangul": "모르겠어",
+   "romanization": "moreugesseo"
+  },
+  "listening1413": {
+   "hangul": "~하고 있다",
+   "romanization": "~hago itda"
+  },
+  "listening1414": {
+   "hangul": "~하고 있었다",
+   "romanization": "~hago isseotda"
+  },
+  "listening1415": {
+   "hangul": "아니야",
+   "romanization": "aniya"
+  },
+  "listening1416": {
+   "hangul": "아닙니다",
+   "romanization": "animnida"
+  },
+  "listening1417": {
+   "hangul": "-라고",
+   "romanization": "-rago"
+  },
+  "listening1418": {
+   "hangul": "~라는 거",
+   "romanization": "~raneun geo"
+  },
+  "listening1419": {
+   "hangul": "~해야 돼",
+   "romanization": "~haeya dwae"
+  },
+  "listening1420": {
+   "hangul": "~해야만 해",
+   "romanization": "~haeyaman hae"
+  },
+  "listening1421": {
+   "hangul": "~해 버리다",
+   "romanization": "~hae beorida"
+  },
+  "listening1422": {
+   "hangul": "~해 버리다",
+   "romanization": "~hae beorida"
+  },
+  "listening1423": {
+   "hangul": "~해야만 한다",
+   "romanization": "~haeyaman handa"
+  },
+  "polysemy1424": {
+   "hangul": "좋다",
+   "romanization": "jota"
+  },
+  "polysemy1425": {
+   "hangul": "좀",
+   "romanization": "jom"
+  },
+  "polysemy1426": {
+   "hangul": "잡다",
+   "romanization": "japda"
+  },
+  "polysemy1427": {
+   "hangul": "들어가다",
+   "romanization": "deureogada"
+  },
+  "polysemy1428": {
+   "hangul": "나가다",
+   "romanization": "nagada"
+  },
+  "polysemy1429": {
+   "hangul": "걸다",
+   "romanization": "geolda"
+  },
+  "polysemy1430": {
+   "hangul": "하다",
+   "romanization": "hada"
+  },
+  "polysemy1431": {
+   "hangul": "되다",
+   "romanization": "doeda"
+  },
+  "polysemy1432": {
+   "hangul": "두다",
+   "romanization": "duda"
+  },
+  "polysemy1433": {
+   "hangul": "열리다",
+   "romanization": "yeollida"
+  },
+  "polysemy1434": {
+   "hangul": "닫다",
+   "romanization": "datda"
+  },
+  "polysemy1435": {
+   "hangul": "자르다",
+   "romanization": "jareuda"
+  },
+  "polysemy1436": {
+   "hangul": "붙다",
+   "romanization": "butda"
+  },
+  "polysemy1437": {
+   "hangul": "붙이다",
+   "romanization": "buchida"
+  },
+  "polysemy1438": {
+   "hangul": "떨어지다",
+   "romanization": "tteoreojida"
+  },
+  "polysemy1439": {
+   "hangul": "오르다",
+   "romanization": "oreuda"
+  },
+  "polysemy1440": {
+   "hangul": "내리다",
+   "romanization": "naerida"
+  },
+  "polysemy1441": {
+   "hangul": "걸리다",
+   "romanization": "geollida"
+  },
+  "polysemy1442": {
+   "hangul": "알다",
+   "romanization": "alda"
+  },
+  "polysemy1443": {
+   "hangul": "듣다",
+   "romanization": "deutda"
+  },
+  "polysemy1444": {
+   "hangul": "보다",
+   "romanization": "boda"
+  },
+  "polysemy1445": {
+   "hangul": "말하다",
+   "romanization": "malhada"
+  },
+  "polysemy1446": {
+   "hangul": "생각하다",
+   "romanization": "saenggakhada"
+  },
+  "polysemy1447": {
+   "hangul": "알다",
+   "romanization": "alda"
+  },
+  "polysemy1448": {
+   "hangul": "사용하다",
+   "romanization": "sayonghada"
+  },
+  "calendar1449": {
+   "hangul": "월요일",
+   "romanization": "woryoil"
+  },
+  "calendar1450": {
+   "hangul": "화요일",
+   "romanization": "hwayoil"
+  },
+  "calendar1451": {
+   "hangul": "수요일",
+   "romanization": "suyoil"
+  },
+  "calendar1452": {
+   "hangul": "목요일",
+   "romanization": "mogyoil"
+  },
+  "calendar1453": {
+   "hangul": "금요일",
+   "romanization": "geumyoil"
+  },
+  "calendar1454": {
+   "hangul": "토요일",
+   "romanization": "toyoil"
+  },
+  "calendar1455": {
+   "hangul": "일요일",
+   "romanization": "iryoil"
+  },
+  "calendar1456": {
+   "hangul": "요일",
+   "romanization": "yoil"
+  },
+  "calendar1457": {
+   "hangul": "날짜",
+   "romanization": "nalja"
+  },
+  "calendar1458": {
+   "hangul": "일",
+   "romanization": "il"
+  },
+  "calendar1459": {
+   "hangul": "월",
+   "romanization": "wol"
+  },
+  "calendar1460": {
+   "hangul": "년",
+   "romanization": "nyeon"
+  },
+  "calendar1461": {
+   "hangul": "생일",
+   "romanization": "saengil"
+  },
+  "calendar1462": {
+   "hangul": "기념일",
+   "romanization": "ginyeomil"
+  },
+  "calendar1463": {
+   "hangul": "공휴일",
+   "romanization": "gonghyuil"
+  },
+  "calendar1464": {
+   "hangul": "달력",
+   "romanization": "dallyeok"
+  },
+  "calendar1465": {
+   "hangul": "주",
+   "romanization": "ju"
+  },
+  "calendar1466": {
+   "hangul": "주말",
+   "romanization": "jumal"
+  },
+  "calendar1467": {
+   "hangul": "평일",
+   "romanization": "pyeongil"
+  },
+  "calendar1468": {
+   "hangul": "다음 번",
+   "romanization": "daeum beon"
+  },
+  "calendar1469": {
+   "hangul": "일정",
+   "romanization": "iljeong"
+  },
+  "calendar1470": {
+   "hangul": "기한",
+   "romanization": "gihan"
+  },
+  "weather1471": {
+   "hangul": "날씨",
+   "romanization": "nalssi"
+  },
+  "weather1472": {
+   "hangul": "맑음",
+   "romanization": "malgeum"
+  },
+  "weather1473": {
+   "hangul": "비",
+   "romanization": "bi"
+  },
+  "weather1474": {
+   "hangul": "눈",
+   "romanization": "nun"
+  },
+  "weather1475": {
+   "hangul": "흐림",
+   "romanization": "heurim"
+  },
+  "weather1476": {
+   "hangul": "맑아지다",
+   "romanization": "malgajida"
+  },
+  "weather1477": {
+   "hangul": "비가 오다",
+   "romanization": "biga oda"
+  },
+  "weather1478": {
+   "hangul": "눈이 오다",
+   "romanization": "nuni oda"
+  },
+  "weather1479": {
+   "hangul": "바람",
+   "romanization": "baram"
+  },
+  "weather1480": {
+   "hangul": "강풍",
+   "romanization": "gangpung"
+  },
+  "weather1481": {
+   "hangul": "태풍",
+   "romanization": "taepung"
+  },
+  "weather1482": {
+   "hangul": "기온",
+   "romanization": "gion"
+  },
+  "weather1483": {
+   "hangul": "온도",
+   "romanization": "ondo"
+  },
+  "weather1484": {
+   "hangul": "더운",
+   "romanization": "deoun"
+  },
+  "weather1485": {
+   "hangul": "추운",
+   "romanization": "chuun"
+  },
+  "weather1486": {
+   "hangul": "따뜻한",
+   "romanization": "ttatteutan"
+  },
+  "weather1487": {
+   "hangul": "시원한",
+   "romanization": "siwonhan"
+  },
+  "weather1488": {
+   "hangul": "무더운",
+   "romanization": "mudeoun"
+  },
+  "weather1489": {
+   "hangul": "천둥",
+   "romanization": "cheondung"
+  },
+  "weather1490": {
+   "hangul": "천둥번개",
+   "romanization": "cheondungbeongae"
+  },
+  "weather1491": {
+   "hangul": "구름",
+   "romanization": "gureum"
+  },
+  "weather1492": {
+   "hangul": "안개",
+   "romanization": "angae"
+  },
+  "weather1493": {
+   "hangul": "습도",
+   "romanization": "seupdo"
+  },
+  "weather1494": {
+   "hangul": "일기예보",
+   "romanization": "ilgiyebo"
+  },
+  "weather1495": {
+   "hangul": "기후",
+   "romanization": "gihu"
+  },
+  "weather1496": {
+   "hangul": "봄",
+   "romanization": "bom"
+  },
+  "weather1497": {
+   "hangul": "여름",
+   "romanization": "yeoreum"
+  },
+  "weather1498": {
+   "hangul": "가을",
+   "romanization": "gaeul"
+  },
+  "weather1499": {
+   "hangul": "겨울",
+   "romanization": "gyeoul"
+  },
+  "weather1500": {
+   "hangul": "무지개",
+   "romanization": "mujigae"
+  },
+  "weather1501": {
+   "hangul": "우산",
+   "romanization": "usan"
+  },
+  "fruits1527": {
+   "hangul": "과일",
+   "romanization": "gwail"
+  },
+  "fruits1528": {
+   "hangul": "사과",
+   "romanization": "sagwa"
+  },
+  "fruits1529": {
+   "hangul": "바나나",
+   "romanization": "banana"
+  },
+  "fruits1530": {
+   "hangul": "오렌지",
+   "romanization": "orenji"
+  },
+  "fruits1531": {
+   "hangul": "귤",
+   "romanization": "gyul"
+  },
+  "fruits1532": {
+   "hangul": "딸기",
+   "romanization": "ttalgi"
+  },
+  "fruits1533": {
+   "hangul": "포도",
+   "romanization": "podo"
+  },
+  "fruits1534": {
+   "hangul": "수박",
+   "romanization": "subak"
+  },
+  "fruits1535": {
+   "hangul": "복숭아",
+   "romanization": "boksunga"
+  },
+  "fruits1536": {
+   "hangul": "배",
+   "romanization": "bae"
+  },
+  "fruits1537": {
+   "hangul": "레몬",
+   "romanization": "remon"
+  },
+  "fruits1538": {
+   "hangul": "멜론",
+   "romanization": "mellon"
+  },
+  "fruits1539": {
+   "hangul": "파인애플",
+   "romanization": "paineaepeul"
+  },
+  "fruits1540": {
+   "hangul": "키위",
+   "romanization": "kiwi"
+  },
+  "fruits1541": {
+   "hangul": "채소",
+   "romanization": "chaeso"
+  },
+  "fruits1542": {
+   "hangul": "당근",
+   "romanization": "danggeun"
+  },
+  "fruits1543": {
+   "hangul": "양파",
+   "romanization": "yangpa"
+  },
+  "fruits1544": {
+   "hangul": "감자",
+   "romanization": "gamja"
+  },
+  "fruits1545": {
+   "hangul": "토마토",
+   "romanization": "tomato"
+  },
+  "fruits1546": {
+   "hangul": "오이",
+   "romanization": "oi"
+  },
+  "fruits1547": {
+   "hangul": "양배추",
+   "romanization": "yangbaechu"
+  },
+  "fruits1548": {
+   "hangul": "상추",
+   "romanization": "sangchu"
+  },
+  "fruits1549": {
+   "hangul": "가지",
+   "romanization": "gaji"
+  },
+  "fruits1550": {
+   "hangul": "시금치",
+   "romanization": "sigeumchi"
+  },
+  "drinks1551": {
+   "hangul": "물",
+   "romanization": "mul"
+  },
+  "drinks1552": {
+   "hangul": "차",
+   "romanization": "cha"
+  },
+  "drinks1553": {
+   "hangul": "녹차",
+   "romanization": "nokcha"
+  },
+  "drinks1554": {
+   "hangul": "홍차",
+   "romanization": "hongcha"
+  },
+  "drinks1555": {
+   "hangul": "커피",
+   "romanization": "keopi"
+  },
+  "drinks1556": {
+   "hangul": "우유",
+   "romanization": "uyu"
+  },
+  "drinks1557": {
+   "hangul": "주스",
+   "romanization": "juseu"
+  },
+  "drinks1558": {
+   "hangul": "오렌지 주스",
+   "romanization": "orenji juseu"
+  },
+  "drinks1559": {
+   "hangul": "탄산음료",
+   "romanization": "tansaneumnyo"
+  },
+  "drinks1560": {
+   "hangul": "콜라",
+   "romanization": "kolla"
+  },
+  "drinks1561": {
+   "hangul": "음료",
+   "romanization": "eumnyo"
+  },
+  "drinks1562": {
+   "hangul": "뜨거운 물",
+   "romanization": "tteugeoun mul"
+  },
+  "drinks1563": {
+   "hangul": "찬물",
+   "romanization": "chanmul"
+  },
+  "drinks1564": {
+   "hangul": "따뜻한 음료",
+   "romanization": "ttatteutan eumnyo"
+  },
+  "school-basic1565": {
+   "hangul": "학교",
+   "romanization": "hakgyo"
+  },
+  "school-basic1566": {
+   "hangul": "교실",
+   "romanization": "gyosil"
+  },
+  "school-basic1567": {
+   "hangul": "선생님",
+   "romanization": "seonsaengnim"
+  },
+  "school-basic1568": {
+   "hangul": "학생",
+   "romanization": "haksaeng"
+  },
+  "school-basic1569": {
+   "hangul": "학생",
+   "romanization": "haksaeng"
+  },
+  "school-basic1570": {
+   "hangul": "대학교",
+   "romanization": "daehakgyo"
+  },
+  "school-basic1571": {
+   "hangul": "책",
+   "romanization": "chaek"
+  },
+  "school-basic1572": {
+   "hangul": "교과서",
+   "romanization": "gyogwaseo"
+  },
+  "school-basic1573": {
+   "hangul": "공책",
+   "romanization": "gongchaek"
+  },
+  "school-basic1574": {
+   "hangul": "연필",
+   "romanization": "yeonpil"
+  },
+  "school-basic1575": {
+   "hangul": "펜",
+   "romanization": "pen"
+  },
+  "school-basic1576": {
+   "hangul": "지우개",
+   "romanization": "jiugae"
+  },
+  "school-basic1577": {
+   "hangul": "책상",
+   "romanization": "chaeksang"
+  },
+  "school-basic1578": {
+   "hangul": "의자",
+   "romanization": "uija"
+  },
+  "school-basic1579": {
+   "hangul": "칠판",
+   "romanization": "chilpan"
+  },
+  "school-basic1580": {
+   "hangul": "숙제",
+   "romanization": "sukje"
+  },
+  "school-basic1581": {
+   "hangul": "시험",
+   "romanization": "siheom"
+  },
+  "school-basic1582": {
+   "hangul": "수업",
+   "romanization": "sueop"
+  },
+  "school-basic1583": {
+   "hangul": "공부하다",
+   "romanization": "gongbuhada"
+  },
+  "school-basic1584": {
+   "hangul": "질문",
+   "romanization": "jilmun"
+  },
+  "school-basic1585": {
+   "hangul": "답",
+   "romanization": "dap"
+  },
+  "hobbies1586": {
+   "hangul": "취미",
+   "romanization": "chwimi"
+  },
+  "hobbies1587": {
+   "hangul": "음악",
+   "romanization": "eumak"
+  },
+  "hobbies1588": {
+   "hangul": "영화",
+   "romanization": "yeonghwa"
+  },
+  "hobbies1589": {
+   "hangul": "독서",
+   "romanization": "dokseo"
+  },
+  "hobbies1590": {
+   "hangul": "게임",
+   "romanization": "geim"
+  },
+  "hobbies1591": {
+   "hangul": "스포츠",
+   "romanization": "seupocheu"
+  },
+  "hobbies1592": {
+   "hangul": "사진",
+   "romanization": "sajin"
+  },
+  "hobbies1593": {
+   "hangul": "여행",
+   "romanization": "yeohaeng"
+  },
+  "hobbies1594": {
+   "hangul": "요리",
+   "romanization": "yori"
+  },
+  "hobbies1595": {
+   "hangul": "노래",
+   "romanization": "norae"
+  },
+  "hobbies1596": {
+   "hangul": "그림",
+   "romanization": "geurim"
+  },
+  "hobbies1597": {
+   "hangul": "만화",
+   "romanization": "manhwa"
+  },
+  "hobbies1598": {
+   "hangul": "산책",
+   "romanization": "sanchaek"
+  },
+  "hobbies1599": {
+   "hangul": "음악을 듣다",
+   "romanization": "eumageul deutda"
+  },
+  "hobbies1600": {
+   "hangul": "영화를 보다",
+   "romanization": "yeonghwareul boda"
+  },
+  "hobbies1601": {
+   "hangul": "책을 읽다",
+   "romanization": "chaegeul ilkda"
+  },
+  "hobbies1602": {
+   "hangul": "게임을 하다",
+   "romanization": "geimeul hada"
+  },
+  "hobbies1603": {
+   "hangul": "사진을 찍다",
+   "romanization": "sajineul jjikda"
+  },
+  "hobbies1604": {
+   "hangul": "그림을 그리다",
+   "romanization": "geurimeul geurida"
+  },
+  "hobbies1605": {
+   "hangul": "노래하다",
+   "romanization": "noraehada"
+  },
+  "hobbies1606": {
+   "hangul": "춤추다",
+   "romanization": "chumchuda"
+  },
+  "hobbies1607": {
+   "hangul": "모으다",
+   "romanization": "moeuda"
+  },
+  "health1608": {
+   "hangul": "병원",
+   "romanization": "byeongwon"
+  },
+  "health1609": {
+   "hangul": "의사",
+   "romanization": "uisa"
+  },
+  "health1610": {
+   "hangul": "환자",
+   "romanization": "hwanja"
+  },
+  "health1611": {
+   "hangul": "진찰",
+   "romanization": "jinchal"
+  },
+  "health1612": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "health1613": {
+   "hangul": "약",
+   "romanization": "yak"
+  },
+  "health1614": {
+   "hangul": "병",
+   "romanization": "byeong"
+  },
+  "health1615": {
+   "hangul": "증상",
+   "romanization": "jeungsang"
+  },
+  "health1616": {
+   "hangul": "열",
+   "romanization": "yeol"
+  },
+  "health1617": {
+   "hangul": "두통",
+   "romanization": "dutong"
+  },
+  "health1618": {
+   "hangul": "복통",
+   "romanization": "boktong"
+  },
+  "health1619": {
+   "hangul": "기침",
+   "romanization": "gichim"
+  },
+  "health1620": {
+   "hangul": "목",
+   "romanization": "mok"
+  },
+  "health1621": {
+   "hangul": "콧물",
+   "romanization": "kotmul"
+  },
+  "health1622": {
+   "hangul": "감기",
+   "romanization": "gamgi"
+  },
+  "health1623": {
+   "hangul": "아프다",
+   "romanization": "apeuda"
+  },
+  "health1624": {
+   "hangul": "피곤하다",
+   "romanization": "pigonhada"
+  },
+  "health1625": {
+   "hangul": "쉬다",
+   "romanization": "swida"
+  },
+  "health1626": {
+   "hangul": "낫다",
+   "romanization": "natda"
+  },
+  "health1627": {
+   "hangul": "머리가 아파요",
+   "romanization": "meoriga apayo"
+  },
+  "health1628": {
+   "hangul": "열이 있어요",
+   "romanization": "yeori isseoyo"
+  },
+  "health1629": {
+   "hangul": "기침이 나요",
+   "romanization": "gichimi nayo"
+  },
+  "health1630": {
+   "hangul": "몸이 안 좋아요",
+   "romanization": "momi an joayo"
+  },
+  "household1631": {
+   "hangul": "청소",
+   "romanization": "cheongso"
+  },
+  "household1632": {
+   "hangul": "빨래",
+   "romanization": "ppallae"
+  },
+  "household1633": {
+   "hangul": "씻다",
+   "romanization": "ssitda"
+  },
+  "household1634": {
+   "hangul": "청소하다",
+   "romanization": "cheongsohada"
+  },
+  "household1635": {
+   "hangul": "쓰레기",
+   "romanization": "sseuregi"
+  },
+  "household1636": {
+   "hangul": "쓰레기통",
+   "romanization": "sseuregitong"
+  },
+  "household1637": {
+   "hangul": "쓰레기 봉투",
+   "romanization": "sseuregi bongtu"
+  },
+  "household1638": {
+   "hangul": "분리수거",
+   "romanization": "bullisugeo"
+  },
+  "household1639": {
+   "hangul": "재활용",
+   "romanization": "jaehwaryong"
+  },
+  "household1640": {
+   "hangul": "버리다",
+   "romanization": "beorida"
+  },
+  "household1641": {
+   "hangul": "내놓다",
+   "romanization": "naenota"
+  },
+  "household1642": {
+   "hangul": "정리하다",
+   "romanization": "jeonghada"
+  },
+  "household1643": {
+   "hangul": "더럽다",
+   "romanization": "deoreopda"
+  },
+  "household1644": {
+   "hangul": "깨끗하다",
+   "romanization": "kkaekkeutada"
+  },
+  "household1645": {
+   "hangul": "세제",
+   "romanization": "seje"
+  },
+  "driving1646": {
+   "hangul": "차",
+   "romanization": "cha"
+  },
+  "driving1647": {
+   "hangul": "자전거",
+   "romanization": "jajeongeo"
+  },
+  "driving1648": {
+   "hangul": "오토바이",
+   "romanization": "otobai"
+  },
+  "driving1649": {
+   "hangul": "운전",
+   "romanization": "unjeon"
+  },
+  "driving1650": {
+   "hangul": "운전하다",
+   "romanization": "unjeonhada"
+  },
+  "driving1651": {
+   "hangul": "도로",
+   "romanization": "doro"
+  },
+  "driving1652": {
+   "hangul": "교차로",
+   "romanization": "gyocharo"
+  },
+  "driving1653": {
+   "hangul": "신호등",
+   "romanization": "sinhodeung"
+  },
+  "driving1654": {
+   "hangul": "주차",
+   "romanization": "jucha"
+  },
+  "driving1655": {
+   "hangul": "주차장",
+   "romanization": "juchajang"
+  },
+  "driving1656": {
+   "hangul": "휘발유",
+   "romanization": "hwibalyu"
+  },
+  "driving1657": {
+   "hangul": "브레이크",
+   "romanization": "beureikeu"
+  },
+  "driving1658": {
+   "hangul": "핸들",
+   "romanization": "haendeul"
+  },
+  "driving1659": {
+   "hangul": "돌다",
+   "romanization": "dolda"
+  },
+  "driving1660": {
+   "hangul": "멈추다",
+   "romanization": "meomchuda"
+  },
+  "driving1661": {
+   "hangul": "나아가다",
+   "romanization": "naagada"
+  },
+  "driving1662": {
+   "hangul": "사고",
+   "romanization": "sago"
+  },
+  "postal1663": {
+   "hangul": "우체국",
+   "romanization": "ucheguk"
+  },
+  "postal1664": {
+   "hangul": "우편",
+   "romanization": "upyeon"
+  },
+  "postal1665": {
+   "hangul": "편지",
+   "romanization": "pyeonji"
+  },
+  "postal1666": {
+   "hangul": "짐",
+   "romanization": "jim"
+  },
+  "postal1667": {
+   "hangul": "소포",
+   "romanization": "sopo"
+  },
+  "postal1668": {
+   "hangul": "보내다",
+   "romanization": "bonaeda"
+  },
+  "postal1669": {
+   "hangul": "도착하다",
+   "romanization": "dochakhada"
+  },
+  "postal1670": {
+   "hangul": "배달하다",
+   "romanization": "baedalhada"
+  },
+  "postal1671": {
+   "hangul": "주소",
+   "romanization": "juso"
+  },
+  "postal1672": {
+   "hangul": "우편번호",
+   "romanization": "upyeonbeonho"
+  },
+  "postal1673": {
+   "hangul": "우표",
+   "romanization": "upyo"
+  },
+  "postal1674": {
+   "hangul": "배달",
+   "romanization": "baedal"
+  },
+  "postal1675": {
+   "hangul": "택배",
+   "romanization": "taekbae"
+  },
+  "postal1676": {
+   "hangul": "받다",
+   "romanization": "batda"
+  },
+  "admin-basic1677": {
+   "hangul": "주소",
+   "romanization": "juso"
+  },
+  "admin-basic1678": {
+   "hangul": "이름",
+   "romanization": "ireum"
+  },
+  "admin-basic1679": {
+   "hangul": "생년월일",
+   "romanization": "saengnyeonwolil"
+  },
+  "admin-basic1680": {
+   "hangul": "서류",
+   "romanization": "seoryu"
+  },
+  "admin-basic1681": {
+   "hangul": "신청",
+   "romanization": "sincheong"
+  },
+  "admin-basic1682": {
+   "hangul": "신청",
+   "romanization": "sincheong"
+  },
+  "admin-basic1683": {
+   "hangul": "기입",
+   "romanization": "giip"
+  },
+  "admin-basic1684": {
+   "hangul": "서명",
+   "romanization": "seomyeong"
+  },
+  "admin-basic1685": {
+   "hangul": "도장",
+   "romanization": "dojang"
+  },
+  "admin-basic1686": {
+   "hangul": "창구",
+   "romanization": "changgu"
+  },
+  "admin-basic1687": {
+   "hangul": "접수",
+   "romanization": "jeopsu"
+  },
+  "admin-basic1688": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "admin-basic1689": {
+   "hangul": "필요하다",
+   "romanization": "piryohada"
+  },
+  "admin-basic1690": {
+   "hangul": "복사",
+   "romanization": "boksa"
+  },
+  "admin-basic1691": {
+   "hangul": "증명서",
+   "romanization": "jeungmyeongseo"
+  },
+  "disaster1692": {
+   "hangul": "지진",
+   "romanization": "jijin"
+  },
+  "disaster1693": {
+   "hangul": "쓰나미",
+   "romanization": "sseunami"
+  },
+  "disaster1694": {
+   "hangul": "태풍",
+   "romanization": "taepung"
+  },
+  "disaster1695": {
+   "hangul": "홍수",
+   "romanization": "hongsu"
+  },
+  "disaster1696": {
+   "hangul": "화재",
+   "romanization": "hwajae"
+  },
+  "disaster1697": {
+   "hangul": "화재",
+   "romanization": "hwajae"
+  },
+  "disaster1698": {
+   "hangul": "대피",
+   "romanization": "daepi"
+  },
+  "disaster1699": {
+   "hangul": "대피소",
+   "romanization": "daepiso"
+  },
+  "disaster1700": {
+   "hangul": "비상구",
+   "romanization": "bisanggu"
+  },
+  "disaster1701": {
+   "hangul": "재해 예방",
+   "romanization": "jaehae yebang"
+  },
+  "disaster1702": {
+   "hangul": "경보",
+   "romanization": "gyeongbo"
+  },
+  "disaster1703": {
+   "hangul": "주의보",
+   "romanization": "juuibo"
+  },
+  "disaster1704": {
+   "hangul": "안전",
+   "romanization": "anjeon"
+  },
+  "disaster1705": {
+   "hangul": "위험",
+   "romanization": "wiheom"
+  },
+  "disaster1706": {
+   "hangul": "응급",
+   "romanization": "eunggeup"
+  },
+  "disaster1707": {
+   "hangul": "긴급",
+   "romanization": "gingeup"
+  },
+  "disaster1708": {
+   "hangul": "소화기",
+   "romanization": "sohwagi"
+  },
+  "katakana1709": {
+   "hangul": "편의점",
+   "romanization": "pyeoneujeom"
+  },
+  "katakana1710": {
+   "hangul": "슈퍼마켓",
+   "romanization": "syupeomaket"
+  },
+  "katakana1711": {
+   "hangul": "레스토랑",
+   "romanization": "reseutorang"
+  },
+  "katakana1712": {
+   "hangul": "호텔",
+   "romanization": "hotel"
+  },
+  "katakana1713": {
+   "hangul": "스마트폰",
+   "romanization": "seumateupon"
+  },
+  "katakana1714": {
+   "hangul": "애플리케이션",
+   "romanization": "aepeullikeisyeon"
+  },
+  "katakana1715": {
+   "hangul": "인터넷",
+   "romanization": "inteonet"
+  },
+  "katakana1716": {
+   "hangul": "와이파이",
+   "romanization": "waipai"
+  },
+  "katakana1717": {
+   "hangul": "배터리",
+   "romanization": "baeteori"
+  },
+  "katakana1718": {
+   "hangul": "메뉴",
+   "romanization": "menyu"
+  },
+  "katakana1719": {
+   "hangul": "티켓",
+   "romanization": "tiket"
+  },
+  "katakana1720": {
+   "hangul": "카드",
+   "romanization": "kadeu"
+  },
+  "katakana1721": {
+   "hangul": "서비스",
+   "romanization": "seobiseu"
+  },
+  "katakana1722": {
+   "hangul": "시스템",
+   "romanization": "siseutem"
+  },
+  "katakana1723": {
+   "hangul": "엘리베이터",
+   "romanization": "ellibeiteo"
+  },
+  "katakana1724": {
+   "hangul": "에스컬레이터",
+   "romanization": "eseukeolleiteo"
+  },
+  "online-shopping1725": {
+   "hangul": "주문",
+   "romanization": "jumun"
+  },
+  "online-shopping1726": {
+   "hangul": "상품",
+   "romanization": "sangpum"
+  },
+  "online-shopping1727": {
+   "hangul": "상품 페이지",
+   "romanization": "sangpum peiji"
+  },
+  "online-shopping1728": {
+   "hangul": "장바구니",
+   "romanization": "jangbaguni"
+  },
+  "online-shopping1729": {
+   "hangul": "구매",
+   "romanization": "gumae"
+  },
+  "online-shopping1730": {
+   "hangul": "결제",
+   "romanization": "gyeolje"
+  },
+  "online-shopping1731": {
+   "hangul": "발송",
+   "romanization": "balsong"
+  },
+  "online-shopping1732": {
+   "hangul": "배송",
+   "romanization": "baesong"
+  },
+  "online-shopping1733": {
+   "hangul": "도착",
+   "romanization": "dochak"
+  },
+  "online-shopping1734": {
+   "hangul": "반품",
+   "romanization": "banpum"
+  },
+  "online-shopping1735": {
+   "hangul": "교환",
+   "romanization": "gyohwan"
+  },
+  "online-shopping1736": {
+   "hangul": "사이즈",
+   "romanization": "saijeu"
+  },
+  "online-shopping1737": {
+   "hangul": "재고",
+   "romanization": "jaego"
+  },
+  "online-shopping1738": {
+   "hangul": "품절",
+   "romanization": "pumjeol"
+  },
+  "online-shopping1739": {
+   "hangul": "배송비",
+   "romanization": "baesongbi"
+  },
+  "online-shopping1740": {
+   "hangul": "배송지",
+   "romanization": "baesongji"
+  },
+  "technology1741": {
+   "hangul": "스마트폰",
+   "romanization": "seumateupon"
+  },
+  "technology1742": {
+   "hangul": "컴퓨터",
+   "romanization": "keompyuteo"
+  },
+  "technology1743": {
+   "hangul": "휴대폰",
+   "romanization": "hyudaepon"
+  },
+  "technology1744": {
+   "hangul": "애플리케이션",
+   "romanization": "aepeullikeisyeon"
+  },
+  "technology1745": {
+   "hangul": "계정",
+   "romanization": "gyejeong"
+  },
+  "technology1746": {
+   "hangul": "비밀번호",
+   "romanization": "bimilbeonho"
+  },
+  "technology1747": {
+   "hangul": "로그인",
+   "romanization": "rogeuin"
+  },
+  "technology1748": {
+   "hangul": "로그아웃",
+   "romanization": "rogeuaut"
+  },
+  "technology1749": {
+   "hangul": "다운로드",
+   "romanization": "daunrodeu"
+  },
+  "technology1750": {
+   "hangul": "업로드",
+   "romanization": "eopnrodeu"
+  },
+  "technology1751": {
+   "hangul": "설치",
+   "romanization": "seolchi"
+  },
+  "technology1752": {
+   "hangul": "업데이트",
+   "romanization": "eopdeiteu"
+  },
+  "technology1753": {
+   "hangul": "저장",
+   "romanization": "jeojang"
+  },
+  "technology1754": {
+   "hangul": "삭제",
+   "romanization": "sakje"
+  },
+  "technology1755": {
+   "hangul": "설정",
+   "romanization": "seoljeong"
+  },
+  "technology1756": {
+   "hangul": "화면",
+   "romanization": "hwamyeon"
+  },
+  "technology1757": {
+   "hangul": "파일",
+   "romanization": "pail"
+  },
+  "technology1758": {
+   "hangul": "사진",
+   "romanization": "sajin"
+  },
+  "technology1759": {
+   "hangul": "동영상",
+   "romanization": "dongyeongsang"
+  },
+  "technology1760": {
+   "hangul": "인터넷",
+   "romanization": "inteonet"
+  },
+  "technology1761": {
+   "hangul": "알림",
+   "romanization": "allim"
+  },
+  "education1762": {
+   "hangul": "대학교",
+   "romanization": "daehakgyo"
+  },
+  "education1763": {
+   "hangul": "학부",
+   "romanization": "hakbu"
+  },
+  "education1764": {
+   "hangul": "학과",
+   "romanization": "hakgwa"
+  },
+  "education1765": {
+   "hangul": "전공",
+   "romanization": "jeongong"
+  },
+  "education1766": {
+   "hangul": "강의",
+   "romanization": "gangui"
+  },
+  "education1767": {
+   "hangul": "수업",
+   "romanization": "sueop"
+  },
+  "education1768": {
+   "hangul": "시험",
+   "romanization": "siheom"
+  },
+  "education1769": {
+   "hangul": "성적",
+   "romanization": "seongjeok"
+  },
+  "education1770": {
+   "hangul": "학점",
+   "romanization": "hakjeom"
+  },
+  "education1771": {
+   "hangul": "졸업",
+   "romanization": "joreop"
+  },
+  "education1772": {
+   "hangul": "입학",
+   "romanization": "ipak"
+  },
+  "education1773": {
+   "hangul": "유학",
+   "romanization": "yuhak"
+  },
+  "education1774": {
+   "hangul": "연구",
+   "romanization": "yeongu"
+  },
+  "education1775": {
+   "hangul": "리포트",
+   "romanization": "ripoteu"
+  },
+  "education1776": {
+   "hangul": "발표",
+   "romanization": "balpyo"
+  },
+  "office1777": {
+   "hangul": "회사",
+   "romanization": "hoesa"
+  },
+  "office1778": {
+   "hangul": "사원",
+   "romanization": "sawon"
+  },
+  "office1779": {
+   "hangul": "상사",
+   "romanization": "sangsa"
+  },
+  "office1780": {
+   "hangul": "부하",
+   "romanization": "buha"
+  },
+  "office1781": {
+   "hangul": "동료",
+   "romanization": "dongnyo"
+  },
+  "office1782": {
+   "hangul": "부서",
+   "romanization": "buseo"
+  },
+  "office1783": {
+   "hangul": "회의",
+   "romanization": "hoeui"
+  },
+  "office1784": {
+   "hangul": "회의실",
+   "romanization": "hoeuisil"
+  },
+  "office1785": {
+   "hangul": "자료",
+   "romanization": "jaryo"
+  },
+  "office1786": {
+   "hangul": "업무",
+   "romanization": "eommu"
+  },
+  "office1787": {
+   "hangul": "일정",
+   "romanization": "iljeong"
+  },
+  "office1788": {
+   "hangul": "출장",
+   "romanization": "chuljang"
+  },
+  "office1789": {
+   "hangul": "휴가",
+   "romanization": "hyuga"
+  },
+  "office1790": {
+   "hangul": "월급",
+   "romanization": "wolgeup"
+  },
+  "office1791": {
+   "hangul": "야근",
+   "romanization": "yageun"
+  },
+  "office1792": {
+   "hangul": "연락",
+   "romanization": "yeollak"
+  },
+  "office1793": {
+   "hangul": "보고",
+   "romanization": "bogo"
+  },
+  "office1794": {
+   "hangul": "상담",
+   "romanization": "sangdam"
+  },
+  "office1795": {
+   "hangul": "의뢰",
+   "romanization": "uiroe"
+  },
+  "events1796": {
+   "hangul": "이벤트",
+   "romanization": "ibenteu"
+  },
+  "events1797": {
+   "hangul": "콘서트",
+   "romanization": "konseoteu"
+  },
+  "events1798": {
+   "hangul": "라이브 공연",
+   "romanization": "raibeu gongyeon"
+  },
+  "events1799": {
+   "hangul": "축제",
+   "romanization": "chukje"
+  },
+  "events1800": {
+   "hangul": "티켓",
+   "romanization": "tiket"
+  },
+  "events1801": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "events1802": {
+   "hangul": "계획",
+   "romanization": "gyehoek"
+  },
+  "events1803": {
+   "hangul": "약속",
+   "romanization": "yaksok"
+  },
+  "events1804": {
+   "hangul": "취소하다",
+   "romanization": "chwisohada"
+  },
+  "events1805": {
+   "hangul": "참가하다",
+   "romanization": "chamgahada"
+  },
+  "events1806": {
+   "hangul": "기획하다",
+   "romanization": "gihoekhada"
+  },
+  "tourism1807": {
+   "hangul": "관광",
+   "romanization": "gwangwang"
+  },
+  "tourism1808": {
+   "hangul": "관광지",
+   "romanization": "gwangwangji"
+  },
+  "tourism1809": {
+   "hangul": "여행",
+   "romanization": "yeohaeng"
+  },
+  "tourism1810": {
+   "hangul": "여행자",
+   "romanization": "yeohaengja"
+  },
+  "tourism1811": {
+   "hangul": "명소",
+   "romanization": "myeongso"
+  },
+  "tourism1812": {
+   "hangul": "경치",
+   "romanization": "gyeongchi"
+  },
+  "tourism1813": {
+   "hangul": "안내소",
+   "romanization": "annaeso"
+  },
+  "tourism1814": {
+   "hangul": "관광 안내",
+   "romanization": "gwangwang annae"
+  },
+  "tourism1815": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "tourism1816": {
+   "hangul": "입장권",
+   "romanization": "ipjanggwon"
+  },
+  "tourism1817": {
+   "hangul": "표",
+   "romanization": "pyo"
+  },
+  "tourism1818": {
+   "hangul": "기념품",
+   "romanization": "ginyeompum"
+  },
+  "tourism1819": {
+   "hangul": "사진",
+   "romanization": "sajin"
+  },
+  "tourism1820": {
+   "hangul": "지도",
+   "romanization": "jido"
+  },
+  "services1821": {
+   "hangul": "미용실",
+   "romanization": "miyongsil"
+  },
+  "services1822": {
+   "hangul": "이발소",
+   "romanization": "ibalso"
+  },
+  "services1823": {
+   "hangul": "세탁소",
+   "romanization": "setakso"
+  },
+  "services1824": {
+   "hangul": "수리",
+   "romanization": "suri"
+  },
+  "services1825": {
+   "hangul": "약국",
+   "romanization": "yakguk"
+  },
+  "services1826": {
+   "hangul": "우체국",
+   "romanization": "ucheguk"
+  },
+  "services1827": {
+   "hangul": "공공 서비스",
+   "romanization": "gonggong seobiseu"
+  },
+  "services1828": {
+   "hangul": "식당",
+   "romanization": "sikdang"
+  },
+  "services1829": {
+   "hangul": "가게",
+   "romanization": "gage"
+  },
+  "services1830": {
+   "hangul": "예약",
+   "romanization": "yeyak"
+  },
+  "services1831": {
+   "hangul": "부탁하다",
+   "romanization": "butakhada"
+  },
+  "services1832": {
+   "hangul": "수령",
+   "romanization": "suryeong"
+  },
+  "administration1833": {
+   "hangul": "관공서",
+   "romanization": "gwangongseo"
+  },
+  "administration1834": {
+   "hangul": "시청",
+   "romanization": "sicheong"
+  },
+  "administration1835": {
+   "hangul": "구청",
+   "romanization": "guchung"
+  },
+  "administration1836": {
+   "hangul": "절차",
+   "romanization": "jeolcha"
+  },
+  "administration1837": {
+   "hangul": "신고",
+   "romanization": "singo"
+  },
+  "administration1838": {
+   "hangul": "신청서",
+   "romanization": "sincheongseo"
+  },
+  "administration1839": {
+   "hangul": "증명서",
+   "romanization": "jeungmyeongseo"
+  },
+  "administration1840": {
+   "hangul": "외국인등록증",
+   "romanization": "oegugin deungnokjeung"
+  },
+  "administration1841": {
+   "hangul": "갱신",
+   "romanization": "gaengsin"
+  },
+  "administration1842": {
+   "hangul": "허가",
+   "romanization": "heoga"
+  },
+  "administration1843": {
+   "hangul": "등록",
+   "romanization": "deungnok"
+  },
+  "administration1844": {
+   "hangul": "제도",
+   "romanization": "jedo"
+  },
+  "society1845": {
+   "hangul": "지역",
+   "romanization": "jiyeok"
+  },
+  "society1846": {
+   "hangul": "사회",
+   "romanization": "sahoe"
+  },
+  "society1847": {
+   "hangul": "동네",
+   "romanization": "dongne"
+  },
+  "society1848": {
+   "hangul": "주민",
+   "romanization": "jumin"
+  },
+  "society1849": {
+   "hangul": "지역 사회",
+   "romanization": "jiyeok sahoe"
+  },
+  "society1850": {
+   "hangul": "규칙",
+   "romanization": "gyuchik"
+  },
+  "society1851": {
+   "hangul": "매너",
+   "romanization": "maeneo"
+  },
+  "society1852": {
+   "hangul": "교류",
+   "romanization": "gyoryu"
+  },
+  "society1853": {
+   "hangul": "지원",
+   "romanization": "jiwon"
+  },
+  "society1854": {
+   "hangul": "문제",
+   "romanization": "munje"
+  },
+  "society1855": {
+   "hangul": "과제",
+   "romanization": "gwaje"
+  },
+  "digital-communication1856": {
+   "hangul": "메시지",
+   "romanization": "mesiji"
+  },
+  "digital-communication1857": {
+   "hangul": "이메일",
+   "romanization": "imeil"
+  },
+  "digital-communication1858": {
+   "hangul": "첨부",
+   "romanization": "cheombu"
+  },
+  "digital-communication1859": {
+   "hangul": "답장",
+   "romanization": "dapjang"
+  },
+  "digital-communication1860": {
+   "hangul": "전달",
+   "romanization": "jeondal"
+  },
+  "digital-communication1861": {
+   "hangul": "공유",
+   "romanization": "gongyu"
+  },
+  "digital-communication1862": {
+   "hangul": "게시물",
+   "romanization": "gesimul"
+  },
+  "digital-communication1863": {
+   "hangul": "댓글",
+   "romanization": "daetgeul"
+  },
+  "digital-communication1864": {
+   "hangul": "계정",
+   "romanization": "gyejeong"
+  },
+  "digital-communication1865": {
+   "hangul": "그룹",
+   "romanization": "geurup"
+  },
+  "digital-communication1866": {
+   "hangul": "알림",
+   "romanization": "allim"
+  },
+  "digital-communication1867": {
+   "hangul": "온라인",
+   "romanization": "ollain"
+  },
+  "news1868": {
+   "hangul": "뉴스",
+   "romanization": "nyuseu"
+  },
+  "news1869": {
+   "hangul": "보도",
+   "romanization": "bodo"
+  },
+  "news1870": {
+   "hangul": "발표",
+   "romanization": "balpyo"
+  },
+  "news1871": {
+   "hangul": "사고",
+   "romanization": "sago"
+  },
+  "news1872": {
+   "hangul": "사건",
+   "romanization": "sageon"
+  },
+  "news1873": {
+   "hangul": "정부",
+   "romanization": "jeongbu"
+  },
+  "news1874": {
+   "hangul": "회사",
+   "romanization": "hoesa"
+  },
+  "news1875": {
+   "hangul": "경제",
+   "romanization": "gyeongje"
+  },
+  "news1876": {
+   "hangul": "정책",
+   "romanization": "jeongchaek"
+  },
+  "news1877": {
+   "hangul": "조사",
+   "romanization": "josa"
+  },
+  "news1878": {
+   "hangul": "결과",
+   "romanization": "gyeolgwa"
+  },
+  "news1879": {
+   "hangul": "원인",
+   "romanization": "wonin"
+  },
+  "news1880": {
+   "hangul": "영향",
+   "romanization": "yeonghyang"
+  },
+  "news1881": {
+   "hangul": "발표하다",
+   "romanization": "balpyohada"
+  },
+  "news1882": {
+   "hangul": "보도하다",
+   "romanization": "bodohada"
+  },
+  "health-advanced1883": {
+   "hangul": "치료",
+   "romanization": "chiryo"
+  },
+  "health-advanced1884": {
+   "hangul": "입원",
+   "romanization": "ibwon"
+  },
+  "health-advanced1885": {
+   "hangul": "퇴원",
+   "romanization": "toewon"
+  },
+  "health-advanced1886": {
+   "hangul": "수술",
+   "romanization": "susul"
+  },
+  "health-advanced1887": {
+   "hangul": "검사",
+   "romanization": "geomsa"
+  },
+  "health-advanced1888": {
+   "hangul": "진단",
+   "romanization": "jindan"
+  },
+  "health-advanced1889": {
+   "hangul": "의료",
+   "romanization": "uiryo"
+  },
+  "health-advanced1890": {
+   "hangul": "의사",
+   "romanization": "uisa"
+  },
+  "health-advanced1891": {
+   "hangul": "간호사",
+   "romanization": "ganhosa"
+  },
+  "health-advanced1892": {
+   "hangul": "전문의",
+   "romanization": "jeonmunui"
+  },
+  "health-advanced1893": {
+   "hangul": "회복",
+   "romanization": "hoebok"
+  },
+  "health-advanced1894": {
+   "hangul": "증상",
+   "romanization": "jeungsang"
+  },
+  "keigo1895": {
+   "hangul": "존댓말 (높임)",
+   "romanization": "jondaenmal (nopim)"
+  },
+  "keigo1896": {
+   "hangul": "겸양어",
+   "romanization": "gyeomyangeo"
+  },
+  "keigo1897": {
+   "hangul": "정중한 표현",
+   "romanization": "jeongjunghan pyohyeon"
+  },
+  "keigo1898": {
+   "hangul": "고객님",
+   "romanization": "gogaengnim"
+  },
+  "keigo1899": {
+   "hangul": "안내",
+   "romanization": "annae"
+  },
+  "keigo1900": {
+   "hangul": "기다려 주십시오",
+   "romanization": "gidaryeo jusipsio"
+  },
+  "keigo1901": {
+   "hangul": "잠시만 기다려 주십시오",
+   "romanization": "jamsiman gidaryeo jusipsio"
+  },
+  "keigo1902": {
+   "hangul": "계시다",
+   "romanization": "gyesida"
+  },
+  "keigo1903": {
+   "hangul": "찾아뵙다",
+   "romanization": "chajaboepda"
+  },
+  "keigo1904": {
+   "hangul": "말씀드리다",
+   "romanization": "malsseumdeurida"
+  },
+  "keigo1905": {
+   "hangul": "가다/오다 (겸양)",
+   "romanization": "gada/oda (gyeomyang)"
+  },
+  "keigo1906": {
+   "hangul": "하다 (겸양)",
+   "romanization": "hada (gyeomyang)"
+  },
+  "keigo1907": {
+   "hangul": "보시다",
+   "romanization": "bosida"
+  },
+  "keigo1908": {
+   "hangul": "드리다",
+   "romanization": "deurida"
+  },
+  "keigo1909": {
+   "hangul": "받다 (겸양)",
+   "romanization": "batda (gyeomyang)"
+  },
+  "economy1910": {
+   "hangul": "경제",
+   "romanization": "gyeongje"
+  },
+  "economy1911": {
+   "hangul": "기업",
+   "romanization": "gieop"
+  },
+  "economy1912": {
+   "hangul": "경기",
+   "romanization": "gyeonggi"
+  },
+  "economy1913": {
+   "hangul": "시장",
+   "romanization": "sijang"
+  },
+  "economy1914": {
+   "hangul": "소비",
+   "romanization": "sobi"
+  },
+  "economy1915": {
+   "hangul": "생산",
+   "romanization": "saengsan"
+  },
+  "economy1916": {
+   "hangul": "무역",
+   "romanization": "muyeok"
+  },
+  "economy1917": {
+   "hangul": "가격",
+   "romanization": "gagyeok"
+  },
+  "economy1918": {
+   "hangul": "물가",
+   "romanization": "mulga"
+  },
+  "economy1919": {
+   "hangul": "매출",
+   "romanization": "maechul"
+  },
+  "economy1920": {
+   "hangul": "이익",
+   "romanization": "iik"
+  },
+  "economy1921": {
+   "hangul": "손실",
+   "romanization": "sonsil"
+  },
+  "economy1922": {
+   "hangul": "투자",
+   "romanization": "tuja"
+  },
+  "economy1923": {
+   "hangul": "고용",
+   "romanization": "goyong"
+  },
+  "abstract1924": {
+   "hangul": "원인",
+   "romanization": "wonin"
+  },
+  "abstract1925": {
+   "hangul": "결과",
+   "romanization": "gyeolgwa"
+  },
+  "abstract1926": {
+   "hangul": "목적",
+   "romanization": "mokjeok"
+  },
+  "abstract1927": {
+   "hangul": "방법",
+   "romanization": "bangbeop"
+  },
+  "abstract1928": {
+   "hangul": "상황",
+   "romanization": "sanghwang"
+  },
+  "abstract1929": {
+   "hangul": "상태",
+   "romanization": "sangtae"
+  },
+  "abstract1930": {
+   "hangul": "경향",
+   "romanization": "gyeonghyang"
+  },
+  "abstract1931": {
+   "hangul": "가능성",
+   "romanization": "ganeungseong"
+  },
+  "abstract1932": {
+   "hangul": "필요성",
+   "romanization": "piryoseong"
+  },
+  "abstract1933": {
+   "hangul": "중요성",
+   "romanization": "jungyoseong"
+  },
+  "abstract1934": {
+   "hangul": "효과",
+   "romanization": "hyogwa"
+  },
+  "abstract1935": {
+   "hangul": "영향",
+   "romanization": "yeonghyang"
+  },
+  "abstract1936": {
+   "hangul": "대응",
+   "romanization": "daeeung"
+  },
+  "abstract1937": {
+   "hangul": "해결",
+   "romanization": "haegyeol"
+  },
+  "media-opinion1938": {
+   "hangul": "의견",
+   "romanization": "uigyeon"
+  },
+  "media-opinion1939": {
+   "hangul": "주장",
+   "romanization": "jujang"
+  },
+  "media-opinion1940": {
+   "hangul": "반론",
+   "romanization": "ballon"
+  },
+  "media-opinion1941": {
+   "hangul": "근거",
+   "romanization": "geungeo"
+  },
+  "media-opinion1942": {
+   "hangul": "찬성",
+   "romanization": "chanseong"
+  },
+  "media-opinion1943": {
+   "hangul": "반대",
+   "romanization": "bandae"
+  },
+  "media-opinion1944": {
+   "hangul": "비판",
+   "romanization": "bipan"
+  },
+  "media-opinion1945": {
+   "hangul": "평가",
+   "romanization": "pyeongga"
+  },
+  "media-opinion1946": {
+   "hangul": "토론",
+   "romanization": "toron"
+  },
+  "media-opinion1947": {
+   "hangul": "기사",
+   "romanization": "gisa"
+  },
+  "media-opinion1948": {
+   "hangul": "논문",
+   "romanization": "nonmun"
+  },
+  "media-opinion1949": {
+   "hangul": "보도",
+   "romanization": "bodo"
+  },
+  "academic1950": {
+   "hangul": "개념",
+   "romanization": "gaenyeom"
+  },
+  "academic1951": {
+   "hangul": "이론",
+   "romanization": "iron"
+  },
+  "academic1952": {
+   "hangul": "분석",
+   "romanization": "bunseok"
+  },
+  "academic1953": {
+   "hangul": "구조",
+   "romanization": "gujo"
+  },
+  "academic1954": {
+   "hangul": "요소",
+   "romanization": "yoso"
+  },
+  "academic1955": {
+   "hangul": "정의",
+   "romanization": "jeongui"
+  },
+  "academic1956": {
+   "hangul": "전제",
+   "romanization": "jeonje"
+  },
+  "academic1957": {
+   "hangul": "근거",
+   "romanization": "geungeo"
+  },
+  "academic1958": {
+   "hangul": "관점",
+   "romanization": "gwanjeom"
+  },
+  "academic1959": {
+   "hangul": "비교",
+   "romanization": "bigyo"
+  },
+  "academic1960": {
+   "hangul": "설명",
+   "romanization": "seolmyeong"
+  },
+  "academic1961": {
+   "hangul": "이해",
+   "romanization": "ihae"
+  },
+  "politics-economy1962": {
+   "hangul": "정치",
+   "romanization": "jeongchi"
+  },
+  "politics-economy1963": {
+   "hangul": "정부",
+   "romanization": "jeongbu"
+  },
+  "politics-economy1964": {
+   "hangul": "사회",
+   "romanization": "sahoe"
+  },
+  "politics-economy1965": {
+   "hangul": "경제",
+   "romanization": "gyeongje"
+  },
+  "politics-economy1966": {
+   "hangul": "정책",
+   "romanization": "jeongchaek"
+  },
+  "politics-economy1967": {
+   "hangul": "법률",
+   "romanization": "beomnyul"
+  },
+  "politics-economy1968": {
+   "hangul": "선거",
+   "romanization": "seongeo"
+  },
+  "politics-economy1969": {
+   "hangul": "세금",
+   "romanization": "segeum"
+  },
+  "politics-economy1970": {
+   "hangul": "예산",
+   "romanization": "yesan"
+  },
+  "politics-economy1971": {
+   "hangul": "외교",
+   "romanization": "oegyo"
+  },
+  "politics-economy1972": {
+   "hangul": "제도",
+   "romanization": "jedo"
+  },
+  "politics-economy1973": {
+   "hangul": "개혁",
+   "romanization": "gaehyeok"
+  },
+  "written-language1974": {
+   "hangul": "기사",
+   "romanization": "gisa"
+  },
+  "written-language1975": {
+   "hangul": "사설",
+   "romanization": "saseol"
+  },
+  "written-language1976": {
+   "hangul": "논문",
+   "romanization": "nonmun"
+  },
+  "written-language1977": {
+   "hangul": "문서",
+   "romanization": "munseo"
+  },
+  "written-language1978": {
+   "hangul": "표현",
+   "romanization": "pyohyeon"
+  },
+  "written-language1979": {
+   "hangul": "문장",
+   "romanization": "munjang"
+  },
+  "written-language1980": {
+   "hangul": "단락",
+   "romanization": "dallak"
+  },
+  "written-language1981": {
+   "hangul": "제목",
+   "romanization": "jemok"
+  },
+  "written-language1982": {
+   "hangul": "요약",
+   "romanization": "yoyak"
+  },
+  "written-language1983": {
+   "hangul": "인용",
+   "romanization": "inyong"
+  },
+  "formal-nuance1984": {
+   "hangul": "뉘앙스",
+   "romanization": "nwianseu"
+  },
+  "formal-nuance1985": {
+   "hangul": "문체",
+   "romanization": "munche"
+  },
+  "formal-nuance1986": {
+   "hangul": "포멀한",
+   "romanization": "pomeolhan"
+  },
+  "formal-nuance1987": {
+   "hangul": "캐주얼한",
+   "romanization": "kaejueolhan"
+  },
+  "formal-nuance1988": {
+   "hangul": "배려",
+   "romanization": "baeryeo"
+  },
+  "formal-nuance1989": {
+   "hangul": "완곡한",
+   "romanization": "wangokhan"
+  },
+  "formal-nuance1990": {
+   "hangul": "표현 방식",
+   "romanization": "pyohyeon bangsik"
+  },
+  "formal-nuance1991": {
+   "hangul": "어조",
+   "romanization": "eojo"
+  },
+  "formal-nuance1992": {
+   "hangul": "인상",
+   "romanization": "insang"
+  },
+  "formal-nuance1993": {
+   "hangul": "배려심",
+   "romanization": "baeryeosim"
+  },
+  "collocations1994": {
+   "hangul": "결정을 내리다",
+   "romanization": "gyeoljeongeul naerida"
+  },
+  "collocations1995": {
+   "hangul": "영향을 주다",
+   "romanization": "yeonghyangeul juda"
+  },
+  "collocations1996": {
+   "hangul": "조사를 하다",
+   "romanization": "josareul hada"
+  },
+  "collocations1997": {
+   "hangul": "목적을 이루다",
+   "romanization": "mokjeogeul iruda"
+  },
+  "collocations1998": {
+   "hangul": "책임을 다하다",
+   "romanization": "chaegimeul dahada"
+  },
+  "collocations1999": {
+   "hangul": "제안을 하다",
+   "romanization": "jeaneul hada"
+  },
+  "collocations2000": {
+   "hangul": "의견을 반영하다",
+   "romanization": "uigyeoneul banyeonghada"
+  },
+  "collocations2001": {
+   "hangul": "문제를 해결하다",
+   "romanization": "munjereul haegyeolhada"
+  },
+  "collocations2002": {
+   "hangul": "영향을 미치다",
+   "romanization": "yeonghyangeul michida"
+  },
+  "collocations2003": {
+   "hangul": "합의에 도달하다",
+   "romanization": "habuie dodalhada"
+  },
+  "idioms2004": {
+   "hangul": "일석이조",
+   "romanization": "ilseogijo"
+  },
+  "idioms2005": {
+   "hangul": "심기일전",
+   "romanization": "simgiiljeon"
+  },
+  "idioms2006": {
+   "hangul": "꾸준한 노력",
+   "romanization": "kkujunhan noryeok"
+  },
+  "idioms2007": {
+   "hangul": "이심전심",
+   "romanization": "isimjeonsim"
+  },
+  "idioms2008": {
+   "hangul": "사계절의 변화",
+   "romanization": "sagyejeorui byeonhwa"
+  },
+  "idioms2009": {
+   "hangul": "굳은 결심",
+   "romanization": "gudeun gyeolsim"
+  },
+  "idioms2010": {
+   "hangul": "상식",
+   "romanization": "sangsik"
+  },
+  "idioms2011": {
+   "hangul": "전환점",
+   "romanization": "jeonhwanjeom"
+  },
+  "idioms2012": {
+   "hangul": "드디어",
+   "romanization": "deudieo"
+  },
+  "idioms2013": {
+   "hangul": "어쩔 수 없다",
+   "romanization": "eojjeol su eopda"
+  },
+  "idioms2014": {
+   "hangul": "그럼에도 불구하고",
+   "romanization": "geureomedo bulguhago"
+  },
+  "idioms2015": {
+   "hangul": "다시 말해서",
+   "romanization": "dasi malhaeseo"
+  },
+  "onomatopoeia2016": {
+   "hangul": "두근두근",
+   "romanization": "dugeundugeun"
+  },
+  "onomatopoeia2017": {
+   "hangul": "두근두근",
+   "romanization": "dugeundugeun"
+  },
+  "onomatopoeia2018": {
+   "hangul": "짜증짜증",
+   "romanization": "jjajeungjjajeung"
+  },
+  "onomatopoeia2019": {
+   "hangul": "메스꺼움",
+   "romanization": "meseukkeoum"
+  },
+  "onomatopoeia2020": {
+   "hangul": "조마조마",
+   "romanization": "jomajoma"
+  },
+  "onomatopoeia2021": {
+   "hangul": "오싹오싹",
+   "romanization": "ossagossak"
+  },
+  "onomatopoeia2022": {
+   "hangul": "실망",
+   "romanization": "silmang"
+  },
+  "onomatopoeia2023": {
+   "hangul": "안도",
+   "romanization": "ando"
+  },
+  "onomatopoeia2024": {
+   "hangul": "깜짝",
+   "romanization": "kkamjjak"
+  },
+  "onomatopoeia2025": {
+   "hangul": "오싹",
+   "romanization": "ossak"
+  },
+  "onomatopoeia2026": {
+   "hangul": "생글생글",
+   "romanization": "saenggeulsaenggeul"
+  },
+  "onomatopoeia2027": {
+   "hangul": "히죽히죽",
+   "romanization": "hijukhijuk"
+  },
+  "onomatopoeia2028": {
+   "hangul": "껄껄",
+   "romanization": "kkeolkkeol"
+  },
+  "onomatopoeia2029": {
+   "hangul": "쥐 죽은 듯 조용",
+   "romanization": "jwi jugeun deut joyong"
+  },
+  "onomatopoeia2030": {
+   "hangul": "술술",
+   "romanization": "sulsul"
+  },
+  "onomatopoeia2031": {
+   "hangul": "투덜투덜",
+   "romanization": "tudeoltudeol"
+  },
+  "onomatopoeia2032": {
+   "hangul": "살금살금",
+   "romanization": "salgeumsalgeum"
+  },
+  "onomatopoeia2033": {
+   "hangul": "꼬르륵",
+   "romanization": "kkoreureuk"
+  },
+  "onomatopoeia2034": {
+   "hangul": "천천히",
+   "romanization": "cheoncheonhi"
+  },
+  "onomatopoeia2035": {
+   "hangul": "휙",
+   "romanization": "hwik"
+  },
+  "onomatopoeia2036": {
+   "hangul": "확",
+   "romanization": "hwak"
+  },
+  "onomatopoeia2037": {
+   "hangul": "꽉",
+   "romanization": "kkwak"
+  },
+  "onomatopoeia2038": {
+   "hangul": "터벅터벅",
+   "romanization": "teobeokteobeok"
+  },
+  "onomatopoeia2039": {
+   "hangul": "터덜터덜",
+   "romanization": "teodeolteodeol"
+  },
+  "onomatopoeia2040": {
+   "hangul": "어슬렁어슬렁",
+   "romanization": "eoseullengeoseulleong"
+  },
+  "onomatopoeia2041": {
+   "hangul": "어슬렁어슬렁",
+   "romanization": "eoseullengeoseulleong"
+  },
+  "onomatopoeia2042": {
+   "hangul": "두리번두리번",
+   "romanization": "duribeonduribeon"
+  },
+  "onomatopoeia2043": {
+   "hangul": "폭신폭신",
+   "romanization": "poksinpoksin"
+  },
+  "onomatopoeia2044": {
+   "hangul": "쫀득쫀득",
+   "romanization": "jjondeukjjondeuk"
+  },
+  "onomatopoeia2045": {
+   "hangul": "매끈매끈",
+   "romanization": "maekkeunmaekkeun"
+  },
+  "onomatopoeia2046": {
+   "hangul": "까칠까칠",
+   "romanization": "kkachilkkachil"
+  },
+  "onomatopoeia2047": {
+   "hangul": "끈적끈적",
+   "romanization": "kkeunjeokkkeunjeok"
+  },
+  "onomatopoeia2048": {
+   "hangul": "미끈미끈",
+   "romanization": "mikkeunmikkeun"
+  },
+  "onomatopoeia2049": {
+   "hangul": "엉망진창",
+   "romanization": "eongmangjinchang"
+  },
+  "onomatopoeia2050": {
+   "hangul": "너덜너덜",
+   "romanization": "neodeolneodeol"
+  },
+  "onomatopoeia2051": {
+   "hangul": "반짝반짝",
+   "romanization": "banjjakbanjjak"
+  },
+  "onomatopoeia2052": {
+   "hangul": "반짝반짝",
+   "romanization": "banjjakbanjjak"
+  },
+  "onomatopoeia2053": {
+   "hangul": "또렷하게",
+   "romanization": "ttoryeothage"
+  },
+  "onomatopoeia2054": {
+   "hangul": "깜빡깜빡",
+   "romanization": "kkamppakkkamppak"
+  },
+  "onomatopoeia2055": {
+   "hangul": "주룩주룩",
+   "romanization": "jurukjuruk"
+  },
+  "onomatopoeia2056": {
+   "hangul": "보슬보슬",
+   "romanization": "boseulboseul"
+  },
+  "onomatopoeia2057": {
+   "hangul": "뚝뚝",
+   "romanization": "ttukttuk"
+  },
+  "onomatopoeia2058": {
+   "hangul": "우르릉",
+   "romanization": "ureureung"
+  },
+  "onomatopoeia2059": {
+   "hangul": "덜컹덜컹",
+   "romanization": "deolkeongdeolkeong"
+  },
+  "onomatopoeia2060": {
+   "hangul": "쿵쿵",
+   "romanization": "kungkung"
+  },
+  "onomatopoeia2061": {
+   "hangul": "쾅",
+   "romanization": "kwang"
+  },
+  "onomatopoeia2062": {
+   "hangul": "철컥",
+   "romanization": "cheolkeok"
+  },
+  "onomatopoeia2063": {
+   "hangul": "짝짝",
+   "romanization": "jjakjjak"
+  },
+  "onomatopoeia2064": {
+   "hangul": "딩동",
+   "romanization": "dingdong"
+  },
+  "onomatopoeia2065": {
+   "hangul": "쏴아",
+   "romanization": "sswaa"
+  },
+  "onomatopoeia2066": {
+   "hangul": "멍멍",
+   "romanization": "meongmeong"
+  },
+  "onomatopoeia2067": {
+   "hangul": "야옹야옹",
+   "romanization": "yaongyaong"
   }
  },
  "sentences": {
@@ -4488,6 +9417,150 @@
    {
     "ko": "아침에 만나면 ＿＿＿＿라고 말해요.",
     "es": "Si te encuentras con alguien por la mañana, dices \"buenos días\"."
+   }
+  ],
+  "airport587": [
+   {
+    "ko": "이 ＿＿＿＿은 아주 큽니다.",
+    "es": "Este aeropuerto es muy grande."
+   }
+  ],
+  "airport588": [
+   {
+    "ko": "＿＿＿＿은 몇 시에 출발해요?",
+    "es": "¿A qué hora sale el vuelo?"
+   }
+  ],
+  "airport589": [
+   {
+    "ko": "＿＿＿＿을 타는 건 처음이에요.",
+    "es": "Es la primera vez que subo a un avión."
+   }
+  ],
+  "airport590": [
+   {
+    "ko": "＿＿＿＿을 보여 주세요.",
+    "es": "Muéstreme la tarjeta de embarque, por favor."
+   }
+  ],
+  "airport591": [
+   {
+    "ko": "＿＿＿＿가 너무 무거워요.",
+    "es": "La maleta pesa demasiado."
+   }
+  ],
+  "airport592": [
+   {
+    "ko": "＿＿＿＿는 하나만 가지고 탈 수 있어요.",
+    "es": "Solo se puede llevar un equipaje de mano."
+   }
+  ],
+  "airport593": [
+   {
+    "ko": "＿＿＿＿를 잊어버렸어요.",
+    "es": "Se me olvidó el pasaporte."
+   }
+  ],
+  "airport594": [
+   {
+    "ko": "＿＿＿＿는 십 번이에요.",
+    "es": "La puerta de embarque es la número diez."
+   }
+  ],
+  "airport595": [
+   {
+    "ko": "비행기 ＿＿＿＿은 몇 시예요?",
+    "es": "¿A qué hora es la llegada del avión?"
+   }
+  ],
+  "airport596": [
+   {
+    "ko": "＿＿＿＿ 삼십 분 전에 와 주세요.",
+    "es": "Venga treinta minutos antes de la salida, por favor."
+   }
+  ],
+  "airport597": [
+   {
+    "ko": "＿＿＿＿ 줄에 서 있어요.",
+    "es": "Estoy haciendo cola para el control de inmigración."
+   }
+  ],
+  "airport598": [
+   {
+    "ko": "＿＿＿＿에서 짐을 보여줬어요.",
+    "es": "Enseñé el equipaje en la aduana."
+   }
+  ],
+  "trouble608": [
+   {
+    "ko": "역을 몰라서 ＿＿＿＿.",
+    "es": "No encontraba la estación y me perdí."
+   }
+  ],
+  "trouble609": [
+   {
+    "ko": "지갑을 ＿＿＿＿.",
+    "es": "He perdido la cartera."
+   }
+  ],
+  "trouble610": [
+   {
+    "ko": "오늘은 ＿＿＿＿.",
+    "es": "Hoy no me encuentro bien."
+   }
+  ],
+  "trouble611": [
+   {
+    "ko": "배가 ＿＿＿＿.",
+    "es": "Me duele el estómago."
+   }
+  ],
+  "trouble612": [
+   {
+    "ko": "＿＿＿＿한테 진찰을 받았어요.",
+    "es": "Me examinó el médico."
+   }
+  ],
+  "trouble613": [
+   {
+    "ko": "이 ＿＿＿＿을 드세요.",
+    "es": "Tómese este medicamento, por favor."
+   }
+  ],
+  "trouble614": [
+   {
+    "ko": "계란에 ＿＿＿＿가 있어요.",
+    "es": "Tengo alergia al huevo."
+   }
+  ],
+  "trouble615": [
+   {
+    "ko": "＿＿＿＿이 있어요.",
+    "es": "Tengo fiebre."
+   }
+  ],
+  "trouble616": [
+   {
+    "ko": "다리에 ＿＿＿＿를 입었어요.",
+    "es": "Me hice una herida en la pierna."
+   }
+  ],
+  "trouble617": [
+   {
+    "ko": "＿＿＿＿를 불러 주세요.",
+    "es": "Llame a una ambulancia, por favor."
+   }
+  ],
+  "trouble618": [
+   {
+    "ko": "곤란할 때는 의사한테 ＿＿＿＿.",
+    "es": "Cuando tienes un problema, llamas al médico."
+   }
+  ],
+  "trouble619": [
+   {
+    "ko": "무슨 ＿＿＿＿ 있어요?",
+    "es": "¿Hay algún problema?"
    }
   ]
  }
