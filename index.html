@@ -6191,7 +6191,9 @@
             if (statusEl) {
                 statusEl.style.display = 'block';
                 const total = vocabulary.length;
-                statusEl.textContent = `${translated} de ${total} palabras traducidas al coreano. El resto se muestra en japonés hasta que se traduzcan.`;
+                statusEl.textContent = (translated === total)
+                    ? 'Todo el contenido traducido.'
+                    : `${translated} de ${total} palabras traducidas al coreano. El resto se muestra en japonés hasta que se traduzcan.`;
             }
         } catch (e) {
             if (statusEl) {
@@ -6504,19 +6506,6 @@
     // su scroll con normalidad. Se usa al salir de Repasar/Estadísticas hacia atrás.
     function goBackToLastTopicsScreen() { showScreen(lastTopicsScreen); }
 
-    // Palabras "aprendidas" de un temario: acertadas alguna vez Y no están
-    // actualmente pendientes en repasar. Esto es lo que cuenta de verdad
-    // para el % del nivel (las estrellas son solo orientativas).
-    function getLearnedWordsCount(topicId) {
-        const words = vocabulary.filter(v => v.category === topicId);
-        return words.filter(w => stats.correctWords[w.id] && !mistakes[w.id]).length;
-    }
-    function isTopicFullyLearned(topicId) {
-        const words = vocabulary.filter(v => v.category === topicId);
-        if (words.length === 0) return false;
-        return getLearnedWordsCount(topicId) === words.length;
-    }
-
     function getTopicProgress(topicId) {
         if (!userProgress[topicId]) { userProgress[topicId] = { completed: 0 }; saveData(); }
         return userProgress[topicId].completed;
@@ -6556,7 +6545,6 @@
         pendingStarResetTopic = null;
         if (!userProgress[topicId]) getTopicProgress(topicId);
         userProgress[topicId].completed = 0;
-        vocabulary.filter(v => v.category === topicId).forEach(w => delete stats.correctWords[w.id]);
         saveData();
         refreshTopicsView();
     }
@@ -6574,7 +6562,7 @@
                 <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${displayTopicTitle(t)}</div>
                 <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
             </div>
-            ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">${isTopicFullyLearned(t.id) ? '✅' : `⭐ ${completed}`}</div>` : ''}
+            ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
         `;
         return card;
     }
@@ -6584,10 +6572,9 @@
     function computeLevelStats(level) {
         const levelTopics = topics.filter(t => topicLevelMap[t.id] === level.id);
         const total = levelTopics.length;
-        const totalWords = levelTopics.reduce((sum, t) => sum + vocabulary.filter(v => v.category === t.id).length, 0);
-        const learnedWords = levelTopics.reduce((sum, t) => sum + getLearnedWordsCount(t.id), 0);
-        const pct = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
-        return { levelTopics, total, pct };
+        const practicedCount = levelTopics.filter(t => getTopicProgress(t.id) > 0).length;
+        const pct = total > 0 ? Math.round((practicedCount / total) * 100) : 0;
+        return { levelTopics, total, practicedCount, pct };
     }
 
     // ==================== SISTEMA GACHA JLPT ==================== //
