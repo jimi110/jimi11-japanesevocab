@@ -1116,7 +1116,7 @@
             </div>
 
             <div class="settings-section">
-                <div class="settings-section-title">Apariencia</div>
+                <div class="settings-section-title">🎨 Apariencia</div>
                 <div class="theme-grid" id="theme-grid">
                     <!-- Las opciones de tema se generan aquí por JS -->
                 </div>
@@ -1158,6 +1158,14 @@
                     <button class="seg-btn" data-value="true" onclick="setPref('koreanMode', true)">한국어</button>
                 </div>
                 <div id="korean-mode-status" class="settings-hint" style="display:none; font-size:12px; color:var(--text-muted); margin-top:8px;"></div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">✏️ Completa el hueco</div>
+                <div class="segmented-control panel-seg" id="fillblank-controls">
+                    <button class="seg-btn active" data-value="true" onclick="setPref('fillBlankEnabled', true)">Activado</button>
+                    <button class="seg-btn" data-value="false" onclick="setPref('fillBlankEnabled', false)">Desactivado</button>
+                </div>
             </div>
 
             <div class="settings-section">
@@ -1407,7 +1415,7 @@
 
 <script>
     // --- 1. CONFIGURACIÓN Y LOCALSTORAGE --- //
-    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false };
+    let prefs = { layout: 'auto', theme: 'light', hiragana: true, sound: true, customThemeColor: '#1cb0f6', koreanMode: false, fillBlankEnabled: true };
     let userProgress = {};
     // Errores pendientes de repaso: { [wordId]: { id, category, count, lastMissed } }
     let mistakes = {};
@@ -1498,6 +1506,7 @@
         updateSegControl('hiragana-controls', prefs.hiragana);
         updateSegControl('sound-controls', prefs.sound);
         updateSegControl('korean-mode-controls', prefs.koreanMode);
+        updateSegControl('fillblank-controls', prefs.fillBlankEnabled);
         renderThemeGrid();
         applyKoreanTitle();
         applySearchPlaceholder();
@@ -6506,6 +6515,16 @@
     // su scroll con normalidad. Se usa al salir de Repasar/Estadísticas hacia atrás.
     function goBackToLastTopicsScreen() { showScreen(lastTopicsScreen); }
 
+    function getLearnedWordsCount(topicId) {
+        const words = vocabulary.filter(v => v.category === topicId);
+        return words.filter(w => stats.correctWords[w.id] && !mistakes[w.id]).length;
+    }
+    function isTopicFullyLearned(topicId) {
+        const words = vocabulary.filter(v => v.category === topicId);
+        if (words.length === 0) return false;
+        return getLearnedWordsCount(topicId) === words.length;
+    }
+
     function getTopicProgress(topicId) {
         if (!userProgress[topicId]) { userProgress[topicId] = { completed: 0 }; saveData(); }
         return userProgress[topicId].completed;
@@ -6545,6 +6564,7 @@
         pendingStarResetTopic = null;
         if (!userProgress[topicId]) getTopicProgress(topicId);
         userProgress[topicId].completed = 0;
+        vocabulary.filter(v => v.category === topicId).forEach(w => delete stats.correctWords[w.id]);
         saveData();
         refreshTopicsView();
     }
@@ -6562,7 +6582,7 @@
                 <div class="topic-title"><span style="color:var(--text-muted); font-size:13px; font-weight:normal;">${numStr}</span> ${displayTopicTitle(t)}</div>
                 <div class="topic-stats">${vocabCount} ${t.id === 'survival' || t.id === 'polite' ? 'expresiones' : 'palabras'}</div>
             </div>
-            ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">⭐ ${completed}</div>` : ''}
+            ${completed > 0 ? `<div class="progress-indicator" data-topic-id="${t.id}" onclick="event.stopPropagation(); resetTopicStars('${t.id}')" title="Toca dos veces para reiniciar las estrellas">${isTopicFullyLearned(t.id) ? '✅' : `⭐ ${completed}`}</div>` : ''}
         `;
         return card;
     }
@@ -6572,9 +6592,10 @@
     function computeLevelStats(level) {
         const levelTopics = topics.filter(t => topicLevelMap[t.id] === level.id);
         const total = levelTopics.length;
-        const practicedCount = levelTopics.filter(t => getTopicProgress(t.id) > 0).length;
-        const pct = total > 0 ? Math.round((practicedCount / total) * 100) : 0;
-        return { levelTopics, total, practicedCount, pct };
+        const totalWords = levelTopics.reduce((sum, t) => sum + vocabulary.filter(v => v.category === t.id).length, 0);
+        const learnedWords = levelTopics.reduce((sum, t) => sum + getLearnedWordsCount(t.id), 0);
+        const pct = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
+        return { levelTopics, total, pct };
     }
 
     // ==================== SISTEMA GACHA JLPT ==================== //
@@ -7117,7 +7138,7 @@
         // siguen funcionando exactamente igual que antes.
         const formats = [0, 1, 2];
         const wordSentences = getWordSentences(word);
-        if (wordSentences && wordSentences.length) formats.push(3);
+        if (prefs.fillBlankEnabled && wordSentences && wordSentences.length) formats.push(3);
         const format = formats[Math.floor(Math.random() * formats.length)];
         
         let questionLabel, questionTextHTML, isOptionsSpanish;
