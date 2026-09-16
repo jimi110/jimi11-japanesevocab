@@ -7099,9 +7099,21 @@
 
     function startPractice(customWords, isReview) {
         playSound('primary');
-        const topicWords = customWords || vocabulary.filter(v => v.category === currentTopicId);
+        let selectedWords;
+        if (customWords) {
+            selectedWords = shuffleArray(customWords).slice(0, 10);
+        } else {
+            // Priorizamos las palabras del tema que aún no se han acertado
+            // nunca, para no repetir una y otra vez las que ya se saben antes
+            // de completar el resto. Si con eso no llegamos a 10, rellenamos
+            // con las ya acertadas para no dejar la práctica más corta.
+            const topicWords = vocabulary.filter(v => v.category === currentTopicId);
+            const notLearned = shuffleArray(topicWords.filter(w => !stats.correctWords[w.id]));
+            const learned = shuffleArray(topicWords.filter(w => stats.correctWords[w.id]));
+            selectedWords = [...notLearned, ...learned].slice(0, 10);
+        }
         practiceState = {
-            questions: shuffleArray(topicWords).slice(0, 10),
+            questions: selectedWords,
             currentIndex: 0, score: 0, results: [], answered: false,
             isReview: !!isReview
         };
