@@ -75,7 +75,10 @@
    "formal-nuance",
    "collocations",
    "idioms",
-   "onomatopoeia"
+   "onomatopoeia",
+   "counters",
+   "honorifics",
+   "etiquette"
   ]
  },
  "words": {
@@ -8750,6 +8753,382 @@
   "onomatopoeia2067": {
    "hangul": "야옹야옹",
    "romanization": "yaongyaong"
+  },
+  "disaster2142": {
+   "hangul": "긴급 지진 속보",
+   "romanization": "gingeup jijin sokbo"
+  },
+  "disaster2143": {
+   "hangul": "전국 긴급 경보 시스템",
+   "romanization": "jeonguk gingeup gyeongbo siseutem"
+  },
+  "disaster2144": {
+   "hangul": "진도",
+   "romanization": "jindo"
+  },
+  "disaster2145": {
+   "hangul": "규모",
+   "romanization": "gyumo"
+  },
+  "disaster2146": {
+   "hangul": "여진",
+   "romanization": "yeojin"
+  },
+  "disaster2147": {
+   "hangul": "방재 용품",
+   "romanization": "bangjae yongpum"
+  },
+  "disaster2148": {
+   "hangul": "비상식량",
+   "romanization": "bisangsingnyang"
+  },
+  "disaster2149": {
+   "hangul": "손전등",
+   "romanization": "sonjeondeung"
+  },
+  "disaster2150": {
+   "hangul": "대피 훈련",
+   "romanization": "daepi hullyeon"
+  },
+  "disaster2151": {
+   "hangul": "안부 확인",
+   "romanization": "anbu hwagin"
+  },
+  "disaster2152": {
+   "hangul": "흔들리다",
+   "romanization": "heundeullida"
+  },
+  "disaster2153": {
+   "hangul": "쓰러지다",
+   "romanization": "sseureojida"
+  },
+  "disaster2154": {
+   "hangul": "웅크리다",
+   "romanization": "ungkeurida"
+  },
+  "disaster2155": {
+   "hangul": "머리를 보호하다",
+   "romanization": "meorireul bohohada"
+  },
+  "disaster2156": {
+   "hangul": "높은 곳으로",
+   "romanization": "nopeun goseuro"
+  },
+  "disaster2157": {
+   "hangul": "방재 무선",
+   "romanization": "bangjae museon"
+  },
+  "disaster2158": {
+   "hangul": "경계 레벨",
+   "romanization": "gyeonggye rebel"
+  },
+  "disaster2159": {
+   "hangul": "특별 경보",
+   "romanization": "teukbyeol gyeongbo"
+  },
+  "disaster2160": {
+   "hangul": "산사태",
+   "romanization": "sansatae"
+  },
+  "disaster2161": {
+   "hangul": "사이렌",
+   "romanization": "saireun"
+  },
+  "counters2068": {
+   "hangul": "분류사",
+   "romanization": "bunryusa"
+  },
+  "counters2069": {
+   "hangul": "한 개",
+   "romanization": "han gae"
+  },
+  "counters2070": {
+   "hangul": "두 개",
+   "romanization": "du gae"
+  },
+  "counters2071": {
+   "hangul": "세 개",
+   "romanization": "se gae"
+  },
+  "counters2072": {
+   "hangul": "한 명",
+   "romanization": "han myeong"
+  },
+  "counters2073": {
+   "hangul": "두 명",
+   "romanization": "du myeong"
+  },
+  "counters2074": {
+   "hangul": "세 명",
+   "romanization": "se myeong"
+  },
+  "counters2075": {
+   "hangul": "네 명",
+   "romanization": "ne myeong"
+  },
+  "counters2076": {
+   "hangul": "한 장",
+   "romanization": "han jang"
+  },
+  "counters2077": {
+   "hangul": "두 장",
+   "romanization": "du jang"
+  },
+  "counters2078": {
+   "hangul": "세 장",
+   "romanization": "se jang"
+  },
+  "counters2079": {
+   "hangul": "한 병/자루",
+   "romanization": "han byeong/jaru"
+  },
+  "counters2080": {
+   "hangul": "두 병/자루",
+   "romanization": "du byeong/jaru"
+  },
+  "counters2081": {
+   "hangul": "세 병/자루",
+   "romanization": "se byeong/jaru"
+  },
+  "counters2082": {
+   "hangul": "한 마리",
+   "romanization": "han mari"
+  },
+  "counters2083": {
+   "hangul": "두 마리",
+   "romanization": "du mari"
+  },
+  "counters2084": {
+   "hangul": "세 마리",
+   "romanization": "se mari"
+  },
+  "counters2085": {
+   "hangul": "한 마리(큰 동물)",
+   "romanization": "han mari (keun dongmul)"
+  },
+  "counters2086": {
+   "hangul": "한 대",
+   "romanization": "han dae"
+  },
+  "counters2087": {
+   "hangul": "두 대",
+   "romanization": "du dae"
+  },
+  "counters2088": {
+   "hangul": "한 권",
+   "romanization": "han gwon"
+  },
+  "counters2089": {
+   "hangul": "두 권",
+   "romanization": "du gwon"
+  },
+  "counters2090": {
+   "hangul": "한 잔",
+   "romanization": "han jan"
+  },
+  "counters2091": {
+   "hangul": "두 잔",
+   "romanization": "du jan"
+  },
+  "counters2092": {
+   "hangul": "일 층",
+   "romanization": "il cheung"
+  },
+  "counters2093": {
+   "hangul": "이 층",
+   "romanization": "i cheung"
+  },
+  "counters2094": {
+   "hangul": "삼 층",
+   "romanization": "sam cheung"
+  },
+  "counters2095": {
+   "hangul": "한 번",
+   "romanization": "han beon"
+  },
+  "counters2096": {
+   "hangul": "두 번",
+   "romanization": "du beon"
+  },
+  "counters2097": {
+   "hangul": "한 채",
+   "romanization": "han chae"
+  },
+  "counters2098": {
+   "hangul": "한 켤레",
+   "romanization": "han kyeolle"
+  },
+  "counters2099": {
+   "hangul": "한 벌",
+   "romanization": "han beol"
+  },
+  "counters2100": {
+   "hangul": "한 살",
+   "romanization": "han sal"
+  },
+  "counters2101": {
+   "hangul": "스무 살",
+   "romanization": "seumu sal"
+  },
+  "counters2102": {
+   "hangul": "번호",
+   "romanization": "beonho"
+  },
+  "counters2103": {
+   "hangul": "하나, 둘…",
+   "romanization": "hana, dul…"
+  },
+  "honorifics2104": {
+   "hangul": "~씨",
+   "romanization": "~ssi"
+  },
+  "honorifics2105": {
+   "hangul": "~아/야 (애칭)",
+   "romanization": "~a/ya (aeching)"
+  },
+  "honorifics2106": {
+   "hangul": "~군",
+   "romanization": "~gun"
+  },
+  "honorifics2107": {
+   "hangul": "~님",
+   "romanization": "~nim"
+  },
+  "honorifics2108": {
+   "hangul": "~선생님",
+   "romanization": "~seonsaengnim"
+  },
+  "honorifics2109": {
+   "hangul": "이름만 부르기",
+   "romanization": "ireumman bureugi"
+  },
+  "honorifics2110": {
+   "hangul": "선배",
+   "romanization": "seonbae"
+  },
+  "honorifics2111": {
+   "hangul": "후배",
+   "romanization": "hubae"
+  },
+  "honorifics2112": {
+   "hangul": "부장",
+   "romanization": "bujang"
+  },
+  "honorifics2113": {
+   "hangul": "사장",
+   "romanization": "sajang"
+  },
+  "honorifics2114": {
+   "hangul": "귀하",
+   "romanization": "gwiha"
+  },
+  "honorifics2115": {
+   "hangul": "성",
+   "romanization": "seong"
+  },
+  "honorifics2116": {
+   "hangul": "이름",
+   "romanization": "ireum"
+  },
+  "honorifics2117": {
+   "hangul": "호칭",
+   "romanization": "hoching"
+  },
+  "honorifics2118": {
+   "hangul": "경칭",
+   "romanization": "gyeongching"
+  },
+  "honorifics2119": {
+   "hangul": "성 + 씨",
+   "romanization": "seong + ssi"
+  },
+  "honorifics2120": {
+   "hangul": "자신에게는 붙이지 않음",
+   "romanization": "jasinegeneun buchiji aneum"
+  },
+  "etiquette2121": {
+   "hangul": "인사(절)",
+   "romanization": "insa(jeol)"
+  },
+  "etiquette2122": {
+   "hangul": "신발 벗기",
+   "romanization": "sinbal beotgi"
+  },
+  "etiquette2123": {
+   "hangul": "실내화",
+   "romanization": "sillaehwa"
+  },
+  "etiquette2124": {
+   "hangul": "팁(한국에는 없음)",
+   "romanization": "tip (hangugeneun eopseum)"
+  },
+  "etiquette2125": {
+   "hangul": "줄을 서다",
+   "romanization": "jureul seoda"
+  },
+  "etiquette2126": {
+   "hangul": "대중교통 통화 금지",
+   "romanization": "daejunggyotong tonghwa geumji"
+  },
+  "etiquette2127": {
+   "hangul": "걸으면서 먹지 않기",
+   "romanization": "georeumyeonseo meokji anki"
+  },
+  "etiquette2128": {
+   "hangul": "명함",
+   "romanization": "myeongham"
+  },
+  "etiquette2129": {
+   "hangul": "명함 교환",
+   "romanization": "myeongham gyohwan"
+  },
+  "etiquette2130": {
+   "hangul": "쓰레기 분리수거",
+   "romanization": "sseuregi bullisugeo"
+  },
+  "etiquette2131": {
+   "hangul": "공중목욕탕/온천",
+   "romanization": "gongjungmogyoktang/oncheon"
+  },
+  "etiquette2132": {
+   "hangul": "몸을 씻다",
+   "romanization": "momeul ssitda"
+  },
+  "etiquette2133": {
+   "hangul": "면을 후루룩 먹기 (실례 아님)",
+   "romanization": "myeoneul hururuk meokgi (sillye anim)"
+  },
+  "etiquette2134": {
+   "hangul": "정숙",
+   "romanization": "jeongsuk"
+  },
+  "etiquette2135": {
+   "hangul": "시간 엄수",
+   "romanization": "sigan eomsu"
+  },
+  "etiquette2136": {
+   "hangul": "무음 모드",
+   "romanization": "mueum modeu"
+  },
+  "etiquette2137": {
+   "hangul": "매너",
+   "romanization": "maeneo"
+  },
+  "etiquette2138": {
+   "hangul": "관습",
+   "romanization": "gwanseup"
+  },
+  "etiquette2139": {
+   "hangul": "암묵적인 규칙",
+   "romanization": "amukjeogin gyuchik"
+  },
+  "etiquette2140": {
+   "hangul": "노약자석",
+   "romanization": "noyakjaseok"
+  },
+  "etiquette2141": {
+   "hangul": "상식",
+   "romanization": "sangsik"
   }
  },
  "sentences": {
@@ -18129,6 +18508,1098 @@
    {
     "ko": "＿＿ 방법을 찾아요.",
     "es": "Busco la solución."
+   }
+  ],
+  "calendar1449": [
+   {
+    "ko": "＿＿＿부터 일해요.",
+    "es": "Trabajo desde el lunes."
+   }
+  ],
+  "calendar1450": [
+   {
+    "ko": "＿＿＿에 병원에 가요.",
+    "es": "El martes voy al hospital."
+   }
+  ],
+  "calendar1451": [
+   {
+    "ko": "＿＿＿은 쉬는 날이에요.",
+    "es": "El miércoles es día libre."
+   }
+  ],
+  "calendar1452": [
+   {
+    "ko": "＿＿＿에 회의가 있어요.",
+    "es": "El jueves hay una reunión."
+   }
+  ],
+  "calendar1453": [
+   {
+    "ko": "＿＿＿ 밤에 친구를 만나요.",
+    "es": "El viernes por la noche quedo con amigos."
+   }
+  ],
+  "calendar1454": [
+   {
+    "ko": "＿＿＿에 쇼핑하러 가요.",
+    "es": "El sábado voy de compras."
+   }
+  ],
+  "calendar1455": [
+   {
+    "ko": "＿＿＿에는 느긋하게 쉬어요.",
+    "es": "El domingo descanso tranquilamente."
+   }
+  ],
+  "calendar1456": [
+   {
+    "ko": "오늘은 무슨 ＿＿예요?",
+    "es": "¿Qué día de la semana es hoy?"
+   }
+  ],
+  "calendar1457": [
+   {
+    "ko": "＿＿를 써 주세요.",
+    "es": "Escribe la fecha, por favor."
+   }
+  ],
+  "calendar1458": [
+   {
+    "ko": "오늘은 며칠이에요?",
+    "es": "¿Qué día del mes es hoy?"
+   }
+  ],
+  "calendar1459": [
+   {
+    "ko": "지금 몇 ＿이에요?",
+    "es": "¿Qué mes es ahora?"
+   }
+  ],
+  "calendar1460": [
+   {
+    "ko": "올해는 바빠요.",
+    "es": "Este año estoy ocupado."
+   }
+  ],
+  "calendar1461": [
+   {
+    "ko": "＿＿ 축하해요!",
+    "es": "¡Feliz cumpleaños!"
+   }
+  ],
+  "calendar1462": [
+   {
+    "ko": "오늘은 결혼 ＿＿＿이에요.",
+    "es": "Hoy es nuestro aniversario de boda."
+   }
+  ],
+  "calendar1463": [
+   {
+    "ko": "다음 주는 ＿＿이에요.",
+    "es": "La próxima semana es festivo."
+   }
+  ],
+  "calendar1464": [
+   {
+    "ko": "벽에 ＿＿을 걸어요.",
+    "es": "Cuelgo un calendario en la pared."
+   }
+  ],
+  "calendar1465": [
+   {
+    "ko": "한 ＿에 세 번 운동해요.",
+    "es": "Hago ejercicio tres veces a la semana."
+   }
+  ],
+  "calendar1466": [
+   {
+    "ko": "＿＿은 가족과 보내요.",
+    "es": "El fin de semana lo paso con la familia."
+   }
+  ],
+  "calendar1467": [
+   {
+    "ko": "＿＿에는 일찍 일어나요.",
+    "es": "Los días laborables me levanto temprano."
+   }
+  ],
+  "calendar1468": [
+   {
+    "ko": "＿＿ 같이 가요.",
+    "es": "Vayamos juntos la próxima vez."
+   }
+  ],
+  "calendar1469": [
+   {
+    "ko": "내일 ＿＿을 확인해요.",
+    "es": "Voy a comprobar los planes de mañana."
+   }
+  ],
+  "calendar1470": [
+   {
+    "ko": "보고서 ＿＿은 금요일이에요.",
+    "es": "El plazo del informe es el viernes."
+   }
+  ],
+  "education1763": [
+   {
+    "ko": "저는 경제 ＿＿ 학생이에요.",
+    "es": "Soy estudiante de la facultad de economía."
+   }
+  ],
+  "education1764": [
+   {
+    "ko": "이 ＿＿는 인기가 많아요.",
+    "es": "Este departamento es popular."
+   }
+  ],
+  "education1765": [
+   {
+    "ko": "제 ＿＿은 공학이에요.",
+    "es": "Mi especialidad es ingeniería."
+   }
+  ],
+  "education1766": [
+   {
+    "ko": "오후 ＿＿에 출석해요.",
+    "es": "Asisto a la clase magistral de la tarde."
+   }
+  ],
+  "education1767": [
+   {
+    "ko": "＿＿은 아홉 시에 시작해요.",
+    "es": "La clase empieza a las nueve."
+   }
+  ],
+  "education1768": [
+   {
+    "ko": "다음 주에 ＿＿이 있어요.",
+    "es": "La próxima semana hay examen."
+   }
+  ],
+  "education1769": [
+   {
+    "ko": "이번 학기 ＿＿이 좋아요.",
+    "es": "Mis notas de este semestre son buenas."
+   }
+  ],
+  "education1770": [
+   {
+    "ko": "＿＿을 못 받았어요.",
+    "es": "Suspendí el crédito."
+   }
+  ],
+  "education1771": [
+   {
+    "ko": "내년에 ＿＿해요.",
+    "es": "Me gradúo el año que viene."
+   }
+  ],
+  "education1772": [
+   {
+    "ko": "사월에 ＿＿해요.",
+    "es": "Ingreso en abril."
+   }
+  ],
+  "education1773": [
+   {
+    "ko": "일본으로 ＿＿을 가요.",
+    "es": "Voy a estudiar al extranjero en Japón."
+   }
+  ],
+  "education1774": [
+   {
+    "ko": "환경 문제를 ＿＿하고 있어요.",
+    "es": "Investigo problemas medioambientales."
+   }
+  ],
+  "education1775": [
+   {
+    "ko": "내일까지 ＿＿＿를 제출해요.",
+    "es": "Entrego el informe antes de mañana."
+   }
+  ],
+  "education1776": [
+   {
+    "ko": "다음 주에 ＿＿가 있어요.",
+    "es": "La próxima semana hay una presentación."
+   }
+  ],
+  "events1796": [
+   {
+    "ko": "회사 ＿＿＿＿에 참가해요.",
+    "es": "Participo en el evento de la empresa."
+   }
+  ],
+  "events1797": [
+   {
+    "ko": "＿＿＿ 티켓을 사요.",
+    "es": "Compro entradas para el concierto."
+   }
+  ],
+  "events1798": [
+   {
+    "ko": "좋아하는 밴드의 ＿＿＿을 보러 가요.",
+    "es": "Voy a ver la actuación en directo de mi banda favorita."
+   }
+  ],
+  "events1799": [
+   {
+    "ko": "여름 ＿＿에 가요.",
+    "es": "Voy al festival de verano."
+   }
+  ],
+  "events1800": [
+   {
+    "ko": "＿＿을 예약했어요.",
+    "es": "Reservé las entradas."
+   }
+  ],
+  "events1801": [
+   {
+    "ko": "레스토랑에 ＿＿을 해요.",
+    "es": "Hago una reserva en el restaurante."
+   }
+  ],
+  "events1802": [
+   {
+    "ko": "여행 ＿＿을 세워요.",
+    "es": "Hago el plan del viaje."
+   }
+  ],
+  "events1803": [
+   {
+    "ko": "친구와 ＿＿이 있어요.",
+    "es": "Tengo una quedada con amigos."
+   }
+  ],
+  "events1804": [
+   {
+    "ko": "예약을 ＿＿＿해요.",
+    "es": "Cancelo la reserva."
+   }
+  ],
+  "events1805": [
+   {
+    "ko": "이벤트에 ＿＿＿＿.",
+    "es": "Participo en el evento."
+   }
+  ],
+  "events1806": [
+   {
+    "ko": "파티를 ＿＿＿＿.",
+    "es": "Organizo la fiesta."
+   }
+  ],
+  "services1821": [
+   {
+    "ko": "＿＿＿에서 머리를 잘라요.",
+    "es": "Me corto el pelo en la peluquería."
+   }
+  ],
+  "services1822": [
+   {
+    "ko": "아버지는 ＿＿＿에 가요.",
+    "es": "Mi padre va a la barbería."
+   }
+  ],
+  "services1823": [
+   {
+    "ko": "코트를 ＿＿＿에 맡겨요.",
+    "es": "Llevo el abrigo a la tintorería."
+   }
+  ],
+  "services1824": [
+   {
+    "ko": "자전거 ＿＿를 부탁해요.",
+    "es": "Encargo la reparación de la bicicleta."
+   }
+  ],
+  "services1825": [
+   {
+    "ko": "＿＿에서 약을 사요.",
+    "es": "Compro medicina en la farmacia."
+   }
+  ],
+  "services1827": [
+   {
+    "ko": "이 마을의 ＿＿ ＿＿＿는 좋아요.",
+    "es": "Los servicios públicos de este pueblo son buenos."
+   }
+  ],
+  "services1829": [
+   {
+    "ko": "이 ＿＿는 싸요.",
+    "es": "Esta tienda es barata."
+   }
+  ],
+  "services1831": [
+   {
+    "ko": "수리를 ＿＿＿.",
+    "es": "Encargo la reparación."
+   }
+  ],
+  "services1832": [
+   {
+    "ko": "짐 ＿＿을 해요.",
+    "es": "Hago la recogida del paquete."
+   }
+  ],
+  "administration1833": [
+   {
+    "ko": "＿＿＿에서 절차를 밟아요.",
+    "es": "Hago el trámite en el ayuntamiento."
+   }
+  ],
+  "administration1834": [
+   {
+    "ko": "＿＿에 가요.",
+    "es": "Voy al ayuntamiento de la ciudad."
+   }
+  ],
+  "administration1835": [
+   {
+    "ko": "＿＿에서 증명서를 받아요.",
+    "es": "Obtengo el certificado en la oficina de distrito."
+   }
+  ],
+  "administration1836": [
+   {
+    "ko": "이 ＿＿는 시간이 걸려요.",
+    "es": "Este trámite lleva tiempo."
+   }
+  ],
+  "administration1837": [
+   {
+    "ko": "주소 변경 ＿＿를 해요.",
+    "es": "Presento la notificación de cambio de dirección."
+   }
+  ],
+  "administration1838": [
+   {
+    "ko": "＿＿＿＿를 작성해요.",
+    "es": "Relleno el formulario de solicitud."
+   }
+  ],
+  "administration1839": [
+   {
+    "ko": "주민등록 ＿＿＿＿를 받아요.",
+    "es": "Obtengo el certificado de residencia."
+   }
+  ],
+  "administration1840": [
+   {
+    "ko": "＿＿＿＿＿＿을 보여 주세요.",
+    "es": "Muéstreme la tarjeta de residencia, por favor."
+   }
+  ],
+  "administration1841": [
+   {
+    "ko": "외국인등록증을 ＿＿해요.",
+    "es": "Renuevo la tarjeta de residencia."
+   }
+  ],
+  "administration1842": [
+   {
+    "ko": "＿＿를 받아요.",
+    "es": "Obtengo el permiso."
+   }
+  ],
+  "administration1843": [
+   {
+    "ko": "주소 ＿＿을 해요.",
+    "es": "Hago el registro de la dirección."
+   }
+  ],
+  "administration1844": [
+   {
+    "ko": "이 ＿＿는 복잡해요.",
+    "es": "Este sistema es complicado."
+   }
+  ],
+  "society1845": [
+   {
+    "ko": "이 ＿＿은 조용해요.",
+    "es": "Esta zona es tranquila."
+   }
+  ],
+  "society1846": [
+   {
+    "ko": "일본 ＿＿에 대해 배워요.",
+    "es": "Aprendo sobre la sociedad japonesa."
+   }
+  ],
+  "society1847": [
+   {
+    "ko": "＿＿ 사람과 이야기해요.",
+    "es": "Hablo con un vecino."
+   }
+  ],
+  "society1848": [
+   {
+    "ko": "이 마을의 ＿＿은 친절해요.",
+    "es": "Los residentes de este pueblo son amables."
+   }
+  ],
+  "society1849": [
+   {
+    "ko": "＿＿＿＿에 참여해요.",
+    "es": "Participo en la comunidad local."
+   }
+  ],
+  "society1850": [
+   {
+    "ko": "＿＿을 지켜요.",
+    "es": "Sigo las normas."
+   }
+  ],
+  "society1851": [
+   {
+    "ko": "＿＿가 중요해요.",
+    "es": "Los modales son importantes."
+   }
+  ],
+  "society1852": [
+   {
+    "ko": "지역 사람들과 ＿＿해요.",
+    "es": "Tengo intercambio con la gente de la zona."
+   }
+  ],
+  "society1853": [
+   {
+    "ko": "＿＿을 받아요.",
+    "es": "Recibo apoyo."
+   }
+  ],
+  "society1854": [
+   {
+    "ko": "＿＿를 해결해요.",
+    "es": "Resuelvo el problema."
+   }
+  ],
+  "society1855": [
+   {
+    "ko": "큰 ＿＿가 있어요.",
+    "es": "Hay un gran desafío."
+   }
+  ],
+  "digital-communication1856": [
+   {
+    "ko": "친구에게 ＿＿＿를 보내요.",
+    "es": "Envío un mensaje a un amigo."
+   }
+  ],
+  "digital-communication1857": [
+   {
+    "ko": "＿＿을 보내요.",
+    "es": "Envío un correo electrónico."
+   }
+  ],
+  "digital-communication1858": [
+   {
+    "ko": "파일을 ＿＿해요.",
+    "es": "Adjunto el archivo."
+   }
+  ],
+  "digital-communication1859": [
+   {
+    "ko": "바로 ＿＿해요.",
+    "es": "Respondo enseguida."
+   }
+  ],
+  "digital-communication1860": [
+   {
+    "ko": "이 메일을 ＿＿해요.",
+    "es": "Reenvío este correo."
+   }
+  ],
+  "digital-communication1861": [
+   {
+    "ko": "사진을 ＿＿해요.",
+    "es": "Comparto la foto."
+   }
+  ],
+  "digital-communication1862": [
+   {
+    "ko": "SNS에 ＿＿을 올려요.",
+    "es": "Hago una publicación en redes sociales."
+   }
+  ],
+  "digital-communication1863": [
+   {
+    "ko": "＿＿을 써요.",
+    "es": "Escribo un comentario."
+   }
+  ],
+  "digital-communication1865": [
+   {
+    "ko": "＿＿에 참여해요.",
+    "es": "Me uno al grupo."
+   }
+  ],
+  "digital-communication1867": [
+   {
+    "ko": "＿＿＿으로 회의를 해요.",
+    "es": "Tenemos la reunión en línea."
+   }
+  ],
+  "disaster2142": [
+   {
+    "ko": "휴대폰에 ＿＿＿＿＿＿가 왔어요.",
+    "es": "Me llegó una alerta de terremoto (aviso anticipado) al móvil."
+   }
+  ],
+  "disaster2143": [
+   {
+    "ko": "＿＿＿＿＿＿＿＿＿＿는 전국에 경보를 보내요.",
+    "es": "El sistema nacional de alertas (J-Alert) envía avisos a todo el país."
+   }
+  ],
+  "disaster2144": [
+   {
+    "ko": "이번 지진의 ＿＿는 5였어요.",
+    "es": "La intensidad de este terremoto fue de 5."
+   }
+  ],
+  "disaster2145": [
+   {
+    "ko": "＿＿는 7이었어요.",
+    "es": "La magnitud fue de 7."
+   }
+  ],
+  "disaster2146": [
+   {
+    "ko": "본진 후에 ＿＿이 계속됐어요.",
+    "es": "Después del terremoto principal, siguieron las réplicas."
+   }
+  ],
+  "disaster2147": [
+   {
+    "ko": "집에 ＿＿ ＿＿을 준비해 놨어요.",
+    "es": "Tengo preparado un kit de emergencia en casa."
+   }
+  ],
+  "disaster2148": [
+   {
+    "ko": "＿＿＿＿을 삼 일치 샀어요.",
+    "es": "Compré comida de emergencia para tres días."
+   }
+  ],
+  "disaster2149": [
+   {
+    "ko": "정전일 때 ＿＿＿을 썼어요.",
+    "es": "Durante el apagón usé una linterna."
+   }
+  ],
+  "disaster2150": [
+   {
+    "ko": "학교에서 ＿＿ ＿＿이 있었어요.",
+    "es": "En el colegio hubo un simulacro de evacuación."
+   }
+  ],
+  "disaster2151": [
+   {
+    "ko": "가족의 ＿＿ ＿＿을 했어요.",
+    "es": "Confirmé que mi familia estaba a salvo."
+   }
+  ],
+  "disaster2152": [
+   {
+    "ko": "지진으로 건물이 ＿＿＿＿＿.",
+    "es": "El edificio tembló por el terremoto."
+   }
+  ],
+  "disaster2153": [
+   {
+    "ko": "가구가 ＿＿＿＿＿.",
+    "es": "Los muebles se cayeron."
+   }
+  ],
+  "disaster2154": [
+   {
+    "ko": "지진이 나면 바로 ＿＿＿＿ 주세요.",
+    "es": "Cuando hay un terremoto, agáchate enseguida."
+   }
+  ],
+  "disaster2155": [
+   {
+    "ko": "흔들릴 때는 ＿＿＿ ＿＿＿ 주세요.",
+    "es": "Mientras tiembla, protégete la cabeza."
+   }
+  ],
+  "disaster2156": [
+   {
+    "ko": "쓰나미가 오면 ＿＿ ＿＿＿ 도망가세요.",
+    "es": "Si viene un tsunami, huye a un lugar alto."
+   }
+  ],
+  "disaster2157": [
+   {
+    "ko": "＿＿ ＿＿에서 대피 방송이 나왔어요.",
+    "es": "Por la radio de emergencias del barrio sonó el aviso de evacuación."
+   }
+  ],
+  "disaster2158": [
+   {
+    "ko": "＿＿ ＿＿이 올라갔어요.",
+    "es": "El nivel de alerta ha subido."
+   }
+  ],
+  "disaster2159": [
+   {
+    "ko": "기상청이 ＿＿ ＿＿를 발표했어요.",
+    "es": "La agencia meteorológica emitió una alerta especial."
+   }
+  ],
+  "disaster2160": [
+   {
+    "ko": "폭우로 ＿＿＿가 일어났어요.",
+    "es": "Por la lluvia intensa se produjo un deslizamiento de tierra."
+   }
+  ],
+  "disaster2161": [
+   {
+    "ko": "＿＿＿ 소리가 들렸어요.",
+    "es": "Se escuchó el sonido de la sirena."
+   }
+  ],
+  "counters2068": [
+   {
+    "ko": "'장'이나 '병'은 ＿＿의 하나예요.",
+    "es": "'Mai' y 'hon' son ejemplos de contador."
+   }
+  ],
+  "counters2069": [
+   {
+    "ko": "사과를 ＿＿ 주세요.",
+    "es": "Deme una manzana, por favor."
+   }
+  ],
+  "counters2070": [
+   {
+    "ko": "계란을 ＿＿ 샀어요.",
+    "es": "Compré dos huevos."
+   }
+  ],
+  "counters2071": [
+   {
+    "ko": "빵을 ＿＿ 먹었어요.",
+    "es": "Comí tres panes."
+   }
+  ],
+  "counters2072": [
+   {
+    "ko": "교실에 학생이 ＿＿ 있어요.",
+    "es": "Hay una persona (un estudiante) en el aula."
+   }
+  ],
+  "counters2073": [
+   {
+    "ko": "＿＿이서 영화를 보러 갔어요.",
+    "es": "Fuimos al cine los dos juntos."
+   }
+  ],
+  "counters2074": [
+   {
+    "ko": "가족은 ＿＿이에요.",
+    "es": "Somos tres en la familia."
+   }
+  ],
+  "counters2075": [
+   {
+    "ko": "테이블에 ＿＿ 앉아 있어요.",
+    "es": "Hay cuatro personas sentadas en la mesa."
+   }
+  ],
+  "counters2076": [
+   {
+    "ko": "종이를 ＿＿ 주세요.",
+    "es": "Deme una hoja de papel, por favor."
+   }
+  ],
+  "counters2077": [
+   {
+    "ko": "티켓을 ＿＿ 샀어요.",
+    "es": "Compré dos entradas."
+   }
+  ],
+  "counters2078": [
+   {
+    "ko": "셔츠를 ＿＿ 가지고 있어요.",
+    "es": "Tengo tres camisas."
+   }
+  ],
+  "counters2079": [
+   {
+    "ko": "펜을 ＿＿ 빌려 주세요.",
+    "es": "Préstame un bolígrafo, por favor."
+   }
+  ],
+  "counters2080": [
+   {
+    "ko": "맥주를 ＿＿ 주세요.",
+    "es": "Deme dos cervezas, por favor."
+   }
+  ],
+  "counters2081": [
+   {
+    "ko": "우산을 ＿＿ 샀어요.",
+    "es": "Compré tres paraguas."
+   }
+  ],
+  "counters2082": [
+   {
+    "ko": "고양이가 ＿＿ 있어요.",
+    "es": "Hay un gato."
+   }
+  ],
+  "counters2083": [
+   {
+    "ko": "개를 ＿＿ 키우고 있어요.",
+    "es": "Tengo dos perros."
+   }
+  ],
+  "counters2084": [
+   {
+    "ko": "물고기를 ＿＿ 받았어요.",
+    "es": "Me dieron tres peces."
+   }
+  ],
+  "counters2085": [
+   {
+    "ko": "목장에 소가 ＿＿ 있어요.",
+    "es": "En la granja hay una vaca."
+   }
+  ],
+  "counters2086": [
+   {
+    "ko": "주차장에 차가 ＿＿ 있어요.",
+    "es": "En el aparcamiento hay un coche."
+   }
+  ],
+  "counters2087": [
+   {
+    "ko": "컴퓨터를 ＿＿ 샀어요.",
+    "es": "Compré dos ordenadores."
+   }
+  ],
+  "counters2088": [
+   {
+    "ko": "책을 ＿＿ 읽었어요.",
+    "es": "Leí un libro."
+   }
+  ],
+  "counters2089": [
+   {
+    "ko": "공책을 ＿＿ 주세요.",
+    "es": "Deme dos cuadernos, por favor."
+   }
+  ],
+  "counters2090": [
+   {
+    "ko": "커피를 ＿＿ 마셨어요.",
+    "es": "Bebí una taza de café."
+   }
+  ],
+  "counters2091": [
+   {
+    "ko": "물을 ＿＿ 주세요.",
+    "es": "Deme dos vasos de agua, por favor."
+   }
+  ],
+  "counters2092": [
+   {
+    "ko": "화장실은 ＿＿에 있어요.",
+    "es": "El baño está en la primera planta."
+   }
+  ],
+  "counters2093": [
+   {
+    "ko": "레스토랑은 ＿＿에 있어요.",
+    "es": "El restaurante está en la segunda planta."
+   }
+  ],
+  "counters2094": [
+   {
+    "ko": "제 방은 ＿＿에 있어요.",
+    "es": "Mi habitación está en el tercer piso."
+   }
+  ],
+  "counters2095": [
+   {
+    "ko": "일본에 ＿＿ 가 본 적이 있어요.",
+    "es": "He ido a Japón una vez."
+   }
+  ],
+  "counters2096": [
+   {
+    "ko": "이 영화를 ＿＿ 봤어요.",
+    "es": "He visto esta película dos veces."
+   }
+  ],
+  "counters2097": [
+   {
+    "ko": "이 길에 가게가 ＿＿ 있어요.",
+    "es": "En esta calle hay una tienda (edificio)."
+   }
+  ],
+  "counters2098": [
+   {
+    "ko": "양말을 ＿＿ 샀어요.",
+    "es": "Compré un par de calcetines."
+   }
+  ],
+  "counters2099": [
+   {
+    "ko": "코트를 ＿＿ 샀어요.",
+    "es": "Compré un abrigo."
+   }
+  ],
+  "counters2100": [
+   {
+    "ko": "여동생은 ＿＿예요.",
+    "es": "Mi hermana pequeña tiene un año."
+   }
+  ],
+  "counters2101": [
+   {
+    "ko": "형은 올해 ＿＿가 돼요.",
+    "es": "Mi hermano mayor cumple veinte años este año."
+   }
+  ],
+  "counters2102": [
+   {
+    "ko": "그는 반에서 ＿＿예요.",
+    "es": "Él es el número uno de la clase."
+   }
+  ],
+  "honorifics2104": [
+   {
+    "ko": "다나카＿＿라고 불러요.",
+    "es": "Le llamo 'Tanaka-ssi'."
+   }
+  ],
+  "honorifics2105": [
+   {
+    "ko": "어린아이에게는 ＿＿를 붙여요.",
+    "es": "A los niños pequeños se les pone un sufijo cariñoso."
+   }
+  ],
+  "honorifics2106": [
+   {
+    "ko": "남자아이 이름에 ＿＿를 붙이기도 해요.",
+    "es": "A veces se pone '-gun' al nombre de un chico."
+   }
+  ],
+  "honorifics2107": [
+   {
+    "ko": "손님에게는 ＿＿을 붙여서 불러요.",
+    "es": "A los clientes se les llama con '-nim'."
+   }
+  ],
+  "honorifics2108": [
+   {
+    "ko": "의사에게는 ＿＿＿을 붙여서 불러요.",
+    "es": "A los médicos se les llama con '-seonsaengnim'."
+   }
+  ],
+  "honorifics2109": [
+   {
+    "ko": "가족끼리는 ＿＿＿＿로 부르기도 해요.",
+    "es": "Entre familiares a veces se llama sin ningún sufijo."
+   }
+  ],
+  "honorifics2110": [
+   {
+    "ko": "그는 대학교 ＿＿예요.",
+    "es": "Él es un senpai de la universidad."
+   }
+  ],
+  "honorifics2111": [
+   {
+    "ko": "그녀는 회사 ＿＿예요.",
+    "es": "Ella es una kōhai de la empresa."
+   }
+  ],
+  "honorifics2112": [
+   {
+    "ko": "＿＿과 상담했어요.",
+    "es": "Consulté con el jefe de sección."
+   }
+  ],
+  "honorifics2113": [
+   {
+    "ko": "＿＿은 오늘 출장이에요.",
+    "es": "El presidente de la empresa está de viaje de negocios hoy."
+   }
+  ],
+  "honorifics2114": [
+   {
+    "ko": "서류에는 '다나카＿＿'라고 써요.",
+    "es": "En los documentos se escribe 'Tanaka-dono'."
+   }
+  ],
+  "honorifics2115": [
+   {
+    "ko": "그의 ＿은 스즈키예요.",
+    "es": "Su apellido es Suzuki."
+   }
+  ],
+  "honorifics2116": [
+   {
+    "ko": "＿＿을 알려 주세요.",
+    "es": "Dime tu nombre, por favor."
+   }
+  ],
+  "honorifics2117": [
+   {
+    "ko": "한국어의 ＿＿은 어려워요.",
+    "es": "La forma de dirigirse a alguien en coreano es difícil."
+   }
+  ],
+  "honorifics2118": [
+   {
+    "ko": "＿＿ 사용법에 주의합시다.",
+    "es": "Tengamos cuidado con el uso de los títulos honoríficos."
+   }
+  ],
+  "honorifics2119": [
+   {
+    "ko": "직장에서는 ＿＿＿가 기본이에요.",
+    "es": "En el trabajo, lo básico es apellido + ssi."
+   }
+  ],
+  "honorifics2120": [
+   {
+    "ko": "'씨'는 ＿＿＿＿＿＿＿.",
+    "es": "'-ssi' no se usa con uno mismo."
+   }
+  ],
+  "etiquette2121": [
+   {
+    "ko": "인사할 때 ＿＿(절)를 해요.",
+    "es": "Al saludar se hace una reverencia."
+   }
+  ],
+  "etiquette2122": [
+   {
+    "ko": "현관에서 ＿＿ ＿＿ 주세요.",
+    "es": "Quítate los zapatos en la entrada, por favor."
+   }
+  ],
+  "etiquette2123": [
+   {
+    "ko": "화장실용 ＿＿＿가 있어요.",
+    "es": "Hay zapatillas específicas para el baño."
+   }
+  ],
+  "etiquette2124": [
+   {
+    "ko": "한국 식당에서는 ＿는 필요 없어요.",
+    "es": "En los restaurantes de Corea no hace falta propina."
+   }
+  ],
+  "etiquette2125": [
+   {
+    "ko": "계산대 앞에서 손님들이 ＿＿을 서고 있어요.",
+    "es": "Los clientes están haciendo fila delante de la caja."
+   }
+  ],
+  "etiquette2126": [
+   {
+    "ko": "지하철 안에서 ＿＿ ＿＿예요.",
+    "es": "Dentro del metro está prohibido hablar por teléfono."
+   }
+  ],
+  "etiquette2127": [
+   {
+    "ko": "한국에서는 매너로 ＿＿＿＿＿＿＿ 않아요.",
+    "es": "En Corea, por educación, no se come mientras se camina."
+   }
+  ],
+  "etiquette2128": [
+   {
+    "ko": "처음 만나는 사람에게 ＿＿을 건네요.",
+    "es": "Le doy mi tarjeta de presentación a alguien que conozco por primera vez."
+   }
+  ],
+  "etiquette2129": [
+   {
+    "ko": "회의 전에 ＿＿ ＿＿을 했어요.",
+    "es": "Antes de la reunión hicimos el intercambio de tarjetas."
+   }
+  ],
+  "etiquette2130": [
+   {
+    "ko": "한국에서는 ＿＿ ＿＿가 세밀해요.",
+    "es": "En Corea la separación de basura es muy detallada."
+   }
+  ],
+  "etiquette2131": [
+   {
+    "ko": "주말에 ＿＿에 갔어요.",
+    "es": "El fin de semana fui a un baño termal."
+   }
+  ],
+  "etiquette2132": [
+   {
+    "ko": "탕에 들어가기 전에 ＿＿ ＿＿.",
+    "es": "Antes de entrar en la bañera, te lavas el cuerpo."
+   }
+  ],
+  "etiquette2133": [
+   {
+    "ko": "라면 먹을 때 ＿＿＿＿ ＿＿ 것은 흔해요.",
+    "es": "Al comer ramen, es normal sorber los fideos haciendo ruido."
+   }
+  ],
+  "etiquette2134": [
+   {
+    "ko": "신사 안에서는 ＿＿하게 합시다.",
+    "es": "Dentro del santuario, guardemos silencio y respeto."
+   }
+  ],
+  "etiquette2135": [
+   {
+    "ko": "한국에서는 ＿＿ ＿＿가 중요해요.",
+    "es": "En Corea la puntualidad es importante."
+   }
+  ],
+  "etiquette2136": [
+   {
+    "ko": "영화관에서는 휴대폰을 ＿＿ ＿＿로 해요.",
+    "es": "En el cine, pones el móvil en modo silencioso."
+   }
+  ],
+  "etiquette2137": [
+   {
+    "ko": "지하철 안의 ＿＿를 지킵시다.",
+    "es": "Respetemos los modales dentro del metro."
+   }
+  ],
+  "etiquette2138": [
+   {
+    "ko": "나라마다 ＿＿이 달라요.",
+    "es": "Las costumbres varían según el país."
+   }
+  ],
+  "etiquette2139": [
+   {
+    "ko": "한국에는 ＿＿＿ ＿＿이 많이 있어요.",
+    "es": "En Corea hay muchas reglas no escritas."
+   }
+  ],
+  "etiquette2140": [
+   {
+    "ko": "＿＿＿에는 어르신이 앉아요.",
+    "es": "En el asiento prioritario se sientan las personas mayores."
+   }
+  ],
+  "etiquette2141": [
+   {
+    "ko": "그건 한국의 ＿＿이에요.",
+    "es": "Eso es sentido común en Corea."
    }
   ]
  }
