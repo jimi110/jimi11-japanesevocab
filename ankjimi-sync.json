@@ -1,0 +1,13 @@
+{
+  "_comentario": "Plantilla para sincronizar el progreso de Ankjimi entre dispositivos usando tu propio repositorio de GitHub. Este archivo NO se actualiza solo: expórtalo desde Ajustes > Exportar copia de seguridad dentro de la app cada vez que quieras subir tu progreso, y reemplázalo por este mismo camino cuando quieras bajarlo en otro dispositivo (Ajustes > Restaurar copia de seguridad).",
+  "cuenta": {
+    "nombre_usuario": "",
+    "contraseña": "",
+    "nota": "Estos dos campos son solo una etiqueta para que sepas de quién es esta copia; Ankjimi no tiene servidor propio, así que no se valida contra nada. Si subes este archivo a GitHub, usa un repositorio PRIVADO si vas a poner una contraseña real aquí, o mejor deja la contraseña vacía y protege el acceso con los permisos del propio repositorio."
+  },
+  "ultima_sincronizacion": null,
+  "dispositivo": "",
+  "progreso": {
+    "_nota": "Aquí es donde se pega el contenido que genera el botón 'Exportar copia de seguridad' de la app (mazos, tarjetas, historial de repasos y multimedia en base64). Este archivo se creó vacío como plantilla."
+  }
+}
